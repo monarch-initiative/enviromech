@@ -1,0 +1,9 @@
+site_name: EnviroHealthMech
+theme:
+  name: material
+nav:
+  - Home: index.md
+  - Explanation:
+      - Design Decisions: explanation/design-decisions.md
+  - Working Notes & Reports:
+      - linkml-aop Schema Update (2026-09): linkml_aop_schema_update_plan.md
