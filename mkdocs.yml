@@ -7,3 +7,4 @@ nav:
       - Design Decisions: explanation/design-decisions.md
   - Working Notes & Reports:
       - linkml-aop Schema Update (2026-09): linkml_aop_schema_update_plan.md
+      - dismech AOP Handoff (2026-09-21): reports/dismech-aop-handoff-2026-09-21.md
