@@ -1,0 +1,158 @@
+id: https://w3id.org/monarch-initiative/ehmech
+name: ehmech
+title: EnviroHealthMech schema
+description: >-
+  The EnviroHealthMech schema. It imports the AOP-Wiki EMOD schema from
+  EHS-Data-Standards/linkml-aop unchanged and adds only the classes that
+  EnviroHealthMech needs while they are being worked out. A class that earns a
+  place in EMOD moves to linkml-aop; a class that turns out to be specific to
+  deriving pathways from external knowledge bases stays here.
+
+  SKETCH. The import below resolves against a sibling checkout of linkml-aop and
+  is a placeholder for a pinned dependency. See the decision register before
+  treating anything in this file as adopted.
+prefixes:
+  linkml: https://w3id.org/linkml/
+  ehmech: https://w3id.org/monarch-initiative/ehmech/
+  dismech: https://dismech.monarchinitiative.org/
+default_prefix: ehmech
+default_range: string
+
+imports:
+  - linkml:types
+  # Placeholder: sibling checkout. Replace with a pinned linkml-aop dependency
+  # and an import map once the schema-update branch in linkml-aop has landed.
+  - ../../../../linkml-aop/src/linkml_aop/schema/aop_emod_linkml
+
+classes:
+
+  KeyEventAggregation:
+    description: >-
+      A record that a Key Event is aggregated from one or more nodes of an external
+      knowledge base, and the curator's argument that the aggregation does not
+      misrepresent the biology.
+
+      An AOP simplifies a mechanism into a chain of measurable Key Events, so a Key
+      Event is often broader than any one node in a mechanism graph such as a
+      dismech pathograph, and several nodes may be lumped into it. This class
+      records which nodes went in, what each one asserted in its own source, and
+      how the set relates to the Event. It is not a statement about AOP-Wiki
+      provenance: HarmonizedEvent tracks an AOP-Wiki Event back to the AOP-Wiki
+      Events it was harmonized from, and this class is deliberately separate from
+      it so that the two kinds of provenance are never mixed.
+
+      Three checks belong to this class rather than to Event, and a validator or a
+      reviewer should apply them to every record: (1) every source node sits at the
+      same level of biological organization as the Event, or the mismatch is recorded
+      in level_mismatch_note rather than silently resolved; (2) each source node's
+      terms satisfy the Event's event components, read from the components rather
+      than from the Event title, which may be narrower; (3) rationale says in the
+      curator's own words why the lumped nodes are one measurable change.
+    attributes:
+      id:
+        identifier: true
+        description: A local identifier for this aggregation record.
+      event_id:
+        description: The Key Event the source nodes are aggregated into.
+        range: Event
+        inlined: true
+        required: true
+      aggregation_relation:
+        description: How the set of source nodes, taken together, relates to the Event.
+        range: AggregationRelationEnum
+        required: true
+      source_nodes:
+        description: >-
+          The nodes aggregated into the Event, each described as its source records
+          it. At least one is required; a record with one node is a plain
+          correspondence, and a record with several is a lumping.
+        range: SourceNode
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        required: true
+      rationale:
+        description: >-
+          Why these nodes are one measurable biological change, in the curator's
+          own words. Required. A rationale that only restates the Event title or
+          the aggregation_relation value fails review.
+        required: true
+      level_mismatch_note:
+        description: >-
+          Present only when a source node's level of biological organization
+          differs from the Event's. States which node, which two levels, and which
+          reading the evidence supports. Absence asserts that every source node
+          sits at the Event's level.
+      notes:
+
+  SourceNode:
+    description: >-
+      One node of an external knowledge base as that source records it. The
+      values here are copied from the source, not re-curated: the point of the
+      class is to let a reader compare what the source asserted with what the
+      Event asserts. Terms reuse the EMOD BiologicalProcess, BiologicalObject and
+      BiologicalAction classes so the comparison with Event.event_components is
+      computable.
+    attributes:
+      source_knowledge_base:
+        description: The knowledge base the node comes from, for example dismech.
+        required: true
+      source_entry:
+        description: >-
+          The entry within that knowledge base, for example a dismech disease or
+          module slug such as Primary_Ciliary_Dyskinesia.
+        required: true
+      source_entry_uri:
+        description: A resolvable URI for the entry, when the source publishes one.
+        range: uri
+      node_name:
+        description: The node's name exactly as the source spells it.
+        required: true
+      source_level:
+        description: >-
+          The level of biological organization as the source records it, verbatim
+          (for dismech, the biological_scale value such as CELLULAR). Kept as a
+          string because the source's vocabulary is not EMOD's.
+      biological_organization_id:
+        description: The source_level mapped onto EMOD's levels.
+        range: LevelOfBiologicalOrganization
+        inlined: true
+      processes:
+        description: Biological process terms the source binds to the node.
+        range: BiologicalProcess
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      objects:
+        description: Biological object terms the source binds to the node, including cell type and anatomical location.
+        range: BiologicalObject
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      biological_action_id:
+        description: >-
+          The direction or kind of change the source asserts on the node, mapped
+          onto EMOD's BiologicalActionEnum (for dismech, from the modifier on the
+          bound process).
+        range: BiologicalAction
+        inlined: true
+      source_confidence:
+        description: >-
+          The source's own confidence marking on the node, verbatim, when it has
+          one (for dismech, mechanism_confidence). Absent means the source did not
+          mark it, not that it is established.
+      notes:
+
+enums:
+  AggregationRelationEnum:
+    description: How a set of source nodes relates to the Event they are aggregated into.
+    permissible_values:
+      constitutes:
+        description: >-
+          The source nodes, taken together, are the Event. Nothing the Event
+          asserts lies outside their union, and nothing they assert lies outside
+          the Event.
+      narrower_than:
+        description: >-
+          The source nodes are each a narrower case of the Event. The Event
+          covers biology the nodes do not assert.
