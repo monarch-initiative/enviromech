@@ -1,0 +1,113 @@
+# Sketch instance: AOP-Wiki KE 1908 aggregated from two Primary_Ciliary_Dyskinesia
+# pathophysiology nodes. Event fields are copied from the 2026-09-03 AOP-Wiki
+# XML export via aop-wiki-cli; node fields from dismech main on 2026-09-21.
+id: ehmech:kea-0001
+event_id:
+  id: 1908
+  title: "Cilia Beat Frequency, Decreased"
+  short_name: "Cilia Beat Frequency, Decreased"
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  cell_term_id:
+    id: 1
+    source: CL
+    term: multi-ciliated epithelial cell
+  organ_term_id:
+    id: 1
+    source: UBERON
+    term: lung epithelium
+  event_components:
+  - id: 1
+    biological_process_id:
+      id: 1
+      source: HP
+      source_id: HP:0012262
+      term: Abnormal ciliary motility
+    biological_object_id:
+      id: 1
+      source: GO
+      source_id: GO:0031514
+      term: motile cilium
+    biological_action_id:
+      id: 3
+      term: occurrence
+aggregation_relation: constitutes
+source_nodes:
+- source_knowledge_base: dismech
+  source_entry: Primary_Ciliary_Dyskinesia
+  source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+  node_name: Ciliary Dysfunction
+  source_level: CELLULAR
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  processes:
+  - id: 101
+    source: GO
+    source_id: GO:0003341
+    term: cilium movement
+  objects:
+  - id: 201
+    source: CL
+    source_id: CL:4030034
+    term: respiratory tract multiciliated cell
+  - id: 202
+    source: UBERON
+    source_id: UBERON:0004802
+    term: respiratory tract epithelium
+  biological_action_id:
+    id: 4
+    term: abnormal
+  notes: >-
+    Eight model readouts land on this node in dismech, including ciliary beat
+    frequency (DECREASED after GSTA2 knockdown) and beat pattern (ALTERED in
+    patient-derived nasal, organoid and hiPSC cultures). Its description records
+    that frequency can be preserved: RSPH1-related disease keeps frequency with an
+    abnormal circular waveform, and DNAH11-related disease is hyperkinetic.
+- source_knowledge_base: dismech
+  source_entry: Primary_Ciliary_Dyskinesia
+  source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+  node_name: Ciliary Disorientation
+  source_level: CELLULAR
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  processes:
+  - id: 101
+    source: GO
+    source_id: GO:0003341
+    term: cilium movement
+  objects:
+  - id: 201
+    source: CL
+    source_id: CL:4030034
+    term: respiratory tract multiciliated cell
+  - id: 203
+    source: UBERON
+    source_id: UBERON:0005384
+    term: nasal cavity epithelium
+  biological_action_id:
+    id: 4
+    term: abnormal
+  notes: >-
+    Two readouts from the GAS2L2-deficient patient nasal model: ciliary
+    orientation and beat coordination (ALTERED) and ciliary beat frequency
+    (INCREASED). The increase is compatible with the Event's component (abnormal
+    motility) and not with its title (frequency decreased).
+rationale: >-
+  Both nodes bind the same process term, cilium movement, with the same modifier,
+  abnormal, on the same cell type, and both are measured by beat pattern or beat
+  frequency in ciliated airway cultures. Read against the Event's component,
+  occurrence of abnormal ciliary motility in the motile cilium, the two nodes
+  together are that change and nothing more, so they constitute it. Read against
+  the Event's title alone they would not fit: dismech records preserved or
+  increased frequency for some genotypes, and the Event title asserts a decrease.
+  The aggregation therefore rests on the component, and the title is narrower
+  than the Event it names. dismech keeps the two nodes apart because directional
+  alignment and beat frequency are quantified separately; the AOP does not need
+  that resolution to predict decreased mucociliary clearance, which is the
+  simplification the aggregation makes.
+notes: >-
+  KE 1908 sits in AOPs 411, 424 and 425. The aggregation is asserted for the
+  Event, not for any one of those pathways.
