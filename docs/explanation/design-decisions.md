@@ -107,3 +107,11 @@ typed, source-anchored evidence.
 - How evidence, confidence, and provenance are represented, building on dismech's
   evidence model (including its SEPIO export) and ongoing Monarch discussions of the same
   questions.
+- How a record written outside the EMOD database identifies the lookup terms it uses.
+  The EMOD schema was generated from the EMOD MySQL database, so every class, including
+  `LevelOfBiologicalOrganization`, `BiologicalProcess`, `BiologicalObject` and
+  `BiologicalAction`, carries the table's integer primary key as a required identifier.
+  A hand-written record has to supply those integers, and has no way to know the ones the
+  EMOD database assigned. The two `KeyEventAggregation` examples in `src/data/examples/`
+  (2026-09-22) mix real AOP-Wiki ids with invented local placeholders for this reason, and
+  would point at the wrong rows if loaded into EMOD.

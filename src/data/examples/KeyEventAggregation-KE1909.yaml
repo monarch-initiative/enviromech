@@ -1,0 +1,122 @@
+# Sketch instance: AOP-Wiki KE 1909 aggregated from two Primary_Ciliary_Dyskinesia
+# pathophysiology nodes joined by a causal edge, with a level mismatch recorded. Event fields are copied
+# from the 2026-09-03 AOP-Wiki XML export via aop-wiki-cli; node fields from
+# dismech main on 2026-09-21.
+id: ehmech:kea-0002
+event_id:
+  id: 1909
+  title: "Mucociliary Clearance, Decreased"
+  short_name: "MCC, Decreased"
+  biological_organization_id:
+    id: 5
+    term: Individual
+  event_components:
+  - id: 2
+    biological_process_id:
+      id: 2
+      source: VT
+      source_id: VT:0001947
+      term: mucociliary clearance trait
+    biological_action_id:
+      id: 2
+      term: decreased
+aggregation_relation: constitutes
+source_nodes:
+- source_knowledge_base: dismech
+  source_entry: Primary_Ciliary_Dyskinesia
+  source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+  node_name: Impaired Mucociliary Clearance
+  source_level: TISSUE
+  biological_organization_id:
+    id: 3
+    term: Tissue
+  processes:
+  - id: 102
+    source: GO
+    source_id: GO:0120197
+    term: mucociliary clearance
+  objects:
+  - id: 201
+    source: CL
+    source_id: CL:4030034
+    term: respiratory tract multiciliated cell
+  - id: 204
+    source: UBERON
+    source_id: UBERON:0001004
+    term: respiratory system
+  - id: 205
+    source: UBERON
+    source_id: UBERON:0001825
+    term: paranasal sinus
+  biological_action_id:
+    id: 2
+    term: decreased
+  notes: >-
+    Three model links land on this node in dismech, all declaring model_scale
+    TISSUE: mucociliary transport in hiPSC-derived airway epithelium (DECREASED),
+    transport velocity across mixed wild-type and CCDC40-deficient cultures
+    (DECREASED), and fluorescent-particle transport after CCDC40 mRNA delivery
+    (INCREASED, a rescue). The node's description also cites whole-lung
+    radioaerosol clearance, absent in most of 69 measured patients.
+- source_knowledge_base: dismech
+  source_entry: Primary_Ciliary_Dyskinesia
+  source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+  node_name: Central-Apparatus Transport Dysfunction
+  source_level: CELLULAR
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  processes:
+  - id: 102
+    source: GO
+    source_id: GO:0120197
+    term: mucociliary clearance
+  objects:
+  - id: 201
+    source: CL
+    source_id: CL:4030034
+    term: respiratory tract multiciliated cell
+  - id: 202
+    source: UBERON
+    source_id: UBERON:0004802
+    term: respiratory tract epithelium
+  biological_action_id:
+    id: 2
+    term: decreased
+  source_confidence: PROVISIONAL
+  notes: >-
+    One model link, the C1d-defective patient airway transport model, declaring
+    model_scale TISSUE: ciliary particle transport (DECREASED). The node's
+    description records that beat frequency, waveform, routine TEM and nasal
+    nitric oxide can all look normal, so transport is the only measurement that
+    detects this route.
+internal_edges:
+- upstream_node: Central-Apparatus Transport Dysfunction
+  downstream_node: Impaired Mucociliary Clearance
+  source_link_type: INDIRECT_KNOWN_INTERMEDIATES
+  description: >-
+    Loss of C1d projection components impairs effective respiratory surface
+    transport. dismech supports the edge with one in vitro ciliary transport
+    study (PMID:39362668).
+rationale: >-
+  Both nodes bind mucociliary clearance, decreased, which is the Event's component
+  with the same direction; the ontologies differ (GO process on the nodes, VT trait
+  on the Event) but name the same change. Impaired Mucociliary Clearance is
+  dismech's convergence point for every ciliary route to clearance failure in this
+  entry. Central-Apparatus Transport Dysfunction is one of those routes, and it is
+  aggregated rather than left upstream because nothing measures it except
+  transport: its readout is the same particle-transport measurement that
+  instruments the convergence node, so no assay separates the two ends of the
+  edge between them. Together they are the change KE 1909 names, and they
+  constitute it.
+level_mismatch_note: >-
+  Impaired Mucociliary Clearance is TISSUE and Central-Apparatus Transport
+  Dysfunction is CELLULAR in dismech; the Event is Individual in AOP-Wiki. The
+  evidence supports these at different levels of measurement. Every model readout
+  on both nodes is transport across a cultured airway epithelium, which is
+  tissue-level, even for the node dismech scales as cellular. The convergence
+  node's description also cites whole-lung radioaerosol clearance in patients,
+  which is individual-level and is the kind of measurement KE 1909's own method
+  text describes. So the mismatch is not an error on either side. The Event's
+  level is kept; the tissue readouts would inform it as measurements of a proxy
+  rather than of the Event itself.

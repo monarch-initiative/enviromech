@@ -48,6 +48,11 @@ classes:
       terms satisfy the Event's event components, read from the components rather
       than from the Event title, which may be narrower; (3) rationale says in the
       curator's own words why the lumped nodes are one measurable change.
+
+      Aggregating two nodes that the source joins by a causal edge is allowed: an
+      AOP simplifies, and a step whose two ends no assay separates sits below the
+      resolution the pathway needs. The edge is kept in internal_edges so that the
+      specificity the Event simplifies away stays recoverable from the record.
     attributes:
       id:
         identifier: true
@@ -77,12 +82,46 @@ classes:
           own words. Required. A rationale that only restates the Event title or
           the aggregation_relation value fails review.
         required: true
+      internal_edges:
+        description: >-
+          Causal edges the source draws between two of this record's source nodes.
+          Every causal edge between two aggregated nodes should be listed, since
+          the Event no longer shows it; an edge from an aggregated node to a node
+          outside the record belongs to a Key Event Relationship instead.
+        range: SourceEdge
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
       level_mismatch_note:
         description: >-
           Present only when a source node's level of biological organization
           differs from the Event's. States which node, which two levels, and which
           reading the evidence supports. Absence asserts that every source node
           sits at the Event's level.
+      notes:
+
+  SourceEdge:
+    description: >-
+      A causal edge between two nodes of an external knowledge base, as that source
+      records it, kept on a KeyEventAggregation when both of its ends are aggregated
+      into the same Event. Both ends are named by node_name and must match a
+      source_nodes entry on the same record; LinkML cannot enforce that match, so
+      it is a check for a validator script or a reviewer. The edge's evidence stays
+      in the source and is not copied here.
+    attributes:
+      upstream_node:
+        description: The node_name of the upstream end, exactly as in source_nodes.
+        required: true
+      downstream_node:
+        description: The node_name of the downstream end, exactly as in source_nodes.
+        required: true
+      source_link_type:
+        description: >-
+          The source's own typing of the edge, verbatim, when it has one (for
+          dismech, causal_link_type such as DIRECT or
+          INDIRECT_KNOWN_INTERMEDIATES).
+      description:
+        description: What the source says the edge asserts, in the curator's summary.
       notes:
 
   SourceNode:
