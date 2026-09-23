@@ -29,6 +29,16 @@ EnviroHealthMech has no schema of its own. Its base schema is
 [`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml)
 in [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop). Schema changes belong in linkml-aop.
 
+## Skills
+
+Claude Code skills live in `.claude/skills/`, one directory per skill, each holding a
+`SKILL.md` with frontmatter whose `name` matches the directory.
+
+- **screen-aop-key-event**: use before an AOP-Wiki Key Event's structured properties are
+  used to look for matching dismech nodes. Runs the offline alignment check in
+  `aop_wiki_cli`, escalates to the model review when the Event's level and its own
+  description do not line up, and says what each outcome means for the pathway.
+
 ## Documentation
 
 - `docs/` is hand-written, tracked source for the documentation site.
