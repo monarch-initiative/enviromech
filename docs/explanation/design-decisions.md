@@ -1,6 +1,6 @@
-# EnviroHealthMech design decisions
+# EnviroMech design decisions
 
-This is the **decision register** for EnviroHealthMech. It records the deliberate design and
+This is the **decision register** for EnviroMech. It records the deliberate design and
 scope choices that shape the project, so that people and AI agents can find *why it is
 built this way* in one place instead of re-deriving it.
 
@@ -17,9 +17,9 @@ built this way* in one place instead of re-deriving it.
 The structure follows dismech's
 [design decisions register](https://github.com/monarch-initiative/dismech/blob/main/docs/explanation/design-decisions.md).
 
-## 1. What EnviroHealthMech is
+## 1. What EnviroMech is
 
-**Decision:** EnviroHealthMech is a repository of environmental health mechanisms built from
+**Decision:** EnviroMech is a repository of environmental health mechanisms built from
 AI-curated literature sources. It records how exposures to chemicals and other hazards
 external to the body relate to adverse effects, represented as phenotypes and diseases,
 whatever the strength of the
@@ -39,7 +39,7 @@ regulatory decision and an exploratory hypothesis draw on the same literature. H
 them together lets a hypothesis be read against established pathways, and lets an
 established AOP serve as context for a new association. dismech has shown that
 AI-curated mechanism content can be kept auditable when it is validated against a schema
-and its evidence against its sources; EnviroHealthMech applies that approach to environmental
+and its evidence against its sources; EnviroMech applies that approach to environmental
 health. Its pathways extend principles of the Adverse Outcome Pathway (AOP) framework: a
 real-world exposure event is not a Key Event, and the Molecular Initiating Event it would
 trigger is rarely observable at the time of exposure, so the structure has to separate
@@ -49,7 +49,7 @@ what was observed from what is inferred.
 
 ## 2. Relationship to dismech
 
-**Decision:** EnviroHealthMech inherits some of dismech's design principles, those governing
+**Decision:** EnviroMech inherits some of dismech's design principles, those governing
 how content is curated and validated, but not its schema.
 
 **Rationale:** dismech is organized around disease entries. An exposure is recorded as an
@@ -57,13 +57,13 @@ how content is curated and validated, but not its schema.
 mechanistic story worth modeling". dismech can record an exposure-disease association
 without a mechanism (328 of its 1,194 environmental factors had no mechanism link on
 2026-09-21), but only inside a disease entry that already exists, and the association has
-no identity of its own. EnviroHealthMech makes the association itself the thing recorded: it can
+no identity of its own. EnviroMech makes the association itself the thing recorded: it can
 exist before any curated disease entry or known mechanism, it can be found starting from
 the exposure, and hypothesized and established mechanisms attach to it. That difference in
 what the knowledge base is organized around is why dismech's schema cannot be reused
 as-is.
 
-**Open:** which dismech principles are inherited, and which schema principles EnviroHealthMech
+**Open:** which dismech principles are inherited, and which schema principles EnviroMech
 departs from, are not yet recorded individually. Each should get its own entry here, with
 its reason, as it is decided.
 
@@ -71,7 +71,7 @@ its reason, as it is decided.
 
 ## 3. Base schema
 
-**Decision:** EnviroHealthMech has no schema of its own for now. Its base schema is the
+**Decision:** EnviroMech has no schema of its own for now. Its base schema is the
 AOP-Wiki EMOD schema in [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop),
 [`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml).
 
@@ -100,9 +100,9 @@ typed, source-anchored evidence.
 
 ## Open and deferred decisions
 
-- Which dismech design principles EnviroHealthMech inherits (see entry 2).
-- Which dismech schema principles EnviroHealthMech departs from, and why (see entry 2).
-- Whether and when EnviroHealthMech gets a schema of its own, extending or importing the
+- Which dismech design principles EnviroMech inherits (see entry 2).
+- Which dismech schema principles EnviroMech departs from, and why (see entry 2).
+- Whether and when EnviroMech gets a schema of its own, extending or importing the
   linkml-aop schema.
 - How evidence, confidence, and provenance are represented, building on dismech's
   evidence model (including its SEPIO export) and ongoing Monarch discussions of the same

@@ -4,12 +4,12 @@ Guidance for Claude Code when working in this repository.
 
 ## Project overview
 
-EnviroHealthMech is an environmental health mechanisms repository built from AI-curated
+EnviroMech is an environmental health mechanisms repository built from AI-curated
 literature sources, following the approach of
 [dismech](https://github.com/monarch-initiative/dismech). See `docs/index.md`.
 
-**Naming:** write the project name as **EnviroHealthMech** in anything a person reads (docs,
-prose, titles). Lowercase `ehmech` is only for identifiers: the repository and
+**Naming:** write the project name as **EnviroMech** in anything a person reads (docs,
+prose, titles). Lowercase `enviromech` is only for identifiers: the repository and
 directory name, paths, and package names.
 
 ## Design decisions
@@ -19,13 +19,13 @@ register at [`docs/explanation/design-decisions.md`](docs/explanation/design-dec
 Cite a recorded decision when it is relevant. If one looks wrong or stale, surface it
 rather than silently contradicting it.
 
-In particular: EnviroHealthMech inherits some of dismech's design principles but **not** its schema
+In particular: EnviroMech inherits some of dismech's design principles but **not** its schema
 principles, so do not carry a dismech schema convention over without checking the
 register.
 
 ## Schema
 
-EnviroHealthMech has no schema of its own. Its base schema is
+EnviroMech has no schema of its own. Its base schema is
 [`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml)
 in [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop). Schema changes belong in linkml-aop.
 
