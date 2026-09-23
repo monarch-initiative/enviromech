@@ -1,4 +1,4 @@
-# EnviroHealthMech
+# EnviroMech
 
 An environmental health mechanisms repository built from AI-curated literature sources,
 recording how exposures to chemicals and other hazards relate to adverse effects
@@ -7,7 +7,7 @@ to mature Adverse Outcome Pathways.
 It follows the approach of the
 [Disorder Mechanisms Knowledge Base (dismech)](https://github.com/monarch-initiative/dismech).
 
-What EnviroHealthMech holds, and how it differs from dismech, is described on the
+What EnviroMech holds, and how it differs from dismech, is described on the
 documentation site's [home page](docs/index.md).
 
 ## Status
@@ -16,7 +16,7 @@ Early setup. The repository currently holds documentation only; no curated conte
 
 ## Schema
 
-EnviroHealthMech does not yet have a schema of its own. Its base schema is the AOP-Wiki EMOD
+EnviroMech does not yet have a schema of its own. Its base schema is the AOP-Wiki EMOD
 schema from [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop):
 [`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml).
 Changes to that schema are made in linkml-aop.
