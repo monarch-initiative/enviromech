@@ -3,7 +3,7 @@ name: screen-aop-key-event
 description: >
   Screen one AOP-Wiki Key Event for internal errors before its structured
   properties are used to look for matching dismech pathograph nodes. Use when
-  reusing an existing Key Event in an EnviroHealthMech pathway, when a Key
+  reusing an existing Key Event in an EnviroMech pathway, when a Key
   Event's level of biological organization looks wrong for its description, when
   deciding whether a level difference between AOP-Wiki and dismech is a real
   modelling difference or an error in the AOP-Wiki record, or before writing a
@@ -12,7 +12,7 @@ description: >
 
 # Screen an AOP-Wiki Key Event before comparing it with dismech
 
-An EnviroHealthMech pathway reuses an existing Key Event rather than inventing
+An EnviroMech pathway reuses an existing Key Event rather than inventing
 one, and reusing it means inheriting its structured properties. The level of
 biological organization is the one that then decides curation work: it governs
 which dismech pathophysiology nodes can be aggregated into that Key Event, and a
@@ -47,7 +47,7 @@ ls outputs/cache/                                       # snapshot dates availab
 
 ## Step 1 - Record which Key Event and why
 
-Write down the Key Event ID, the snapshot date, and the EnviroHealthMech pathway
+Write down the Key Event ID, the snapshot date, and the EnviroMech pathway
 it is being screened for. Every judgement below is relative to that Event as the
 snapshot holds it, and a later snapshot may differ.
 
@@ -134,6 +134,6 @@ inventory of AOP-Wiki data errors that dismech issue
   permissible values of `SexTermEnum` and `LifeStageTermEnum` carry no
   definitions to read.
 - It does not validate a `KeyEventAggregation` record. That is a separate check,
-  over EnviroHealthMech's own records rather than over AOP-Wiki's.
+  over EnviroMech's own records rather than over AOP-Wiki's.
 - It does not judge whether the Event is the right one for the pathway. It
   checks the Event against itself.

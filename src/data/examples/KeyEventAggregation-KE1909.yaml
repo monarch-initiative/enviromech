@@ -2,7 +2,7 @@
 # pathophysiology nodes joined by a causal edge, with a level mismatch recorded. Event fields are copied
 # from the 2026-09-03 AOP-Wiki XML export via aop-wiki-cli; node fields from
 # dismech main on 2026-09-21.
-id: ehmech:kea-0002
+id: enviromech:kea-0002
 event_id:
   id: 1909
   title: "Mucociliary Clearance, Decreased"

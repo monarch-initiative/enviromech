@@ -1,7 +1,7 @@
 # Sketch instance: AOP-Wiki KE 1908 aggregated from two Primary_Ciliary_Dyskinesia
 # pathophysiology nodes. Event fields are copied from the 2026-09-03 AOP-Wiki
 # XML export via aop-wiki-cli; node fields from dismech main on 2026-09-21.
-id: ehmech:kea-0001
+id: enviromech:kea-0001
 event_id:
   id: 1908
   title: "Cilia Beat Frequency, Decreased"

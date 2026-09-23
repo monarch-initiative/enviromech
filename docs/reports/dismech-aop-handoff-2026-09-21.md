@@ -1,17 +1,17 @@
-# Handoff: dismech AOP work relevant to EnviroHealthMech
+# Handoff: dismech AOP work relevant to EnviroMech
 
 **Date:** 2026-09-21
 **From:** a Claude Code session working in `monarch-initiative/dismech`
 **For:** the next session working in this repository, and @gingin77
 
-This brief lists the AOP work already done in dismech that EnviroHealthMech should build
+This brief lists the AOP work already done in dismech that EnviroMech should build
 on rather than repeat. Everything listed was checked on the date above: each path exists,
 and each issue's state and assignee were read from GitHub. Local paths assume the dismech
 checkout at `/Users/ginniehench/Developer/dismech`.
 
 ## The task that prompted this
 
-The goal is a set of **airway inflammation pathways** for EnviroHealthMech. Each one is
+The goal is a set of **airway inflammation pathways** for EnviroMech. Each one is
 built from mechanisms already curated in dismech's disease entries and modules, and
 written as instances of the classes in linkml-aop's
 [`aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml).
@@ -48,7 +48,7 @@ Network JSON for both comparisons sits in each project's `artifacts/` folder.
 | [#10454](https://github.com/monarch-initiative/dismech/issues/10454) | open, assigned to @gingin77 | Proposes a project collecting use cases where a KER was checked against primary literature. The first use case, KER3445, is written up in full in the issue |
 | [#10773](https://github.com/monarch-initiative/dismech/issues/10773) | open, unassigned | An inventory of AOP-Wiki data errors found during curation |
 | [#10272](https://github.com/monarch-initiative/dismech/issues/10272) | open, assigned to @gingin77 | The six open schema questions from the alignment page. See the correction below |
-| [#10395](https://github.com/monarch-initiative/dismech/issues/10395) | open, assigned to @gingin77 | A proposed "Phenocopy" tab on dismech disease pages. It asks for a dismech feature, but what it records is an exposure-outcome association, which is what EnviroHealthMech holds |
+| [#10395](https://github.com/monarch-initiative/dismech/issues/10395) | open, assigned to @gingin77 | A proposed "Phenocopy" tab on dismech disease pages. It asks for a dismech feature, but what it records is an exposure-outcome association, which is what EnviroMech holds |
 
 **Stay in dismech:** [#11950](https://github.com/monarch-initiative/dismech/issues/11950),
 [#11951](https://github.com/monarch-initiative/dismech/issues/11951) and
@@ -69,7 +69,7 @@ current command surface.
 When porting, replace the dismech-specific parts:
 
 - **Evidence rule.** The skills say AOP-Wiki is never a dismech reference, because dismech
-  has no fetcher for it. EnviroHealthMech has not decided its own evidence rule, so do not
+  has no fetcher for it. EnviroMech has not decided its own evidence rule, so do not
   carry that rule over as a decision.
 - **Paths and recipes.** Replace `kb/disorders/`, `references_cache/` and `just` recipes,
   which do not exist here.
@@ -89,7 +89,7 @@ dismech. The alignment page frames **all six** as dismech schema questions, each
   all carry taxon, sex and life-stage links. They matter here only when importing from
   dismech: those values will be missing from dismech-derived content and cannot be
   filled in from it.
-- **Question 6**, marking a node as toxicokinetic, bears directly on EnviroHealthMech. The
+- **Question 6**, marking a node as toxicokinetic, bears directly on EnviroMech. The
   EMOD `Event` definition excludes exposure events. Every dismech entry examined so far
   lands its exposures on an absorption or intake node two hops upstream of the first
   molecular Event. An exporter has to decide which nodes to leave out, and nothing in
@@ -118,7 +118,7 @@ Surveyed on 2026-09-21. These counts move with every curation PR.
 **Gap:** dismech has no module for type 2 airway inflammation, mucus hypersecretion,
 mucociliary clearance failure or airway remodeling. Filling these would give the reusable
 Events that join airway pathways into a network. That work belongs in dismech, where it
-runs under dismech's validation and review agents. EnviroHealthMech would then consume
+runs under dismech's validation and review agents. EnviroMech would then consume
 the checked result.
 
 The 2026-09-03 AOP-Wiki snapshot holds 39 Events with airway or lung terms in their titles.

@@ -1,10 +1,10 @@
-id: https://w3id.org/monarch-initiative/ehmech
-name: ehmech
-title: EnviroHealthMech schema
+id: https://w3id.org/monarch-initiative/enviromech
+name: enviromech
+title: EnviroMech schema
 description: >-
-  The EnviroHealthMech schema. It imports the AOP-Wiki EMOD schema from
+  The EnviroMech schema. It imports the AOP-Wiki EMOD schema from
   EHS-Data-Standards/linkml-aop unchanged and adds only the classes that
-  EnviroHealthMech needs while they are being worked out. A class that earns a
+  EnviroMech needs while they are being worked out. A class that earns a
   place in EMOD moves to linkml-aop; a class that turns out to be specific to
   deriving pathways from external knowledge bases stays here.
 
@@ -13,9 +13,9 @@ description: >-
   treating anything in this file as adopted.
 prefixes:
   linkml: https://w3id.org/linkml/
-  ehmech: https://w3id.org/monarch-initiative/ehmech/
+  enviromech: https://w3id.org/monarch-initiative/enviromech/
   dismech: https://dismech.monarchinitiative.org/
-default_prefix: ehmech
+default_prefix: enviromech
 default_range: string
 
 imports:
