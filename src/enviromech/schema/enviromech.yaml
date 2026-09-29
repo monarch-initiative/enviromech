@@ -136,6 +136,22 @@ classes:
       source_knowledge_base:
         description: The knowledge base the node comes from, for example dismech.
         required: true
+      source_node_ref:
+        description: >-
+          The node's identity in the source, written in the source's own
+          cross-entry reference grammar so it can be resolved there. For dismech
+          this is the entity reference <entry>:<section>#<name>, for example
+          Primary_Ciliary_Dyskinesia:pathophysiology#Ciliary Dysfunction, which
+          is what dismech's attaches_to uses across files and what its
+          entity_refs resolver checks. This is the key that maps a source node to
+          the Event: two nodes from one entry are two distinct refs, and a
+          pathophysiology node is distinguished from a phenotype of the same
+          name. source_entry and node_name are its readable parts and must agree
+          with it.
+        required: true
+      node_name:
+        description: The node's name exactly as the source spells it.
+        required: true
       source_entry:
         description: >-
           The entry within that knowledge base, for example a dismech disease or
@@ -144,9 +160,6 @@ classes:
       source_entry_uri:
         description: A resolvable URI for the entry, when the source publishes one.
         range: uri
-      node_name:
-        description: The node's name exactly as the source spells it.
-        required: true
       source_level:
         description: >-
           The level of biological organization as the source records it, verbatim

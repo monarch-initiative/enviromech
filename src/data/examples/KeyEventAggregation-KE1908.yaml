@@ -35,6 +35,7 @@ event_id:
 aggregation_relation: constitutes
 source_nodes:
 - source_knowledge_base: dismech
+  source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Ciliary Dysfunction
   source_entry: Primary_Ciliary_Dyskinesia
   source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
   node_name: Ciliary Dysfunction
@@ -66,6 +67,7 @@ source_nodes:
     that frequency can be preserved: RSPH1-related disease keeps frequency with an
     abnormal circular waveform, and DNAH11-related disease is hyperkinetic.
 - source_knowledge_base: dismech
+  source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Ciliary Disorientation
   source_entry: Primary_Ciliary_Dyskinesia
   source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
   node_name: Ciliary Disorientation

@@ -71,17 +71,20 @@ its reason, as it is decided.
 
 ## 3. Base schema
 
-**Decision:** EnviroMech has no schema of its own for now. Its base schema is the
+**Decision:** EnviroMech's schema, `src/enviromech/schema/enviromech.yaml`, imports the
 AOP-Wiki EMOD schema in [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop),
-[`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml).
+[`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml),
+unchanged, and adds only the classes EnviroMech needs while they are being worked out. A
+class that earns a place in EMOD moves to linkml-aop; a class specific to deriving
+pathways from external knowledge bases stays here.
 
 **Rationale:** the EMOD schema already models Adverse Outcome Pathways, Key Events,
 Assays, Observations, and Evidence, and its stated purpose includes providing a basis for
 pathways derived by automated approaches such as text mining. Building on it avoids a
 second, diverging model of the same concepts.
 
-**Consequence:** changes to that schema are made in linkml-aop, not here. Its class
-definitions and the reasoning behind them are in EHS-Data-Standards/linkml-aop's
+**Consequence:** changes to the EMOD classes are made in linkml-aop, never by overriding
+them here. Its class definitions and the reasoning behind them are in EHS-Data-Standards/linkml-aop's
 [`src/docs/dev/definition_rationale.md`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/docs/dev/definition_rationale.md).
 
 **Status:** adopted.
@@ -102,8 +105,8 @@ typed, source-anchored evidence.
 
 - Which dismech design principles EnviroMech inherits (see entry 2).
 - Which dismech schema principles EnviroMech departs from, and why (see entry 2).
-- Whether and when EnviroMech gets a schema of its own, extending or importing the
-  linkml-aop schema.
+- Which of the classes sketched in `enviromech.yaml` belong in EMOD, and when the
+  linkml-aop import is pinned rather than resolved against a sibling checkout (see entry 3).
 - How evidence, confidence, and provenance are represented, building on dismech's
   evidence model (including its SEPIO export) and ongoing Monarch discussions of the same
   questions.

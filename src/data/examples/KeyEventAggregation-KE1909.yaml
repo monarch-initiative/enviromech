@@ -23,6 +23,7 @@ event_id:
 aggregation_relation: constitutes
 source_nodes:
 - source_knowledge_base: dismech
+  source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Impaired Mucociliary Clearance
   source_entry: Primary_Ciliary_Dyskinesia
   source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
   node_name: Impaired Mucociliary Clearance
@@ -59,6 +60,7 @@ source_nodes:
     (INCREASED, a rescue). The node's description also cites whole-lung
     radioaerosol clearance, absent in most of 69 measured patients.
 - source_knowledge_base: dismech
+  source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Central-Apparatus Transport Dysfunction
   source_entry: Primary_Ciliary_Dyskinesia
   source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
   node_name: Central-Apparatus Transport Dysfunction

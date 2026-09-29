@@ -25,9 +25,20 @@ register.
 
 ## Schema
 
-EnviroMech has no schema of its own. Its base schema is
+EnviroMech's schema is [`src/enviromech/schema/enviromech.yaml`](src/enviromech/schema/enviromech.yaml).
+It imports the AOP-Wiki EMOD schema,
 [`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml)
-in [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop). Schema changes belong in linkml-aop.
+from [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop),
+unchanged, and adds only what EnviroMech needs while it is being worked out. The
+division of work: a class that earns a place in EMOD moves to linkml-aop; a class
+specific to deriving pathways from external knowledge bases stays here. Changes to the
+EMOD classes themselves are made in linkml-aop, never by overriding them here.
+
+The import resolves against a sibling `linkml-aop` checkout. That is a placeholder for a
+pinned dependency, not a design choice; the schema file says so at the top.
+
+Validate the example records with
+`linkml-validate -s src/enviromech/schema/enviromech.yaml -C KeyEventAggregation src/data/examples/*.yaml`.
 
 ## Skills
 

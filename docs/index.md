@@ -30,7 +30,9 @@ mechanisms attach to it. See
 
 ## Schema
 
-EnviroMech does not yet have a schema of its own. Its base schema is the AOP-Wiki EMOD
-schema from [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop):
-[`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml).
+EnviroMech's schema, `src/enviromech/schema/enviromech.yaml`, imports the AOP-Wiki EMOD
+schema from [EHS-Data-Standards/linkml-aop](https://github.com/EHS-Data-Standards/linkml-aop),
+[`src/linkml_aop/schema/aop_emod_linkml.yaml`](https://github.com/EHS-Data-Standards/linkml-aop/blob/main/src/linkml_aop/schema/aop_emod_linkml.yaml),
+unchanged, and adds only what EnviroMech needs. Changes to the EMOD classes are made in
+linkml-aop.
 See [decision 3](explanation/design-decisions.md#3-base-schema).
