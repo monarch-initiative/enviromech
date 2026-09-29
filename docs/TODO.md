@@ -21,7 +21,7 @@ it stands:
 |---|---|
 | Screen one Key Event for internal errors before its properties are used | Exists here: the `screen-aop-key-event` skill |
 | Find dismech nodes from a Key Event's structured properties (process, object, action, level) across the whole corpus | Missing. Today a curator reads one already-chosen entry's node names (skill step 6). Planned as `scripts/find_source_nodes.py`: exact-CURIE hits first, label and synonym overlap second, output a ranked candidate list for a person to read. KE 1908 shows why it lists rather than decides: the Event binds `HP:0012262` and the matching nodes bind `GO:0003341`. Ontology closure is a later tier and needs a local build |
-| Resolve a chosen node reference into a `SourceNode` block, and check a record against dismech | TODO |
+| Resolve a chosen node reference into a `SourceNode` block, and check a record against dismech | Exists here: `scripts/resolve_source_node.py`, `just resolve-source-node`, `just check-source-nodes` |
 | Triage KER evidence and let it set priority (skill step 5) | Exists in dismech as the `ker-evidence-triage` skill; not yet referenced from here |
 | Run the KER lookup and read its JSON by role (skill steps 2 to 4) | Exists in `aop_wiki_cli`; the skill's wrapping prose is dismech-specific |
 | Assemble chains and decide where they land; verify edges; record what was not curated (skill steps 6 to 8) | dismech-shaped. What the EnviroMech equivalent is depends on the open decisions in the register about what a pathway record here is |

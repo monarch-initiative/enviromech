@@ -37,8 +37,7 @@ EMOD classes themselves are made in linkml-aop, never by overriding them here.
 The import resolves against a sibling `linkml-aop` checkout. That is a placeholder for a
 pinned dependency, not a design choice; the schema file says so at the top.
 
-Validate the example records with
-`linkml-validate -s src/enviromech/schema/enviromech.yaml -C KeyEventAggregation src/data/examples/*.yaml`.
+Validate the example records with `just validate-examples`.
 
 ## Skills
 
@@ -49,6 +48,25 @@ Claude Code skills live in `.claude/skills/`, one directory per skill, each hold
   used to look for matching dismech nodes. Runs the offline alignment check in
   `aop_wiki_cli`, escalates to the model review when the Event's level and its own
   description do not line up, and says what each outcome means for the pathway.
+
+## Scripts
+
+Scripts live in `scripts/` and run through the `justfile`. They execute under the sibling
+dismech checkout's environment (`uv run --project ../dismech`), the same placeholder
+arrangement the schema uses for its linkml-aop import; `DISMECH_ROOT` points elsewhere.
+Searching dismech's disorders and nodes on EnviroMech's behalf belongs here, not in
+dismech.
+
+- `just resolve-source-node "<entry>:<section>#<name>"` resolves a dismech node reference
+  and emits the `SourceNode` block for it, with the node's GO/CL/UBERON descriptors
+  re-typed as EMOD term objects. It copies every bound term; prune to what the Event is
+  about and write `notes` by hand. Genes are reported, not copied, because EMOD has no
+  gene object source.
+- `just check-source-nodes <file>...` checks every `source_nodes[]` entry of a
+  `KeyEventAggregation` record against dismech: the reference resolves, `source_entry`,
+  `node_name` and `source_level` agree with it, and no term is on the record that dismech
+  does not bind to that node. Terms the record omits are listed, not failed.
+- `just validate-examples` validates `src/data/examples/` against the schema.
 
 ## Documentation
 
