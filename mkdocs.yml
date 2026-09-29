@@ -1,6 +1,13 @@
 site_name: EnviroMech
 theme:
   name: material
+# Kept in the repository, left out of the site build.
+exclude_docs: |
+  reports/dismech-chemical-entities-2026-09-24.md
+  reports/dismech-estrogen-receptor-aop-toxcast-bridge-2026-09-26.md
+  reports/dismech-inflammasome-exposure-gap-2026-09-24.md
+  reports/things-to-clarify-2026-09-22.md
+  enviromech-adverse-outcome-decision-draft.md
 nav:
   - Home: index.md
   - Explanation:

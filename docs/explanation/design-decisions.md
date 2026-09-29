@@ -20,12 +20,12 @@ The structure follows dismech's
 ## 1. What EnviroMech is
 
 **Decision:** EnviroMech is a repository of environmental health mechanisms built from
-AI-curated literature sources. It records how exposures to chemicals and other hazards
-external to the body relate to adverse effects, represented as phenotypes and diseases,
-whatever the strength of the
-evidence behind them:
+AI-curated literature sources. It revolves around capturing known and hypothesized
+associations between hazards and health impacts, where a hazard is a chemical or other
+agent external to the body and a health impact is represented as a phenotype or disease,
+whatever the strength of the evidence behind them:
 
-- associations between an exposure and an adverse effect, with no known mechanism;
+- associations between a hazard and a health impact, with no known mechanism;
 - hypothesized mechanisms proposed to explain such associations;
 - mature Adverse Outcome Pathways, used in chemical safety risk assessment decisions,
   whose mechanisms carry substantial evidential support.
@@ -34,7 +34,7 @@ How well supported a record is must be readable from its evidence, confidence, a
 provenance, recorded as separate things, and observation, testable Key Events, and
 inferred mechanism are kept distinct throughout.
 
-**Rationale:** exposure-outcome knowledge exists at every level of support, and a
+**Rationale:** hazard-to-health-impact knowledge exists at every level of support, and a
 regulatory decision and an exploratory hypothesis draw on the same literature. Holding
 them together lets a hypothesis be read against established pathways, and lets an
 established AOP serve as context for a new association. dismech has shown that
@@ -49,25 +49,25 @@ what was observed from what is inferred.
 
 ## 2. Relationship to dismech
 
-**Decision:** EnviroMech inherits some of dismech's design principles, those governing
-how content is curated and validated, but not its schema.
+**Decision:** The plan is to make use of some of dismech's design principles, those
+governing how content is curated and validated, but not its schema.
 
 **Rationale:** dismech is organized around disease entries. An exposure is recorded as an
 `environmental:` factor of a curated disease, and a disease is in scope when it has "a
 mechanistic story worth modeling". dismech can record an exposure-disease association
 without a mechanism (328 of its 1,194 environmental factors had no mechanism link on
 2026-09-21), but only inside a disease entry that already exists, and the association has
-no identity of its own. EnviroMech makes the association itself the thing recorded: it can
-exist before any curated disease entry or known mechanism, it can be found starting from
-the exposure, and hypothesized and established mechanisms attach to it. That difference in
-what the knowledge base is organized around is why dismech's schema cannot be reused
-as-is.
+no identity of its own. EnviroMech revolves around capturing known and hypothesized
+associations between hazards and health impacts: an association can exist before any
+curated disease entry or known mechanism, it can be found starting from the hazard, and
+hypothesized and established mechanisms attach to it. That difference in what the
+knowledge base is organized around is why dismech's schema cannot be reused as-is.
 
-**Open:** which dismech principles are inherited, and which schema principles EnviroMech
+**Open:** which dismech principles EnviroMech will use, and which schema principles it
 departs from, are not yet recorded individually. Each should get its own entry here, with
 its reason, as it is decided.
 
-**Status:** adopted; details open.
+**Status:** planned; details open.
 
 ## 3. Base schema
 
@@ -103,7 +103,7 @@ typed, source-anchored evidence.
 
 ## Open and deferred decisions
 
-- Which dismech design principles EnviroMech inherits (see entry 2).
+- Which dismech design principles EnviroMech will use (see entry 2).
 - Which dismech schema principles EnviroMech departs from, and why (see entry 2).
 - Which of the classes sketched in `enviromech.yaml` belong in EMOD, and when the
   linkml-aop import is pinned rather than resolved against a sibling checkout (see entry 3).

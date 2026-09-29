@@ -22,7 +22,7 @@ which are recorded separately. See
 
 EnviroMech follows the approach of the
 [Disorder Mechanisms Knowledge Base (dismech)](https://github.com/monarch-initiative/dismech)
-and inherits some of its design principles for how content is curated and validated. The difference is what each is organized around. dismech is organized around
+and plans to make use of some of its design principles for how content is curated and validated. The difference is what each is organized around. dismech is organized around
 disease entries; in EnviroMech the exposure-outcome association is itself the thing
 recorded, so it can exist before any curated disease entry or known mechanism, and
 mechanisms attach to it. See

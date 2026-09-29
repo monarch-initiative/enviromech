@@ -19,7 +19,7 @@ register at [`docs/explanation/design-decisions.md`](docs/explanation/design-dec
 Cite a recorded decision when it is relevant. If one looks wrong or stale, surface it
 rather than silently contradicting it.
 
-In particular: EnviroMech inherits some of dismech's design principles but **not** its schema
+In particular: EnviroMech makes use of some of dismech's design principles but **not** its schema
 principles, so do not carry a dismech schema convention over without checking the
 register.
 
@@ -53,7 +53,8 @@ Claude Code skills live in `.claude/skills/`, one directory per skill, each hold
 ## Documentation
 
 - `docs/` is hand-written, tracked source for the documentation site.
-- Every page under `docs/` is listed in the `mkdocs.yml` nav.
+- Every page under `docs/` is listed in the `mkdocs.yml` nav, or named in its
+  `exclude_docs` block if it is kept in the repository but left off the site.
 - `docs/explanation/` holds the reasoning behind the project, starting with the decision
   register.
 - `docs/how-to/` holds curation procedures.
