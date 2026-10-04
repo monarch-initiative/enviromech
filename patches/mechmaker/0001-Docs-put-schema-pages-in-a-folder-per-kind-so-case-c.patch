@@ -1,0 +1,95 @@
+From f1ffe9ab2cd9fd6d13d4e1c944acb139d60613e9 Mon Sep 17 00:00:00 2001
+From: Ginnie Hench <ginniehench@gmail.com>
+Date: Sat, 3 Oct 2026 22:22:21 -0400
+Subject: [PATCH 1/2] Docs: put schema pages in a folder per kind, so case
+ cannot collide
+
+Every Mech has a Term class and a term slot. LinkML's gen-doc wrote one
+page per element into docs/elements/, so their pages were Term.md and
+term.md: one file on a filesystem that ignores case. On macOS the second
+overwrote the first, the strict docs build failed on the links to the
+lost page, and `just qc` could not pass on a fresh Mech there. CI runs
+on Linux and never saw it.
+
+Generate with subfolder_type_separation, which gives classes, slots,
+enums and types a folder each. A fresh Mech's docs build now passes on
+macOS.
+
+Two elements of one kind whose names differ only by case would still
+collide, so the generated Mech's schema test now refuses them.
+
+Co-Authored-By: Claude Fable 5.1 <noreply@anthropic.com>
+---
+ template/src/{{mech_slug}}/docs.py  |  8 +++++++-
+ template/tests/test_schema.py.jinja | 15 +++++++++++++++
+ tests/test_template.py              |  9 +++++++++
+ 3 files changed, 31 insertions(+), 1 deletion(-)
+
+diff --git a/template/src/{{mech_slug}}/docs.py b/template/src/{{mech_slug}}/docs.py
+index 71bf91b..779b5bc 100644
+--- a/template/src/{{mech_slug}}/docs.py
++++ b/template/src/{{mech_slug}}/docs.py
+@@ -79,7 +79,13 @@ def generate() -> None:
+ 
+     elements = DOCS / "elements"
+     shutil.rmtree(elements, ignore_errors=True)
+-    DocGenerator(str(SCHEMA_PATH), example_directory=str(examples)).serialize(directory=str(elements))
++    # Classes, slots, enums and types each get a folder. In one folder, the Term
++    # class and the term slot are Term.md and term.md, which are the same file
++    # on a filesystem that ignores case (macOS, Windows): one overwrites the
++    # other and the build fails on the links to the lost page.
++    DocGenerator(
++        str(SCHEMA_PATH), example_directory=str(examples), subfolder_type_separation=True
++    ).serialize(directory=str(elements))
+ 
+     diagram = ERDiagramGenerator(str(SCHEMA_PATH), structural=True).serialize()
+     (DOCS / "structure.md").write_text(
+diff --git a/template/tests/test_schema.py.jinja b/template/tests/test_schema.py.jinja
+index 37323ea..33e06af 100644
+--- a/template/tests/test_schema.py.jinja
++++ b/template/tests/test_schema.py.jinja
+@@ -31,6 +31,21 @@ def test_schema_loads():
+     assert sv.get_class(RECORD_CLASS).tree_root
+ 
+ 
++@pytest.mark.parametrize("kind", ["all_classes", "all_slots", "all_enums", "all_types"])
++def test_names_of_one_kind_differ_by_more_than_case(kind):
++    """The schema pages are one file per element, in a folder per kind. Two
++    names of one kind that differ only by case are one file on macOS and
++    Windows, and the documentation build loses a page."""
++    names = [str(n) for n in getattr(SchemaView(str(SCHEMA_PATH)), kind)()]
++    seen: dict[str, str] = {}
++    clashes = []
++    for name in names:
++        if name.casefold() in seen:
++            clashes.append((seen[name.casefold()], name))
++        seen[name.casefold()] = name
++    assert clashes == []
++
++
+ @pytest.mark.parametrize("name,md5", VENDORED_MD5.items())
+ def test_vendored_modules_are_unmodified(name, md5):
+     assert hashlib.md5((SCHEMA_DIR / name).read_bytes()).hexdigest() == md5
+diff --git a/tests/test_template.py b/tests/test_template.py
+index 1cbd126..2c5390e 100644
+--- a/tests/test_template.py
++++ b/tests/test_template.py
+@@ -184,6 +184,15 @@ def test_docs_site_config(generated):
+         assert (dest / "docs" / page).exists(), page
+ 
+ 
++def test_schema_pages_are_in_a_folder_per_kind(generated):
++    """Every Mech has a Term class and a term slot. In one folder their pages
++    are Term.md and term.md, one file where case is ignored, and the docs
++    build fails there. A folder per kind keeps them apart."""
++    _, answers, dest = generated
++    source = (dest / "src" / answers["mech_slug"] / "docs.py").read_text()
++    assert "subfolder_type_separation=True" in source
++
++
+ def test_registry_entry_front_matter(generated):
+     _, answers, dest = generated
+     text = (dest / "registry" / f"{answers['mech_slug']}.md").read_text()
+-- 
+2.50.1 (Apple Git-155)
+

@@ -2,7 +2,8 @@
 # clinical studies. The graphic does not name the reviews; the two cited here
 # were found by a PubMed search on 2026-10-03.
 id: enviromech:obs-0002
-title: Levodopa treatment reduces the motor symptoms of Parkinson disease.
+name: Levodopa and Parkinson disease motor symptoms
+description: Levodopa treatment reduces the motor symptoms of Parkinson disease.
 status: DRAFT
 causal_agent:
   name: L-dopa
@@ -45,3 +46,11 @@ notes: >-
   The Causal Agent here is a treatment and the direction is a decrease: the
   observation bears on the Adverse Outcome by showing that restoring dopamine
   relieves the motor deficit.
+creation_date: 2026-10-03
+curation_history:
+- timestamp: "2026-10-03T20:00:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-fable-5-1
+  action: CREATE
+  description: Drafted from the AOP 587 graphic and the cited sources; every quote checked against its cached source.

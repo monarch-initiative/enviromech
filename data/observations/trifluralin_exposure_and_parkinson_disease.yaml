@@ -1,7 +1,8 @@
 # From the AOP 587 graphic, panel B, observation 1: an epidemiologic study using
 # Parkinson's disease and agricultural records.
 id: enviromech:obs-0001
-title: Long-term trifluralin exposure, estimated from agricultural pesticide-use records, is associated with Parkinson disease.
+name: Trifluralin exposure and Parkinson disease
+description: Long-term trifluralin exposure, estimated from agricultural pesticide-use records, is associated with Parkinson disease.
 status: DRAFT
 causal_agent:
   name: Trifluralin
@@ -48,3 +49,11 @@ notes: >-
   The association is with a diagnosis of Parkinson disease; the link to the
   Adverse Outcome, Parkinsonian motor deficits, rests on motor deficits being
   how the disease is diagnosed.
+creation_date: 2026-10-03
+curation_history:
+- timestamp: "2026-10-03T20:00:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-fable-5-1
+  action: CREATE
+  description: Drafted from the AOP 587 graphic and the cited sources; every quote checked against its cached source.
