@@ -1,7 +1,6 @@
 # From the AOP 587 graphic, panel B, observation 2: systematic reviews of
 # clinical studies. The graphic does not name the reviews; the two cited here
-# were found by a PubMed search on 2026-10-03. In cases where the database id
-# key is not known, a negative id is used as a local placeholder.
+# were found by a PubMed search on 2026-10-03.
 id: enviromech:obs-0002
 title: Levodopa treatment reduces the motor symptoms of Parkinson disease.
 status: DRAFT
@@ -13,13 +12,12 @@ causal_agent:
     label: L-dopa
 asserted_relation: used to treat
 observation:
-  id: -2
+  id: 2
   biological_action_id:
-    id: 2
     term: decreased
   phenotype: Parkinson disease
   assay_id:
-    id: -2
+    id: 2
     title: Systematic review and meta-analysis of clinical studies
   events:
   - 896

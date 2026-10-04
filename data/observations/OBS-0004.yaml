@@ -1,6 +1,5 @@
 # Not in the AOP 587 graphic. Added because the same study reports it and it
-# bears on KE 1 of the pathway. In cases where the database id key is not known,
-# a negative id is used as a local placeholder.
+# bears on KE 1 of the pathway.
 id: enviromech:obs-0004
 title: Trifluralin causes mitochondrial dysfunction in dopaminergic neurons derived from patient induced pluripotent stem cells.
 status: DRAFT
@@ -14,17 +13,15 @@ causal_agent:
   - comptox:DTXSID4021395
 asserted_relation: leads to
 observation:
-  id: -4
+  id: 4
   biological_action_id:
-    id: 7
     term: functional change
   biological_object_id:
-    id: -2
     source: GO
     source_id: GO:0005739
     term: mitochondrion
   assay_id:
-    id: -4
+    id: 4
     title: Mitochondrial function assays in dopaminergic neurons derived from Parkinson's disease patient iPSCs
   events:
   - 177

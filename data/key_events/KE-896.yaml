@@ -1,7 +1,5 @@
 # AOP-Wiki KE 896, the Adverse Outcome of AOP 587. Structured properties read
-# from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli. In cases where
-# AOP-Wiki's database id key is not known, a negative id is used as a local
-# placeholder.
+# from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
 id: aop.events:896
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -11,17 +9,13 @@ event:
   title: Parkinsonian motor deficits
   short_name: Parkinsonian motor deficits
   biological_organization_id:
-    id: 5
     term: Individual
   event_components:
-  - id: -1
-    biological_object_id:
-      id: -1
+  - biological_object_id:
       source: MESH
       source_id: D020734
       term: Parkinsonian disorders
     biological_action_id:
-      id: 3
       term: occurrence
   definition: >-
     A large number of neurological disorders are characterized by a clinical syndrome

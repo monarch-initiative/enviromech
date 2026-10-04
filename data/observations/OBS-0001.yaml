@@ -1,6 +1,5 @@
 # From the AOP 587 graphic, panel B, observation 1: an epidemiologic study using
-# Parkinson's disease and agricultural records. In cases where the database id
-# key is not known, a negative id is used as a local placeholder.
+# Parkinson's disease and agricultural records.
 id: enviromech:obs-0001
 title: Long-term trifluralin exposure, estimated from agricultural pesticide-use records, is associated with Parkinson disease.
 status: DRAFT
@@ -14,13 +13,12 @@ causal_agent:
   - comptox:DTXSID4021395
 asserted_relation: exposure correlated with
 observation:
-  id: -1
+  id: 1
   biological_action_id:
-    id: 1
     term: increased
   phenotype: Parkinson disease
   assay_id:
-    id: -1
+    id: 1
     title: Pesticide-wide association study of Parkinson's disease using agricultural pesticide-use records
   events:
   - 896
@@ -35,16 +33,18 @@ evidence:
   snippet: We associate long-term exposure to 53 pesticides with PD and identify co-exposure profiles.
   explanation: >-
     The abstract reports the association for 53 pesticides without naming them,
-    so this quote alone does not name trifluralin. See notes.
+    so this quote alone does not name trifluralin. The next item does.
+- reference: PMID:37193692
+  reference_title: A pesticide and iPSC dopaminergic neuron screen identifies and classifies Parkinson-relevant pesticides.
+  supports: SUPPORT
+  evidence_source: HUMAN_CLINICAL
+  snippet: "Ten PWAS pesticides led to cell death >3 standard deviations above the DMSO control mean at a concentration of 30 µM: propargite, copper sulfate (basic and pentahydrate), dicofol, folpet, naled, endothall, trifluralin, endosulfan, and diquat dibromide"
+  explanation: >-
+    Names trifluralin as a PWAS pesticide, that is, one the paper's
+    pesticide-wide association study implicated in Parkinson disease. The
+    sentence reports the toxicity screen; it is quoted here for what it says
+    about which pesticides the association study implicated.
 notes: >-
-  The paper's full text (PMC10188516, read through Europe PMC on 2026-10-03)
-  names trifluralin among the pesticides its
-  pesticide-wide association study implicated: "Ten PWAS pesticides led to cell
-  death >3 standard deviations above the DMSO control mean at a concentration of
-  30 µM: propargite, copper sulfate (basic and pentahydrate), dicofol, folpet,
-  naled, endothall, trifluralin, endosulfan, and diquat dibromide". That quote
-  is not checked by the reference validator: the cached text comes from the PDF,
-  which breaks the sentence at a hyphenated line end and spells trifluralin with
-  a ligature, so an exact match fails. The association is with a
-  diagnosis of Parkinson disease; the link to the Adverse Outcome, Parkinsonian
-  motor deficits, rests on motor deficits being how the disease is diagnosed.
+  The association is with a diagnosis of Parkinson disease; the link to the
+  Adverse Outcome, Parkinsonian motor deficits, rests on motor deficits being
+  how the disease is diagnosed.

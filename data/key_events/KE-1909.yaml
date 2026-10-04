@@ -1,7 +1,6 @@
 # AOP-Wiki KE 1909, with the dismech nodes aggregated into it. Event properties
 # read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli; node fields
-# from dismech main on 2026-09-21. In cases where AOP-Wiki's database id key is
-# not known, a negative id is used as a local placeholder.
+# from dismech main on 2026-09-21.
 id: aop.events:1909
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -11,17 +10,13 @@ event:
   title: "Mucociliary Clearance, Decreased"
   short_name: "MCC, Decreased"
   biological_organization_id:
-    id: 5
     term: Individual
   event_components:
-  - id: -2
-    biological_process_id:
-      id: -2
+  - biological_process_id:
       source: VT
       source_id: VT:0001947
       term: mucociliary clearance trait
     biological_action_id:
-      id: 2
       term: decreased
   definition: >-
     In healthy adults, tracheal mucus movement varies from 4 to >20 mm/min (Stannard and
@@ -81,28 +76,22 @@ aggregation:
     node_name: Impaired Mucociliary Clearance
     source_level: TISSUE
     biological_organization_id:
-      id: 3
       term: Tissue
     processes:
-    - id: -102
-      source: GO
+    - source: GO
       source_id: GO:0120197
       term: mucociliary clearance
     objects:
-    - id: -201
-      source: CL
+    - source: CL
       source_id: CL:4030034
       term: respiratory tract multiciliated cell
-    - id: -204
-      source: UBERON
+    - source: UBERON
       source_id: UBERON:0001004
       term: respiratory system
-    - id: -205
-      source: UBERON
+    - source: UBERON
       source_id: UBERON:0001825
       term: paranasal sinus
     biological_action_id:
-      id: 2
       term: decreased
     notes: >-
       Three model links land on this node in dismech, all declaring model_scale
@@ -118,24 +107,19 @@ aggregation:
     node_name: Central-Apparatus Transport Dysfunction
     source_level: CELLULAR
     biological_organization_id:
-      id: 2
       term: Cellular
     processes:
-    - id: -102
-      source: GO
+    - source: GO
       source_id: GO:0120197
       term: mucociliary clearance
     objects:
-    - id: -201
-      source: CL
+    - source: CL
       source_id: CL:4030034
       term: respiratory tract multiciliated cell
-    - id: -202
-      source: UBERON
+    - source: UBERON
       source_id: UBERON:0004802
       term: respiratory tract epithelium
     biological_action_id:
-      id: 2
       term: decreased
     source_confidence: PROVISIONAL
     notes: >-

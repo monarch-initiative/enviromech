@@ -1,7 +1,6 @@
 # AOP-Wiki KE 1908, with the dismech nodes aggregated into it. Event properties
 # read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli; node fields
-# from dismech main on 2026-09-21. In cases where AOP-Wiki's database id key is
-# not known, a negative id is used as a local placeholder.
+# from dismech main on 2026-09-21.
 id: aop.events:1908
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -11,30 +10,23 @@ event:
   title: "Cilia Beat Frequency, Decreased"
   short_name: "Cilia Beat Frequency, Decreased"
   biological_organization_id:
-    id: 2
     term: Cellular
   cell_term_id:
-    id: -1
     source: CL
     term: multi-ciliated epithelial cell
   organ_term_id:
-    id: -1
     source: UBERON
     term: lung epithelium
   event_components:
-  - id: -1
-    biological_process_id:
-      id: -1
+  - biological_process_id:
       source: HP
       source_id: HP:0012262
       term: Abnormal ciliary motility
     biological_object_id:
-      id: -1
       source: GO
       source_id: GO:0031514
       term: motile cilium
     biological_action_id:
-      id: 3
       term: occurrence
   definition: >-
     Cohesive beating of cilia lining the upper and lower respiratory tract is critical
@@ -114,24 +106,19 @@ aggregation:
     node_name: Ciliary Dysfunction
     source_level: CELLULAR
     biological_organization_id:
-      id: 2
       term: Cellular
     processes:
-    - id: -101
-      source: GO
+    - source: GO
       source_id: GO:0003341
       term: cilium movement
     objects:
-    - id: -201
-      source: CL
+    - source: CL
       source_id: CL:4030034
       term: respiratory tract multiciliated cell
-    - id: -202
-      source: UBERON
+    - source: UBERON
       source_id: UBERON:0004802
       term: respiratory tract epithelium
     biological_action_id:
-      id: 4
       term: abnormal
     notes: >-
       Eight model readouts land on this node in dismech, including ciliary beat
@@ -146,24 +133,19 @@ aggregation:
     node_name: Ciliary Disorientation
     source_level: CELLULAR
     biological_organization_id:
-      id: 2
       term: Cellular
     processes:
-    - id: -101
-      source: GO
+    - source: GO
       source_id: GO:0003341
       term: cilium movement
     objects:
-    - id: -201
-      source: CL
+    - source: CL
       source_id: CL:4030034
       term: respiratory tract multiciliated cell
-    - id: -203
-      source: UBERON
+    - source: UBERON
       source_id: UBERON:0005384
       term: nasal cavity epithelium
     biological_action_id:
-      id: 4
       term: abnormal
     notes: >-
       Two readouts from the GAS2L2-deficient patient nasal model: ciliary

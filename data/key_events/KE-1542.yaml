@@ -1,7 +1,5 @@
 # AOP-Wiki KE 1542, the Molecular Initiating Event of AOP 587. Structured
-# properties read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli. In
-# cases where AOP-Wiki's database id key is not known, a negative id is used as
-# a local placeholder.
+# properties read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
 id: aop.events:1542
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -11,30 +9,23 @@ event:
   title: "Inhibition, Mitochondrial complex III"
   short_name: "Inhibition, Mitochondrial complex III"
   biological_organization_id:
-    id: 1
     term: Molecular
   cell_term_id:
-    id: -1
     source: CL
     term: eukaryotic cell
   organ_term_id:
-    id: -1
     source: UBERON
     term: organ
   event_components:
-  - id: -1
-    biological_process_id:
-      id: -1
+  - biological_process_id:
       source: HP
       source_id: HP:0011924
       term: Decreased activity of mitochondrial complex III
     biological_object_id:
-      id: -1
       source: GO
       source_id: GO:0005750
       term: mitochondrial respiratory chain complex III
     biological_action_id:
-      id: 2
       term: decreased
   definition: >-
     The mitochondrial complex III, also known as cytochrome bc1 complex, is located in
