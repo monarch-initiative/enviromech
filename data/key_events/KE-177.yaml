@@ -1,0 +1,543 @@
+# AOP-Wiki KE 177, an intermediate Key Event of AOP 587 and of 42 other AOPs.
+# Structured properties read from the 2026-10-03 AOP-Wiki XML export with
+# aop_wiki_cli. In cases where AOP-Wiki's database id key is not known, a
+# negative id is used as a local placeholder.
+id: aop.events:177
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/177
+event:
+  id: 177
+  title: "Increase, Mitochondrial dysfunction"
+  short_name: "Increase, Mitochondrial dysfunction"
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  cell_term_id:
+    id: -1
+    source: CL
+    term: eukaryotic cell
+  organ_term_id:
+    id: -1
+    source: UBERON
+    term: organ
+  event_components:
+  - id: -1
+    biological_object_id:
+      id: -1
+      source: GO
+      source_id: GO:0005739
+      term: mitochondrion
+    biological_action_id:
+      id: 7
+      term: functional change
+  definition: >-
+    Mitochondrial dysfunction is a consequence of inhibition of the respiratory chain
+    leading to oxidative stress.
+
+    Mitochondria can be found in all cells and are considered the most important
+    cellular consumers of oxygen. Furthermore, mitochondria possess numerous redox
+    enzymes capable of transferring single electrons to oxygen, generating the
+    superoxide (O2-). Some mitochondrial enzymes that are involved in reactive oxygen
+    species (ROS) generation include the electron-transport chain (ETC) complexes I, II
+    and III; pyruvate dehydrogenase (PDH) and glycerol-3-phosphate dehydrogenase (GPDH).
+    The transfer of electrons to oxygen, generating superoxide, happens mainly when
+    these redox carriers are charged enough with electrons and the potential energy for
+    transfer is elevated, like in the case of high mitochondrial membrane potential. In
+    contrast, ROS generation is decreased if there are not enough electrons and the
+    potential energy for the transfer is not sufficient (reviewed in Lin and Beal,
+    2006).
+
+    Cells are also able to detoxify the generated ROS due to an extensive antioxidant
+    defence system that includes superoxide dismutases, glutathione peroxidases,
+    catalase, thioredoxins, and peroxiredoxins in various cell organelles (reviewed in
+    Lin and Beal, 2006). It is worth mentioning that, as in the case of ROS generation,
+    antioxidant defences are also closely related to the redox and energetic status of
+    mitochondria. If mitochondria are structurally and functionally healthy, an
+    antioxidant defence mechanism balances ROS generation, and there is not much
+    available ROS production. However, in case of mitochondrial damage, the antioxidant
+    defence capacity drops and ROS generation takes over. Once this happens, a vicious
+    cycle starts and ROS can further damage mitochondria, leading to more free-radical
+    generation and further loss of antioxidant capacity. During mitochondrial
+    dysfunction the availability of ATP also decreases, which is considered necessary
+    for repair mechanisms after ROS generation.
+
+    A number of proteins bound to the mitochondria or endoplasmic reticulum (ER),
+    especially in the mitochondria-associated ER membrane (MAM), are playing an
+    important role of communicators between these two organelles (reviewed Mei et al.,
+    2013). ER stress induces mitochondrial dysfunction through regulation of Ca2+
+    signaling and ROS production (reviewed Mei et al., 2013). Prolonged ER stress leads
+    to release of Ca2+ at the MAM and increased Ca2+ uptake into the mitochondrial
+    matrix, which induces Ca2+-dependent mitochondrial outer membrane permeabilization
+    and apoptosis. At the same, ROS are produced by proteins in the ER oxidoreductin 1
+    (ERO1) family. ER stress activates ERO1 and leads to excessive production of ROS,
+    which, in turn, inactivates SERCA and activates inositol-1,4,5- trisphosphate
+    receptors (IP3R) via oxidation, resulting in elevated levels of cytosolic Ca2+,
+    increased mitochondrial uptake of Ca2+, and ultimately mitochondrial dysfunction.
+    Just as ER stress can lead to mitochondrial dysfunction, mitochondrial dysfunction
+    also induces ER Stress (reviewed Mei et al., 2013). For example, nitric oxide
+    disrupts the mitochondrial respiratory chain and causes changes in mitochondrial
+    Ca2+ flux which induce ER stress. Increased Ca2+ flux triggers loss of mitochondrial
+    membrane potential (MMP), opening of mitochondrial permeability transition pore
+    (mPTP), release of cytochrome c and apoptosis inducing factor (AIF), decreasing ATP
+    synthesis and rendering the cells more vulnerable to both apoptosis and necrosis
+    (Wang and Qin, 2010).
+
+    Metal-induced Mitochondrial Dysfunction
+
+    Mitochondria are an important site of Ca2+ regulation and storage, taking up Ca2+
+    ions electrophoretically from the cytosol through a Ca2+ uniporter, which can then
+    accumulate in the mitochondria (Roos et al., 2012; Orrenius et al., 2015).
+    Similarities between calcium and metals, such as cadmium and lead, makes the
+    entrance and accumulation of these metals into the mitochondria via calcium metals
+    possible by mode of molecular mimicry (Mathews et al., 2013; Adiele et al., 2012).
+    The outer mitochondrial membrane also contains the divalent metal transporter
+    (DMT1), which allows for mitochondrial uptake of divalent metals such as Fe and Mn.
+    When cells are under heavy metal-induced stress, DMT has been shown to be
+    overexpressed in the mitochondrial membrane, making the mitochondria targets of
+    metal toxicity and accumulation.
+
+    Heavy metal exposure in aerobic organisms increases ROS formation through redox
+    cycling, where metals with different valence states (Fe, Cu, Cr, etc.) directly
+    produce ROS as they are reduced by cellular antioxidants and then react with oxygen
+    (Shaki et al., 2012; Shaki et al., 2013; Pourahmad et al., 2006; Santos et al.,
+    2007). The production of highly reactive hydroxyl radicals under mitochondrial
+    oxidative stress and in the presence of transition metals occurs via the Fenton
+    reaction or Haber-Weiss reaction (Hancock et al., 2001; Valko et al., 2005;
+    Adam-Vizi et al., 2010). Metals and ROS are capable of damaging mitochondrial DNA as
+    well as mechanisms of DNA repair and proliferation arrest (Valko et al., 2005).
+    Metals and ROS have the potential to directly damage mitochondrial membranes and
+    structure by binding to and oxidizing membrane lipids and proteins. This structural
+    damage can collapse the MMP and lead to the opening of the MPTP (Orrenius et al.,
+    2015; Roos et al., 2012; Pourahmad et al., 2006). Uranium and mercury, for example,
+    have both been shown to directly inhibit the mitochondrial electron transport chain
+    and interfere with ATP production (Shaki et al., 2012; Roos et al., 2012).
+    Furthermore, as previously mentioned, metals have been shown to inhibit
+    ROS-detoxifying enzymes. By binding to these enzymes, metals can inhibit their
+    antioxidant functions, and cause an accumulation of ROS and increased synthesis of
+    more antioxidant enzymes in order to combat the oxidative stress (Blajszczak and
+    Bonini, 2017).
+
+    Summing up: Mitochondria play a pivotal role in cell survival and cell death because
+    they are regulators of both energy metabolism and apoptotic/necrotic pathways
+    (Fiskum, 2000; Wieloch, 2001; Friberg and Wieloch, 2002). The production of ATP via
+    oxidative phosphorylation is a vital mitochondrial function (Kann and Kovács, 2007;
+    Nunnari and Suomalainen, 2012). The ATP is continuously required for signalling
+    processes (e.g. Ca2+ signalling), maintenance of ionic gradients across membranes,
+    and biosynthetic processes (e.g. protein synthesis, heme synthesis or lipid and
+    phospholipid metabolism) (Kang and Pervaiz, 2012), and (Green, 1998; McBride et al.,
+    2006). Inhibition of mitochondrial respiration contributes to various cellular
+    stress responses, such as deregulation of cellular Ca2+ homeostasis (Graier et al.,
+    2007) and ROS production (Nunnari and Suomalainen, 2012; reviewed Mei et al.,
+    2013).). It is well established in the existing literature that mitochondrial
+    dysfunction may result in: (a) an increased ROS production and a decreased ATP
+    level, (b) the loss of mitochondrial protein import and protein biosynthesis, (c)
+    the reduced activities of enzymes of the mitochondrial respiratory chain and the
+    Krebs cycle, (d) the loss of the mitochondrial membrane potential, (e) the loss of
+    mitochondrial motility, causing a failure to re-localize to the sites with increased
+    energy demands (f) the destruction of the mitochondrial network, and (g) increased
+    mitochondrial Ca2+ uptake, causing Ca2+ overload (reviewed in Lin and Beal, 2006;
+    Graier et al., 2007), (h) the rupture of the mitochondrial inner and outer
+    membranes, leading to (i) the release of mitochondrial pro-death factors, including
+    cytochrome c (Cyt. c), apoptosis-inducing factor, or endonuclease G (Braun, 2012;
+    Martin, 2011; Correia et al., 2012; Cozzolino et al., 2013), which eventually leads
+    to apoptotic, necrotic or autophagic cell death (Wang and Qin, 2010). Due to their
+    structural and functional complexity, mitochondria present multiple targets for
+    various compounds.
+  measured_or_detected: >-
+    Mitochondrial dysfunction can be detected using isolated mitochondria, intact cells
+    or cells in culture as well as in vivo studies. Such assessment can be performed
+    with a large range of methods (revised by Brand and Nicholls, 2011) for which some
+    important examples are given. All approaches to assess mitochondrial dysfunction
+    fall into two main categories: the first assesses the consequences of a
+    loss-of-function, i.e. impaired functioning of the respiratory chain and processes
+    linked to it. Some assay to assess this have been described for KE1, with the
+    limitation that they are not specific for complex I. In the context of overall
+    mitochondrial dysfunction, the same assays provide useful information, when
+    performed under slightly different assay conditions (e.g. without addition of
+    complex III and IV inhibitors). The second approach assesses a ‘non-desirable
+    gain-of-function’, i.e. processes that are usually only present to a very small
+    degree in healthy cells, and that are triggered in a cell, in which mitochondria
+    fail.
+
+    I. Mitochondrial dysfunction assays assessing a loss-of function.
+
+    1. Cellular oxygen consumption.
+
+    See KE1 for details of oxygen consumption assays. The oxygen consumption parameter
+    can be combined with other endpoints to derive more specific information on the
+    efficacy of mitochondrial function. One approach measures the ADP-to-O ratio (the
+    number of ADP molecules phosphorylated per oxygen atom reduced (Hinkle, 1995 and
+    Hafner et al., 1990). The related P/O ratio is calculated from the amount of ADP
+    added, divided by the amount of O 2 consumed while phosphorylating the added ADP
+    (Ciapaite et al., 2005; Diepart et al., 2010; Hynes et al., 2006; James et al.,
+    1995; von Heimburg et al., 2005).
+
+    2. Mitochondrial membrane potential (Δψm ).
+
+    - Revision of AOP3 (Project: NP/EFSA/PREV/2024/02 ): The mitochondrial membrane
+    potential (Δψm) is the electric potential difference across the inner mitochondrial
+    membrane. It requires a functioning respiratory chain in the absence of mechanisms
+    that dissipate the proton gradient without coupling it to ATP production.
+    Quantitative assessment of ΔΨm in living cells is most commonly achieved through the
+    use of cationic, lipophilic fluorescent probes that accumulate within the
+    mitochondrial matrix in proportion to the electrochemical gradient (Leonard et al.,
+    2014). Among these, tetramethylrhodamine derivatives such as TMRE
+    (tetramethylrhodamine ethyl ester) and TMRM (tetramethylrhodamine methyl ester) are
+    widely employed due to their reversible, potential-dependent distribution across the
+    inner mitochondrial membrane (Scaduto and Grotyohann, 1999; Creed and McKenzie,
+    2019). When applied at non-quenching, nanomolar concentrations, these dyes allow
+    linear and quantitative detection of ΔΨm, as fluorescence intensity directly
+    correlates with mitochondrial polarization. Detection can be performed by flow
+    cytometry for population-level quantification, by high-content microscopy for
+    spatially resolved analysis, or by fluorescence plate readers for higher throughput
+    (Wong and Cortopassi, 2002; Valdebenito and Dunchen, 2022). Quantitative
+    interpretation requires the use of appropriate controls, typically involving
+    treatment with protonophores such as FCCP or CCCP, which fully dissipate ΔΨm and
+    thereby establish baseline fluorescence, and inhibitors such as oligomycin or
+    antimycin A to reveal different components of mitochondrial respiration. In
+    parallel, dyes such as JC-1 are also used, though their ratiometric readout is less
+    sensitive at low potentials and more prone to artifacts compared with TMRE or TMRM
+    (Leonard et al., 2022). For accurate normalization, measurements are often corrected
+    for cell number, mitochondrial content, or total protein, and fluorescence changes
+    are expressed relative to maximal depolarization. In addition to chemical probes,
+    genetically encoded sensors, such as mitochondria-targeted fluorescent proteins
+    fused to potential-sensitive domains, provide complementary tools for ΔΨm monitoring
+    in live-cell and in vivo contexts (Leonard et al., 2022). - Not endorsed
+
+    3. Enzymatic activity of the electron transport system (ETS).
+
+    Determination of ETS activity can be dene following Owens and King's assay (1975).
+    The technique is based on a cell-free homogenate that is incubated with NADH to
+    saturate the mitochondrial ETS and an artificial electron acceptor [l - (4
+    -iodophenyl) -3 - (4 -nitrophenyl) -5-phenylte trazolium chloride (INT)] to register
+    the electron transmission rate. The oxygen consumption rate is calculated from the
+    molar production rate of INT-formazan which is determined spectrophotometrically
+    (Cammen et al., 1990).
+
+    4. ATP content.
+
+    For the evaluation of ATP levels, various commercially-available ATP assay kits are
+    offered based on luciferin and luciferase activity. For isolated mitochondria
+    various methods are available to continuously measure ATP with electrodes (Laudet
+    2005), with luminometric methods, or for obtaining more information on different
+    nucleotide phosphate pools (e.g. Ciapaite et al., (2005).
+
+    - Revision of AOP3 (Project: NP/EFSA/PREV/2024/02 ) :
+
+    Determination of mitochondrial ATP production based on extracellular flux analysis
+
+    The method is based on the detection of OCR (Oxygen Consumption Rate) that
+    represents mitochondrial respiration as well as on the detection of ECAR
+    (extracellular acidification rate) / proton efflux rate (PER): reflects
+    extracellular acidification, a proxy for glycolysis (lactate release) plus
+    contributions from CO₂/HCO₃⁻. PER is preferred over raw ECAR since it corrects for
+    CO₂-derived acidification (Desousa et al., 2023; Espinosa et al., 2022). Application
+    of inhibitors of individual complexes of the respiratory chain allows the detection
+    of ATP-linked OCR: portion of oxygen consumption directly driving ATP synthesis
+    (lost after ATP synthase inhibition) (Yoo et al., 2024). The proton leak &
+    non-mitochondrial OCR represents remaining oxygen consumption after ATP synthase and
+    electron transport chain inhibitor addition. The difference yields the ATP-coupled
+    respiration component.
+
+    Calculation of mitochondrial ATP production
+
+    Mito ATP production rate (pmol ATP/min) = OCRATP (pmol O2/min) × 2 × P/O
+
+    OCR_ATP: ATP-coupled portion of OCR.
+
+    Factor 2: each O₂ molecule contains two oxygen atoms.
+
+    P/O ratio: number of ATP molecules synthesized per oxygen atom reduced. A mean P/O ≈
+    2.75 is typically assumed (validated across many cell types but substrate- and
+    condition-dependent) (Plitzko and Loesgen, 2018; Mookerjee et al., 2017; Motawe et
+    al., 2024).
+
+    Limitations
+
+    P/O ratio varies by substrate (glucose vs. fatty acids), cell type, and conditions.
+    Fixed values are approximations.
+
+    Non-mitochondrial oxygen consumption (oxidases, peroxidases, etc.) can confound OCR,
+    hence use of ETC inhibitors.
+
+    PER vs. ECAR: CO₂-driven acidification must be corrected to avoid overestimating
+    glycolytic ATP.
+
+    Normalization: results are usually expressed per cell, protein content, DNA, or
+    mitochondrial mass — interpretation depends on normalization method.
+
+    - Not endorsed
+
+    II. Mitochondrial dysfunction assays assessing a gain-of function.
+
+    1. Mitochondrial permeability transition pore opening (PTP).
+
+    The opening of the PTP is associated with a permeabilization of mitochondrial
+    membranes, so that different compounds and cellular constituents can change
+    intracellular localization. This can be measured by assessment of the translocation
+    of cytochrome c, adenylate kinase or AIF from mitochondria to the cytosol or
+    nucleus. The translocation can be assessed biochemically in cell fractions, by
+    imaging approaches in fixed cells or tissues or by life-cell imaging of GFP fusion
+    proteins (Single 1998; Modjtahedi 2006). An alternative approach is to measure the
+    accessibility of cobalt to the mitochondrial matrix in a calcein fluorescence
+    quenching assay in live permeabilized cells (Petronilli et al., 1999).
+
+    2. mtDNA damage as a biomarker of mitochondrial dysfunction.
+
+    Various quantitative polymerase chain reaction (QPCR)-based assays have been
+    developed to detect changes of DNA structure and sequence in the mitochondrial
+    genome. mtDNA damage can be detected in blood after low-level rotenone exposure, and
+    the damage persists even after CI activity has returned to normal. With a more
+    sustained rotenone exposure, mtDNA damage is also detected in skeletal muscle. These
+    data support the idea that mtDNA damage in peripheral tissues in the rotenone model
+    may provide a biomarker of past or ongoing mitochondrial toxin exposure (Sanders et
+    al., 2014a and 2014b).
+
+    3. Generation of ROS and resultant oxidative stress.
+
+    a. General approach. Electrons from the mitochondrial ETS may be transferred
+    ‘erroneously’ to molecular oxygen to form superoxide anions. This type of side
+    reaction can be strongly enhanced upon mitochondrial damage. As superoxide may form
+    hydrogen peroxide, hydroxyl radicals or other reactive oxygen species, a large
+    number of direct ROS assays and assays assessing the effects of ROS (indirect ROS
+    assays) are available (Adam-Vizi, 2005; Fan and Li 2014). Direct assays are based on
+    the chemical modification of fluorescent or luminescent reporters by ROS species.
+    Indirect assays assess cellular metabolites, the concentration of which is changed
+    in the presence of ROS (e.g. glutathione, malonaldehyde, isoprostanes,etc.) At the
+    animal level the effects of oxidative stress are measured from biomarkers in the
+    blood or urine.
+
+    b. Measurement of the cellular glutathione (GSH) status. GSH is regenerated from its
+    oxidized form (GSSH) by the action of an NADPH dependent reductase (GSSH + NADPH +
+    H+ à 2 GSH + NADP+). The ratio of GSH/GSSG is therefore a good indicator for the
+    cellular NADH+/NADPH ratio (i.e. the redox potential). GSH and GSSH levels can be
+    determined by HPLC, capillary electrophoresis, or biochemically with DTNB (Ellman’s
+    reagent). As excess GSSG is rapidly exported from most cells to maintain a constant
+    GSH/GSSG ratio, a reduction of total glutathione (GSH/GSSG) is often a good
+    surrogate measure for oxidative stress.
+
+    c. Quantification of lipid peroxidation. Measurement of lipid peroxidation has
+    historically relied on the detection of thiobarbituric acid (TBA)-reactive compounds
+    such as malondialdehyde generated from the decomposition of cellular membrane lipid
+    under oxidative stress (Pryor et al., 1976). This method is quite sensitive, but not
+    highly specific. A number of commercial assay kits are available for this assay
+    using absorbance or fluorescence detection technologies. The formation of F2-like
+    prostanoid derivatives of arachidonic acid, termed F2-isoprostanes (IsoP) has been
+    shown to be more specific for lipid peroxidation. A number of commercial ELISA kits
+    have been developed for IsoPs, but interfering agents in samples requires partial
+    purification before analysis. Alternatively, GC/MS may be used, as robust (specific)
+    and sensitive method.
+
+    d. Detection of superoxide production. Generation of superoxide by inhibition of
+    complex I and the methods for its detection are described by Grivennikova and
+    Vinogradov (2014). A range of different methods is also described by BioTek (
+    http://www.biotek.com/resources/articles/reactive-oxygen-species.html ). The
+    reduction of ferricytochrome c to ferrocytochrome c may be used to assess the rate
+    of superoxide formation (McCord, 1968). Like in other superoxide assays, specificity
+    can only be obtained by measurements in the absence and presence of superoxide
+    dismutase. Chemiluminescent reactions have been used for their increased
+    sensitivity. The most widely used chemiluminescent substrate is lucigenin.
+    Coelenterazine has also been used as a chemiluminescent substrate. Hydrocyanine dyes
+    are fluorogenic sensors for superoxide and hydroxyl radical, and they become
+    membrane impermeable after oxidation (trapping at site of formation). The best
+    characterized of these probes are Hydro-Cy3 and Hydro-Cy5. generation of superoxide
+    in mitochondria can be visualized using fluorescence microscopy with MitoSOX™ Red
+    reagent (Life Technologies). MitoSOX™ Red reagent is a cationic derivative of
+    dihydroethidium that permeates live cells and accumulates in mitochondria.
+
+    e. Detection of hydrogen peroxide (H 2 O 2 ) production. There are a number of
+    fluorogenic substrates, which serve as hydrogen donors that have been used in
+    conjunction with horseradish peroxidase (HRP) enzyme to produce intensely
+    fluorescent products in the presence of hydrogen peroxide (Zhou et al., 1997: Ruch
+    et al., 1983). The more commonly used substrates include
+    diacetyldichloro-fluorescein, homovanillic acid, and Amplex® Red. In these examples,
+    increasing amounts of H 2 O 2 form increasing amounts of fluorescent product
+    (Tarpley et al., 2004).
+
+    Summing up, mitochondrial dysfunction can be measured by: • ROS production:
+    superoxide (O2-), and hydroxyl radicals (OH−) • Nitrosative radical formation such
+    as ONOO− or directly by: • Loss of mitochondrial membrane potential (MMP) • Opening
+    of mitochondrial permeability transition pores (mPTP) • ATP synthesis • Increase in
+    mitochondrial Ca2+ • Cytochrome c release • AIF (apoptosis inducing factor) release
+    from mitochondria • Mitochondrial Complexes enzyme activity • Measurements of
+    mitochondrial oxygen consumption • Ultrastructure of mitochondria using electron
+    microscope and mitochondrial fragmentation measured by labelling with DsRed-Mito
+    expression (Knott et al, 2008) Mitochondrial dysfunction-induced oxidative stress
+    can be measured by: • Reactive carbonyls formations (proteins oxidation) • Increased
+    8-oxo-dG immunoreactivity (DNA oxidation) • Lipid peroxidation (formation of
+    malondialdehyde (MDA) and 4- hydroxynonenal (HNE) • 3-nitrotyrosine (3-NT)
+    formation, marker of protein nitration • Translocation of Bid and Bax to
+    mitochondria • Measurement of intracellular free calcium concentration ([Ca2+]i):
+    Cells are loaded with 4 μM fura-2/AM). • Ratio between reduced and oxidized form of
+    glutathione (GSH depletion) (Promega assay, TB369; Radkowsky et al., 1986) •
+    Neuronal nitric oxide synthase (nNOS) activation that is Ca2+-dependent. All above
+    measurements can be performed as the assays for each readout are well established in
+    the existing literature (e.g. Bal-Price and Brown, 2000; Bal-Price et al., 2002;
+    Fujikawa, 2015; Walker et al., 1995). See also KE Oxidative Stress, Increase
+
+    Assay Type & Measured Content
+
+    Description
+
+    Dose Range Studied
+
+    Assay Characteristics
+
+    (Length/Ease of use/Accuracy)
+
+    Rhodamine 123 Assay
+
+    Measuring Mitochondrial membrane potential (MMP) and its collapse
+
+    (Shaki et al., 2012)
+
+    Mitochondrial uptake of cationic fluorescent dye, rhodamine 123, is used for
+    estimation of mitochondrial membrane potential. The fluorescence was monitored using
+    Schimadzou RF-5000U fluorescence spectrophotometer at the excitation and emission
+    wavelength of 490 nm and 535 nm, respectively.
+
+    50, 100 and 500 μM of uranyl acetate
+
+    Short / easy
+
+    Medium accurancy
+
+    TMRE fluorescence Assay
+
+    Measuring Mitochondrial permeability transition pore (mPTP) opening
+
+    (Huser et al., 1998)
+
+    Laser scanning confocal microscopy in combination with the potentiometric
+    fluorescence dye tetramethylrhodamine ethyl ester to monitor relative changes in
+    membrane potential in single isolated cardiac mitochondria. The cationic dye
+    distributes across the membrane in a voltage-dependent manner. Therefore, the large
+    potential gradient across the inner mitochondrial membrane results in the
+    accumulation of the fluorescent dye within the matrix compartment. Rapid
+    depolarizations are caused by the opening of the transition pore.
+
+    1 µM cyclosporin A
+
+    Short / easy
+
+    Low accurancy
+
+    GSH / GSSG Determination Assay
+
+    Measuring cellular glutathione (GSH) status; ratio of GSH/GSSG
+
+    (Owen & Butterfield, 2010; Shaki et al., 2013)
+
+    GSH and GSSG levels are determinted biochemically with DTNB (Ellman’s reagent). The
+    developed yellow color was read at 412 nm on a spectrophotometer.
+
+    100 µM uranyl acetate
+
+    Short / easy
+
+    Low accurancy
+
+    TBARS Assay
+
+    Quantification of lipid peroxidation
+
+    (Yuan et al., 2016)
+
+    MDA content, a product of lipid peroxidation, was measured using a thiobarbituric
+    acid reactive substances (TBARS) assay. Briefly, the kidney cells were collected in
+    1 ml PBS buffer solution (pH 7.4) and sonicated. MDA reacts with thiobarbituric acid
+    forming a colored product which can be measured at an absorbance of 532 nm.
+
+    200, 400, 800 µM uranyl acetate
+
+    Medium / medium
+
+    High accurancy
+
+    Aequorin-based bioluminescence assay
+
+    Increase in mitochondrial Ca 2+ influx
+
+    (Pozzan & Rudolf, 2009)
+
+    Together with GFP, the aequorin moiety acts as Ca 2+ sensor in vivo , which delivers
+    emission energy to the GFP acceptor molecule in a BRET (Bioluminescence Resonance
+    Energy Transfer) process; the Ca2+ can then be visualized with fluorescence
+    microscopy.
+
+    Short / easy
+
+    Low accurancy
+
+    Western blot & immunostaining analyses
+
+    Measuring cytochrome c release
+
+    (Chen et al., 2000)
+
+    Examining the redistribution of Cyto c in cytosolic and mitochondrial cellular
+    fractions. Cells are homogenized and centrifuged, then prepared for immunoblots.
+    Cellular fractions were washed in PBS and lysed in 1% NP-40 buffer. Cellular
+    proteins were separated by SDS–PAGE, transferred onto nitrocellulose membranes,
+    probed using immunoblot analyses with antibodies specific to cyto c (6581A for
+    Western and 65971A for immunostaining; Pharmingen)
+
+    Short / easy
+
+    Medium accurancy
+
+    Quantikine Rat/Mouse Cytochrome c Immunoassay
+
+    Measuring cytochrome c release
+
+    (Shaki et al., 2012)
+
+    Cytochrome C release was measured a monoclonal antibody specific for rat/mouse
+    cytochrome c was precoated onto the microplate. Seventy-five microliter of conjugate
+    (containing mono- clonal antibody specific for cytochrome c conjugated to
+    horseradish peroxidase). After 2 h of incubation, the substrate solution (100 μl)
+    was added to each well and incubated for 30 min. After 100 μl of the stop solution
+    was added to each well; the optical density of each well was determined by the
+    aforementioned microplate spectrophotometer set to 450 nm.
+
+    Short / easy
+
+    Low accurancy
+
+    Membrane potential and cell viability – Flow Cytometry
+
+    Measuring cytochrome c release
+
+    (Kruidering et al., 1997)
+
+    “Dc and viability were determined by analyzing the R123 and propidium iodide
+    fluorescence intensity with a FACScan flow cytometer (Becton Dickinson, San Jose,
+    CA) equipped with an argon laser, with the Lysis software program (Becton
+    Dickinson). R123 is a cationic dye that accumulates in the negatively charged inner
+    side of the mitochondria. When the potential drops, less R123 accumulates in the
+    mitochondria, which results in a lower fluorescence signal. The potential was
+    measured as follows: at the indicated times, a 500-ml sample of the cell suspension
+    was taken and transferred to an Eppendorf minivial. To this sample, 100 ml of 6 mM
+    R123 in buffer D was added. After incubation for 10 min at 37°C, the cell suspension
+    was centrifuged for 5 min at 80 3 g . The cell pellet was resuspended in 200 ml of
+    buffer D, containing 0.2 mM R123 and 10 mM propidium iodide, to prevent loss of R123
+    and to stain nonviable cells, respectively. The samples were transferred to FACScan
+    tubes and analyzed immediately. Analysis was performed at a flow rate of
+
+    60 ml/min. R123 fluorescence was detected by the FL1 detector with an emission
+    detection limit below 560 nm. Propidium iodide fluorescence was detected by the FL3
+    detector, with emission detection above 620 nm. Per sample 3,000 to 5,000 cells were
+    counted (Van de Water et al. , 1993)”
+
+    Short / easy
+
+    Medium accurancy
+level_screening:
+  outcome: NOT_SCREENED
+term_findings:
+- >-
+  The event component has no biological process; AOP-Wiki records only the
+  object (mitochondrion) and the action (functional change).
+- >-
+  The title says "Increase" while the recorded action is "functional change".

@@ -1,0 +1,188 @@
+# AOP-Wiki KE 1908, with the dismech nodes aggregated into it. Event properties
+# read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli; node fields
+# from dismech main on 2026-09-21. In cases where AOP-Wiki's database id key is
+# not known, a negative id is used as a local placeholder.
+id: aop.events:1908
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/1908
+event:
+  id: 1908
+  title: "Cilia Beat Frequency, Decreased"
+  short_name: "Cilia Beat Frequency, Decreased"
+  biological_organization_id:
+    id: 2
+    term: Cellular
+  cell_term_id:
+    id: -1
+    source: CL
+    term: multi-ciliated epithelial cell
+  organ_term_id:
+    id: -1
+    source: UBERON
+    term: lung epithelium
+  event_components:
+  - id: -1
+    biological_process_id:
+      id: -1
+      source: HP
+      source_id: HP:0012262
+      term: Abnormal ciliary motility
+    biological_object_id:
+      id: -1
+      source: GO
+      source_id: GO:0031514
+      term: motile cilium
+    biological_action_id:
+      id: 3
+      term: occurrence
+  definition: >-
+    Cohesive beating of cilia lining the upper and lower respiratory tract is critical
+    for efficient MCC. CBF is influenced by several factors including changes in the
+    physical and chemical properties of the ASL (especially the periciliary fluid),
+    structural modulation in the cilia, concentration of cyclic nucleotides cAMP and
+    cGMP, and intracellular calcium (Ca 2+ ). Formation of cyclic nucleotides such as
+    cGMP is mediated by nitric oxide (NO), which is released by an enzyme family of
+    nitric oxide synthases (NOSs) when the substrate L-arginine (L-Arg) is transformed
+    to L-citrulline. NO activates its receptor protein, soluble guanylate cyclase (sGC),
+    which catalyzes formation of cGMP from guanosine triphosphate (GTP). cGMP then
+    activates protein kinase G (PKG) which has been implicated in the regulation of CBF
+    (Jiao et al., 2011; Li et al., 2000). NO-dependent stimulation of CBF has also been
+    associated with an increase in cAMP-dependent protein kinase A (PKA) (Di Benedetto
+    et al., 1991; Lansley et al., 1992; Salathe et al., 1993; Sanderson and Dirksen,
+    1989; Schmid et al., 2007; Sisson et al., 1999; Uzlaner and Priel, 1999). An
+    increase in intracellular endogenous cAMP was observed after treatment with
+    isobutyl-1-methylxanthine that also increased CBF (Tamaoki et al., 1989). cAMP
+    accumulation in the airway cilia has been shown to be dependent on
+    Ca2+–calmodulin-dependent PDE1A and indirectly regulates CBF (Kogiso et al., 2018).
+    Increase in CBF after treatment with NO substrate, L-arginine and inhibition of CBF
+    by a NOS inhibitor, N-omega-nitro-L-arginine methyl ester (L-NAME) further provides
+    evidence for the role of NO in increasing CBF (Jiao J. et al., 2011; Sisson J. H.,
+    1995; Uzlaner and Priel, 1999; Yang et al., 1997).
+
+    Modulation of CBF is not always accompanied by changes in cAMP levels. PKC
+    activators, phorbol 12-myristate 13-acetate and L-o~-dioctanoylglycerol have been
+    shown to decrease CBF in a concentration- and time-dependent manner in rabbit
+    tracheal epithelial cells (Kobayashi et al., 1989). CBF has been shown to decrease
+    after exposure to inhaled oxidants such as cigarette smoke across different species.
+    A study with 120 subjects showed a significant decrease in nasal CBF following
+    exposure to tobacco smoke (Agius et al., 1998). Exposure to cigarette smoke extract
+    lead to reduction in forskolin-induced CBF in human sinonasal epithelium (Cohen et
+    al., 2009) and isoproterenol- and methacholine-induced CBF in human adenoid tissues
+    (Wang et al., 2012). This decrease in CBF and unresponsiveness to beta-agonist
+    stimulation occurs in parallel to PKC activation and has been shown to be dependent
+    on the duration of exposure to cigarette smoke in mice (Simet et al., 2010). Normal
+    human bronchial epithelial cells exposed to aerosolized nicotine showed decreased
+    CFTR and BK conductance, impaired CBF, ASL volume, and decreased expression of FOXJ1
+    and KCNMA1 (Garcia-Arcos et al., 2016).
+
+    A concentration-dependent decrease in CBF has been observed after treatment with
+    aldehydes. For example inhibition of cilia ATPase activity was observed after
+    treatment with acetaldehyde, in ciliated bovine bronchial epithelial cells (Sisson
+    et al., 1991). Acrolein, an aldehyde in the gas phase of cigarette smoke, induced
+    ciliostasis at high concentrations (> 1 mM), after 5 min of treatment, and cellular
+    necrosis after 3 hr. However, at lower concentrations (from 0.5‒1 mM), acrolein
+    transiently reduced the CBF to 4 Hz (Romet et al., 1990).
+  measured_or_detected: >-
+    There is no standardized method for measuring CBF. Digital high-speed video imaging
+    with a manual count of CBF in slow motion video play is the most commonly used
+    method for CBF measurement (Kim et al., 2011; Peabody et al., 2018). Photometry and
+    video-microscopy have been used to measure CBF in vitro and ex vivo, including in
+    ciliated bovine bronchial epithelial cells (Allen-Gipson et al., 2011; Sisson et
+    al., 2003; Uzlaner and Priel, 1999), normal human bronchial epithelial cells
+    (Feriani et al., 2017), human nasal epithelial cells (Dimova et al., 2005; Min et
+    al., 1999b), human nasal ciliated epithelium (nasal brushings) (Agius et al., 1998),
+    and mouse tracheal rings (Simet et al., 2010).
+
+    CBF measurement in vitro generally involves mounting the tissue at the air-liquid
+    interface on a stage followed by microscopic analysis and acquisition of images
+    and/or video recordings of beating cilia. For in vivo and ex vivo measurements,
+    Doppler optical coherence tomography (D-OCT) can also be applied, a mesoscopic
+    non-contact imaging modality that provides high-resolution tomographic images and
+    detects micromotion simultaneously (Jing et al., 2017). D-OCT has been used to
+    quantitatively measure CBF in ex vivo rabbit tracheal cultures (Lemieux et al.,
+    2015).
+level_screening:
+  outcome: NOT_SCREENED
+aggregation:
+  aggregation_relation: constitutes
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Ciliary Dysfunction
+    source_entry: Primary_Ciliary_Dyskinesia
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+    node_name: Ciliary Dysfunction
+    source_level: CELLULAR
+    biological_organization_id:
+      id: 2
+      term: Cellular
+    processes:
+    - id: -101
+      source: GO
+      source_id: GO:0003341
+      term: cilium movement
+    objects:
+    - id: -201
+      source: CL
+      source_id: CL:4030034
+      term: respiratory tract multiciliated cell
+    - id: -202
+      source: UBERON
+      source_id: UBERON:0004802
+      term: respiratory tract epithelium
+    biological_action_id:
+      id: 4
+      term: abnormal
+    notes: >-
+      Eight model readouts land on this node in dismech, including ciliary beat
+      frequency (DECREASED after GSTA2 knockdown) and beat pattern (ALTERED in
+      patient-derived nasal, organoid and hiPSC cultures). Its description records
+      that frequency can be preserved: RSPH1-related disease keeps frequency with an
+      abnormal circular waveform, and DNAH11-related disease is hyperkinetic.
+  - source_knowledge_base: dismech
+    source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Ciliary Disorientation
+    source_entry: Primary_Ciliary_Dyskinesia
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+    node_name: Ciliary Disorientation
+    source_level: CELLULAR
+    biological_organization_id:
+      id: 2
+      term: Cellular
+    processes:
+    - id: -101
+      source: GO
+      source_id: GO:0003341
+      term: cilium movement
+    objects:
+    - id: -201
+      source: CL
+      source_id: CL:4030034
+      term: respiratory tract multiciliated cell
+    - id: -203
+      source: UBERON
+      source_id: UBERON:0005384
+      term: nasal cavity epithelium
+    biological_action_id:
+      id: 4
+      term: abnormal
+    notes: >-
+      Two readouts from the GAS2L2-deficient patient nasal model: ciliary
+      orientation and beat coordination (ALTERED) and ciliary beat frequency
+      (INCREASED). The increase is compatible with the Event's component (abnormal
+      motility) and not with its title (frequency decreased).
+  rationale: >-
+    Both nodes bind the same process term, cilium movement, with the same modifier,
+    abnormal, on the same cell type, and both are measured by beat pattern or beat
+    frequency in ciliated airway cultures. Read against the Event's component,
+    occurrence of abnormal ciliary motility in the motile cilium, the two nodes
+    together are that change and nothing more, so they constitute it. Read against
+    the Event's title alone they would not fit: dismech records preserved or
+    increased frequency for some genotypes, and the Event title asserts a decrease.
+    The aggregation therefore rests on the component, and the title is narrower
+    than the Event it names. dismech keeps the two nodes apart because directional
+    alignment and beat frequency are quantified separately; the AOP does not need
+    that resolution to predict decreased mucociliary clearance, which is the
+    simplification the aggregation makes.
+  notes: >-
+    KE 1908 sits in AOPs 411, 424 and 425. The aggregation is asserted for the
+    Event, not for any one of those pathways.

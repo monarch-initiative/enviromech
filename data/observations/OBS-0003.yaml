@@ -1,0 +1,53 @@
+# From the AOP 587 graphic, panel B, the observation associated with KE 2: an
+# iPSC-based toxicity new approach method. In cases where the database id key is
+# not known, a negative id is used as a local placeholder.
+id: enviromech:obs-0003
+title: Trifluralin is directly toxic to dopaminergic neurons derived from patient induced pluripotent stem cells.
+status: DRAFT
+causal_agent:
+  name: Trifluralin
+  agent_type: ENVIRONMENTAL_CHEMICAL
+  term:
+    id: CHEBI:35027
+    label: trifluralin
+  other_identifiers:
+  - comptox:DTXSID4021395
+asserted_relation: directly toxic to
+observation:
+  id: -3
+  biological_action_id:
+    id: 2
+    term: decreased
+  biological_object_id:
+    id: -1
+    source: CL
+    source_id: CL:0000700
+    term: dopaminergic neuron
+  assay_id:
+    id: -3
+    title: Live-cell imaging toxicity screen in dopaminergic neurons derived from Parkinson's disease patient iPSCs
+  events:
+  - 890
+evidence:
+- reference: PMID:37193692
+  reference_title: A pesticide and iPSC dopaminergic neuron screen identifies and classifies Parkinson-relevant pesticides.
+  supports: SUPPORT
+  evidence_source: IN_VITRO
+  snippet: We find trifluralin is a driver of toxicity to dopaminergic neurons and leads to mitochondrial dysfunction.
+  explanation: >-
+    The screen exposed iPSC-derived dopaminergic neurons to pesticides and
+    measured neuron death; trifluralin is named as toxic to them.
+- reference: PMID:37193692
+  reference_title: A pesticide and iPSC dopaminergic neuron screen identifies and classifies Parkinson-relevant pesticides.
+  supports: SUPPORT
+  evidence_source: IN_VITRO
+  snippet: We find that 10 pesticides are directly toxic to these neurons.
+  explanation: >-
+    States that the toxicity was direct, to the dopaminergic neurons in
+    culture. The abstract does not list the ten; trifluralin is named in the
+    sentence quoted above.
+notes: >-
+  KE 890 is assigned the Organ level in AOP-Wiki and concerns neurons of the
+  nigrostriatal pathway in vivo. This observation is of cultured neurons, so it
+  is evidence for the cell loss the Event describes, measured in a model
+  system, not an observation of the Event itself.

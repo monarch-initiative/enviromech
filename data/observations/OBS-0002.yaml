@@ -1,0 +1,49 @@
+# From the AOP 587 graphic, panel B, observation 2: systematic reviews of
+# clinical studies. The graphic does not name the reviews; the two cited here
+# were found by a PubMed search on 2026-10-03. In cases where the database id
+# key is not known, a negative id is used as a local placeholder.
+id: enviromech:obs-0002
+title: Levodopa treatment reduces the motor symptoms of Parkinson disease.
+status: DRAFT
+causal_agent:
+  name: L-dopa
+  agent_type: DRUG_TREATMENT
+  term:
+    id: CHEBI:15765
+    label: L-dopa
+asserted_relation: used to treat
+observation:
+  id: -2
+  biological_action_id:
+    id: 2
+    term: decreased
+  phenotype: Parkinson disease
+  assay_id:
+    id: -2
+    title: Systematic review and meta-analysis of clinical studies
+  events:
+  - 896
+phenotype_term:
+  id: MONDO:0005180
+  label: Parkinson disease
+evidence:
+- reference: PMID:41317111
+  reference_title: "Effects of oral levodopa on motor symptoms and gait impairments in Parkinson's disease: a systematic review and meta-analysis."
+  supports: SUPPORT
+  evidence_source: HUMAN_CLINICAL
+  snippet: Oral levodopa induces substantial acute improvements in motor symptoms and key gait parameters but has limited effects on other gait characteristics, emphasizing the need for complementary and individualized interventions.
+  explanation: >-
+    A meta-analysis of 38 studies comparing patients on and off medication
+    finds that levodopa improves motor scores.
+- reference: PMID:25981231
+  reference_title: "Levodopa alone compared with levodopa-sparing therapy as initial treatment for Parkinson's disease: a meta-analysis."
+  supports: SUPPORT
+  evidence_source: HUMAN_CLINICAL
+  snippet: L-Dopa alone is the most effective medication available for treating the motor symptoms of PD patients, despite the greater incidence of involuntary movements.
+  explanation: >-
+    A meta-analysis of eleven randomised trials finds levodopa more effective
+    on motor symptoms than levodopa-sparing therapy.
+notes: >-
+  The Causal Agent here is a treatment and the direction is a decrease: the
+  observation bears on the Adverse Outcome by showing that restoring dopamine
+  relieves the motor deficit.

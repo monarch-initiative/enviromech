@@ -1,0 +1,45 @@
+# Not in the AOP 587 graphic. Added because the same study reports it and it
+# bears on KE 1 of the pathway. In cases where the database id key is not known,
+# a negative id is used as a local placeholder.
+id: enviromech:obs-0004
+title: Trifluralin causes mitochondrial dysfunction in dopaminergic neurons derived from patient induced pluripotent stem cells.
+status: DRAFT
+causal_agent:
+  name: Trifluralin
+  agent_type: ENVIRONMENTAL_CHEMICAL
+  term:
+    id: CHEBI:35027
+    label: trifluralin
+  other_identifiers:
+  - comptox:DTXSID4021395
+asserted_relation: leads to
+observation:
+  id: -4
+  biological_action_id:
+    id: 7
+    term: functional change
+  biological_object_id:
+    id: -2
+    source: GO
+    source_id: GO:0005739
+    term: mitochondrion
+  assay_id:
+    id: -4
+    title: Mitochondrial function assays in dopaminergic neurons derived from Parkinson's disease patient iPSCs
+  events:
+  - 177
+evidence:
+- reference: PMID:37193692
+  reference_title: A pesticide and iPSC dopaminergic neuron screen identifies and classifies Parkinson-relevant pesticides.
+  supports: SUPPORT
+  evidence_source: IN_VITRO
+  snippet: We find trifluralin is a driver of toxicity to dopaminergic neurons and leads to mitochondrial dysfunction.
+  explanation: >-
+    Names mitochondrial dysfunction as an effect of trifluralin in the
+    dopaminergic neuron cultures.
+notes: >-
+  The object and action are those AOP-Wiki records for KE 177 (mitochondrion,
+  functional change), so the observation can be compared with the Event's
+  components. The study does not test inhibition of mitochondrial complex III,
+  the Molecular Initiating Event of AOP 587, so this observation does not place
+  trifluralin on that pathway's first step.

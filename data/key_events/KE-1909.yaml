@@ -1,0 +1,176 @@
+# AOP-Wiki KE 1909, with the dismech nodes aggregated into it. Event properties
+# read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli; node fields
+# from dismech main on 2026-09-21. In cases where AOP-Wiki's database id key is
+# not known, a negative id is used as a local placeholder.
+id: aop.events:1909
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/1909
+event:
+  id: 1909
+  title: "Mucociliary Clearance, Decreased"
+  short_name: "MCC, Decreased"
+  biological_organization_id:
+    id: 5
+    term: Individual
+  event_components:
+  - id: -2
+    biological_process_id:
+      id: -2
+      source: VT
+      source_id: VT:0001947
+      term: mucociliary clearance trait
+    biological_action_id:
+      id: 2
+      term: decreased
+  definition: >-
+    In healthy adults, tracheal mucus movement varies from 4 to >20 mm/min (Stannard and
+    O'Callaghan, 2006), whereas mucociliary clearance (MCC) in the small airways is
+    slower due to the lower number of ciliated cells (fewer cilia) and their shorter
+    length (Foster et al., 1980; Iravani, 1969; Wanner et al., 1996).
+
+    Since optimal MCC is dependent in multiple factors, including cilia number and
+    structure as well as ASL and mucus properties, any disturbances of these can lead to
+    impaired MCC. While high humidity or infection can enhance MCC, long-term exposure
+    to noxious substances (e.g. cigarette smoke) lead to decreased mucus clearance from
+    the airways. In most instances this is reflected by decreased mucus transport rates
+    or velocities.
+  measured_or_detected: >-
+    In humans, MCC has been assessed traditionally following inhalation of radio-labeled
+    particles such as 99Tcm-labeled polystyrene particles, resin particles or serum
+    albumin and following their clearance at regular intervals by radioimaging using
+    gamma cameras (Agnew et al., 1986; Kärjä et al., 1982). Taking into account
+    inhalation volumes and flow rates, lung airflow, particle deposition and retention,
+    clearance rates can be calculated and effects of e.g. drugs on MCC can be examined.
+    Alternatively, since MCC occurs at a similar rate in the nose to that in trachea and
+    bronchi (Andersen and Proctor, 1983; Rutland and Cole, 1981) and for ease of use,
+    measurements of MCC can be restricted to that of nasal MCC only. Probably one of the
+    simplest methods is the saccharin transit test (STT). For this test, a small
+    particle of saccharin is placed behind the anterior end of the inferior turbinate.
+    The saccharin will be transported by mucociliary action toward the nasopharynx,
+    where its sweet taste is perceived. When MCC is impaired, saccharin transit times
+    will increase, with a 10- to 20-minute delay being considered a clinical sign of
+    decreased MCC. Using the same principle, the test can also be performed or
+    complemented with dyes such as indigo carmine or methylene blue (Deborah and
+    Prathibha, 2014).
+
+    In experimental animals, MCC has been evaluated by gamma-scintigraphy (Greiff et
+    al., 1990; Hua et al., 2010; Read et al., 1992), fluorescence
+    videography/fluoroscopy (in explanted tracheas etc.) (Grubb et al., 2016; Rogers et
+    al., 2018), or by 3D-SPECT (Ortiz Belda et al., 2016). Direct observation of
+    particle movement across airway epithelia to determine mucus velocity or transport
+    rates by using a fiberoptic bronchoscope may be helpful when working in larger
+    animals such as dogs (King, 1998).
+
+    In vitro, freshly excised frog palate preparations have been used to assess cilia
+    function and mucociliary transport by videomicroscopy (Macchione et al., 1995;
+    Macchione et al., 1999; Trindade et al., 2007). Murine and human nasal, bronchial
+    and small airway epithelial models grown at the air-liquid interface are also
+    suitable in vitro test systems for determining mucus transport by tracing inert
+    particle movement with a set-up similar to that used for assessing CBF (Benam et
+    al., 2018; Fliegauf et al., 2013; Knowles and Boucher, 2002; Sears et al., 2015).
+level_screening:
+  outcome: NOT_SCREENED
+aggregation:
+  aggregation_relation: constitutes
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Impaired Mucociliary Clearance
+    source_entry: Primary_Ciliary_Dyskinesia
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+    node_name: Impaired Mucociliary Clearance
+    source_level: TISSUE
+    biological_organization_id:
+      id: 3
+      term: Tissue
+    processes:
+    - id: -102
+      source: GO
+      source_id: GO:0120197
+      term: mucociliary clearance
+    objects:
+    - id: -201
+      source: CL
+      source_id: CL:4030034
+      term: respiratory tract multiciliated cell
+    - id: -204
+      source: UBERON
+      source_id: UBERON:0001004
+      term: respiratory system
+    - id: -205
+      source: UBERON
+      source_id: UBERON:0001825
+      term: paranasal sinus
+    biological_action_id:
+      id: 2
+      term: decreased
+    notes: >-
+      Three model links land on this node in dismech, all declaring model_scale
+      TISSUE: mucociliary transport in hiPSC-derived airway epithelium (DECREASED),
+      transport velocity across mixed wild-type and CCDC40-deficient cultures
+      (DECREASED), and fluorescent-particle transport after CCDC40 mRNA delivery
+      (INCREASED, a rescue). The node's description also cites whole-lung
+      radioaerosol clearance, absent in most of 69 measured patients.
+  - source_knowledge_base: dismech
+    source_node_ref: Primary_Ciliary_Dyskinesia:pathophysiology#Central-Apparatus Transport Dysfunction
+    source_entry: Primary_Ciliary_Dyskinesia
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Primary_Ciliary_Dyskinesia.html
+    node_name: Central-Apparatus Transport Dysfunction
+    source_level: CELLULAR
+    biological_organization_id:
+      id: 2
+      term: Cellular
+    processes:
+    - id: -102
+      source: GO
+      source_id: GO:0120197
+      term: mucociliary clearance
+    objects:
+    - id: -201
+      source: CL
+      source_id: CL:4030034
+      term: respiratory tract multiciliated cell
+    - id: -202
+      source: UBERON
+      source_id: UBERON:0004802
+      term: respiratory tract epithelium
+    biological_action_id:
+      id: 2
+      term: decreased
+    source_confidence: PROVISIONAL
+    notes: >-
+      One model link, the C1d-defective patient airway transport model, declaring
+      model_scale TISSUE: ciliary particle transport (DECREASED). The node's
+      description records that beat frequency, waveform, routine TEM and nasal
+      nitric oxide can all look normal, so transport is the only measurement that
+      detects this route.
+  internal_edges:
+  - upstream_node: Central-Apparatus Transport Dysfunction
+    downstream_node: Impaired Mucociliary Clearance
+    source_link_type: INDIRECT_KNOWN_INTERMEDIATES
+    description: >-
+      Loss of C1d projection components impairs effective respiratory surface
+      transport. dismech supports the edge with one in vitro ciliary transport
+      study (PMID:39362668).
+  rationale: >-
+    Both nodes bind mucociliary clearance, decreased, which is the Event's component
+    with the same direction; the ontologies differ (GO process on the nodes, VT trait
+    on the Event) but name the same change. Impaired Mucociliary Clearance is
+    dismech's convergence point for every ciliary route to clearance failure in this
+    entry. Central-Apparatus Transport Dysfunction is one of those routes, and it is
+    aggregated rather than left upstream because nothing measures it except
+    transport: its readout is the same particle-transport measurement that
+    instruments the convergence node, so no assay separates the two ends of the
+    edge between them. Together they are the change KE 1909 names, and they
+    constitute it.
+  level_mismatch_note: >-
+    Impaired Mucociliary Clearance is TISSUE and Central-Apparatus Transport
+    Dysfunction is CELLULAR in dismech; the Event is Individual in AOP-Wiki. The
+    evidence supports these at different levels of measurement. Every model readout
+    on both nodes is transport across a cultured airway epithelium, which is
+    tissue-level, even for the node dismech scales as cellular. The convergence
+    node's description also cites whole-lung radioaerosol clearance in patients,
+    which is individual-level and is the kind of measurement KE 1909's own method
+    text describes. So the mismatch is not an error on either side. The Event's
+    level is kept; the tissue readouts would inform it as measurements of a proxy
+    rather than of the Event itself.

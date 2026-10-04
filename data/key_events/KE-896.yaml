@@ -1,0 +1,277 @@
+# AOP-Wiki KE 896, the Adverse Outcome of AOP 587. Structured properties read
+# from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli. In cases where
+# AOP-Wiki's database id key is not known, a negative id is used as a local
+# placeholder.
+id: aop.events:896
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/896
+event:
+  id: 896
+  title: Parkinsonian motor deficits
+  short_name: Parkinsonian motor deficits
+  biological_organization_id:
+    id: 5
+    term: Individual
+  event_components:
+  - id: -1
+    biological_object_id:
+      id: -1
+      source: MESH
+      source_id: D020734
+      term: Parkinsonian disorders
+    biological_action_id:
+      id: 3
+      term: occurrence
+  definition: >-
+    A large number of neurological disorders are characterized by a clinical syndrome
+    with motor symptoms of bradykinesia, tremor, rigidity and postural instability. As
+    these clinical features are common to multiple disorders, the clinical syndrome is
+    referred as “parkinsonism” and when parkinsonism is representing the prevalent part
+    of the syndrome, these are referred as “parkinsonian disorders”. Parkinson’s Disease
+    (PD) is one of parkinsonian disorders and can have an idiopathic, genetic or toxic
+    (i.e. MPTP induced parkinsonism) cause (Dickson 2012). All these disorders include a
+    deregulation of the extrapyramidal system.
+
+    The pyramidal motor system comprises bundles of neurons originating in the motor
+    centers of the cerebral cortex to terminate in the brainstem or in the spinal cord
+    where they are responsible for voluntary control of motor functions (Brooks 1971).
+    The extrapyramidal system, which is the anatomical organization of the AO, is the
+    part of the motor system primarily involved in the control and regulation of
+    involuntary motor control, and in fine tuning (Barnes et al., 1983). Especially the
+    initiation and maintenance of complex movement patterns or of neuronal regulatory
+    pathways involved in postural control of the body are regulated by the nigrostriatal
+    system that is affected in parkinsonian states. The CNS input is modulated by
+    extrapyramidal circuits before the execution of complex motor movements. The
+    modulated information from the basal ganglia is looped back through the thalamus to
+    the cortex, from where final motor signals are sent via the pyramidal system; i.e.
+    the basal ganglia system is not involved in the control of motor neurons and
+    striatal muscles, but it modulates the signals from the cortex to these systems.
+    Thus, an impaired input of dopamine into the striatum leads to an impairment of this
+    modulation loop, and a disturbance of basal ganglia feedback to the thalamus and
+    cortex. This ultimately manifests in key parkinsonian symptoms such as tremor,
+    rigidity, or bradykinesia (Bernheimer et al., 1973). These conditions can be
+    generated experimentally by dopamine depletion with reserpine, by inhibition of
+    dopamine receptors, by mechanical or chemical ablation of nigrostriatal dopamine
+    neurons (cut of the median forebrain bundle or injection of the toxicant
+    6-OH-dopamine) or the application of toxicants that leading to a relatively
+    selective death of dopaminergic neurons in the substantia nigra (e.g. MPTP) and
+    therefore a reduction of dopamine in the striatum (Kolata et al., 1983).
+
+    The basal ganglia include the ventral striatum, the neostriatum composed of the
+    putamen and the caudate nucleus, the globus pallidus pars externa (GPe), the globus
+    pallidus pars interna (GPi), the subthalamic nucleus (STN), the substantia nigra
+    pars reticulata (SNpr) and the substantia nigra pars compacta (SNpc) (Obeso et al.,
+    2008). The main input sites into basal ganglia are the striatum and the STN where
+    cortical (glutamatergic) innervations terminate in a topographically organized
+    manner that largely reflects the organization in the cortex (Fallon et al., 1978;
+    Takada et al., 1998). Both the GPi and the SNpr represent the main output nuclei
+    projecting into the thalamus (Parent et al., 1999; Alexander et al., 1990). The
+    connection between input and output nuclei is functionally organized into a “direct”
+    and an “indirect” pathway (Silverdale et al., 2003). These two pathways in parallel
+    regulate the activity of the basal ganglia output neurons of the GPi and STN and are
+    modulated by dopamine in the striatum. The dopaminergic terminals in teh striatum
+    originate from dopaminergic projections from the SNpc. Striatal dopamine modulates
+    the activity of inhibitory GABAergic medium spiny neurons that make up 90% of all
+    neurons in the striatum (Smith et al., 1994). Medium spiny neurons that
+    preferentially express the D1 dopamine receptor are involved in the direct pathway
+    and directly project into the two main output nuclei (GPi and SNpr). Activation of
+    the D1 medium spiny neuronal direct pathway results in a reduction of the inhibitory
+    basal ganglia output (GPi and SNpr) leading to a dis-inhibition of thalamic target
+    neurons (Bolam et al., 2000). These events ultimately lead to an elevated activity
+    in the respective cortical neurons, i.e. D1 signalling in the striatum leads to an
+    increase in motor activity.
+
+    Medium spiny neurons predominantly expressing the D2 dopamine receptor mostly
+    project to the GPe (Gerfen et al., 1990). Activation of D2 expressing neurons leads
+    to an inhibition of their activity. D2 neurons of the indirect pathway connect the
+    striatum with GPi/SNpr via synaptic connections in the GPe and the STN. Activating
+    neurons originating in the STN project into the GPi/SNpr are glutamatergic. From the
+    STN, activating glutamatergic neuronal projections into the GPi/SNpr lead to a
+    basal, low activation. Activation of the indirect pathway by striatal dopamine from
+    the substantia nigra hence leads to a low basal inhibitory GABAergic output into
+    thalamic structures, and thus allows a strong motor cortex activation of the
+    thalamus.
+
+    Functional anatomy of basal ganglia. A) Normal conditions. Striatal (STR) dopamine
+    mainly originates from projections originating in the substantia nigra pars compacta
+    (SNc). The STR is mainly composed of inhibitory GABAergic medium spiny neurons
+    (MSN). MSN involved in the direct pathway directly project to the globus pallidus
+    pars interna (GPi) and the sunstantia nigra pars reticulata (SNpr) leading to a
+    basal inhibition of these output nuclei. MSN involved in the indirect pathway send
+    inhibitory projections to the globus pallidus pars externa (GPe). Their activity is
+    dampened by dopamine binding to D2 receptor expressing MSN in the striatum. B) Lack
+    of striatal dopamine. Under conditions of a lack of striatal dopamine, inhibitory
+    GABAergic neurons, originating in the striatum, receive less activation, resulting
+    in a declined inhibition of GPi and SNpr inhibitory output. In the indirect pathway,
+    the lack of dopamine causes a lack of its inhibitory influence on inhibitory
+    GABAergic projections into the GPe. This accelerated inhibition of the GPe results
+    in a decline in its inhibitory output into the STN. The decline in STN inhibition
+    allows its overactivation, resulting in an excessive activation of stimulatory
+    glutamatergic projections into the GPi and SNpr (according to Silverdale 2003).
+
+    Parkinson’s Disease is characterized by a decline in striatal dopamine input from
+    the substantia nigra pars compacta (Smith t al., 1994). Under normal conditions,
+    ganglial output via GPi/SNpr nuclei causes a moderate inhibitory influence on
+    cortical and brainstem motor neurons. A reduction in striatal dopamine leads to an
+    underactivation of D1 receptor-expressing medium spiny neurons of the direct
+    pathway. This insufficient activation of the inhibitory GABAergic medium spiny
+    neurons results in a reduction of its normal inhibitory influence on GPi and SNpr
+    output nuclei. As a consequence, dopamine depletion leads to the overactivation of
+    the inhibitory GABAergic GPi/SNpr output via the direct pathway (Mitchell et al.,
+    1989).
+
+    In the indirect pathway, the reduced activation of D2 receptors expressing neurons
+    leads to an overactivation of inhibitory output nuclei projecting into the GPe. The
+    resulting inhibitory output of the GPe is hence reduced, thus leading to a declined
+    inhibition of the STN. Overactivation of the stimulatory glutamatergic projections
+    originating in the STN leads to the hyperactivation of the output GPi/SNpr nuclei.
+    As a consequence of striatal dopamine depletion, the direct pathway becomes
+    underactivated and the indirect pathway becomes overactivated. This leads to an
+    overactivation of the basal ganglia output nuclei. Due to their inhibitory influence
+    on thalamocortical motor centers, the resulting reduced cortical activation leads to
+    the prominent impairment of motor functions in parkinsonian states (Silverdale et
+    al., 2003).
+
+    The model of direct and indirect pathways linking striatal dopamine content with the
+    basal ganglia output nuclei has been criticized in recent years as it ignores the
+    influence of extrastriatal dopamine (Smith et al., 2000), or the fact that some
+    medium spiny neurons express dopamine receptors of both the D1 and of the D2 type
+    (Surmeier et al., 1996). Principal validity of the model and the central role of
+    striatal dopamine was e.g. demonstrated by L-DOPA-mediated supplementation of
+    striatal dopamine content in unprimed PD patients that causes a partial reduction in
+    the overactivation of GPi/SNpr output (Yuan et al., 2010; Heimer et al., 2006). As
+    an alternative way for symptomatic treatment of parkinsonian conditions, deep brain
+    stimulation of either the STN or the GPi was shown to relieve from parkinsonian
+    motor features (Mazzone 2003, Odekerken 2013).
+  measured_or_detected: >-
+    For the analysis of striatal dopamine content and its correlation with motor
+    control, both biochemical analysis methods on the cellular and tissue level as well
+    as behavioral tests are required. Available test models are mice and rats on the one
+    hand and non-human primates and humans on the other. Motor impairment features
+    associated with parkinsonian states in man serve as reference standard. Monkey
+    models have the advantage to largely reflect complex motor impairment patterns
+    observed in humans which are rather difficult to assess in rodents. Rodent models in
+    contrast are cost-efficient and allow both biochemical analysis that require major
+    invasive methods as well as basic behavioral tests. Due to the limitations in the
+    assessment of moderate motor impairment in rodents and the well-established
+    correlation between striatal dopamine content and impaired motor output, analysis of
+    striatal dopamine is often applied as surrogate readout for the assessment of motor
+    deficits.
+
+    Detection of striatal dopamine (total or extracellular).
+
+    The standard method used in the majority of experimental work is the determination
+    of total contents of dopamine and its two degradation metabolites HVA and DOPAC. For
+    this purpose, the striatum is quickly removed from experimental animals, homogenized
+    in a suitable acidic buffer, and the dopamine (metabolites) determined by HPLC with
+    electrochemical detector or by HPLC-MS. For live in vivo detection of extracellular
+    dopamine levels, a microdialysis probe is inserted into the striatum. Microdialysis
+    can be performed in anesthetized animals or freely moving animals; basal dopamine
+    levels or stimulated levels (amphetamine, KCl) can be recorded. Dopamine and its
+    metabolites are detected in the dialysate either by HPLC or by HPLC-mass
+    spectrometry analysis (Saraswat 1981, Cui 2009, Gonzalez 2011).
+
+    Detection of dopamine neuron terminals in the striatum.
+
+    As alternative to the detection of striatal dopamine that is to a large extent
+    limited to live detection setups due to its instability in tissues, the number of
+    remaining dopamine neurons in the substantia nigra pars compacta was suggested as
+    alternative readout (Burns 1983). It allows the analysis of ex vivo samples without
+    the limitations associated with the instability and reactivity of extravesicular
+    dopamine. Although the number of surviving dopamine neurons in the SNpc in PD or in
+    complex-I inhibitor challenged test animals is a valuable parameter on its own, it
+    was discovered that the number of DA neurons in the SNpc not necessarily correlates
+    with the amount of dopamine released in the striatum. Tyrosine hydroxylase (TH) was
+    regularly stained as marker for DA neurons, however it was observed that TH
+    expression was very variable following MPTP intoxication in the absence of cell
+    death and therefore has only limited suitability for the assessment of DA neuronal
+    numbers (Aznavour 2012). Second, many DA neurites and terminals displayed damage or
+    degradation in the absence of death of the corresponding neuronal cell (Ling 2015).
+    Hence, even in the presence of viable DA neurons in the SNpc, their corresponding
+    terminals could no longer be able to release dopamine into the striatum. Staining of
+    DA neuronal terminals in the striatum is therefore used as a more reliable indirect
+    marker for striatal dopamine content. For the analysis of nigrostriatal terminals,
+    the dopamine transporter (DAT) is visualized either by antibody-mediated staining in
+    tissue slices or by the application of radioactively labeled DAT ligands that allow
+    their application both in vivo and in ex vivo samples (Morris 1996).
+
+    Behavioral tests: Rodent models.
+
+    Rotation : the rotation model of Ungerstedt et al (Ungerstedt 1970) is based on the
+    unilateral lesion of the nigrostriatal dopamine neuron system either in rodents or
+    in non-human primates. The lesion can be produced either surgivally, or by
+    stereotaxic infusion of e.g. 6-OHDA into the nigrostriatal system of one hemisphere,
+    or by infusion of MPTP through one carotid (single sided). After the lesion, animals
+    are left to recover, then the dopamine system is stimulated by injection of
+    amphetamine. The asymmetry of remaining dopamine neurons (only on one side) triggers
+    spontaneous asymmetric motor behaviour, i.e. rotations of the animals. Each full
+    turn of an animal is recorded, the respective numbers of left- and right turns are
+    plotted versus time, respectively. In the standard rotation model, monkeys become
+    hypokinetic in the limbs on the contralateral side of the brain hemisphere treated.
+    Rats preferentially rotate towards the side of the lesion upon treatment with drugs
+    that trigger activation of the remaining dopamine neurons.
+
+    Rotarod : assessment of motor coordination. The animals are placed on a rotating rod
+    that is subjected to linear acceleration. The latency to fall from the rod is
+    detected (Jones 1968). Hang test: Detection of neuromuscular strength. Mice are
+    placed on a horizontal grid. When the animals grabbed the grid with their fore- and
+    hindpaws, the grid is inverted with the animal hanging upside down. In a typical
+    setup, mice are required to remain on the grid for at least 30 s (Tillerson 2002).
+
+    Forepaw Stride length during walking . Ink is applied to the forepaws and the mice
+    walk across a blank sheet of paper. Training of the animals to walk across the white
+    paper in a straight line without stopping is performed before the respective
+    treatment. The distance between single steps on each side are measured (Klapdor
+    1997).
+
+    Grid test : Mice hang upside down for 30 s on the grid that is also used for the
+    Hang test and are recorded on video for closer analysis. With this method, the
+    average forepaw distance is measured by assessing the distance covered, divided by
+    the number of successful forepaw steps. In the course of the analysis, the number of
+    unsuccessful forepaw steps are detected and displayed as percentage of the total
+    number of steps performed (Crawley 1999).
+
+    Akinesia : the animal is placed on a flat surface and the latency until it has moved
+    all of its four limbs is assessed.
+
+    Open field test : Infrared beams detect the animals activity for the determination
+    of parameters such as the time spent locomoting, the distance travelled, or the
+    number of rearings.
+
+    Pole test : the animal is placed on a gauze-taped pole with the head upwards below
+    the top of the pole. Two parameters are detected: 1) time until animals turn by
+    180°; 2) time until the animals reach the floor.
+
+    Non-invasive imaging of DA neuron terminals
+
+    Positron emission tomography (PET) : Based on its appropriate half life time of ca.
+    2 h for clinical investigations, fluorine-18 labeled L-[18F]-fluorodopa is routinely
+    used in trace amounts for intravenous administration. Striatal uptake of
+    L-[18F]-fluorodopa is followed by applying positron emission tomography (PET)
+    (Leenders 1986).
+
+    Single photon emission computed tomography (SPECT) : monitoring of dopamine
+    transporter (DAT). Iodine-123-β-CIT is used as a sensitive ligand for dopamine and
+    serotonin transporters and was applied in monkeys and humans (Winogrodzka 2003).
+
+    Human neurological tests
+
+    A recent systematic review and evaluation of currently used rating scales for the
+    assessment of motor impairment and disability in PD patients identified the 1)
+    Columbia University rating scale, 2) the Northwestern University Disability Scale,
+    and 3) the Unified Parkinsons Disease rating scale as the most evaluated and
+    reliable scales available (Ramaker 2002). All scales evaluate several parameters,
+    some of which are not motor related. Thus, only subscales are useful for readout of
+    motor symptoms (e.g. 13 of the 42 UPDRS parameters). Of these, not all are equally
+    dependent on nigrostriatal dopamine. Examination needs to be done by a trained
+    neurologist.
+level_screening:
+  outcome: NOT_SCREENED
+term_findings:
+- >-
+  The event component has no biological process, and its object is a MeSH
+  disease heading (D020734, Parkinsonian disorders) where a phenotype term
+  such as HP:0001300 (Parkinsonism) would describe the motor deficit.
+- >-
+  No cell or organ term is recorded.

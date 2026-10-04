@@ -1,0 +1,210 @@
+# AOP-Wiki KE 890, an intermediate Key Event of AOP 587. Structured properties
+# read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli. In cases where
+# AOP-Wiki's database id key is not known, a negative id is used as a local
+# placeholder.
+id: aop.events:890
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/890
+event:
+  id: 890
+  title: Degeneration of dopaminergic neurons of the nigrostriatal pathway
+  short_name: Degeneration of dopaminergic neurons of the nigrostriatal pathway
+  biological_organization_id:
+    id: 4
+    term: Organ
+  organ_term_id:
+    id: -1
+    source: UBERON
+    term: corpus striatum
+  event_components:
+  - id: -1
+    biological_process_id:
+      id: -1
+      source: MP
+      source_id: MP:0003244
+      term: loss of dopaminergic neurons
+    biological_action_id:
+      id: 1
+      term: increased
+  definition: >-
+    Degeneration of dopaminergic neurons (DA neurons) within the Substantia Nigra pars
+    compacta (SNpc) i.e. the nigrostriatal pathway, paralleled by the formation of
+    cytoplasmic fibrillar inclusions called Lewy bodies (LB), is regarded as a key event
+    in Parkinson’s disease (PD) and is, in a quantitative manner, directly linked to the
+    occurrence of clinical signs indicative of PD, i.e impaired motor behavior (Shulman
+    et al., 2011; Jellinger et al., 2009, Dickinson 2012, Dauer et al., 2003). The
+    severity of the clinical signs correlates with the degree of nigral cell loss, and
+    the reduced level of dopamine in the striatum. It is estimated that at the onset of
+    clinical signs, 60% of SNpc neurons are lost, corresponding to an 80% depletion of
+    striatal dopamine (Jellinger et al., 2009). PD is clinically and pathologically
+    defined as a progressive disorder: there is a temporally progress, according to a
+    specific pattern, from the brain stem to the nigrostriatal areas and to cortical
+    locations (Braak et al., 2004 and 2009) and there is a temporal increase in the
+    occurrence of LB, of dopamine depletion in the striatum and of loss of DA neurons in
+    the SNpc (Shulman et al., 2012). Indeed, in patients with PD there is a more evident
+    loss of dopamine in striatum compared to SNpc, indicating that striatal dopaminergic
+    nerve terminals are the primary target of the degenerative process in the
+    nigrostriatal pathway and that neuronal loss in SNpc would result as a final outcome
+    (Hornykiewicz et al., 1966; Dauer et al., 2003; Bernhaimer et al., 1973; Pavese et
+    al., 2009). Studies in PD patients and experimental models are also suggesting that
+    progression from striatal terminal to loss of DA neurons occurs through a “dying
+    back” axonopathy pathology and that axonal dysfuction may be an important hallmark
+    in PD (Orimo et al., 2005; Raff et al., 2002; Kim-Han et al., 2011; O’Malley 2010).
+
+    In human brain, the classical Lewy body (LB) is characterized at light microscopy by
+    eosinophilic, spherical, intra-cytoplasmatic inclusion and it stains for α-synuclein
+    and ubiqutin proteins which form the ultrastructural fibrillar core of LB visible at
+    transmission electron microscopy. On autopsy, from individuals affected by PD,
+    accumulation of aggregates positive for α-synuclein protein are also observed within
+    neuronal processes, called Lewy neurites (LN), as well as by neurons showing a more
+    diffuse or granular peri-nuclear pattern (Dickson 2012). Because dopaminergic cells
+    are rich in melanin, their loss is detectable by depigmentation of the midbrain at
+    gross pathology examination (Dickson 2012; Shulman et al., 2010). However, it should
+    be noted that, although LB are recognized as characteristic of PD, they are not
+    found in a minority of clinically defined PD cases (Dauer 2003) and they can also be
+    observed in other diseases (Dickson 2012).
+
+    The biological function of the nigrostriatal pathway depends on the intactness of
+    its anatomical structure. Preservation of the striatum terminals and of neuronal
+    cell bodies of DA neurons in the SNpc is a prerequisite for the maintenance of the
+    physiological function (Fujita et al., 2014). The nigrostriatal system is
+    anatomically located in the basal ganglia loop which comprises the motor system
+    structures caudate nucleus, putamen, globus pallidum and subsatantia nigra. The
+    caudate nucleus and the putamen are collectively called striatum (David Robinson in:
+    Neurobiology, Springer edition, 1997). The system plays a unique integrative role in
+    the control of movement as part of a system called the “basal ganglia motor loop”.
+    This anatomical loop includes structures in the thalamus, motor and somatosensory
+    cortex and wide regions of surrounding cortex. Neurons of the SN produce dopamine (
+    DA) and project to the striatum. They give dopaminergic excitatory (D1 receptors)
+    and inhibitory (D2 receptors) inputs to striatal interneurons (GABAergic). These
+    control thalamic output to the motor cortex. Degeneration within the SNpc leads to a
+    decreased thalamic activation of the motor cortex. (Shulman et al., 2011).
+
+    The dopaminergic cells localized in the SNpc synthesize the transmitter substance
+    dopamine (DA) and make extensive contacts within the caudate and putamen (the
+    striatum). These DA neurons have a complex morphology and high energy demand. They
+    are provided with very long and dense arborisations projecting into the striatum
+    where DA is released. This unique morphological characteristics demand a high level
+    of energy to maintain the activity at the synaptic level, to compensate for the risk
+    of depolarization of the poorly myelinated fibres and to support a long distance
+    axonal transport. This puts a tremendous burden on mitochondrial functions
+    (Pissadaki et al., 2013). SNpc neurons are provided with specific calcium channels,
+    the L-type Cav 1.3 which are intended to regulate the autonomous firing as
+    “pacemaker”. The high demand of calcium buffering arising from this is handled by
+    the endoplasmic reticulum (ER) and by the mitochondria. This is a function specific
+    for SNpc DA neurons, as the dopaminergic neurons belonging to the ventral tegmental
+    area (VTA) are using Na+ channels as a pacemaker. Additional peculiarities of the
+    neurons of the nigrostriatal pathway are the high number of synapses and the higher
+    probability of these neurons to accumulate misfolded proteins, including
+    α-synuclein. Furthermore, the nigrostriatal pathway metabolism of DA is known to
+    induce oxidative and nitrative stress (Fujita et al., 2014; Asanuma et al., 2003;
+    Cantuti-Castelvetri et al., 2003; Pissadaki et al., 2013) making DA neurons
+    particularly sensitive to oxidative stress (Lotharius and Brundin, 2002). DA neurons
+    in SNpc also have a relatively low mitochondria mass which may contribute to the
+    vulnerability of these neurons (Liang et al., 2007). In addition, increased levels
+    of iron have been observed in SN of PD patients (Gotz et al., 2004) and the high
+    content of iron in dopamine neurons has been reported to trigger
+    oxidative/nitrosative stress and subsequent neurodegeneration (Ayton and Lei 2014;
+    Benshachar et al., 1991). As a consequence, these neurons are particularly sensitive
+    to various stressors that can contribute to their vulnerability and preferential
+    loss (Fujita et al., 2014).
+  measured_or_detected: >-
+    The presence of DA cells in the SNpc and DA terminals in the striatum can be
+    visualized using different phenotypic histological markers. Changes can be captured
+    by measurement of markers specific for dopaminergic neurons such as tyrosine
+    hydroxylase (TH),dopamine transporter (DAT) and vesicular monoamine transporter type
+    2 (VMAT2). Degenerating and/or degenerated neurons can be detected by the silver
+    stains and the Fluoro Jade stains. Depending on the chemical stressor, study design
+    and animal species/strain, the methodology required for the analysis of
+    neuropathology and function may vary as it is recognized that different endpoints
+    can be quantitatively and/or qualitatively affected differently. However, when
+    testing potential neurotoxic chemicals, it is important to assess the integrity and
+    function of the nigra-striatal pathway. Some well-developed and accepted techniques
+    such as quantification of dopaminergic neurons in the substantia nigra par compacta,
+    quantification of dopaminergic terminals in the striatum, quantification of dopamine
+    content in the striatum and detection of Lewy Body-like aggregation, which are
+    commonly used for these purposes, are described below (Tieu, 2011):
+
+    • The silver degeneration stain is a method to trace degeneration of axons. By this
+    matter, products from disintegrated cells are visualized (Switzer R., 2000; Betarbet
+    et al., 2000). The mechanism by which the siver degeneration stain labels
+    degenerating neurons is unknown.
+
+    • Fluoro Jade stain is a fluorochrome derived from fluorescein used in neuroscience
+    disciplines to label degenerating neurons. It is an alternative technique to
+    traditional methods for labeling degenerating neurons such as silver degeneration
+    staining. Fluoro-Jade may be preferred to other degeneration stains due to the
+    simplicity of staining procedures, which are a common drawbacks of conventional
+    stains. However, the mechanism by which fluoro-jade labels degenerating neurons is
+    unknown (Betarbet et al., 2000, Schmued et al., 1997).
+
+    • Detection of TH, the enzyme responsible for catalyzing the conversion of the amino
+    acid L-tyrosine to L-3,4-dihydroxyphenylalanine (L-DOPA), a precursor for dopamine.
+    Detection of TH can be done either by immunocytochemistry followed by cell counting
+    (quantitative evaluation) or by western blot followed by densitometry analysis
+    (Betarbet et al., 2000, Lee 1987, Fetissov 1999).
+
+    • Counting of cells, immunostained for TH, or counting of nuclei by e.g. with
+    Nissel’s, DAPI (Kapuscinski, 1995) or Hoechst stain (Latt et al., 1976) should be
+    done following standard morphometric protocols. However, inclusion of stereological
+    cell counts to assess neurodegeneration is representing the most sensitive method to
+    confirm quantitatively specific morphological changes (Dauer 2008, Brooks 1992,
+    Thiruchelvam 2000a and 2000b).
+
+    • Quantification of dopaminergic neurons in SNpc: the average number of DA neurons
+    in adult mouse SN is approximately 8.000 to 14.000, depending on strain (Zaborszky
+    and Vadasz 2001). Their distribution is not homogeneous with difference in density
+    between the caudal and rostral part of the SN. The gold standard for counting
+    neurons is then to use an unbiased stereological protocol for cell counting with an
+    optical dissector system (Tieu et al., 2011). This requires a computerized
+    stereology software. The count should include TH+ neurons as well the total count of
+    neurons using a non-specific cell stain (e.g. Nisell’s, Fox3).
+
+    • Quantification of dopaminergic terminals in the striatum: the density of
+    dopaminergic terminals is not homogeneous in the striatum, increasing from the
+    rostral to the caudal part and representative regions of the striatum should be
+    assessed. This can be done by digitalization of the fibres and quantification by
+    optical density or quantification of the fiber density identifyied by by TH+
+    immunoreactivity (Tieu et al., 2011; Fernagut et al., 2007). Alternatively, striatal
+    tissue can be isolated for immunobloting of TH or DAT.
+
+    • DA transporters (DAT) and vesicular monoamine transporter type 2 (VMAT2) can be
+    visualized and quantified using immunocytochemistry (single cell levels) or western
+    blot followed by densitometry analysis, to quantify the changes in their expression.
+    (Hirata et al., 2007; Fornai et al., 2003; Tong et al., 2011; Ciliax et al., 1995).
+    • DA, DOPAC (DA metabolite) and homovanillic acid (HVA) content in the striatum can
+    be quantified through several methodologies such as capillary electrophoresis,
+    spectrofluorimetry and high performance liquid chromatography (HPLC). The commonly
+    used detectors for chromatography include MS, UV, optical fiber detector,
+    electrochemical detector and fluorescence detector (Zhao et al., 2011, Fornai et
+    al., 2005, Magnusson et al., 1980). • Indentification of LB in standard histological
+    sections stained with haematoxylin and eosin, they are characterized by the presence
+    of pale eosinophilic vacuoles (Betarbet et al., 2000 and 2006; Pappolla et al.,
+    1988; Dale et al., 1992).
+
+    • Immuno staining for α-synuclein and ubiquitin to identify and quantify Lewy bodies
+    presence. In vivo, α-synuclein and ubiqutin can be evaluated in the fixed tissue and
+    quantified for fluorescence intensity (Betarbet et al., 2000 and 2006; Forno et al.,
+    1996, Tiller-Borcich 1988; Galloway et al., 199;, Kuzuhara et al., 1988; Kuusisto
+    eyt al., 2003).
+
+    • Imaging techniques: 18-fluoro-dopa positron emission tomography (PET)
+    quantification of various dopamine presynaptic markers (e.g. dopamine transporter
+    DAT, vescicular monoamine transporter type 2 VAT2) identified by single photon
+    emission tomography (SPECT). They permit to visualize the loss of nigrostriatal DA
+    neurons in patients(Shapira et al. 2013) .
+level_screening:
+  outcome: NOT_SCREENED
+  note: >-
+    AOP-Wiki assigns Organ. The Event is the loss of a cell population and has
+    no cell term, so the level is worth screening before in vitro Observations
+    on cultured neurons are read as direct evidence for it.
+term_findings:
+- >-
+  No cell term is recorded, although the Event is about dopaminergic neurons
+  (CL:0000700).
+- >-
+  The organ term is corpus striatum, while the title and the process concern
+  the nigrostriatal pathway, whose dopaminergic cell bodies are in the
+  substantia nigra (UBERON:0002038).

@@ -1,0 +1,273 @@
+# AOP-Wiki KE 1542, the Molecular Initiating Event of AOP 587. Structured
+# properties read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli. In
+# cases where AOP-Wiki's database id key is not known, a negative id is used as
+# a local placeholder.
+id: aop.events:1542
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/1542
+event:
+  id: 1542
+  title: "Inhibition, Mitochondrial complex III"
+  short_name: "Inhibition, Mitochondrial complex III"
+  biological_organization_id:
+    id: 1
+    term: Molecular
+  cell_term_id:
+    id: -1
+    source: CL
+    term: eukaryotic cell
+  organ_term_id:
+    id: -1
+    source: UBERON
+    term: organ
+  event_components:
+  - id: -1
+    biological_process_id:
+      id: -1
+      source: HP
+      source_id: HP:0011924
+      term: Decreased activity of mitochondrial complex III
+    biological_object_id:
+      id: -1
+      source: GO
+      source_id: GO:0005750
+      term: mitochondrial respiratory chain complex III
+    biological_action_id:
+      id: 2
+      term: decreased
+  definition: >-
+    The mitochondrial complex III, also known as cytochrome bc1 complex, is located in
+    the inner mitochondrial membrane. It is the third of the five complexes that form
+    the mitochondrial respiratory chain. It contains three catalytic subunits,
+    cytochrome b/b6, cytochrome c1 and the Rieske iron–sulfur protein an (2Fe-2S
+    cluster).
+
+    Complex III catalyzes electron transfer from ubiquinol (QH2) deriving from complex
+    I, complex II and other mitochondrial systems, to cytochrome c. The complex has two
+    functional binding sites for quinone, one is the oxidation site of quinone (QP or
+    QO) on one side of the intermembrane space, close to heme b. The other is the
+    quinone reduction site (QN or QI) on the matrix side, close to heme bH (Hunte et al,
+    2003).
+
+    The electron transfer in this process mediates the translocation of protons from the
+    mitochondrial matrix through the inner membrane to the intermembrane space. The
+    created proton gradient will be used to catalyze the reaction in which ADP is
+    converted into ATP.
+
+    In functional mitochondria, Complex III can be found as free complex or in
+    association with Complex I and Complex IV (CI-CIII2-CIV) in supramolecular
+    structures called respirasomes (Letts & Sazanov, 2017).
+
+    The initiation event is the reversible or irreversible interaction to any of the
+    subunits in the mitochondrial complex III, leading to an perturbation of the
+    electron flow and an absence of proton transport via this complex.
+
+    In most cases, inhibition of Complex III occurs upon binding of inhibitors to one of
+    the two quinone binding sites. Specific binding to the quinol oxidation site (QP or
+    QO site), blocks the motion of the iron-sulfur protein subunit. Binding to this site
+    confers to inhibitors selectivity between mammalian vs protozoan (Esser et al, 2023)
+    or pests Complex III (Luo et al, 2022).
+  measured_or_detected: >-
+    Activity of complex III of the respiratory chain can be determined indirectly by the
+    detection of oxygen consumption as a readout for the activity of oxidative
+    phosphorylation in entire mitochondria. Direct enzymatic activity measurements
+    include spectrophotometric assays. Detection of oxygen consumption is conducted
+    either in permeabilized cells to allow unrestricted access of substrates and
+    inhibitors to mitochondria or in isolated mitochondria. Direct enzymatic assays are
+    performed in isolated mitochondria, or submitochondrial particles.
+
+    Detection of complex III activity in isolated mitochondria or in submitochondrial
+    particles by spectrophotometry.
+
+    The decylubiquinol/cytochrome c reductase assay is the standard spectrophotometric
+    method to measure the enzymatic activity of mitochondrial complex III
+    (ubiquinol–cytochrome c reductase) (Krähenbühl et. al, 1994). The principle of the
+    assay is based on the physiological role of complex III, which catalyzes the
+    transfer of electrons from ubiquinol (QH₂) to cytochrome c in the respiratory chain.
+    In the assay, the artificial substrate decylubiquinol (DB), a soluble analog of
+    ubiquinol with a shortened aliphatic side chain, serves as the electron donor (Xia
+    et al., 2013). Decylubiquinol is oxidized by complex III at the Qo site of
+    cytochrome b, and the released electrons are transferred sequentially through the
+    Rieske iron–sulfur protein and cytochrome c₁ subunit to the terminal electron
+    acceptor, cytochrome c. The reduction of cytochrome c results in a characteristic
+    increase in absorbance at approximately 550 nm, which can be continuously monitored
+    using a spectrophotometer. The rate of cytochrome c reduction is directly
+    proportional to the activity of complex III in the sample (Krähenbühl et. al, 1994).
+    To ensure specificity, the assay is performed in the presence and absence of
+    antimycin A, a potent inhibitor of the Qi site of complex III (Bujan et al., 2022).
+    The difference between the total rate and the antimycin-insensitive rate defines the
+    antimycin-sensitive activity, which corresponds to the true activity of complex III.
+    This control is essential, as cytochrome c can also be reduced by other
+    mitochondrial enzymes or non-specific redox reactions.
+
+    Complex III activity detection is conducted according to the reaction:
+
+    DB (reduced) + cytochrome c (oxidized) → DB (oxidized) + cytochrome c (reduced) (550
+    nm)
+
+    The reaction is measured in a buffer consisting of: 50 mM potassium phosphate, pH
+    7.4, 1 mM n-dedecylmaltoside, 1 mM KCN, 2,5 µM rotenone, and 0.1 fatty acid free BSA
+    (fraction V) . (Bujan et al., 2022; Krähenbühl et al., 1994).
+
+    The sample is added to the reaction buffer, and allowed to equilibrate for a few
+    minutes at 30 °C. Then, reduced decylbenzylquinone is added (100 µM), in parallel a
+    blank sample without reduced DB is prepared. The reaction is initiated by the
+    addition of cytochrome c (15 µM), absorbance is detected after a lag phase of ca. 20
+    sec. in 30 sec. intervals over a period of 3-5 min. Absorbance is measured at 550
+    nm. At the end of the recordings, an excess amount of ascorbic acid (50 mM) for full
+    cytochrome c reduction is added, the resulting absorbance value is detected
+    separately.
+
+    The results are calculated as first-order rate constants as the reactions rapidly
+    become non-linear. The final absorbance reading (ascorbic acid) are subtracted from
+    each data point. The data are then plotted as a log plot against time, and the slope
+    is the first order rate constant. (Bujan et al., 2022; Krähenbühl et al., 1994).
+
+    Complex III activity detection in permeabilized cells or in isolated mitochondria
+    based on the detection of oxygen consumption.
+
+    The principle of oxygen detection by a Clark electrode is based on the
+    electrochemical reduction of oxygen at a cathode, typically composed of platinum,
+    which is maintained at a fixed potential relative to a reference electrode. The
+    electrode system is immersed in an electrolyte solution and separated from the
+    sample medium by an oxygen-permeable membrane, commonly made of Teflon or
+    polyethylene. Oxygen from the sample diffuses through the membrane into the
+    electrolyte, where it undergoes reduction at the cathode surface according to the
+    reaction:
+
+    O₂ + 4e⁻ + 4H⁺ → 2H₂O (in acidic medium) or
+
+    O₂ + 2H₂O + 4e⁻ → 4OH⁻ (in neutral or alkaline medium).
+
+    The rate of oxygen diffusion through the membrane, and thus the magnitude of the
+    resulting cathodic current, is directly proportional to the partial pressure or
+    concentration of dissolved oxygen in the sample (Li et al. 2012; Silva et al. 2012).
+    This current is measured and converted into an electrical signal, which can be
+    quantitatively related to oxygen concentration. To ensure accuracy and stability,
+    the electrode is often maintained at a constant temperature, and the membrane
+    thickness and electrolyte composition are carefully controlled. The Clark electrode,
+    by providing real-time and continuous measurements, is widely used in biomedical,
+    environmental, and industrial applications for monitoring oxygen levels.
+
+    Optical oxygen sensors operate on the principle of dynamic quenching of luminescence
+    by molecular oxygen. These sensors typically utilize oxygen-sensitive fluorophores
+    or phosphorescent dyes immobilized within an oxygen-permeable matrix (Melnikov et
+    al. 2022; Dmitriev et al. 2012). In the absence of oxygen, the fluorophores exhibit
+    a characteristic luminescence—either fluorescence or phosphorescence—with defined
+    intensity and lifetime upon excitation by a specific wavelength of light. When
+    molecular oxygen is present, it acts as a dynamic quencher, reducing the
+    luminescence intensity and/or shortening the emission lifetime through a collisional
+    quenching mechanism governed by the Stern–Volmer relationship. The degree of
+    quenching is quantitatively related to the local oxygen concentration, enabling
+    precise and non-invasive measurements. Unlike electrochemical sensors, optical
+    oxygen sensors do not consume oxygen during detection, making them particularly
+    suitable for applications requiring high spatial and temporal resolution under
+    physiologically relevant conditions. Extracellular flux analyzers such as the
+    Seahorse system emerged as the frontline technique in high content oxygen
+    consumption detection (Plitzko et al. 2018). Optical oxygen sensors are integrated
+    into the bottom of specialized microplates used for real-time measurement of
+    cellular respiration. Fluorescent or phosphorescent oxygen-sensitive dyes are
+    embedded in solid-state sensor patches adhered to each well. During an assay, a
+    transient microchamber is formed above the adherent cells by lowering a sensor
+    cartridge, temporarily isolating a small volume of medium. The consumption of oxygen
+    by the cells within this microenvironment results in a measurable decrease in oxygen
+    concentration, which is detected by changes in the fluorescence signal of the
+    sensor.
+
+    This real-time, label-free detection enables the calculation of the oxygen
+    consumption rate (OCR), a key parameter reflecting mitochondrial respiratory
+    activity. When coupled with simultaneous measurement of extracellular acidification
+    rate (ECAR), these data provide comprehensive insights into cellular bioenergetics,
+    metabolic reprogramming, and mitochondrial function in live cells under various
+    physiological and pharmacological conditions (Yoo et al. 2024; Zhang et al. 2019).
+
+    Due to its widespread use in current research and its applicability on a
+    high-content scale, the following descriptions will consistently refer to the use of
+    the fluorophore-based method.
+
+    Cell permeabilization
+
+    Controlled permeabilization of cells allows access to mitochondria in their natural
+    environment without the time-consuming isolation procedures that affect
+    mitochondrial function. The principle of cell permeabilization by agents such as
+    digitonin and saponin is based on their ability to selectively disrupt the plasma
+    membrane while preserving the integrity and functionality of intracellular
+    organelles, particularly mitochondria. This selective permeabilization is essential
+    for enabling the controlled introduction of exogenous substrates, ADP, and specific
+    inhibitors directly to mitochondria within their native cellular context, thereby
+    allowing accurate measurement of mitochondrial respiration (Salabei et al. 2014).
+    Digitonin and saponin are amphipathic glycosides that interact preferentially with
+    cholesterol-rich domains of biological membranes. The plasma membrane, which
+    contains a relatively high cholesterol content, is particularly susceptible to
+    disruption by these agents. In contrast, the mitochondrial inner membrane contains
+    little cholesterol and is largely resistant to their action at appropriately
+    optimized concentrations. When cells are treated with low concentrations of
+    digitonin or saponin, the plasma membrane becomes permeable, allowing small
+    molecules (e.g., metabolic substrates, ADP, respiratory inhibitors) to diffuse into
+    the cytoplasm (Divakaruni et al. 2014; Niklas et al. 2011; Lei et al. 2021). This
+    creates a semi-intact cell model in which mitochondrial membranes remain
+    functionally intact, and mitochondrial respiratory activity can be assessed in a
+    highly controlled, substrate-specific manner. Importantly, the preservation of
+    mitochondrial integrity ensures that electron transport, membrane potential, and ATP
+    synthesis can be reliably studied. Selective permeabilization using digitonin or
+    saponin provides an experimental platform, bridging the gap between isolated
+    mitochondria and intact cells, and is particularly compatible with high-resolution
+    platforms like the Seahorse XF Analyzer.
+
+    Complex III activity in permeabilized cells
+
+    In the 96 well format, a cell density in the range of 30.000-80.000 cells per well
+    (depending on the cell type) is added in a volume of 80 µl and centrifuged (200 g
+    for 1 min) to ensure attachment on the bottom of the plate. Depending on the cell
+    type, the cells are then allowed to attach for a certain time period (e.g. 24 h) to
+    ensure proper attachment. If cells in suspension are employed, the measurements can
+    be initiated immediately. Following treatment of the cells, permeabilization is
+    initiated according to the protocols described in Salabei (2014) or Delp (2019). In
+    brief, permeabilization is initiated by MAS buffer (220 mM mannitol, 1 mM ADP, 70 mM
+    sucrose, 10 mM KH2PO4, 5 mM MgCl2, 2 mM HEPES, 1 mM EGTA, 4 mg/ml fatty acid free
+    BSA, and a permeabilizing agent such as digitonin at a concentration of 20 – 200
+    µg/ml, pH 7.2. The optimal concentration of the permeabilizing agent is highly
+    dependent on the cell type and cell density and needs to be empirically determined
+    for each individual setup. Higher concentrations ensure effective permeabilization,
+    however at the same time harm the integrity and function of mitochondria. At a
+    digitonin concentration of 100 µg/ml, measurement of oxygen consumption rate (OCR)
+    can be initiated after ca. 5 min. Due to breakdown of cytosolic integrity, basal
+    mitochondrial respiration proceeds on a relatively low level under these conditions
+    (Djafarzadeh & Jakob, 2017; Makrecka-Kuka et al., 2015).
+
+    Fig. 1 Mitochondrial respiratory chain, detection of complex III activity. In
+    permeabilized cells, respectively in isolated mitochondria, the overview illustrates
+    the specific input of electrons into the respiratory chain by selected substrates.
+    For the determination of complex III activity, inhibitors of complex I and complex
+    II are added first to prevent electron influx via these complexes originating from
+    residual NADH or FADH2 formation in the cells. Then, the complex III selective
+    electron donor duroquinol is added. The observed rise in OCR directly reflects
+    complex III activity as all other electron input sites are blocked under these
+    conditions. (Toki et al. 2022).
+
+    Complex III activity determination requires the addition of complex I and complex II
+    inhibitors. This step ensures that no electron influx, originating from residual
+    NADH or FADH2 from the cell, contributes to oxygen consumption. Then, the complex
+    III substrate duroquinol is added and results in an increase in OCR. If a test
+    compound that inhibits complex III is present, the addition of duroquinol results in
+    an impaired rise in the OCR. If test compounds show an inhibitory effect on OCR
+    following duroquinol addition, it is essential to include testing of complex IV
+    activity. If complex IV is not affected, the conclusion of complex III inhibition
+    can be made (Divakaruni et al., 2022).
+
+    Fig. 2 Exemplary result of complex III detection by an extracellular flux analyzer .
+    Oxygen consumption rate (OCR) detection was started 5 min after addition of
+    permeabilizer (t =0). As test compounds, a complex III inhibitor (white) as well as
+    a compound that does not interfere with complex III (black) were added. Then,
+    complex III substrate duroquinol is added, leading to an increase in OCR. To exclude
+    a contribution of complex IV to the observed inhibition, the selective determination
+    of complex IV activity in a separate experiment is mandatory (Illustrative example
+    provided by Schildknecht S).
+level_screening:
+  outcome: NOT_SCREENED
+term_findings:
+- >-
+  The biological object GO:0005750 is obsolete in the Gene Ontology
+  ("obsolete mitochondrial respiratory chain complex III"), replaced by
+  GO:0045275. Checked against OLS on 2026-10-03.
