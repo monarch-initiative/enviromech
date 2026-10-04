@@ -8,29 +8,39 @@ description: >-
   place in EMOD moves to linkml-aop; a class that turns out to be specific to
   deriving pathways from external knowledge bases stays here.
 
-  SKETCH. The import below resolves against a sibling checkout of linkml-aop and
-  is a placeholder for a pinned dependency. See the decision register before
-  treating anything in this file as adopted.
+  SKETCH. See the decision register before treating anything in this file as
+  adopted.
 prefixes:
   linkml: https://w3id.org/linkml/
   enviromech: https://w3id.org/monarch-initiative/enviromech/
   dismech: https://dismech.monarchinitiative.org/
+  aop.events: https://aopwiki.org/events/
+  aop.stressor: https://aopwiki.org/stressors/
+  PMID: http://www.ncbi.nlm.nih.gov/pubmed/
+  dcterms: http://purl.org/dc/terms/
+  rdfs: http://www.w3.org/2000/01/rdf-schema#
+  CHEBI: http://purl.obolibrary.org/obo/CHEBI_
+  CL: http://purl.obolibrary.org/obo/CL_
+  MONDO: http://purl.obolibrary.org/obo/MONDO_
+  comptox: https://comptox.epa.gov/dashboard/
 default_prefix: enviromech
 default_range: string
 
 imports:
   - linkml:types
-  # Placeholder: sibling checkout. Replace with a pinned linkml-aop dependency
-  # and an import map once the schema-update branch in linkml-aop has landed.
-  - ../../../../linkml-aop/src/linkml_aop/schema/aop_emod_linkml
+  # A vendored, unchanged copy of linkml-aop's aop_emod_linkml.yaml. The commit
+  # and SHA-256 it was copied at are recorded in docs/mechmaker.md. To update,
+  # replace the file and the record of it together; never edit it here.
+  - aop_emod_linkml
 
 classes:
 
   KeyEventAggregation:
     description: >-
-      A record that a Key Event is aggregated from one or more nodes of an external
-      knowledge base, and the curator's argument that the aggregation does not
-      misrepresent the biology.
+      The section of a KeyEventRecord saying that its Key Event is aggregated from
+      one or more nodes of an external knowledge base, with the curator's argument
+      that the aggregation does not misrepresent the biology. The Event is the one
+      in the enclosing record.
 
       An AOP simplifies a mechanism into a chain of measurable Key Events, so a Key
       Event is often broader than any one node in a mechanism graph such as a
@@ -54,14 +64,6 @@ classes:
       resolution the pathway needs. The edge is kept in internal_edges so that the
       specificity the Event simplifies away stays recoverable from the record.
     attributes:
-      id:
-        identifier: true
-        description: A local identifier for this aggregation record.
-      event_id:
-        description: The Key Event the source nodes are aggregated into.
-        range: Event
-        inlined: true
-        required: true
       aggregation_relation:
         description: How the set of source nodes, taken together, relates to the Event.
         range: AggregationRelationEnum
@@ -195,6 +197,237 @@ classes:
           mark it, not that it is established.
       notes:
 
+  KeyEventRecord:
+    description: >-
+      One Key Event, in one file under data/key_events/. The Event itself is an
+      EMOD Event, unchanged; this class adds what EnviroMech needs around it: an
+      identifier that resolves, where and when the Event was read from AOP-Wiki,
+      and what a curator found when checking it.
+
+      Whether the Event is a Molecular Initiating Event, an Adverse Outcome or an
+      intermediate Key Event is not recorded here. That is its role within one
+      AOP and belongs to the AOP's record. Observations are not listed here
+      either: an ObservationRecord names the Events it bears on, and the list of
+      Observations for an Event is derived from those records.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: >-
+          The Key Event's AOP-Wiki identifier as a CURIE, for example
+          aop.events:1542. The prefix is the one Bioregistry registers for
+          AOP-Wiki Key Events.
+        pattern: "^aop\\.events:\\d+$"
+        required: true
+      status:
+        description: Review state of this record.
+        range: CurationStatusEnum
+        required: true
+      event:
+        description: >-
+          The Event, as an EMOD Event.
+        range: Event
+        inlined: true
+        required: true
+      aop_wiki_snapshot:
+        description: >-
+          The date of the AOP-Wiki XML export the Event was read from, as
+          YYYY-MM-DD.
+        range: date
+        required: true
+      source_uri:
+        description: The Event's page on AOP-Wiki.
+        range: uri
+      level_screening:
+        description: >-
+          The outcome of screening the Event's level of biological organization
+          against its own description, with the screen-aop-key-event skill.
+        range: KeyEventScreening
+        inlined: true
+      aggregation:
+        description: >-
+          The nodes of an external knowledge base this Event is aggregated from,
+          when that has been worked out.
+        range: KeyEventAggregation
+        inlined: true
+      term_findings:
+        description: >-
+          Problems found with the ontology terms AOP-Wiki binds to the Event,
+          one per entry: an obsolete term, a label that does not match, a term
+          from an unexpected ontology. The Event block keeps what AOP-Wiki
+          records; the finding is stated here.
+        multivalued: true
+      notes:
+
+  KeyEventScreening:
+    description: >-
+      Whether a Key Event's assigned level of biological organization has been
+      checked against its own description, and what was found.
+    attributes:
+      outcome:
+        range: ScreeningOutcomeEnum
+        required: true
+      screened_on:
+        description: The date the screen was run.
+        range: date
+      method:
+        description: Which pass produced the outcome, and against which snapshot.
+      note:
+
+  ObservationRecord:
+    description: >-
+      One Observation, in one file under data/observations/: that a Causal
+      Agent was observed, by a stated method, to change a biological object,
+      process or phenotype in a stated direction, with the source quoted.
+
+      An Observation can stand alone. With no Events named it is an
+      exposure-outcome association with no known mechanism. With Events named it
+      is evidence for a claim supporting those Key Events.
+
+      What was observed is an EMOD Observation, unchanged. This class adds what
+      EMOD's Observation does not carry: an identifier that resolves, the Causal
+      Agent bound to an ontology term, a phenotype bound to an ontology term, and
+      evidence items whose quotes are checked against the cited source.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: A CURIE minted in the enviromech namespace.
+        required: true
+      title:
+        description: The observation as one plain sentence.
+        required: true
+      status:
+        description: Review state of this record.
+        range: CurationStatusEnum
+        required: true
+      causal_agent:
+        description: What the subjects were exposed to or treated with.
+        range: CausalAgent
+        inlined: true
+        required: true
+      asserted_relation:
+        description: >-
+          The relation the source asserts between the Causal Agent and what was
+          observed, as a short phrase, for example "exposure correlated with",
+          "directly toxic to", "used to treat".
+        required: true
+      observation:
+        description: >-
+          What was observed, as an EMOD Observation: the direction of change
+          (biological_action_id), the object or process changed, the method
+          (assay_id), and the Events it bears on (events, by Event id).
+        range: Observation
+        inlined: true
+        required: true
+      phenotype_term:
+        description: >-
+          The phenotype or disease observed, bound to an ontology term, when
+          the observation is of one. EMOD's Observation.phenotype holds the
+          same thing as a string.
+        range: Term
+        inlined: true
+      evidence:
+        description: >-
+          The sources for this observation, each with an exact quote.
+        range: EvidenceItem
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+        required: true
+      notes:
+
+  CausalAgent:
+    description: >-
+      What subjects were exposed to or treated with in an Observation: a drug
+      treatment, a chemical in the environment, or a biological entity applied
+      in an experimental context. Named inline on each Observation; it has no
+      record of its own. The list of Causal Agents in use is derived from the
+      Observation records. EMOD's counterpart is Stressor.
+    attributes:
+      name:
+        description: The agent's name as the curator writes it.
+        required: true
+      agent_type:
+        range: CausalAgentTypeEnum
+        required: true
+      term:
+        description: >-
+          The ontology term for the agent, when one exists. Two Observations
+          name the same Causal Agent when they bind the same term.
+        range: Term
+        inlined: true
+      other_identifiers:
+        description: >-
+          Other identifiers for the agent, as CURIEs, for example an EPA
+          CompTox identifier such as comptox:DTXSID4021395.
+        range: uriorcurie
+        multivalued: true
+      aop_wiki_stressor:
+        description: >-
+          The agent's AOP-Wiki Stressor, as a CURIE such as aop.stressor:395,
+          when AOP-Wiki lists it as one.
+        range: uriorcurie
+
+  Term:
+    description: >-
+      A reference to an ontology term. The label must be the ontology's own.
+      The same shape as a mechmaker Term.
+    attributes:
+      id:
+        description: The term's CURIE.
+        range: uriorcurie
+        required: true
+      label:
+        description: The ontology's own label for the term.
+        slot_uri: rdfs:label
+        required: true
+
+  EvidenceItem:
+    description: >-
+      A citation that bears on a claim, with a verbatim quote from the source.
+      The quote is checked against the cached source text by
+      linkml-reference-validator; a paraphrase fails. The same shape as a
+      mechmaker EvidenceItem. Distinct from EMOD's Evidence, which links two
+      Observations to a Citation for a Key Event Relationship.
+    slots:
+      - reference
+      - reference_title
+      - supports
+      - evidence_source
+      - snippet
+      - explanation
+
+# Top-level slots, not attributes: linkml-reference-validator finds the
+# reference and the quote through these slots' `implements` values.
+slots:
+  reference:
+    description: The cited source, as a CURIE such as PMID:12345678.
+    pattern: "^[A-Za-z][A-Za-z0-9_]*:[^\\s]+$"
+    required: true
+    implements:
+      - linkml:authoritative_reference
+  reference_title:
+    description: Title of the cited source, copied from the reference cache.
+    recommended: true
+    implements:
+      - dcterms:title
+  supports:
+    description: Which way the evidence cuts relative to the claim.
+    range: EvidenceSupportEnum
+    required: true
+  evidence_source:
+    description: The kind of system the evidence comes from.
+    range: EvidenceSourceEnum
+  snippet:
+    description: >-
+      An exact quote from the cited source. Paraphrase goes in explanation.
+    required: true
+    implements:
+      - linkml:excerpt
+  explanation:
+    description: How the quote bears on the claim.
+
 enums:
   AggregationRelationEnum:
     description: How a set of source nodes relates to the Event they are aggregated into.
@@ -208,3 +441,63 @@ enums:
         description: >-
           The source nodes are each a narrower case of the Event. The Event
           covers biology the nodes do not assert.
+
+  CurationStatusEnum:
+    description: Review state of a record. The same values as a mechmaker Mech.
+    permissible_values:
+      DRAFT:
+        description: Incomplete. Not ready for review.
+      PROPOSED:
+        description: Complete and validated, awaiting human review.
+      REVIEWED:
+        description: A person reviewed and accepted it. Only a person sets this.
+      DEPRECATED:
+        description: Kept for provenance. Not current.
+
+  ScreeningOutcomeEnum:
+    description: The outcome of screening a Key Event's level of biological organization.
+    permissible_values:
+      NOT_SCREENED:
+        description: No screen has been run. The level is as AOP-Wiki assigns it.
+      LEVEL_FITS:
+        description: The Event's description fits its assigned level.
+      LEVEL_DISPUTED:
+        description: The description reads as another level, or spans levels.
+      LEVEL_UNCONFIRMED:
+        description: The Event has no description, or the screen could not tell.
+
+  CausalAgentTypeEnum:
+    description: The kind of thing a Causal Agent is.
+    permissible_values:
+      DRUG_TREATMENT:
+        description: A drug given as treatment.
+      ENVIRONMENTAL_CHEMICAL:
+        description: A chemical in the environment, such as a pesticide or an air pollutant.
+      BIOLOGICAL_ENTITY:
+        description: A biological entity applied in an experimental context.
+
+  EvidenceSupportEnum:
+    description: Direction of an evidence item relative to its claim. Says nothing about strength.
+    permissible_values:
+      SUPPORT:
+        description: The source supports the claim.
+      REFUTE:
+        description: The source contradicts the claim.
+      PARTIAL:
+        description: The source supports the claim in part or with caveats.
+      NO_EVIDENCE:
+        description: The source is relevant but does not bear on the claim.
+
+  EvidenceSourceEnum:
+    description: The kind of system the evidence comes from.
+    permissible_values:
+      HUMAN_CLINICAL:
+        description: Human observations, including patients, cohorts, trials and epidemiology.
+      MODEL_ORGANISM:
+        description: In vivo evidence from a non-human animal.
+      IN_VITRO:
+        description: Cell culture, including iPSC-derived cells, organoids and biochemical assays.
+      COMPUTATIONAL:
+        description: In silico or modelling studies.
+      OTHER:
+        description: Evidence not fitting the values above.
