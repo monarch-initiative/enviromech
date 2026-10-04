@@ -46,10 +46,13 @@ def check(directory: Path) -> list[str]:
                 problems.append(f"{name}: record id {record.get('id')!r} is not enviromech:obs-<number>")
             elif int(match.group(1)) != obs_id:
                 problems.append(
-                    f"{name}: observation.id is {obs_id} but the record id {record['id']} gives {int(match.group(1))}"
+                    f"{name}: observation.id is {obs_id} but the record id {record['id']} "
+                    f"gives {int(match.group(1))}"
                 )
             if obs_id in observation_files:
-                problems.append(f"{name}: observation.id {obs_id} is already used by {observation_files[obs_id]}")
+                problems.append(
+                    f"{name}: observation.id {obs_id} is already used by {observation_files[obs_id]}"
+                )
             else:
                 observation_files[obs_id] = name
 
@@ -71,7 +74,8 @@ def check(directory: Path) -> list[str]:
 
         if key in id_by_assay and id_by_assay[key][0] != assay_id:
             problems.append(
-                f"{name}: the same Assay has id {id_by_assay[key][0]} in {id_by_assay[key][1]} and {assay_id} here"
+                f"{name}: the same Assay has id {id_by_assay[key][0]} in {id_by_assay[key][1]} "
+                f"and {assay_id} here"
             )
         id_by_assay.setdefault(key, (assay_id, name))
 

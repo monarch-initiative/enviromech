@@ -1,18 +1,67 @@
 [project]
 name = "enviromech"
-version = "0.0.0"
-description = "Environmental health mechanisms from AI-curated literature sources"
+version = "0.1.0"
+description = "EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways."
+authors = [{ name = "Ginnie Hench", email = "ginniehench@gmail.com" }]
+readme = "README.md"
+license = { text = "BSD-3-Clause" }
 requires-python = ">=3.11"
+keywords = ["mech", "knowledge base", "linkml", "ontology", "curation"]
+
 dependencies = [
-  "linkml>=1.9.3",
-  "linkml-reference-validator>=0.2.1",
-  # The EMOD schema that enviromech.yaml imports. Pinned to a commit; change the
-  # commit here to take a newer linkml-aop, then run `just install`.
-  # df924b2 is the head of linkml-aop PR #10 (optional ids on term classes);
-  # repin to main once that PR is merged.
-  "linkml_aop @ git+https://github.com/EHS-Data-Standards/linkml-aop@df924b2677603c8f4384bf1053a6e4752fd7244e",
+    "linkml>=1.11.1",
+    "linkml-runtime>=1.9.4",
+    # Checks that every bound CURIE exists, sits under its enum root, and
+    # carries the ontology's own label.
+    "linkml-term-validator>=0.4.5",
+    # Checks that every snippet appears verbatim in its cited source.
+    "linkml-reference-validator>=0.2.1",
+    "oaklib>=0.7.3",
+    # oaklib imports eutils, which still imports pkg_resources.
+    "setuptools<82",
+    "pyyaml>=6.0",
+    # Edits records in place with their layout kept (just add-evidence).
+    "ruamel.yaml>=0.18",
+    "jinja2>=3.1",
+    # The EMOD schema that enviromech.yaml imports. Pinned to a commit; change the
+    # commit here to take a newer linkml-aop, then run `just install`.
+    # df924b2 is the head of linkml-aop PR #10 (optional ids on term classes);
+    # repin to main once that PR is merged.
+    "linkml_aop @ git+https://github.com/EHS-Data-Standards/linkml-aop@df924b2677603c8f4384bf1053a6e4752fd7244e",
 ]
 
-# There is no enviromech Python package yet, only the schema and the records.
-[tool.uv]
-package = false
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    # The documentation site. MkDocs 2 drops the plugin and theme system
+    # Material relies on, so stay on 1.x.
+    "mkdocs>=1.6,<2",
+    "mkdocs-material>=9.7",
+]
+
+[project.urls]
+Homepage = "https://github.com/monarch-initiative/enviromech"
+Repository = "https://github.com/monarch-initiative/enviromech"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# linkml_aop is installed from a git commit, not from PyPI.
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/enviromech"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src", "."]
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
