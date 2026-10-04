@@ -1,3 +1,8 @@
 # Publisher PDFs fetched by linkml-reference-validator. The extracted text in
 # references_cache/*.md is what quotes are checked against.
 references_cache/files/
+
+# Copied from the installed linkml_aop package by `just install`.
+src/enviromech/schema/aop_emod_linkml.yaml
+
+.venv/

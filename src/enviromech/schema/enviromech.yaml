@@ -28,9 +28,10 @@ default_range: string
 
 imports:
   - linkml:types
-  # A vendored, unchanged copy of linkml-aop's aop_emod_linkml.yaml. The commit
-  # and SHA-256 it was copied at are recorded in docs/mechmaker.md. To update,
-  # replace the file and the record of it together; never edit it here.
+  # linkml-aop's aop_emod_linkml.yaml, unchanged. linkml-aop is a dependency
+  # pinned in pyproject.toml; `just install` copies this file out of the installed
+  # package to sit beside this one, where the import finds it. The copy is not
+  # tracked. Never edit it; change the pin instead.
   - aop_emod_linkml
 
 classes:

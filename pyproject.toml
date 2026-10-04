@@ -1,0 +1,18 @@
+[project]
+name = "enviromech"
+version = "0.0.0"
+description = "Environmental health mechanisms from AI-curated literature sources"
+requires-python = ">=3.11"
+dependencies = [
+  "linkml>=1.9.3",
+  "linkml-reference-validator>=0.2.1",
+  # The EMOD schema that enviromech.yaml imports. Pinned to a commit; change the
+  # commit here to take a newer linkml-aop, then run `just install`.
+  # df924b2 is the head of linkml-aop PR #10 (optional ids on term classes);
+  # repin to main once that PR is merged.
+  "linkml_aop @ git+https://github.com/EHS-Data-Standards/linkml-aop@df924b2677603c8f4384bf1053a6e4752fd7244e",
+]
+
+# There is no enviromech Python package yet, only the schema and the records.
+[tool.uv]
+package = false
