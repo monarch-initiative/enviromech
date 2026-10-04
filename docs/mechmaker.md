@@ -10,6 +10,72 @@ Each clash below says what was observed, proposes ways to resolve it, and ends w
 question for review. Answers belong in the
 [decision register](explanation/design-decisions.md) once made.
 
+## The template is integrated (2026-10-03)
+
+The mechmaker template has been run onto this repository and merged with what was
+here. `just qc` passes 10 gates and `just qc-full` 13, on macOS. The sections below
+this one are the earlier investigation; where they disagree with this section, this
+section is current.
+
+**What the template added.** The Python package under `src/enviromech/` (validation,
+evidence, terms, history, reports, exports, the record browser, the docs build), the
+vendored `mech_shared.yaml` and `history.yaml`, `tests/`, `conf/`, `cache/`,
+`history/`, `curation/`, `registry/`, the curation skills under `.claude/skills/`,
+the `.github/` workflows (QC, the weekly sweep, the docs site, the comment guard),
+`AGENTS.md`, `CONTRIBUTING.md`, `LICENSE-data.md` (CC BY 4.0), and `docs/DOMAIN.md`,
+`docs/CURATION.md` and `docs/WORKFLOWS.md`.
+
+**What was merged by hand.** Nine files existed on both sides.
+
+| File | Result |
+|---|---|
+| `README.md`, `docs/index.md`, `LICENSE` | EnviroMech's kept |
+| `src/enviromech/schema/enviromech.yaml` | The template's schema, with the EMOD import, EnviroMech's fields on `ObservationRecord`, and the Key Event, Causal Agent and aggregation classes added. The template's `Term`, `EvidenceItem` and status enums replace EnviroMech's copies |
+| `CLAUDE.md` | The template's, with EnviroMech's sections on the decision register, EMOD, ids and documentation added |
+| `justfile` | The template's, plus `emod-schema`, `validate-key-events` and `check-ids` |
+| `pyproject.toml` | The template's, plus the pinned linkml-aop dependency |
+| `mkdocs.yml`, `.gitignore` | The template's, plus EnviroMech's pages and ignore rules |
+
+**What changed in the records.** Each Observation has a short `name`, with its sentence
+moved to `description`, a `creation_date` and a `curation_history`. The files are named
+after the name, as the template requires. `evidence` is required: an Observation with no source is not
+recorded.
+
+**Where EnviroMech differs from the template.**
+
+- **Two record kinds.** The tooling covers Observations. Key Events are validated
+  against the schema by `just validate-key-events`, added to `just qc`, counted by
+  `just report`, and given pages in the record browser, which lists both kinds; these
+  are changes to EnviroMech's copy of `report.py`, `render.py`, `docs.py` and the
+  browser's front-page template. The rest is
+  [issue #4](https://github.com/monarch-initiative/enviromech/issues/4).
+- **Exports are YAML and JSON only.** RDF fails on EMOD's integer identifiers and the
+  SQL-based formats do not find the tables they expect for EMOD's nested classes.
+  Three tests in `tests/test_export.py` are marked as expected failures for this.
+- **`just qc` has two extra gates:** Key Event schema validation and the Observation
+  and Assay id check. It lacks the template's "site is current" gate, because
+  `pages/` is not committed here; the docs build renders the browser from the records.
+- **`just install`** also copies the EMOD schema out of the installed linkml-aop.
+
+**Two mechmaker bugs were fixed on the way,** on the `docs-pages-by-kind` branch of
+mechmaker, not yet pushed. Both stopped a Mech passing its own checks on macOS: schema
+pages whose names differ only by case overwrote each other, and two recipes used a
+bash 4 option that macOS's bash 3.2 lacks. `.copier-answers.yml` records the local
+commit `0.1.1-5-gf1ffe9a`; `just update-template` will not work until that branch is on
+GitHub.
+
+**The earlier questions.** Q1, Q2 and Q6 are moot: the plain import works and the
+importer that objected is not used. Q5 and Q8 are settled by what was built. Q4 and Q7
+are answered by limiting the exports. Still open:
+
+- **Q3.** EMOD's term fields (`source_id`, `term`) and the `Term` objects on
+  `causal_agent` and `phenotype_term` are not checked against any ontology. The
+  template's descriptor slots (`chemical_entities`, `phenotypes`, `diseases` and the
+  rest) are checked, and are on the record but unused.
+- **Q9 to Q11.** The proposals for linkml-aop and the role of SOMA.
+- `docs/DOMAIN.md` and `docs/CURATION.md` are the template's starting text and need
+  writing for EnviroMech.
+
 ## How the clashes were found
 
 A scratch Mech was generated from mechmaker at `0.1.1-4-g83c34c9` with EnviroMech's
