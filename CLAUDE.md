@@ -34,29 +34,41 @@ division of work: a class that earns a place in EMOD moves to linkml-aop; a clas
 specific to deriving pathways from external knowledge bases stays here. Changes to the
 EMOD classes themselves are made in linkml-aop, never by overriding them here.
 
-The import resolves against `src/enviromech/schema/aop_emod_linkml.yaml`, a vendored,
-unchanged copy of the linkml-aop file. Never edit it; to update it, replace the file and
-the commit and SHA-256 recorded in [`docs/mechmaker.md`](docs/mechmaker.md) together.
+linkml-aop is a dependency, pinned to a commit in `pyproject.toml`. `just install`
+installs it and copies its `aop_emod_linkml.yaml` to
+`src/enviromech/schema/aop_emod_linkml.yaml`, where the import finds it. That copy is
+not tracked and is never edited; to take a newer linkml-aop, change the commit in
+`pyproject.toml` and run `just install` again.
 
 Records are one YAML file each: Key Events under `data/key_events/` (class
 `KeyEventRecord`) and Observations under `data/observations/` (class
 `ObservationRecord`). A Key Event's file holds its `KeyEventAggregation` section, when
-it has one. Validate with linkml and linkml-reference-validator installed:
+it has one. The commands need [uv](https://docs.astral.sh/uv/) and
+[just](https://just.systems/):
 
 ```bash
-linkml-validate -s src/enviromech/schema/enviromech.yaml -C KeyEventRecord data/key_events/*.yaml
-linkml-validate -s src/enviromech/schema/enviromech.yaml -C ObservationRecord data/observations/*.yaml
-linkml-reference-validator validate data data/observations/*.yaml \
-  -s src/enviromech/schema/enviromech.yaml -t ObservationRecord --config .linkml-reference-validator.yaml
+just install              # once, and after changing the linkml-aop pin
+just validate             # every record against the schema
+just check-ids            # the Observation and Assay ids EnviroMech assigns
+just validate-references  # every evidence snippet against its cached source
+just qc                   # all three; what a change must pass
 ```
 
-The last command checks every evidence snippet word for word against the cited source,
+`just validate-references` checks every evidence snippet word for word against the cited source,
 cached under `references_cache/`. Read a source from the cache before quoting it; never
-write a snippet from memory. In EMOD objects, a negative `id` is a local placeholder for
-a database key that is not known; AOP-Wiki ids and the ids of its enumerated lookups
-are real. The ids for the levels of biological organization (1 Molecular to 6
-Population) are kept in `aop_wiki_cli`, in `src/aop_wiki_cli/database_ids.py`; read them
-from there.
+write a snippet from memory. Terms, event components and levels of biological organization carry no `id`:
+linkml-aop makes it optional on those classes, and the term itself identifies them.
+Never invent one. A Key Event's `id` under `event:` is its AOP-Wiki id.
+
+Observations and Assays keep a required integer `id`, because other EMOD classes refer
+to them by it. EnviroMech creates its own Observations and Assays, so it assigns these
+ids itself, as positive integers. An Observation's is the number in its record id
+(`enviromech:obs-0003` has `observation.id: 3`). An Assay's must be unique among
+Assays; when two Observations use the same Assay they give it the same id. These are
+EnviroMech's numbers, not database ids. `just check-ids` enforces both rules.
+
+The database ids for levels of biological organization and for biological actions are
+kept for reference in `aop_wiki_cli`, in `src/aop_wiki_cli/database_ids.py`.
 
 ## Skills
 

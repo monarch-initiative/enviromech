@@ -115,7 +115,9 @@ typed, source-anchored evidence.
   `LevelOfBiologicalOrganization`, `BiologicalProcess`, `BiologicalObject` and
   `BiologicalAction`, carries the table's integer primary key as a required identifier.
   A hand-written record has to supply those integers, and has no way to know the ones the
-  EMOD database assigned. Until this is settled, a record writes a negative integer wherever
-  the database key is not known (adopted 2026-10-03): a negative id cannot collide with a
-  real row and is recognisable as a placeholder. AOP-Wiki ids and the ids of its
-  enumerated lookups, which trace to the AOP-Wiki production database, are real.
+  EMOD database assigned. Settled for EnviroMech's records 2026-10-03: linkml-aop PR #10 makes
+  `id` optional on the term lookup and event component classes, and records leave it
+  out there. `Observation` and `Assay` keep a required id, because other EMOD classes
+  refer to them by it. EnviroMech creates its own Observations and Assays, so it assigns
+  those ids itself, as positive integers; they are EnviroMech's numbers, not database
+  ids.

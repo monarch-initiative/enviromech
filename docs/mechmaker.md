@@ -288,10 +288,12 @@ Draft Key Event and Observation records for AOP 587, *Inhibition of the mitochon
 complex III of nigro-striatal neurons leads to parkinsonian motor deficits*, written
 before the mechmaker tooling is in place. All are `DRAFT`; none has been reviewed.
 
-**Schema.** `enviromech.yaml` now imports a vendored copy of the EMOD schema,
-`src/enviromech/schema/aop_emod_linkml.yaml`, in place of the sibling checkout:
-linkml-aop `main` at commit `204338ff9f4f` (2026-09-24), SHA-256
-`d3c188f12073ed744d39e8b25f7a9db08783ca23b3a1518e1528682bbaf08a30`. It adds
+**Schema.** `enviromech.yaml` imports the EMOD schema from linkml-aop, which is a
+dependency pinned to a commit in `pyproject.toml`. `just install` copies the schema out
+of the installed package to where the import finds it. It was first a sibling checkout,
+then for a few hours a vendored copy; neither is used now. The pin is the head of
+linkml-aop PR #10, which makes `id` optional on the term lookup and event component
+classes, and should move to `main` once that PR is merged. It adds
 `KeyEventRecord`, `KeyEventScreening`, `ObservationRecord`, `CausalAgent`, `Term` and
 `EvidenceItem`. `Term` and `EvidenceItem` have the same shape as mechmaker's, so
 adopting mechmaker later replaces them without changing records.
@@ -326,8 +328,10 @@ linkml-reference-validator against the cached source.
 
 **Questions these records raise.**
 
-- **Q12. Placeholder ids. Answered 2026-10-03:** a negative integer wherever the
-  database key is not known, until Q4 is settled. Recorded in the decision register.
+- **Q12. Placeholder ids. Answered 2026-10-03, then superseded the same day:** negative
+  integers were used at first. linkml-aop PR #10 then made `id` optional on the term
+  and event component classes, and records leave it out there. Observations and Assays
+  keep a required id; EnviroMech assigns those itself, as positive integers.
 - **Q13. One direction for the link. Answered 2026-10-03:** the link is written on the
   Observation only, in EMOD's own `Observation.events`. The list of Observations for a
   Key Event is generated, so the two cannot disagree. This replaces the earlier layout,
@@ -335,11 +339,15 @@ linkml-reference-validator against the cached source.
 - **Q14. `KeyEventAggregation` inside the Key Event file. Answered 2026-10-03:** done.
   The class lost its own `id` and `event_id` and is now the `aggregation` section of a
   `KeyEventRecord`.
-- **Q15. Sources for OBS-0002.** The graphic does not name its systematic reviews. The
-  two cited were found by a PubMed search and should be replaced if others were meant.
-- **Q16. OBS-0001's quote is partial.** The abstract reports the association for 53
-  pesticides without naming them. The sentence naming trifluralin is in the full text
-  but cannot be matched exactly in the cached PDF text. See the file's notes.
+- **Q15. Sources for OBS-0002. Answered 2026-10-03:** keep both meta-analyses. The
+  graphic does not name its systematic reviews; these two were found by a PubMed
+  search.
+- **Q16. OBS-0001's quote is partial. Answered 2026-10-03:** keep it as a partial
+  draft. Since then the reason has gone: linkml-reference-validator 0.3.0 caches the
+  paper's full text from PMC, and the sentence naming trifluralin now passes the check.
+  It is added as a second evidence item; the abstract quote stays, marked PARTIAL.
+- **OBS-0004. Answered 2026-10-03:** keep it, although it is not in the graphic. It is
+  the only Observation so far that bears on KE 177.
 - **Q17. The pathway fit.** None of these Observations tests complex III inhibition.
   They support the later Key Events, which AOP 587 shares with AOP 3 and others, not
   the step that makes AOP 587 distinct.
