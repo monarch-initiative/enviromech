@@ -34,11 +34,29 @@ division of work: a class that earns a place in EMOD moves to linkml-aop; a clas
 specific to deriving pathways from external knowledge bases stays here. Changes to the
 EMOD classes themselves are made in linkml-aop, never by overriding them here.
 
-The import resolves against a sibling `linkml-aop` checkout. That is a placeholder for a
-pinned dependency, not a design choice; the schema file says so at the top.
+The import resolves against `src/enviromech/schema/aop_emod_linkml.yaml`, a vendored,
+unchanged copy of the linkml-aop file. Never edit it; to update it, replace the file and
+the commit and SHA-256 recorded in [`docs/mechmaker.md`](docs/mechmaker.md) together.
 
-Validate the example records with
-`linkml-validate -s src/enviromech/schema/enviromech.yaml -C KeyEventAggregation src/data/examples/*.yaml`.
+Records are one YAML file each: Key Events under `data/key_events/` (class
+`KeyEventRecord`) and Observations under `data/observations/` (class
+`ObservationRecord`). A Key Event's file holds its `KeyEventAggregation` section, when
+it has one. Validate with linkml and linkml-reference-validator installed:
+
+```bash
+linkml-validate -s src/enviromech/schema/enviromech.yaml -C KeyEventRecord data/key_events/*.yaml
+linkml-validate -s src/enviromech/schema/enviromech.yaml -C ObservationRecord data/observations/*.yaml
+linkml-reference-validator validate data data/observations/*.yaml \
+  -s src/enviromech/schema/enviromech.yaml -t ObservationRecord --config .linkml-reference-validator.yaml
+```
+
+The last command checks every evidence snippet word for word against the cited source,
+cached under `references_cache/`. Read a source from the cache before quoting it; never
+write a snippet from memory. In EMOD objects, a negative `id` is a local placeholder for
+a database key that is not known; AOP-Wiki ids and the ids of its enumerated lookups
+are real. The ids for the levels of biological organization (1 Molecular to 6
+Population) are kept in `aop_wiki_cli`, in `src/aop_wiki_cli/database_ids.py`; read them
+from there.
 
 ## Skills
 

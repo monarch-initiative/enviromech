@@ -115,6 +115,7 @@ typed, source-anchored evidence.
   `LevelOfBiologicalOrganization`, `BiologicalProcess`, `BiologicalObject` and
   `BiologicalAction`, carries the table's integer primary key as a required identifier.
   A hand-written record has to supply those integers, and has no way to know the ones the
-  EMOD database assigned. The two `KeyEventAggregation` examples in `src/data/examples/`
-  (2026-09-22) mix real AOP-Wiki ids with invented local placeholders for this reason, and
-  would point at the wrong rows if loaded into EMOD.
+  EMOD database assigned. Until this is settled, a record writes a negative integer wherever
+  the database key is not known (adopted 2026-10-03): a negative id cannot collide with a
+  real row and is recognisable as a placeholder. AOP-Wiki ids and the ids of its
+  enumerated lookups, which trace to the AOP-Wiki production database, are real.

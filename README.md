@@ -12,7 +12,8 @@ documentation site's [home page](docs/index.md).
 
 ## Status
 
-Early setup. The repository currently holds documentation only; no curated content yet.
+Early setup. The first draft records, the Key Events of AOP 587 and four Observations
+that bear on them, are under `data/`. None has been reviewed by a person.
 
 ## Schema
 
