@@ -357,9 +357,11 @@ before the mechmaker tooling is in place. All are `DRAFT`; none has been reviewe
 **Schema.** `enviromech.yaml` imports the EMOD schema from linkml-aop, which is a
 dependency pinned to a commit in `pyproject.toml`. `just install` copies the schema out
 of the installed package to where the import finds it. It was first a sibling checkout,
-then for a few hours a vendored copy; neither is used now. The pin is the head of
-linkml-aop PR #10, which makes `id` optional on the term lookup and event component
-classes, and should move to `main` once that PR is merged. It adds
+then for a few hours a vendored copy; neither is used now. The pin is a commit on
+linkml-aop `main` from PR #10, where `id` is optional on the term lookup and event
+component classes. The commit after it makes `id` required on `EventComponent` again;
+the pin moves there once the Key Event records carry event component ids
+([issue #5](https://github.com/monarch-initiative/enviromech/issues/5)). It adds
 `KeyEventRecord`, `KeyEventScreening`, `ObservationRecord`, `CausalAgent`, `Term` and
 `EvidenceItem`. `Term` and `EvidenceItem` have the same shape as mechmaker's, so
 adopting mechmaker later replaces them without changing records.

@@ -25,8 +25,10 @@ dependencies = [
     "jinja2>=3.1",
     # The EMOD schema that enviromech.yaml imports. Pinned to a commit; change the
     # commit here to take a newer linkml-aop, then run `just install`.
-    # df924b2 is the head of linkml-aop PR #10 (optional ids on term classes);
-    # repin to main once that PR is merged.
+    # df924b2 is on linkml-aop main: PR #10, where id is optional on the term
+    # classes and on EventComponent. The next commit, b86b3b6, makes it required
+    # on EventComponent again; the pin moves there once the Key Event records
+    # carry event component ids (issue #5).
     "linkml_aop @ git+https://github.com/EHS-Data-Standards/linkml-aop@df924b2677603c8f4384bf1053a6e4752fd7244e",
 ]
 
