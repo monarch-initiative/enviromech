@@ -1,0 +1,76 @@
+# A schema-shaped example for the tests. It is not a curated record. Its one
+# evidence item is real, because an Observation must have a source: the quote
+# is in the cached copy of the paper. Real records live under data/observations/.
+id: enviromech:example
+name: Example observation
+description: A placeholder that exercises the record structure.
+status: DRAFT
+causal_agent:
+  name: Example agent
+  agent_type: ENVIRONMENTAL_CHEMICAL
+  term:
+    id: CHEBI:24431
+    label: "chemical entity"
+asserted_relation: exposure correlated with
+observation:
+  id: 1
+  biological_action_id:
+    term: increased
+  phenotype: Example phenotype
+  assay_id:
+    id: 1
+    title: Example method
+biological_processes:
+  - preferred_term: "biological_process"
+    term:
+      id: GO:0008150
+      label: "biological_process"
+cell_types:
+  - preferred_term: "cell"
+    term:
+      id: CL:0000000
+      label: "cell"
+anatomical_entities:
+  - preferred_term: "anatomical entity"
+    term:
+      id: UBERON:0001062
+      label: "anatomical entity"
+chemical_entities:
+  - preferred_term: "chemical entity"
+    term:
+      id: CHEBI:24431
+      label: "chemical entity"
+phenotypes:
+  - preferred_term: "Phenotypic abnormality"
+    term:
+      id: HP:0000118
+      label: "Phenotypic abnormality"
+diseases:
+  - preferred_term: "disease"
+    term:
+      id: MONDO:0000001
+      label: "disease"
+organisms:
+  - preferred_term: "root"
+    term:
+      id: NCBITaxon:1
+      label: "root"
+evidence:
+  - reference: PMID:37193692
+    reference_title: A pesticide and iPSC dopaminergic neuron screen identifies and classifies Parkinson-relevant pesticides.
+    supports: SUPPORT
+    evidence_source: IN_VITRO
+    snippet: We find that 10 pesticides are directly toxic to these neurons.
+    explanation: A placeholder that exercises the evidence structure.
+discussions:
+  - discussion_id: example-gap-1
+    prompt: Which sources should seed this record?
+    kind: CURATION_TODO
+    status: OPEN
+creation_date: 2026-01-01
+curation_history:
+  - timestamp: "2026-01-01T00:00:00Z"
+    curator: mechmaker
+    llm_assisted: false
+    action: CREATE
+    description: Written by the template.

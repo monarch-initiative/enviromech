@@ -1,0 +1,59 @@
+# Changes here will be overwritten by Copier. Do not edit by hand.
+_commit: 0.1.1-5-gf1ffe9a
+_src_path: https://github.com/monarch-initiative/mechmaker
+author_email: ginniehench@gmail.com
+author_name: Ginnie Hench
+author_orcid: ''
+causal_graphs: false
+code_license: BSD-3-Clause
+collection: monarch
+copyright_year: '2026'
+data_license: CC-BY-4.0
+deep_research: false
+description: EnviroMech records how exposures to chemicals and other hazards relate
+    to adverse effects, from associations with no known mechanism to mature Adverse
+    Outcome Pathways.
+domains:
+- biomedical
+- environment
+extra_ontologies: []
+full_title: Environmental Health Mechanisms Knowledge Base
+github_org: monarch-initiative
+github_user: gingin77
+identity_prefix: ''
+include_claude_hook: true
+include_site: true
+load_targets: []
+mech_name: EnviroMech
+mech_slug: enviromech
+ontologies:
+- GO_BP
+- CL
+- UBERON
+- CHEBI
+- HP
+- MONDO
+- NCBITaxon
+output_formats:
+- yaml
+- json
+- jsonld
+- ttl
+- sqlite
+- sql
+- csv
+python_min: '3.11'
+record_class: ObservationRecord
+record_noun: observation
+records_dir: data/observations
+repo_name: enviromech
+site_accent: indigo
+site_palette: indigo
+site_theme: auto
+tabular_layout: per_class
+taxon_scope: ''
+term_backend: ols
+workflows:
+- sweep
+- docs
+- comment-guard
