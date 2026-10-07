@@ -31,7 +31,7 @@ OAK_CONFIG = REPO_ROOT / "conf" / "oak_config.yaml"
 
 def adapter_for(prefix: str) -> str:
     """The full adapter string for a prefix, with the per-prefix shorthands filled in."""
-    adapters = (yaml.safe_load(OAK_CONFIG.read_text()) or {}).get("ontology_adapters") or {}
+    adapters = (yaml.safe_load(OAK_CONFIG.read_text(encoding="utf-8")) or {}).get("ontology_adapters") or {}
     if prefix not in adapters:
         raise SystemExit(f"{prefix} is not in conf/oak_config.yaml. Add it, with its adapter, "
                          "or its terms are never checked.")
@@ -83,7 +83,8 @@ def identity_rule() -> tuple[str, bool, bool] | None:
     """(root, is_direct, include_self) of the identity enum, or None if records mint their ids."""
     from .paths import SCHEMA_PATH
 
-    enum = ((yaml.safe_load(SCHEMA_PATH.read_text()) or {}).get("enums") or {}).get(IDENTITY_ENUM) or {}
+    schema = yaml.safe_load(SCHEMA_PATH.read_text(encoding="utf-8")) or {}
+    enum = (schema.get("enums") or {}).get(IDENTITY_ENUM) or {}
     query = enum.get("reachable_from") or {}
     roots = query.get("source_nodes") or []
     if len(roots) != 1:
@@ -100,7 +101,10 @@ def check_identity(paths: list) -> int:
         return 0
     root, direct, include_self = rule
     if not direct and include_self:
-        print(f"{IDENTITY_ENUM} admits {root} and everything under it; the term check covers that.")
+        # validate.py requires record_term.id to equal an id with the root's
+        # prefix, and the term check holds record_term to the enum.
+        print(f"{IDENTITY_ENUM} admits {root} and everything under it; the term check covers that "
+              "through record_term, which must name the record's id.")
         return 0
     prefix = root.split(":", 1)[0] + ":"
     bad = checked = 0

@@ -1,7 +1,7 @@
 # The EnviroMech domain model
 
 This file is the design record for what EnviroMech knows. mechmaker
-wrote the skeleton. The `design-mech-schema` skill fills it in, and every
+wrote the skeleton. mechmaker's `design-mech-schema` skill fills it in, and every
 later schema change updates it. Sections marked TODO are not done.
 
 ## What a record is

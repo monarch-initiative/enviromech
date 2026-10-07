@@ -6,8 +6,10 @@ SLUG = "enviromech"
 MECH_NAME = "EnviroMech"
 RECORD_CLASS = "ObservationRecord"
 RECORD_NOUN = "observation"
-# Whether records are keyed to an ontology term in `record_term`.
-HAS_RECORD_TERM = False
+# The prefix of the ontology that keys records, or "" when every id is minted.
+# A record whose id has it names the same term in `record_term`.
+IDENTITY_PREFIX = ""
+HAS_RECORD_TERM = bool(IDENTITY_PREFIX)
 REPO_URL = "https://github.com/monarch-initiative/enviromech"
 
 PACKAGE_DIR = Path(__file__).resolve().parent

@@ -49,9 +49,6 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     steps = list(OFFLINE)
-    # mechmaker's "site is current" gate compares a committed pages/ with the
-    # records. EnviroMech does not commit pages/; the docs build below renders
-    # the browser from the records, so a browser that cannot render fails there.
     steps.append(("site settings", ["just", "site-check"]))
     if (PACKAGE_DIR / "research.py").exists():
         steps.append(("research prompt", ["just", "research-check"]))

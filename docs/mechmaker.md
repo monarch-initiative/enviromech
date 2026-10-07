@@ -53,16 +53,15 @@ recorded.
   SQL-based formats do not find the tables they expect for EMOD's nested classes.
   Three tests in `tests/test_export.py` are marked as expected failures for this.
 - **`just qc` has two extra gates:** Key Event schema validation and the Observation
-  and Assay id check. It lacks the template's "site is current" gate, because
-  `pages/` is not committed here; the docs build renders the browser from the records.
+  and Assay id check.
 - **`just install`** also copies the EMOD schema out of the installed linkml-aop.
 
-**Two mechmaker bugs were fixed on the way,** on the `docs-pages-by-kind` branch of
-mechmaker, not yet pushed. Both stopped a Mech passing its own checks on macOS: schema
-pages whose names differ only by case overwrote each other, and two recipes used a
-bash 4 option that macOS's bash 3.2 lacks. `.copier-answers.yml` records the local
-commit `0.1.1-5-gf1ffe9a`; `just update-template` will not work until that branch is on
-GitHub.
+**Two mechmaker bugs were found on the way,** both stopping a Mech from passing its own
+checks on macOS: schema pages whose names differ only by case overwrote each other, and
+two recipes used a bash 4 option that macOS's bash 3.2 lacks. Fixed in mechmaker
+([issue #38](https://github.com/monarch-initiative/mechmaker/issues/38)) and released in
+0.1.2. EnviroMech was updated to mechmaker 0.1.3 on 2026-10-07 with `just
+update-template`; `.copier-answers.yml` records that version.
 
 **The earlier questions.** Q1, Q2 and Q6 are moot: the plain import works and the
 importer that objected is not used. Q5 and Q8 are settled by what was built. Q4 and Q7

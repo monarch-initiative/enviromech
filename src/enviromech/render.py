@@ -1,10 +1,9 @@
 """Render the static record browser into pages/.
 
-    python -m <slug>.render           # write pages/
-    python -m <slug>.render --check   # fail if pages/ is stale
+    python -m <slug>.render           # write pages/, to look at locally
 
-Output is deterministic. EnviroMech does not commit pages/; the docs build
-renders the browser again for the published site.
+pages/ is not committed. `just docs-build` renders the same pages into the
+site under /records/, so the published browser always matches the records.
 Edit the templates in src/<slug>/templates/ or the layout rules below, never
 the files in pages/. Colors, title, columns and hidden sections come from
 conf/site.yaml.
@@ -418,11 +417,15 @@ def build() -> dict[Path, str]:
     records = []
     for path in iter_records():
         data = load(path) or {}
+        if not isinstance(data, dict):  # not a record; just validate reports it
+            continue
         records.append({"stem": path.stem, "data": {"kind": "Observation", **data}})
     # Key Events are a second record kind (issue #4). A Key Event has no name
     # of its own: its page and its row are titled by the Event's title.
     for path in iter_records(KEY_EVENTS_DIR):
         data = load(path) or {}
+        if not isinstance(data, dict):
+            continue
         title = (data.get("event") or {}).get("title") or path.stem
         records.append({"stem": path.stem, "data": {"kind": "Key Event", "name": title, **data}})
     cross_link(records)
@@ -449,28 +452,14 @@ def build() -> dict[Path, str]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--check", action="store_true")
-    args = parser.parse_args(argv)
+    parser.parse_args(argv)
     wanted = build()
     existing = set(PAGES_DIR.rglob("*.html")) | set(PAGES_DIR.rglob("*.css")) if PAGES_DIR.exists() else set()
-    if args.check:
-        if not PAGES_DIR.exists() and not iter_records() and not iter_records(KEY_EVENTS_DIR):
-            print("No records and no pages/ yet; nothing to check.")
-            return 0
-        stale = [p for p, text in wanted.items() if not p.exists() or p.read_text() != text]
-        extra = sorted(existing - set(wanted))
-        for p in stale + extra:
-            print(f"STALE {p.relative_to(REPO_ROOT)}")
-        if stale or extra:
-            print("pages/ is out of date. Run `just render` and commit the result.")
-            return 1
-        print(f"pages/ is current ({len(wanted)} files).")
-        return 0
     for p in existing - set(wanted):
         p.unlink()
     for p, text in wanted.items():
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(text)
+        p.write_text(text, encoding="utf-8")
     print(f"Wrote {len(wanted)} files to {PAGES_DIR.relative_to(REPO_ROOT)}/.")
     return 0
 

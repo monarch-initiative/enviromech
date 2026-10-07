@@ -231,8 +231,8 @@ site-check:
 
 # ---------------------------------------------------------------- site
 
-# Render the static browser into pages/, to look at locally. pages/ is not
-# committed; the docs build renders the browser for the published site.
+# Render the record browser into pages/ to look at locally. Not committed:
+# `just docs-build` renders it fresh into the site.
 render:
     uv run python -m {{slug}}.render
 
