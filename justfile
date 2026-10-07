@@ -68,6 +68,12 @@ validate-key-events:
 check-ids:
     uv run python scripts/check_ids.py
 
+# The Key Event sequence and KER weight of evidence of named AOPs, from an
+# AOP-Wiki XML export. Ratings are the export's structured values, never prose.
+# AOP_WIKI_XML points at an export; aop_wiki_cli is what downloads one.
+aop-evidence AOPS *ARGS:
+    uv run python scripts/aop_evidence.py --xml "${AOP_WIKI_XML:?set AOP_WIKI_XML to an AOP-Wiki XML export}" --aops {{AOPS}} {{ARGS}}
+
 # Term validation of every record (network on first run).
 validate-terms-all:
     #!/usr/bin/env bash
