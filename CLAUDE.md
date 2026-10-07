@@ -55,6 +55,8 @@ just qc-full           # qc plus terms and quotes for every record (network)
 just validate FILE     # closed schema, ontology terms, verbatim quotes (an Observation)
 just validate-key-events   # closed schema, every Key Event record
 just check-ids         # the Observation and Assay ids EnviroMech assigns
+just aop-evidence 305,307   # KE sequence and KER weight of evidence of named AOPs
+                       # (AOP_WIKI_XML points at an AOP-Wiki XML export)
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)
 just new-history ...   # scaffold a history record (dry-run unless --apply)
@@ -168,6 +170,7 @@ Project skills live in `.claude/skills/`. Use them.
 | `github-workflows` | turn on, configure, adapt or debug the GitHub workflows |
 | `site-design` | change how the documentation site and record browser look |
 | `screen-aop-key-event` | screen an AOP-Wiki Key Event's level before its properties are used |
+| `aop-evidence` | collect an AOP's Key Event sequence and its KER weight of evidence |
 
 
 ## Documentation
