@@ -123,9 +123,9 @@ and it points at a gap in the level definition rather than at a bad Event.
 Record the outcome wherever the pathway work lives, with the snapshot date and
 the definitions digest. A screened Event should not need screening twice.
 
-**When a screen finds an error in AOP-Wiki's own record**, it belongs in the
-inventory of AOP-Wiki data errors that dismech issue
-[#10773](https://github.com/monarch-initiative/dismech/issues/10773) collects.
+**When a screen finds an error in AOP-Wiki's own record**, add it to EnviroMech's
+inventory of AOP-Wiki data errors, `docs/aop-wiki-data-errors.md`, as well as to the
+Key Event's record.
 
 ## What this does not do
 

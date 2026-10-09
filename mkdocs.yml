@@ -67,6 +67,7 @@ nav:
   - Workflows: WORKFLOWS.md
   - Explanation:
       - Design Decisions: explanation/design-decisions.md
+  - AOP-Wiki Data Errors: aop-wiki-data-errors.md
   - Working Notes & Reports:
       - Adopting mechmaker (2026-10): mechmaker.md
       - linkml-aop Schema Update (2026-09): linkml_aop_schema_update_plan.md
