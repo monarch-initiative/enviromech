@@ -353,6 +353,11 @@ Draft Key Event and Observation records for AOP 587, *Inhibition of the mitochon
 complex III of nigro-striatal neurons leads to parkinsonian motor deficits*, written
 before the mechmaker tooling is in place. All are `DRAFT`; none has been reviewed.
 
+They follow a graphic of AOP 587 annotated with observations from pesticide exposure
+data and dopaminergic iPSC studies,
+[parkinsons_aop_587_use_case_graphic](assets/aop587_graphic.jpeg). "The graphic" below
+means this image.
+
 **Schema.** `enviromech.yaml` imports the EMOD schema from linkml-aop, which is a
 dependency pinned to a commit in `pyproject.toml`. `just install` copies the schema out
 of the installed package to where the import finds it. It was first a sibling checkout,
