@@ -1,0 +1,27 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: crosswalk
+  path: scripts/crosswalk.py
+session:
+  id: 2026-10-31T233046Z-claude-code-0979cb
+  timestamp: '2026-10-31T23:30:46Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: CREATE
+  outcome: changed
+  summary: Add just crosswalk, which runs dismech's AOP crosswalk for an AOP record
+  details: Added scripts/crosswalk.py and the just crosswalk recipe. They run scripts/aop_dismech_crosswalk.py
+    (monarch-initiative/dismech#16232) in a dismech checkout's own environment, against the snapshot the
+    AOP record names, and write build/crosswalk/AOP-<id>.json, with the dismech commit, snapshot and command
+    recorded, and AOP-<id>.txt. A checkout without the script, or with uncommitted kb/ changes, is refused.
+    Paths come from DISMECH_ROOT and AOP_WIKI_CLI_DATA_DIR. Not in just qc, since CI has neither checkout.
+    Tests replace the dismech run. Run for AOP 40 against Contact_Dermatitis with the PR's branch at 5d8173f1c36.
+    Also added docs/reports/dismech-crosswalk-integration-2026-10-31.md, the plan for the remaining steps.

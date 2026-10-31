@@ -82,6 +82,12 @@ check-aops:
 key-event-from-snapshot events_json ke_id:
     uv run python scripts/key_event_from_snapshot.py "{{events_json}}" "{{ke_id}}"
 
+# Run dismech's AOP crosswalk for an AOP record against dismech entries, writing
+# build/crosswalk/AOP-<id>.json and .txt: `just crosswalk 40 Contact_Dermatitis`.
+# Uses $DISMECH_ROOT and $AOP_WIKI_CLI_DATA_DIR (default ~/Developer/...). Not in qc.
+crosswalk aop_id +entries:
+    uv run python scripts/crosswalk.py "{{aop_id}}" {{entries}}
+
 # Check the ids EnviroMech assigns: each Observation's and event component's
 # matches its record id, each Assay id names one Assay, and each event component
 # in a Key Event record matches its event component record.
