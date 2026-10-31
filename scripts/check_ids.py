@@ -2,10 +2,18 @@
 
     python scripts/check_ids.py [DIRECTORY [EVENT_COMPONENT_DIRECTORY [KEY_EVENT_DIRECTORY]]]
 
-EnviroMech creates its own Observations and Assays, and assigns ids to the event
-components the AOP-Wiki XML gives none, so it assigns these integer ids itself,
-and nothing else keeps them apart. This checks every Observation record under
-DIRECTORY (default data/observations):
+EnviroMech assigns these ids itself, for two different reasons:
+
+- Observations and Assays exist only in EMOD, not in the production AOP-Wiki,
+  so the AOP-Wiki XML does not contain them, and EMOD has no XML export to take
+  them from. EnviroMech creates its own, and gives them ids.
+- Event components are in the AOP-Wiki XML, but the XML does not give their ids.
+
+Because no outside source assigns these ids, this script is the only check that
+they are well formed and that no two records share one.
+
+Observations and Assays. Every Observation record under DIRECTORY (default
+data/observations) is checked:
 
 - an Observation's id is a positive integer and is the number in its record id
   (enviromech:obs-0003 has observation.id 3), so no two Observations share one;
@@ -15,9 +23,9 @@ DIRECTORY (default data/observations):
 - one Assay has one id: two records that describe an Assay identically give it
   the same id.
 
-and every event component record under EVENT_COMPONENT_DIRECTORY (default
-data/event_components), with the Key Event records under KEY_EVENT_DIRECTORY
-(default data/key_events) that use them:
+Event components. Every event component record under EVENT_COMPONENT_DIRECTORY
+(default data/event_components) is checked, with the Key Event records under
+KEY_EVENT_DIRECTORY (default data/key_events) that use them:
 
 - an event component's id is the number in its record id (enviromech:ec-0001
   has event_component.id 1), so no two share one;
