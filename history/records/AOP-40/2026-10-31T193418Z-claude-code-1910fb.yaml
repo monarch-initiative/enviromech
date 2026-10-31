@@ -2,7 +2,7 @@ history_version: 1
 target:
   kind: record
   slug: AOP-40
-  path: data/observations/AOP-40.yaml
+  path: data/aops/AOP-40.yaml
 session:
   id: 2026-10-31T193418Z-claude-code-1910fb
   timestamp: '2026-10-31T19:34:18Z'
