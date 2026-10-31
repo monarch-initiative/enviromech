@@ -1,0 +1,29 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: key-event-from-snapshot
+  path: scripts/key_event_from_snapshot.py
+session:
+  id: 2026-10-31T205136Z-claude-code-76ff68
+  timestamp: '2026-10-31T20:51:36Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: CREATE
+  outcome: changed
+  summary: Add the script that starts a Key Event record from an aop_wiki_cli events cache
+  details: 'Added scripts/key_event_from_snapshot.py, from the scratch scripts used for the AOP 40 Key
+    Events, with tests and a just key-event-from-snapshot recipe. It prints a record through its Event
+    block: ids, snapshot date read from the cache name, structured properties, event components with ids
+    reused from data/event_components/, and the description and measurement text with the HTML removed.
+    Writing it found that the scratch version lost text: a table row with a paragraph in one cell dropped
+    the cells beside it. The extraction now walks the HTML tree, reads nested tables once and drops HTML
+    comments; checked against every Event in the 2026-10-03 snapshot (1,602, description and measurement
+    fields), every word of the source text is kept and none is repeated. beautifulsoup4 is now a direct
+    dependency.'

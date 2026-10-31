@@ -77,6 +77,11 @@ validate-aops:
 check-aops:
     uv run python scripts/check_aops.py
 
+# Print the start of a Key Event record, through its Event block, from an
+# aop_wiki_cli events cache: `just key-event-from-snapshot CACHE 396 > data/key_events/KE-396.yaml`
+key-event-from-snapshot events_json ke_id:
+    uv run python scripts/key_event_from_snapshot.py "{{events_json}}" "{{ke_id}}"
+
 # Check the ids EnviroMech assigns: each Observation's and event component's
 # matches its record id, each Assay id names one Assay, and each event component
 # in a Key Event record matches its event component record.
