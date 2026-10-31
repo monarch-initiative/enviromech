@@ -235,10 +235,12 @@ classes:
       AOP-Wiki, the Key Events with their role in this AOP, and the Key Event
       Relationships by id.
 
-      The Key Events and Key Event Relationships are named by CURIE, not inlined
-      as in EMOD's Aop.events and Aop.ke_relationships, whose link classes need
-      database ids EnviroMech cannot know and repeat the whole Event. Each Key
-      Event has its own record under data/key_events/. A Key Event Relationship
+      The Key Events and Key Event Relationships are named by CURIE, the ids
+      their records have in EnviroMech, so a name resolves to a page on
+      AOP-Wiki. EMOD's Aop.events and Aop.ke_relationships hold the same links,
+      naming each Event or relationship by its integer AOP-Wiki id (since
+      linkml-aop PR #13); they are left empty here. Each Key Event has its own
+      record under data/key_events/. A Key Event Relationship
       will have its own record, holding its upstream and downstream Events and
       its evidence.
 

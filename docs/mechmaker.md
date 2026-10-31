@@ -272,7 +272,7 @@ EnviroMech will have six entities. Against EMOD as it stands:
 
 | Entity | EMOD today | Gap |
 |---|---|---|
-| Key Event, of three types: MIE, AO, intermediate KE | `Event`. The type is not on the Event; it is `AopToEvent.type`, a free string, so one Event can be an MIE in one AOP and a KE in another | No enum for the type (Q8a) |
+| Key Event, of three types: MIE, AO, intermediate KE | `Event`. The type is not on the Event; it is `AopToEvent.type`, so one Event can be an MIE in one AOP and a KE in another | No enum for the type (Q8a). Closed 2026-10-31: linkml-aop PR #13 made `AopToEvent.type` a `KeyEventTypeEnum` |
 | AOP: a chain of Key Events, with branches and loops, constrained to one MIE and one AO per level of biological organization | `Aop`, with `AopToEvent` and `AopToKeRelationship` | The constraint cannot be written in LinkML; it needs a check script (Q8b) |
 | Key Event Relationship | `KeRelationship` | `biological_plausibility` and `empirical_support` are free-text strings |
 | Observation: evidence for claims supporting a Key Event | `Observation`, linked to Events, Citations, an Assay and a Stressor | No quoted snippet (Q5) |
