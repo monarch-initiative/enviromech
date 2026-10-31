@@ -1,0 +1,15 @@
+# The event component of AOP-Wiki KE 396, Covalent Binding, Protein, as recorded in the
+# 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0007
+event_component:
+  id: 7
+  biological_process_id:
+    source: GO
+    source_id: GO:0005515
+    term: protein binding
+  biological_object_id:
+    source: CHEBI
+    source_id: CHEBI:59739
+    term: electrophilic reagant
+  biological_action_id:
+    term: increased

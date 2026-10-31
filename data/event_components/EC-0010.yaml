@@ -1,0 +1,11 @@
+# One of the two event components of AOP-Wiki KE 398, Activation, Dendritic Cells, as
+# recorded in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0010
+event_component:
+  id: 10
+  biological_process_id:
+    source: GO
+    source_id: GO:0001775
+    term: cell activation
+  biological_action_id:
+    term: increased

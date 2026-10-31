@@ -1,0 +1,15 @@
+# One of the two event components of AOP-Wiki KE 272, Activation/Proliferation, T-cells,
+# as recorded in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0013
+event_component:
+  id: 13
+  biological_process_id:
+    source: GO
+    source_id: GO:0008283
+    term: cell proliferation
+  biological_object_id:
+    source: CL
+    source_id: CL:0000813
+    term: memory T cell
+  biological_action_id:
+    term: increased

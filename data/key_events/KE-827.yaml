@@ -1,0 +1,67 @@
+# AOP-Wiki KE 827, the Adverse Outcome of AOP 40. Structured properties read
+# from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:827
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/827
+event:
+  id: 827
+  title: "sensitisation, skin"
+  short_name: "sensitisation, skin"
+  biological_organization_id:
+    term: Organ
+  definition: >-
+    Skin sensitisation is an immunological process that is described in two phases:
+    the induction of sensitisation and the subsequent elicitation of the immune
+    reaction. A sensitised subject has the capacity to mount a more accelerated
+    secondary response to the same chemical. Upon reaching an unknown threshold
+    number of hapten-specific T cells an individual will be said to be sensitised
+    and will elicit a T cell-mediated eczematous skin reaction (termed allergic
+    contact dermatitis, ACD) at the site of sensitiser re-exposure. Above the
+    threshold, the severity of the adverse effect is assumed to increase
+    proportionally to the dose, so the total dose per area of skin (e.g. μg/cm2) is
+    the critical exposure determinant. In this regard, animal data is consistent
+    with human clinical data [1]. The allergic reaction causes inflammation of the
+    skin manifested by varying degrees of erythema, oedema, and vesiculation. It
+    takes up to one week or more for individuals to develop specific sensitivity to
+    a new allergen following exposure. An individual who never has been sensitised
+    to a substance may develop only a mild dermatitis 2 weeks following the initial
+    exposure but typically develops severe dermatitis within 1-2 days of the second
+    and subsequent exposures [2].
+  measured_or_detected: >-
+    [3] Human sensitisation testing is conducted with the Human Repeat Insult Patch
+    Test (HRIPT), as described by McNamee et al. [4]; [5]. Skin biopsy may help to
+    confirm the diagnosis and exclude other disorders.
+
+    Animal models have been developed to assess the sensitisation potential of
+    chemicals. Adler et al. (2011) have reviewed animal test methods for skin
+    sensitisation [6]. Briefly, among these in vivo assays are the guinea-pig
+    occluded patch test [7]; [8], the Magnusson-Kligman guinea pig maximization test
+    [7]; [9]; [10], and the murine Local Lymph Node Assay [11]; [12]; [13]. Using
+    LLNA data, sensitisers can be grouped into potency groups (e.g. extreme, strong,
+    moderate, weak and non-sensitisers). However, as noted by Basketter et al. [14],
+    the LLNA is not without limitations.
+level_screening:
+  outcome: LEVEL_DISPUTED
+  method: >-
+    event-content-internal-alignment keyword pass, aop_wiki_cli at 0bcc052, against the 2026-10-03 snapshot. The model review (event-level-llm-review) was not run: no Anthropic credentials were available.
+  screened_on: "2026-10-31"
+  note: >-
+    Flagged: AOP-Wiki assigns Organ, and the description has no Organ-level
+    words while it has Individual-level ones (individual, individuals,
+    subject, clinical). The description defines the Event as a state of the
+    person: "an individual will be said to be sensitised" on reaching a
+    threshold number of hapten-specific T cells, and "a sensitised subject has
+    the capacity to mount a more accelerated secondary response". The skin is
+    where the response is later elicited, not where sensitisation happens. The
+    description reads as Individual.
+notes: >-
+  No aggregation. This is the adverse outcome: being sensitised, reached at
+  the end of induction. dismech's Contact_Dermatitis pathograph has no node
+  for it. Its node after Allergen-specific T-cell priming is
+  Re-exposure-driven effector T-cell recruitment, which is elicitation, and
+  dismech records the missing outcome node as the knowledge gap
+  no_node_for_integrated_outcome_prediction. The disease term of the entry,
+  MONDO:0005480 contact dermatitis, is not it either: dermatitis is what a
+  sensitised person develops on re-exposure. So no dismech node or entry
+  corresponds to this Event, and that is the finding.

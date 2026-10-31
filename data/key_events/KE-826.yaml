@@ -1,0 +1,106 @@
+# AOP-Wiki KE 826, a Key Event of AOP 40. Structured properties read from the
+# 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:826
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/826
+event:
+  id: 826
+  title: "Activation, Keratinocytes"
+  short_name: "Activation, Keratinocytes"
+  biological_organization_id:
+    term: Cellular
+  cell_term_id:
+    source: CL
+    term: keratinocyte
+  event_components:
+  - id: 8
+    biological_process_id:
+      source: GO
+      source_id: GO:0032980
+      term: keratinocyte activation
+    biological_action_id:
+      term: increased
+  - id: 9
+    biological_process_id:
+      source: GO
+      source_id: GO:0002534
+      term: cytokine production involved in inflammatory response
+    biological_action_id:
+      term: increased
+  definition: >-
+    Keratinocytes are the major cell type of the epidermis of the skin. They are
+    known to be the primary site of skin metabolism and play an important role in
+    epithelial Dendritic Cells (DC) activation. Uptake of the hapten-protein complex
+    formed during covalent binding by keratinocytes activates multiple events,
+    including the release of pro-inflammatory cytokines (i.e. IL-18) and the
+    induction of cyto-protective cellular pathways. Hapten-protein complexes can
+    activate the inflammasome ([1]; [2]) and in so doing induce IL-18 production.
+    Activation of the pro-inflammatory cytokine IL-18 results from cleavage of
+    inactive IL-18 precursor protein by inflammasome-associated caspase-1 [3].
+    Intracellular Nod-like receptors (NLR) contain sensors for a number of cellular
+    insults. Upon activation, NLRs oligomerise form molecular complexes (i.e.
+    inflammasomes) that are involved in the activation of inflammatory-associated
+    caspases, including caspase-1. Induction of intracellular levels of IL-18
+    exhibit responses upon exposure to hapten-protein complexes which can be used to
+    establish potency [4]. Keratinocyte exposure to allergens also results in
+    induction of antioxidant/electrophile response element ARE/EpRE-dependent
+    pathways [5]. Briefly, reactive chemicals bind to Keap1 (Kelch-like
+    ECH-associates protein 1) that normally inhibit the nuclear erythroid 2-related
+    factor 2 (Nrf2). Released Nrf2 interacts with other nuclear proteins and binds
+    to and activates ARE/EpREdependent pathways, including the cytoprotective genes
+    NADPH-quinone oxidoreductase 1 (NQO1) and glutathione S-transferase (GSHST),
+    among others ([5]; [6]).
+  measured_or_detected: >-
+    Methods that have been previously reviewed and approved by a recognized
+    authority should be included in the Overview section above. All other methods,
+    including those well established in the published literature, should be
+    described here. Consider the following criteria when describing each method: 1.
+    Is the assay fit for purpose? 2. Is the assay directly or indirectly (i.e. a
+    surrogate) related to a key event relevant to the final adverse effect in
+    question? 3. Is the assay repeatable? 4. Is the assay reproducible?
+
+    Investigations have focused on the DNA antioxidant-response elements (ARE), also
+    known as electrophile response element. OECD TG 442D is the validated test
+    guideline for measuring the activation of the antioxidant/electrophile response
+    element (ARE) - dependant pathway [7]). Currently, the only in vitro ARE-Nrf2
+    luciferase test method covered by this Test Guideline is the KeratinoSensTM.
+    This assay uses a luciferase reporter gene under control of a single copy of the
+    ARE element of the human AKR1C2 gene stably inserted into immortalized human
+    keratinocytes (HaCaT cells) [8]. The KeratinoSensTM protocol can be found in the
+    EURL ECVAM Database Service on Alternative Methods to animal experimentation
+    (DB-ALM): Protocol No155 for KeratinoSensTM [9]. The Keap1/Nrf2/ARE/EpRE cell
+    signalling assay is also the mechanistic basis for the work on skin
+    sensitisation chemicals at CeeTox Inc. [10]. This work includes quantitative
+    realtime polymerase chain reaction measurements of the relative abundance of
+    mRNA for eleven selected genes whose expression is controlled by one of the
+    three following pathways: Keap1/Nrf 2/ARE/EpRE, ARNT/AhR/XRE, and Nrf1/MTF/MRE.
+    Interestingly, both Emter et al. [8] and McKim et al. [10] combine their cell
+    signalling results with chemical reactivity data in algorithms, which can be
+    viewed as a first step in using the AOP in quantitative assessment.
+
+    In vitro assays based on IL-18 induction in human keratinocytes (cell line NCTC
+    2544) [11] or IL-8 induction in THP-1 cells [12] have also been developed to
+    identify allergens. Other studies have described chemokines (e.g. CCL2, CCL4)
+    and receptor (e.g. CCR7) (see [13]).
+level_screening:
+  outcome: LEVEL_FITS
+  method: >-
+    event-content-internal-alignment keyword pass, aop_wiki_cli at 0bcc052, against the 2026-10-03 snapshot. The model review (event-level-llm-review) was not run: no Anthropic credentials were available.
+  screened_on: "2026-10-31"
+  note: >-
+    No finding: the description carries words for the Cellular level. It
+    describes changes within keratinocytes: inflammasome activation, IL-18
+    release and induction of Nrf2-dependent cytoprotective genes.
+notes: >-
+  No aggregation. dismech's Contact_Dermatitis entry has one keratinocyte
+  activation node, Keratinocyte activation and proinflammatory mediator
+  release, at CELLULAR, binding GO:0032980 keratinocyte activation and
+  GO:0006954 inflammatory response. Its level and process match the Event, but
+  the node sits in the irritant arm, downstream of Epidermal barrier
+  disruption, and its description is of barrier-injured keratinocytes. This
+  Event is keratinocyte activation caused by hapten-protein complexes, with no
+  barrier injury in the path. dismech records the missing step itself, as the
+  knowledge gap no_node_for_hapten_driven_keratinocyte_activation. Aggregating
+  the irritant node here would assert a cause the node does not carry, so
+  nothing is aggregated until dismech has a sensitization-arm node.

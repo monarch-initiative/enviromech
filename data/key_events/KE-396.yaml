@@ -1,0 +1,166 @@
+# AOP-Wiki KE 396, the Molecular Initiating Event of AOP 40. Structured
+# properties read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:396
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/396
+event:
+  id: 396
+  title: "Covalent Binding, Protein"
+  short_name: "Covalent Binding, Protein"
+  biological_organization_id:
+    term: Molecular
+  cell_term_id:
+    source: CL
+    term: eukaryotic cell
+  event_components:
+  - id: 7
+    biological_process_id:
+      source: GO
+      source_id: GO:0005515
+      term: protein binding
+    biological_object_id:
+      source: CHEBI
+      source_id: CHEBI:59739
+      term: electrophilic reagant
+    biological_action_id:
+      term: increased
+  definition: >-
+    The molecular initiating event is covalent binding of electrophilic chemical
+    species with selected nucleophilic molecular sites of action in proteins
+    generating immunogenic neoantigens through a process termed haptenisation [1];
+    [2]. In contrast to receptor-mediated chemical interactions electrophiles are
+    not specific with regard to their molecular target. Moreover, some chemicals are
+    able to react with several different nucleophilic chemical substituents.
+    Therefore, the identification of the specific target protein is not considered
+    to be critical. Moreover, it is recognized that reactivity measured with a
+    particular nucleophilic target or model nucleophile does not necessarily reflect
+    a specific chemical reaction, as many reactions target the same chemical
+    substituent [3]. For toxicological endpoints for which protein binding is
+    important, the biological nucleophile is assumed to be selected amino acids. The
+    exact extent of adduct formation to each amino acid is dependent on the relative
+    hardness / softness of the electrophile and nucleophile [3]. The inability to
+    identify the exact biological nucleophile is deemed less important than
+    information regarding the electrophile. As noted in the hard-soft acid base
+    theory, a soft electrophile will have a relative preference for a soft
+    nucleophile; while a hard electrophile will have a relative preference for a
+    hard nucleophile. As a consequence, for a series of electrophiles assigned to
+    the same mechanistic cluster within a particular domain, the relative rates of
+    reactivity between each electrophile and any nucleophile will remain the same.
+    In other words, while absolute reactivity may vary with protocols, relative
+    reactivity will usually not vary significantly [3]. Binding experiments with
+    small model nucleophiles reveal that, within a particular reaction within a
+    mechanism, the rate of reactivity varies markedly. Moreover, while some
+    compounds appear to bind exclusively with thiol or amine, others bind to a
+    variety of nucleophiles. However, an electrophile is most likely to exhibit a
+    preference for a particular nucleophile. In more complex systems, nucleophilic
+    target preferences may be masked by other factors. It is self-evident that the
+    number of cysteine and lysine residues within a protein will impact target
+    probability. For example, for serum albumin, a major serum protein, 10% of the
+    amino acid residues are lysine but albumin has very few free cysteine residues.
+    Also, it is self-evident that a target site (e.g. cysteine or lysine) which is
+    located on an exposed surface of a protein is more likely to react with an
+    electrophile than one that is located within a grove or fold of a protein. Such
+    steric constraints are imposed by the primary structure (i.e. amino acid
+    sequence) of the peptide or protein, as well as the secondary and tertiary
+    structure of proteins imposed by disulfide bridges, and folding and coiling.
+    Similarly, the microenvironment of the reaction site (e.g. hydrophilic versus
+    hydrophobic) may affect the probability of a particular reaction. Free cysteine
+    residues are more abundant in proteins in the aqueous cytosol than in the non-
+    aqueous biomembranes [4]. An ancillary event in identifying protein-binding is
+    metabolism and/or abiotic transformation (e.g. autoxidation) [5].
+  measured_or_detected: >-
+    In silico models, including physiological-based pharmacokinetic models and
+    traditional structure activity ones, as well as in vitro and in vivo
+    experimental approaches exist.
+
+    In silico Methods
+
+    It is generally recognized that reaction-based methods, as opposed to other
+    means of defining chemical similarity, allow for easier interpretation and
+    provide greater confidence in their use [6]. Chemical reactions related to
+    covalent protein binding have recently been reviewed [7]; [8]; [9]. Measurements
+    and estimations of reactivity have also recently been reviewed [1]; [3].
+    Computational or in silico techniques to predict chemical reactivity have been
+    developed; they vary in complexity from the relatively simple approach of
+    forming chemical categories from 2D structural alerts (i.e. SARs for qualitative
+    identification of chemical sub-structures with the potential of being reactive),
+    such as used in the Organisation for Economic Co-Operation and Development
+    (OECD)QSAR Toolbox [10] to QSAR models (i.e. quantitative prediction of relative
+    reactivity) as described by Schwöbel et al. [11].
+
+    In Chemico Protocols and Databases
+
+    While methionine, histidine, and serine all possess nucleophilic groups that are
+    found in skin proteins, the –SH group of cysteine and the ε-NH2 group of lysine
+    are the most often studied. Soft electrophilic interactions involving the thiol
+    group can be modelled with small molecules. Glutathione (GSH;
+    L-γ-glutamyl-L-cysteinyl-glycine) is the most widely used model nucleophile in
+    soft electrophilic reactivity assays. Typically, chemicals are incubated with
+    GHS and, after a defined reaction time, the concentration of free thiol groups
+    is measured. Such depletion based assays assume adduct formation, which is
+    typically not confirmed. Good relationships between GSH reactivity and toxicity
+    have been demonstrated. Examples of this method can be found in the literature
+    [3]; [12]; [13]; [14]. Recently, OECD adopted the new Test Guideline (TG)
+    No442C: In chemico skin sensitisation – Direct Peptide Reactivity Assay (DPRA).
+    This method quantifies the reactivity of chemicals towards model synthetic
+    peptides containing either lysine or cysteine [15]. The DPRA protocol can be
+    found in the EURL ECVAM Database Service on Alternative Methods to animal
+    experimentation (DB-ALM): Protocol No154 for Direct Peptide Reactivity Assay
+    (DPRA) for skin sensitisation testing [16]. The importance of reaction chemistry
+    for sensitisation indicates that identification of the reaction limited chemical
+    spaces is critical for using the proposed AOP. Systematic databases for
+    reaction-specific chemical spaces are being developed. For example, in chemico
+    databases reporting measurements of reactive potency currently exist for Michael
+    acceptors ([14]; [17]; [18]). The use of model nucleophiles containing primary
+    amino (–NH2) groups, such as in the amino acids lysine are less well-documented,
+    with the principle of measuring relative reactivity being the same as for thiol
+    [1].
+
+    Respiratory Sensitizers
+
+    Both respiratory and skin sensitizers are detected by in vitro and in silico
+    methods used to measure electrophilic binding to proteins and peptides.
+    (Basketter et al., 2017) The rate of covalent binding can also be measured.
+    (Natsch and Gfeller, 2008) Dik et al. modified the DPRA protocol to include two
+    peptide depletion measurement time points, and added high-performance liquid
+    chromatography mass spectrometry (MS) analysis of reaction products, which
+    improved predictive capacity. (Dik et al., 2016) Other authors have worked to
+    investigate the binding of diisocyanates in vapor and liquid phases with LC/MS,
+    MS/MS, and ELISA, as well as, Western blot. (Wisnewski et al., 2013a, 2013b,
+    Hettick et al., 2012, Hopkins et al., 2005, Hettick and Siegel, 2011)
+
+    Overview table: How it is measured or detected
+
+    Acceptance
+
+    Validated
+
+    Direct Peptide Reactivity Assay (DPRA); TG 442C; [1]; X; X
+
+    DB-ALM; [2]
+level_screening:
+  outcome: LEVEL_FITS
+  method: >-
+    event-content-internal-alignment keyword pass, aop_wiki_cli at 0bcc052, against the 2026-10-03 snapshot. The model review (event-level-llm-review) was not run: no Anthropic credentials were available.
+  screened_on: "2026-10-31"
+  note: >-
+    No finding: the description carries words for the Molecular level. It
+    describes the covalent reaction of an electrophile with nucleophilic sites
+    in amino acid residues, which is a change in a molecule.
+term_findings:
+- >-
+  The biological object CHEBI:59739 is labelled "electrophilic reagant" in
+  AOP-Wiki; ChEBI's label is "electrophilic reagent". Checked against OLS on
+  2026-10-31.
+- >-
+  The biological object is the class of the stressor, an electrophilic
+  reagent, rather than the protein it binds. The Event's description says the
+  target protein is not identified and is not considered critical.
+notes: >-
+  No aggregation yet. dismech's Contact_Dermatitis entry has no node for the
+  covalent reaction between hapten and skin protein: it goes from Hapten
+  exposure to Skin innate immune activation during sensitization, and records
+  the absence as the knowledge gap no_node_for_covalent_haptenation. The node is
+  being added by monarch-initiative/dismech#16068, open on 2026-10-31. Once it
+  merges, the aggregation is to be written against it.

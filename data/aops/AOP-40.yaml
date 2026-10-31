@@ -1,0 +1,54 @@
+# AOP-Wiki AOP 40. Its title, Key Events with their roles, and Key Event
+# Relationships read from the 2026-10-03 AOP-Wiki XML export.
+id: aop:40
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/aops/40
+aop:
+  id: 40
+  title: Covalent Protein binding leading to Skin Sensitisation
+  short_name: Skin Sensitisation AOP
+key_events:
+- event: aop.events:396
+  role: MolecularInitiatingEvent
+- event: aop.events:826
+  role: KeyEvent
+- event: aop.events:398
+  role: KeyEvent
+- event: aop.events:272
+  role: KeyEvent
+- event: aop.events:827
+  role: AdverseOutcome
+key_event_relationships:
+- relationship: aop.relationships:833
+  directness_id:
+    term: adjacent
+- relationship: aop.relationships:377
+  directness_id:
+    term: adjacent
+- relationship: aop.relationships:834
+  directness_id:
+    term: adjacent
+- relationship: aop.relationships:379
+  directness_id:
+    term: adjacent
+- relationship: aop.relationships:835
+  directness_id:
+    term: adjacent
+notes: >-
+  In the export, KER 833 joins KE 396 to KE 826, KER 377 joins KE 396 to
+  KE 398, KER 834 joins KE 826 to KE 398, KER 379 joins KE 398 to KE 272, and
+  KER 835 joins KE 272 to KE 827. The pathway branches at the MIE: KE 398 is
+  reached both directly from KE 396 and through KE 826, and the two branches
+  rejoin there. Those links will be recorded in the Key Event Relationship
+  records. AOP 40's OECD status in the export is WPHA/WNT Endorsed. KE 396,
+  KE 398 and KE 272 are shared with AOP 39, as are KER 377 and KER 379.
+curation_history:
+- timestamp: "2026-10-31T00:00:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-5-5
+  action: CREATE
+  description: >-
+    Read from the 2026-10-03 AOP-Wiki XML export: title, short name, the role
+    of each Key Event, and each Key Event Relationship with its adjacency.
