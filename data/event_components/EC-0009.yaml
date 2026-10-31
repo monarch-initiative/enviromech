@@ -1,0 +1,11 @@
+# One of the two event components of AOP-Wiki KE 826, Activation, Keratinocytes, as
+# recorded in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0009
+event_component:
+  id: 9
+  biological_process_id:
+    source: GO
+    source_id: GO:0002534
+    term: cytokine production involved in inflammatory response
+  biological_action_id:
+    term: increased

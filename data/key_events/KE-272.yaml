@@ -1,0 +1,162 @@
+# AOP-Wiki KE 272, a Key Event of AOP 40, with the dismech node aggregated into
+# it. Event properties read from the 2026-10-03 AOP-Wiki XML export with
+# aop_wiki_cli; node fields from dismech main at 8727e500eef on 2026-10-31.
+id: aop.events:272
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/events/272
+event:
+  id: 272
+  title: "Activation/Proliferation, T-cells"
+  short_name: "Activation/Proliferation, T-cells"
+  biological_organization_id:
+    term: Organ
+  organ_term_id:
+    source: UBERON
+    term: lymph node
+  event_components:
+  - id: 12
+    biological_process_id:
+      source: GO
+      source_id: GO:0042110
+      term: T cell activation
+    biological_object_id:
+      source: CL
+      source_id: CL:0000084
+      term: T cell
+    biological_action_id:
+      term: increased
+  - id: 13
+    biological_process_id:
+      source: GO
+      source_id: GO:0008283
+      term: cell proliferation
+    biological_object_id:
+      source: CL
+      source_id: CL:0000813
+      term: memory T cell
+    biological_action_id:
+      term: increased
+  definition: >-
+    T-cells are typically affected by protein-hapten complexes presented by
+    dendritic cells on Major Histocompatibility Complex (MHC) molecules. Molecular
+    understanding of this process has improved in recent years (see [1]). Briefly,
+    MHC molecules are membrane proteins which present the small peptide antigens
+    placed in a “groove” of the MHC molecule during its intracellular synthesis and
+    transport to the cell surface. In the context of the MHC molecular on the cell
+    surface, the small peptide antigen is recognized via the T-cell receptors as
+    self or non-self (e.g. foreign). If this peptide is a foreign peptide, such as
+    part of a protein-hapten complex, the T-cell will be activated to form a memory
+    T-cell, which subsequently proliferates. If reactivated upon presentation by
+    skin dendritic cells, these memory T-cells will induce allergic contact
+    dermatitis [2].
+  measured_or_detected: >-
+    Methods that have been previously reviewed and approved by a recognized
+    authority should be included in the Overview section above. All other methods,
+    including those well established in the published literature, should be
+    described here. Consider the following criteria when describing each method: 1.
+    Is the assay fit for purpose? 2. Is the assay directly or indirectly (i.e. a
+    surrogate) related to a key event relevant to the final adverse effect in
+    question? 3. Is the assay repeatable? 4. Is the assay reproducible?
+
+    Most protocols recognize the importance of the process of antigen-presentation,
+    so in vitro T-cell-based assays are typically co-cultures of allergen-treated
+    dendritic cells and modified T-lymphocytes with expression of selected
+    biomarkers (e.g. interferon gamma), or T-cell proliferation being the reported
+    outcome. Much of this work has been reviewed by Martin et al [1]. It should be
+    remembered that lymph node cell proliferation is the basis for the in vivo mouse
+    Local Lymph Node Assay (LLNA). OECD TG 429 is the validated test guideline for
+    the Skin Sensitisation: Local Lymph Node Assay [3] together with its two
+    non-radioactive modifications (LLNA-DA TG442A [4] and LLNA-BrdU ELISA TG 442B
+    [5]).
+
+    Human T cell proliferation and DC and T cell cytokine profiles produced in
+    response to chemical respiratory stimuli have been measured in vitro. (Holden et
+    al., 2008, Bernstein et al., 2011)
+
+    Overview table: How it is measured or detected
+
+    Acceptance
+
+    Validated
+
+    Local Lymph Node Assay (LLNA); TG 429; [1]; X; X
+
+    TG 442A LLNA:DA; [2]
+
+    TG 442B LLNA: BrdU-ELISA; [3]
+level_screening:
+  outcome: LEVEL_DISPUTED
+  method: >-
+    event-content-internal-alignment keyword pass, aop_wiki_cli at 0bcc052, against the 2026-10-03 snapshot. The model review (event-level-llm-review) was not run: no Anthropic credentials were available.
+  screened_on: "2026-10-31"
+  note: >-
+    Flagged: AOP-Wiki assigns Organ, and the description has no Organ-level
+    words while it has Cellular-level ones. The description is of a change in
+    T cells: recognition of a hapten-modified peptide on MHC by the T-cell
+    receptor, activation to a memory T cell, and proliferation. Both event
+    components bind a cell-level process to a cell type (T cell activation in
+    T cell; cell proliferation in memory T cell). The lymph node, the organ
+    term, is where the change happens, and is also where the LLNA measures it;
+    the Handbook places an Event at the level where the change happens, which
+    here is the cell. The description reads as Cellular.
+term_findings:
+- >-
+  The biological process GO:0008283 is labelled "cell proliferation" in
+  AOP-Wiki; GO's current label is "cell population proliferation". Checked
+  against OLS on 2026-10-31.
+aggregation:
+  aggregation_relation: narrower_than
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Allergen-specific T-cell priming
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Allergen-specific T-cell priming
+    source_level: CELLULAR
+    biological_organization_id:
+      term: Cellular
+    processes:
+    - source: GO
+      source_id: GO:0002468
+      term: dendritic cell antigen processing and presentation
+    - source: GO
+      source_id: GO:0042110
+      term: T cell activation
+    objects:
+    - source: CL
+      source_id: CL:0000453
+      term: Langerhans cell
+    - source: CL
+      source_id: CL:0000451
+      term: dendritic cell
+    - source: CL
+      source_id: CL:0000625
+      term: CD8-positive, alpha-beta T cell
+    notes: >-
+      dismech binds no modifier to either process, so no biological action is
+      recorded. Its description: "During sensitization, antigen-presenting
+      cells prime allergen-specific T cells, establishing the adaptive immune
+      memory required for later flares."
+  rationale: >-
+    The node and the Event share their central component: activation of T
+    cells by antigen-presenting cells carrying the hapten, bound in both to
+    GO:0042110 T cell activation. The node is narrower in its T cells, naming
+    CD8-positive alpha-beta T cells where the Event names T cells and memory T
+    cells, because dismech curates the CD8 effector arm of allergic contact
+    dermatitis. It is also narrower in what it asserts: it binds no
+    proliferation process, while the Event's second component is proliferation
+    of memory T cells. So the node is a narrower case of the Event. The node
+    also binds dendritic cell antigen processing and presentation, which in
+    AOP 40 falls on the upstream side, in KE 398 and KER 379; it is part of the
+    node because priming is named from the T cell's side but needs the
+    presenting cell. That process is not taken to be part of this Event.
+  level_mismatch_note: >-
+    The node is CELLULAR; the Event is Organ in AOP-Wiki. The evidence
+    supports Cellular: the Event's description and both of its components are
+    about T cells, and this record's level screen disputes the Organ
+    assignment. The mismatch is read as an error in AOP-Wiki's level, not as a
+    modelling difference between the two knowledge bases.
+  notes: >-
+    KE 272 sits in AOPs 39 and 40. The aggregation is asserted for the Event,
+    not for either pathway.

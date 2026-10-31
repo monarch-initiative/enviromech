@@ -1,0 +1,32 @@
+history_version: 1
+target:
+  kind: record
+  slug: AOP-40
+  path: data/observations/AOP-40.yaml
+session:
+  id: 2026-10-31T040830Z-claude-code-4287fc
+  timestamp: '2026-10-31T04:08:30Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: CREATE
+  outcome: needs_followup
+  summary: Add the AOP 40 record and its five Key Event records, screened, with one dismech aggregation
+  details: 'Wrote data/aops/AOP-40.yaml from the 2026-10-03 AOP-Wiki XML export: MIE 396, KEs 826, 398
+    and 272, AO 827, KERs 833, 377, 834, 379 and 835, all adjacent; the pathway branches at 396 and rejoins
+    at 398. Wrote KE-396, KE-826, KE-398, KE-272 and KE-827 from the same export with aop_wiki_cli''s
+    cache, HTML removed; text checked to round-trip. Level screen: the keyword pass (event-content-internal-alignment,
+    aop_wiki_cli 0bcc052) found the level fits for 396, 826 and 398, and flagged 272 (Organ, reads Cellular)
+    and 827 (Organ, reads Individual), recorded LEVEL_DISPUTED. The model review was not run: no Anthropic
+    credentials. Term labels checked against OLS: CHEBI:59739 and GO:0008283 differ from AOP-Wiki''s labels,
+    recorded in term_findings. Aggregation against dismech Contact_Dermatitis at 8727e500eef: KE 272 narrower_than
+    Allergen-specific T-cell priming, with a level mismatch note. Not aggregated, with reasons in notes:
+    396 (no node until monarch-initiative/dismech#16068 merges), 826 (dismech''s only keratinocyte node
+    is in the irritant arm), 398 (closest node is broader than the Event and AggregationRelationEnum has
+    no value for that), 827 (no outcome node in dismech). just qc passes.'
