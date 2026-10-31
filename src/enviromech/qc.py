@@ -19,6 +19,8 @@ OFFLINE = [
     ("lint", ["just", "lint"]),
     ("records: closed schema", ["just", "validate-all"]),
     ("key events: closed schema", ["just", "validate-key-events"]),
+    ("aops: closed schema", ["just", "validate-aops"]),
+    ("aops: event roles", ["just", "check-aops"]),
     ("observation and assay ids", ["just", "check-ids"]),
     ("history", ["just", "validate-history"]),
     ("tests", ["just", "test", "-q"]),

@@ -63,6 +63,16 @@ validate-all:
 validate-key-events:
     uv run linkml-validate -s {{schema}} -C KeyEventRecord data/key_events/*.yaml
 
+# Closed-schema validation of every AOP record.
+validate-aops:
+    uv run linkml-validate -s {{schema}} -C AopRecord data/aops/*.yaml
+
+# Check the rules on an AOP's Key Events the schema cannot express: one
+# Molecular Initiating Event, at the Molecular level; at most one Adverse
+# Outcome per level of biological organization.
+check-aops:
+    uv run python scripts/check_aops.py
+
 # Check the ids EnviroMech assigns: each Observation's matches its record id,
 # and each Assay id names one Assay.
 check-ids:

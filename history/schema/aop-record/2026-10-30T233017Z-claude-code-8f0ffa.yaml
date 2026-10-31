@@ -1,0 +1,26 @@
+history_version: 1
+target:
+  kind: schema
+  slug: aop-record
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-10-30T233017Z-claude-code-8f0ffa
+  timestamp: '2026-10-30T23:30:17Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/11
+events:
+- type: CREATE
+  outcome: needs_followup
+  summary: Add the AOP record kind and the AOP 587 record
+  details: 'Added AopRecord, AopKeyEvent, AopKeyEventRelationship and KeyEventRoleEnum to enviromech.yaml,
+    with the aop and aop.relationships prefixes (Bioregistry). Wrote data/aops/AOP-587.yaml from the 2026-10-03
+    AOP-Wiki XML export: MIE 1542, KEs 177 and 890, AO 896, KERs 3637, 908 and 910, all adjacent. Added
+    scripts/check_aops.py (one MIE at the Molecular level; at most one AO per level) with tests, and both
+    checks to just qc. Left for later: the KER records and their evidence classes, and showing AOPs in
+    the report and record browser.'

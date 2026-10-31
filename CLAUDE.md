@@ -12,7 +12,7 @@ ontology-grounded, evidence-backed knowledge base. EnviroMech records how exposu
 prose, titles). Lowercase `enviromech` is only for identifiers: the repository and
 directory name, paths, and package names.
 
-There are two kinds of record, one YAML file each:
+There are three kinds of record, one YAML file each:
 
 - **Observations**, under `data/observations/`, class `ObservationRecord`. This is the
   record kind the mechmaker tooling is built around: every command covers Observations.
@@ -21,8 +21,14 @@ There are two kinds of record, one YAML file each:
   `just report`, and shown in the record browser. `just validate`, `just compliance`,
   the term checks and the exports do not cover them yet; how they should be validated
   is issue #4.
+- **AOPs**, under `data/aops/`, class `AopRecord`. An AOP names its Key Events, each
+  with its role (`MolecularInitiatingEvent`, `KeyEvent`, `AdverseOutcome`), and its Key
+  Event Relationships by id. `just validate-aops` checks the schema and
+  `just check-aops` the rules the schema cannot express: one Molecular Initiating
+  Event, at the Molecular level, and at most one Adverse Outcome per level. `just qc`
+  runs both. Nothing else covers AOPs yet.
 
-Both classes are in `src/enviromech/schema/enviromech.yaml`.
+All three classes are in `src/enviromech/schema/enviromech.yaml`.
 
 The pattern comes from [DisMech](https://github.com/monarch-initiative/dismech).
 The registry of Mechs is [MechRegistry](https://github.com/monarch-initiative/mechregistry).
@@ -54,6 +60,8 @@ just qc                # the offline gate CI blocks on
 just qc-full           # qc plus terms and quotes for every record (network)
 just validate FILE     # closed schema, ontology terms, verbatim quotes (an Observation)
 just validate-key-events   # closed schema, every Key Event record
+just validate-aops     # closed schema, every AOP record
+just check-aops        # one MIE, at the Molecular level; at most one AO per level
 just check-ids         # the Observation and Assay ids EnviroMech assigns
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)

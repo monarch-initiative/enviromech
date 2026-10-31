@@ -309,7 +309,8 @@ the two is tested from the start.
   may have one AO at the individual level and one at the population level, but not two
   at the population level. The MIE needs no per-level rule: a Molecular Initiating Event is at the
   molecular level by definition, and an AOP has one. Both rules need a check script:
-  one MIE per AOP, at the molecular level; at most one AO per level.
+  one MIE per AOP, at the molecular level; at most one AO per level. Written as
+  `scripts/check_aops.py`, run by `just check-aops` (issue #11).
 - **Q8c. The new classes start in EnviroMech.** Typed concordance evidence (temporal,
   dose, incidence) and biological plausibility are defined in `enviromech.yaml`, tried
   on real records, and proposed to linkml-aop once settled, as decision 3 says.
@@ -385,8 +386,8 @@ rewritten as Key Event files with an `aggregation` section.
 | `KE-890.yaml` | Degeneration of dopaminergic neurons of the nigrostriatal pathway | Organ | KE | No cell term; organ term is corpus striatum |
 | `KE-896.yaml` | Parkinsonian motor deficits | Individual | AO | Object is a MeSH disease heading; no process |
 
-The role is shown here for reference. It is not in the files: it belongs to the AOP's
-record, which does not exist yet.
+The role is shown here for reference. It is not in the Key Event files: it belongs to
+the AOP's record, `data/aops/AOP-587.yaml` (added for issue #11).
 
 **Observations** (`data/observations/`). Every snippet passes
 linkml-reference-validator against the cached source.
