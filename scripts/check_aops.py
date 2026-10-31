@@ -7,6 +7,7 @@ Event's level of biological organization from its record under
 KEY_EVENT_DIRECTORY (default data/key_events):
 
 - the record id is aop:<number> and aop.id is that number;
+- the AOP has at least one Key Event, in aop.events;
 - every Key Event named has a record, and is named once;
 - the AOP has exactly one Molecular Initiating Event, and it is at the
   Molecular level;
@@ -28,13 +29,12 @@ MIE = "MolecularInitiatingEvent"
 AO = "AdverseOutcome"
 
 
-def levels(directory: Path) -> dict[str, str | None]:
-    """Each Key Event record's id, and its level of biological organization."""
-    found: dict[str, str | None] = {}
+def levels(directory: Path) -> dict[int, str | None]:
+    """Each Key Event record's AOP-Wiki id (event.id), and its level of biological organization."""
+    found: dict[int, str | None] = {}
     for path in sorted(directory.glob("*.yaml")):
-        record = yaml.safe_load(path.read_text()) or {}
-        level = ((record.get("event") or {}).get("biological_organization_id") or {}).get("term")
-        found[str(record.get("id"))] = level
+        event = (yaml.safe_load(path.read_text()) or {}).get("event") or {}
+        found[event.get("id")] = (event.get("biological_organization_id") or {}).get("term")
     return found
 
 
@@ -55,15 +55,17 @@ def check(directory: Path, key_events: Path) -> list[str]:
                 f"{name}: aop.id is {aop_id!r} but the record id {record['id']} gives {int(match.group(1))}"
             )
 
-        members = record.get("key_events") or []
-        for event, count in Counter(m.get("event") for m in members).items():
+        members = (record.get("aop") or {}).get("events") or []
+        if not members:
+            problems.append(f"{name}: aop.events names no Key Event")
+        for event, count in Counter(m.get("event_id") for m in members).items():
             if count > 1:
-                problems.append(f"{name}: {event} is named {count} times")
+                problems.append(f"{name}: Key Event {event} is named {count} times")
         for m in members:
-            if m.get("event") not in level_of:
-                problems.append(f"{name}: {m.get('event')} has no record under {key_events}")
+            if m.get("event_id") not in level_of:
+                problems.append(f"{name}: Key Event {m.get('event_id')} has no record under {key_events}")
 
-        mies = [m["event"] for m in members if m.get("role") == MIE]
+        mies = [m.get("event_id") for m in members if m.get("type") == MIE]
         if len(mies) != 1:
             problems.append(f"{name}: an AOP has one Molecular Initiating Event, found {len(mies)}: {mies}")
         for event in mies:
@@ -73,10 +75,10 @@ def check(directory: Path, key_events: Path) -> list[str]:
                     f"{name}: the Molecular Initiating Event {event} is at level {level!r}, not Molecular"
                 )
 
-        aos_by_level: dict[str | None, list[str]] = {}
+        aos_by_level: dict[str | None, list[int]] = {}
         for m in members:
-            if m.get("role") == AO and m.get("event") in level_of:
-                aos_by_level.setdefault(level_of[m["event"]], []).append(m["event"])
+            if m.get("type") == AO and m.get("event_id") in level_of:
+                aos_by_level.setdefault(level_of[m["event_id"]], []).append(m["event_id"])
         for level, events in aos_by_level.items():
             if len(events) > 1:
                 problems.append(

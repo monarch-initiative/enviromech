@@ -28,17 +28,17 @@ def test_aops_and_key_events_link_to_each_other():
     """An AOP's page links to each Key Event it names, and that Key Event's
     page links back with its role, although only the AOP's file records it."""
     pages = render.build()
-    by_curie = {load(p)["id"]: p.stem for p in iter_records(KEY_EVENTS_DIR)}
+    by_event_id = {load(p)["event"]["id"]: p.stem for p in iter_records(KEY_EVENTS_DIR)}
     linked = 0
     for path in AOPS:
-        for member in load(path)["key_events"]:
-            stem = by_curie.get(member["event"])
+        for member in load(path)["aop"]["events"]:
+            stem = by_event_id.get(member["event_id"])
             if stem is None:
                 continue
             assert f'href="{stem}.html"' in pages[PAGES_DIR / "records" / f"{path.stem}.html"]
             back = pages[PAGES_DIR / "records" / f"{stem}.html"]
             assert f'href="{path.stem}.html"' in back
-            assert f"({render.enum_text(member['role'])})" in back
+            assert f"({render.enum_text(member['type'])})" in back
             linked += 1
     assert linked, "no AOP names a Key Event that has a record"
 

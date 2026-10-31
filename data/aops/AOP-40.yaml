@@ -8,33 +8,33 @@ aop:
   id: 40
   title: Covalent Protein binding leading to Skin Sensitisation
   short_name: Skin Sensitisation AOP
-key_events:
-- event: aop.events:396
-  role: MolecularInitiatingEvent
-- event: aop.events:826
-  role: KeyEvent
-- event: aop.events:398
-  role: KeyEvent
-- event: aop.events:272
-  role: KeyEvent
-- event: aop.events:827
-  role: AdverseOutcome
-key_event_relationships:
-- relationship: aop.relationships:833
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:377
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:834
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:379
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:835
-  directness_id:
-    term: adjacent
+  events:
+  - event_id: 396  # Covalent Binding, Protein
+    type: MolecularInitiatingEvent
+  - event_id: 826  # Activation, Keratinocytes
+    type: KeyEvent
+  - event_id: 398  # Activation, Dendritic Cells
+    type: KeyEvent
+  - event_id: 272  # Activation/Proliferation, T-cells
+    type: KeyEvent
+  - event_id: 827  # sensitisation, skin
+    type: AdverseOutcome
+  ke_relationships:
+  - relationship_id: 833  # KE 396 -> KE 826
+    directness_id:
+      term: adjacent
+  - relationship_id: 377  # KE 396 -> KE 398
+    directness_id:
+      term: adjacent
+  - relationship_id: 834  # KE 826 -> KE 398
+    directness_id:
+      term: adjacent
+  - relationship_id: 379  # KE 398 -> KE 272
+    directness_id:
+      term: adjacent
+  - relationship_id: 835  # KE 272 -> KE 827
+    directness_id:
+      term: adjacent
 notes: >-
   In the export, KER 833 joins KE 396 to KE 826, KER 377 joins KE 396 to
   KE 398, KER 834 joins KE 826 to KE 398, KER 379 joins KE 398 to KE 272, and
@@ -52,3 +52,12 @@ curation_history:
   description: >-
     Read from the 2026-10-03 AOP-Wiki XML export: title, short name, the role
     of each Key Event, and each Key Event Relationship with its adjacency.
+- timestamp: "2026-10-31T23:00:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-5-5
+  action: EDIT
+  description: >-
+    Moved the Key Events and Key Event Relationships into EMOD's aop.events and
+    aop.ke_relationships, naming each by its AOP-Wiki id, as design decision 5
+    records. No Key Event, role, relationship or directness changed.

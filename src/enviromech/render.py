@@ -418,30 +418,33 @@ def cross_link(records: list[dict]) -> None:
 def cross_link_aops(records: list[dict]) -> None:
     """Link each AOP to its Key Events, and each Key Event to the AOPs it is in.
 
-    An AOP names its Key Events by CURIE (aop.events:1542), each with its role.
-    Where a Key Event record has that id, the CURIE becomes a link to its page.
-    Each Key Event's page gains the list of AOPs that name it, with its role in
-    each; that list is not in the Key Event's file, it is derived here.
+    An AOP names its Key Events in EMOD's aop.events, each by its AOP-Wiki id
+    (event_id) with its role (type). Where a Key Event record has that id, the
+    number becomes a link to its page. Each Key Event's page gains the list of
+    AOPs that name it, with its role in each; that list is not in the Key
+    Event's file, it is derived here.
     """
-    by_curie = {r["data"].get("id"): r for r in records if r["data"]["kind"] == "Key Event"}
+    by_event_id = {
+        (r["data"].get("event") or {}).get("id"): r for r in records if r["data"]["kind"] == "Key Event"
+    }
     member_of: dict[str, list[Markup]] = {}
     for r in records:
-        if r["data"]["kind"] != "AOP":
+        aop = r["data"].get("aop")
+        if r["data"]["kind"] != "AOP" or not isinstance(aop, dict):
             continue
         linked = []
-        for member in r["data"].get("key_events") or []:
-            target = by_curie.get(member.get("event"))
+        for member in aop.get("events") or []:
+            target = by_event_id.get(member.get("event_id"))
             if target is None:
                 linked.append(member)
                 continue
-            number = (target["data"].get("event") or {}).get("id")
-            text = f"KE {number}: {target['data']['name']}"
-            linked.append({**member, "event": link(f"{target['stem']}.html", text)})
-            role = enum_text(member.get("role") or "")
+            text = f"KE {member['event_id']}: {target['data']['name']}"
+            linked.append({**member, "event_id": link(f"{target['stem']}.html", text)})
+            role = enum_text(member.get("type") or "")
             name = str(r["data"]["name"])
             back = link(f"{r['stem']}.html", f"{name} ({role})" if role else name)
             member_of.setdefault(target["stem"], []).append(back)
-        r["data"] = {**r["data"], "key_events": linked}
+        r["data"] = {**r["data"], "aop": {**aop, "events": linked}}
     for r in records:
         if r["stem"] in member_of:
             r["data"] = {**r["data"], "aops": member_of[r["stem"]]}

@@ -26,11 +26,14 @@ There are four kinds of record, one YAML file each:
   (`enviromech:ec-0001`). A Key Event record writes its components out in full, each
   with the id of its record here. `just validate-event-components` checks the schema
   and `just check-ids` the ids; `just qc` runs both.
-- **AOPs**, under `data/aops/`, class `AopRecord`. An AOP names its Key Events, each
-  with its role (`MolecularInitiatingEvent`, `KeyEvent`, `AdverseOutcome`), and its Key
-  Event Relationships by id. `just validate-aops` checks the schema and
-  `just check-aops` the rules the schema cannot express: one Molecular Initiating
-  Event, at the Molecular level, and at most one Adverse Outcome per level. `just qc`
+- **AOPs**, under `data/aops/`, class `AopRecord`. The AOP is an EMOD `Aop`, unchanged:
+  its Key Events are in `aop.events`, each by AOP-Wiki id (`event_id`) with its role
+  (`type`: `MolecularInitiatingEvent`, `KeyEvent`, `AdverseOutcome`), and its Key Event
+  Relationships in `aop.ke_relationships`, by `relationship_id`. Put the title beside
+  each id as a comment. `just validate-aops` checks the schema and `just check-aops`
+  the rules the schema cannot express: at least one Key Event, each with a record and
+  named once; one Molecular Initiating Event, at the Molecular level; and at most one
+  Adverse Outcome per level. `just qc`
   runs both. `just report` counts them and the record browser shows them, each AOP
   linked to its Key Events and each Key Event to the AOPs it is in, with its role.
 

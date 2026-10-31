@@ -1,0 +1,23 @@
+history_version: 1
+target:
+  kind: schema
+  slug: aop-records-use-emod
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-10-31T230355Z-claude-code-3fb137
+  timestamp: '2026-10-31T23:03:55Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  summary: AOP records use EMOD's Aop.events and Aop.ke_relationships
+  details: 'Removed AopKeyEvent, AopKeyEventRelationship and KeyEventRoleEnum, and AopRecord''s key_events
+    and key_event_relationships. AOP 587 and AOP 40 now hold their Key Events in aop.events (event_id,
+    type) and their KERs in aop.ke_relationships (relationship_id, directness_id), with each title as
+    a comment; no content changed. check_aops.py, the record browser and their tests read the new fields;
+    check_aops.py also fails an AOP with no Key Events. Added design decision 5. Left for later: the duplicate-KER
+    check noted on issue #11.'

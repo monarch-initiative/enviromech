@@ -229,25 +229,22 @@ classes:
 
   AopRecord:
     description: >-
-      One Adverse Outcome Pathway, in one file under data/aops/. The AOP's own
-      properties are an EMOD Aop; this class adds what EnviroMech needs around
-      it: an identifier that resolves, where and when the AOP was read from
-      AOP-Wiki, the Key Events with their role in this AOP, and the Key Event
-      Relationships by id.
+      One Adverse Outcome Pathway, in one file under data/aops/. The AOP itself
+      is an EMOD Aop, unchanged: its Key Events, each with its role, are in
+      aop.events (AopToEvent, naming the Event by its AOP-Wiki id), and its Key
+      Event Relationships in aop.ke_relationships (AopToKeRelationship, naming
+      the relationship by its AOP-Wiki id). This class adds what EnviroMech
+      needs around it: an identifier that resolves, and where and when the AOP
+      was read from AOP-Wiki.
 
-      The Key Events and Key Event Relationships are named by CURIE, the ids
-      their records have in EnviroMech, so a name resolves to a page on
-      AOP-Wiki. EMOD's Aop.events and Aop.ke_relationships hold the same links,
-      naming each Event or relationship by its integer AOP-Wiki id (since
-      linkml-aop PR #13); they are left empty here. Each Key Event has its own
-      record under data/key_events/. A Key Event Relationship
-      will have its own record, holding its upstream and downstream Events and
-      its evidence.
+      Each Key Event has its own record under data/key_events/. A Key Event
+      Relationship will have its own record, holding its upstream and
+      downstream Events and its evidence.
 
-      Two rules apply that LinkML cannot express, and scripts/check_aops.py
-      checks them: an AOP has exactly one Molecular Initiating Event, at the
-      Molecular level; and at most one Adverse Outcome at each level of
-      biological organization.
+      Rules LinkML cannot express are checked by scripts/check_aops.py: an AOP
+      has at least one Key Event, each named once and each with a record; it
+      has exactly one Molecular Initiating Event, at the Molecular level; and at
+      most one Adverse Outcome at each level of biological organization.
     slots:
       - curation_history
     attributes:
@@ -265,9 +262,8 @@ classes:
         required: true
       aop:
         description: >-
-          The AOP's own properties, as an EMOD Aop. Its events and
-          ke_relationships are left empty; key_events and
-          key_event_relationships below hold them.
+          The AOP, as an EMOD Aop, with its Key Events in events and its Key
+          Event Relationships in ke_relationships.
         range: Aop
         inlined: true
         required: true
@@ -280,61 +276,7 @@ classes:
       source_uri:
         description: The AOP's page on AOP-Wiki.
         range: uri
-      key_events:
-        description: The Key Events of this AOP, each with its role in it.
-        range: AopKeyEvent
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
-        required: true
-      key_event_relationships:
-        description: The Key Event Relationships of this AOP, by id.
-        range: AopKeyEventRelationship
-        multivalued: true
-        inlined: true
-        inlined_as_list: true
       notes:
-
-
-  AopKeyEvent:
-    description: >-
-      One Key Event in one AOP, and its role there. The role belongs to the AOP,
-      not the Event: one Key Event can be the Molecular Initiating Event of one
-      AOP and an intermediate Key Event of another. EMOD's counterpart is
-      AopToEvent.
-    attributes:
-      event:
-        description: >-
-          The Key Event, as the id of its record under data/key_events/, for
-          example aop.events:1542.
-        range: uriorcurie
-        pattern: "^aop\\.events:\\d+$"
-        required: true
-      role:
-        range: KeyEventRoleEnum
-        required: true
-
-
-  AopKeyEventRelationship:
-    description: >-
-      One Key Event Relationship in one AOP. What the relationship connects and
-      its evidence belong to the relationship's own record; what is recorded
-      here is particular to this AOP. EMOD's counterpart is AopToKeRelationship.
-    attributes:
-      relationship:
-        description: >-
-          The Key Event Relationship's AOP-Wiki identifier as a CURIE, for
-          example aop.relationships:3637.
-        range: uriorcurie
-        pattern: "^aop\\.relationships:\\d+$"
-        required: true
-      directness_id:
-        description: >-
-          Whether the relationship joins two Key Events that are adjacent in
-          this AOP, as AOP-Wiki records it.
-        range: Directness
-        inlined: true
-
 
   KeyEventScreening:
     description: >-
@@ -956,23 +898,6 @@ enums:
         description: The description reads as another level, or spans levels.
       LEVEL_UNCONFIRMED:
         description: The Event has no description, or the screen could not tell.
-
-  KeyEventRoleEnum:
-    description: >-
-      The role of a Key Event within one AOP. The values are the ones the
-      AOP-Wiki database stores in aop_events.type, which EMOD's AopToEvent.type
-      holds as a free string.
-    permissible_values:
-      MolecularInitiatingEvent:
-        description: >-
-          The first Key Event, the interaction of a stressor with a biomolecule.
-          At the Molecular level, and one per AOP.
-      KeyEvent:
-        description: An intermediate Key Event.
-      AdverseOutcome:
-        description: >-
-          A final Key Event, relevant to risk assessment or regulatory
-          decision-making. At most one per level of biological organization.
 
   CausalAgentTypeEnum:
     description: The kind of thing a Causal Agent is.

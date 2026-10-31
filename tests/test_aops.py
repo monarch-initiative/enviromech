@@ -36,8 +36,7 @@ def corpus(tmp_path: Path, roles: list[tuple[int, str]]) -> list[str]:
         "AOP-9.yaml",
         {
             "id": "aop:9",
-            "aop": {"id": 9},
-            "key_events": [{"event": f"aop.events:{n}", "role": role} for n, role in roles],
+            "aop": {"id": 9, "events": [{"event_id": n, "type": role} for n, role in roles]},
         },
     )
     return check_aops.check(aops, key_events)
@@ -79,9 +78,14 @@ def test_two_adverse_outcomes_at_one_level_fail(tmp_path):
 
 def test_a_key_event_with_no_record_fails(tmp_path):
     [problem] = corpus(tmp_path, [(1, "MolecularInitiatingEvent"), (99, "AdverseOutcome")])
-    assert "aop.events:99 has no record" in problem
+    assert "Key Event 99 has no record" in problem
 
 
 def test_a_key_event_named_twice_fails(tmp_path):
     [problem] = corpus(tmp_path, [(1, "MolecularInitiatingEvent"), (3, "KeyEvent"), (3, "AdverseOutcome")])
-    assert "aop.events:3 is named 2 times" in problem
+    assert "Key Event 3 is named 2 times" in problem
+
+
+def test_an_aop_with_no_key_events_fails(tmp_path):
+    problems = corpus(tmp_path, [])
+    assert any("aop.events names no Key Event" in p for p in problems)

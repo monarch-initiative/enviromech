@@ -101,6 +101,31 @@ typed, source-anchored evidence.
 
 **Status:** adopted.
 
+## 5. AOP records use linkml-aop's own AOP classes
+
+**Decision:** an AOP record holds its Key Events and Key Event Relationships in EMOD's
+`Aop.events` (`AopToEvent`) and `Aop.ke_relationships` (`AopToKeRelationship`), naming
+each by its AOP-Wiki id, with the Key Event's role in `AopToEvent.type`
+(`KeyEventTypeEnum`). EnviroMech has no AOP classes of its own beyond `AopRecord`, which
+adds the record's identifier and provenance around the `Aop`. More generally, once an
+AOP-framework modelling choice is settled, it is made in linkml-aop first, and EnviroMech
+uses it.
+
+**Rationale:** linkml-aop is meant to be the core model for anyone working with AOPs in
+the EMOD standard, so a choice made only in EnviroMech would leave other users without
+it. Until [linkml-aop#13](https://github.com/EHS-Data-Standards/linkml-aop/pull/13)
+(merged 2026-10-31), `Aop.events` held each Event in full, so EnviroMech's first AOP
+records used their own classes, naming Key Events by CURIE (`aop.events:1542`) with a
+`role`. linkml-aop#13 made those links references by id and gave the role an enum, so the
+EnviroMech classes repeated EMOD's with different names, and they were removed.
+
+**Consequence:** a record names Key Events and relationships by bare AOP-Wiki number
+(`event_id: 1542`), not by CURIE; the record browser builds the link. Rules the schema
+cannot express, such as one Molecular Initiating Event per AOP, stay in EnviroMech's
+`scripts/check_aops.py`.
+
+**Status:** adopted 2026-10-31.
+
 ## Open and deferred decisions
 
 - Which dismech design principles EnviroMech inherits (see entry 2).

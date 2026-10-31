@@ -10,25 +10,25 @@ aop:
     Inhibition of the mitochondrial complex III of nigro-striatal neurons leads
     to parkinsonian motor deficits
   short_name: Mitochondrial dysfunction and Neurotoxicity (cIII)
-key_events:
-- event: aop.events:1542
-  role: MolecularInitiatingEvent
-- event: aop.events:177
-  role: KeyEvent
-- event: aop.events:890
-  role: KeyEvent
-- event: aop.events:896
-  role: AdverseOutcome
-key_event_relationships:
-- relationship: aop.relationships:3637
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:908
-  directness_id:
-    term: adjacent
-- relationship: aop.relationships:910
-  directness_id:
-    term: adjacent
+  events:
+  - event_id: 1542  # Inhibition, Mitochondrial complex III
+    type: MolecularInitiatingEvent
+  - event_id: 177  # Increase, Mitochondrial dysfunction
+    type: KeyEvent
+  - event_id: 890  # Degeneration of dopaminergic neurons of the nigrostriatal pathway
+    type: KeyEvent
+  - event_id: 896  # Parkinsonian motor deficits
+    type: AdverseOutcome
+  ke_relationships:
+  - relationship_id: 3637  # KE 1542 -> KE 177
+    directness_id:
+      term: adjacent
+  - relationship_id: 908  # KE 177 -> KE 890
+    directness_id:
+      term: adjacent
+  - relationship_id: 910  # KE 890 -> KE 896
+    directness_id:
+      term: adjacent
 notes: >-
   In the export, KER 3637 joins KE 1542 to KE 177, KER 908 joins KE 177 to
   KE 890, and KER 910 joins KE 890 to KE 896: one linear chain from the MIE to
@@ -42,3 +42,12 @@ curation_history:
   description: >-
     Read from the 2026-10-03 AOP-Wiki XML export: title, short name, the role
     of each Key Event, and each Key Event Relationship with its adjacency.
+- timestamp: "2026-10-31T23:00:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-5-5
+  action: EDIT
+  description: >-
+    Moved the Key Events and Key Event Relationships into EMOD's aop.events and
+    aop.ke_relationships, naming each by its AOP-Wiki id, as design decision 5
+    records. No Key Event, role, relationship or directness changed.

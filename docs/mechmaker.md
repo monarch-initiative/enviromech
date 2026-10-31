@@ -289,7 +289,8 @@ EnviroMech will have six entities. Against EMOD as it stands:
 - **Key Event Relationships.** Each file holds its concordance evidence and biological
   plausibility. A concordance evidence item names its upstream and downstream
   Observations by id.
-- **AOPs.** Each file names its Key Events, with their roles, and its KERs by id.
+- **AOPs.** Each file names its Key Events, with their roles, and its KERs by id, in
+  EMOD's own `Aop.events` and `Aop.ke_relationships` (design decision 5).
 
 Each evidence-layer object carries mechmaker `EvidenceItem` quotes, which is where the
 quote check attaches. No kind has to exist before another. AOP-Wiki already holds many Key Events, and
