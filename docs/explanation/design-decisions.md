@@ -20,10 +20,9 @@ The structure follows dismech's
 ## 1. What EnviroMech is
 
 **Decision:** EnviroMech is a repository of environmental health mechanisms built from
-AI-curated literature sources. It records how exposures to chemicals and other hazards
-external to the body relate to adverse effects, represented as phenotypes and diseases,
-whatever the strength of the
-evidence behind them:
+AOPs and AI-curated literature sources from DisMech. It records how exposures to
+chemicals and other hazards external to the body relate to adverse outcomes, whatever the
+strength of the evidence behind them:
 
 - associations between an exposure and an adverse effect, with no known mechanism;
 - hypothesized mechanisms proposed to explain such associations;
