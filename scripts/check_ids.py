@@ -1,10 +1,11 @@
-"""Check the ids EnviroMech assigns to Observations and Assays.
+"""Check the ids EnviroMech assigns to Observations, Assays and event components.
 
-    python scripts/check_ids.py [DIRECTORY]
+    python scripts/check_ids.py [DIRECTORY [EVENT_COMPONENT_DIRECTORY [KEY_EVENT_DIRECTORY]]]
 
-EnviroMech creates its own Observations and Assays, so it assigns their integer
-ids itself, and nothing else keeps them apart. This checks every Observation
-record under DIRECTORY (default data/observations):
+EnviroMech creates its own Observations and Assays, and assigns ids to the event
+components the AOP-Wiki XML gives none, so it assigns these integer ids itself,
+and nothing else keeps them apart. This checks every Observation record under
+DIRECTORY (default data/observations):
 
 - an Observation's id is a positive integer and is the number in its record id
   (enviromech:obs-0003 has observation.id 3), so no two Observations share one;
@@ -13,6 +14,16 @@ record under DIRECTORY (default data/observations):
   Assay identically;
 - one Assay has one id: two records that describe an Assay identically give it
   the same id.
+
+and every event component record under EVENT_COMPONENT_DIRECTORY (default
+data/event_components), with the Key Event records under KEY_EVENT_DIRECTORY
+(default data/key_events) that use them:
+
+- an event component's id is the number in its record id (enviromech:ec-0001
+  has event_component.id 1), so no two share one;
+- one combination of action, object and process has one record;
+- every event component in a Key Event record has an id, that id has a record,
+  and the component is written exactly as that record writes it.
 
 Exits 1 and lists every problem if any check fails.
 """
@@ -24,6 +35,7 @@ from pathlib import Path
 import yaml
 
 RECORD_ID = re.compile(r"^enviromech:obs-(\d+)$")
+COMPONENT_ID = re.compile(r"^enviromech:ec-(\d+)$")
 
 
 def check(directory: Path) -> list[str]:
@@ -82,13 +94,73 @@ def check(directory: Path) -> list[str]:
     return problems
 
 
+def check_event_components(directory: Path, key_events: Path) -> list[str]:
+    problems: list[str] = []
+    component_by_id: dict[int, tuple[dict, str]] = {}
+    id_by_component: dict[str, tuple[int, str]] = {}
+
+    for path in sorted(directory.glob("*.yaml")):
+        record = yaml.safe_load(path.read_text()) or {}
+        name = path.name
+        component = record.get("event_component") or {}
+        component_id = component.get("id")
+        match = COMPONENT_ID.match(str(record.get("id", "")))
+        if not match:
+            problems.append(f"{name}: record id {record.get('id')!r} is not enviromech:ec-<number>")
+            continue
+        if component_id != int(match.group(1)) or isinstance(component_id, bool):
+            problems.append(
+                f"{name}: event_component.id is {component_id!r} but the record id {record['id']} "
+                f"gives {int(match.group(1))}"
+            )
+            continue
+        if component_id in component_by_id:
+            problems.append(
+                f"{name}: event_component.id {component_id} is already used by "
+                f"{component_by_id[component_id][1]}"
+            )
+            continue
+        described = {k: v for k, v in component.items() if k != "id"}
+        key = yaml.safe_dump(described, sort_keys=True)
+        if key in id_by_component:
+            problems.append(
+                f"{name}: the same event component is already recorded as id "
+                f"{id_by_component[key][0]} in {id_by_component[key][1]}"
+            )
+        component_by_id[component_id] = (described, name)
+        id_by_component.setdefault(key, (component_id, name))
+
+    for path in sorted(key_events.glob("*.yaml")):
+        record = yaml.safe_load(path.read_text()) or {}
+        name = path.name
+        for component in (record.get("event") or {}).get("event_components") or []:
+            component_id = component.get("id")
+            described = {k: v for k, v in component.items() if k != "id"}
+            if component_id is None:
+                problems.append(f"{name}: an event component has no id")
+            elif component_id not in component_by_id:
+                problems.append(f"{name}: event component id {component_id} has no record under {directory}")
+            elif component_by_id[component_id][0] != described:
+                problems.append(
+                    f"{name}: event component {component_id} differs from {component_by_id[component_id][1]}"
+                )
+
+    return problems
+
+
 def main() -> int:
     directory = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/observations")
-    problems = check(directory)
+    components = Path(sys.argv[2]) if len(sys.argv) > 2 else Path("data/event_components")
+    key_events = Path(sys.argv[3]) if len(sys.argv) > 3 else Path("data/key_events")
+    problems = check(directory) + check_event_components(components, key_events)
     for problem in problems:
         print(f"ERROR {problem}")
     count = len(list(directory.glob("*.yaml")))
-    print(f"{count} Observation record(s) checked, {len(problems)} id problem(s).")
+    component_count = len(list(components.glob("*.yaml")))
+    print(
+        f"{count} Observation record(s) and {component_count} event component record(s) checked, "
+        f"{len(problems)} id problem(s)."
+    )
     return 1 if problems else 0
 
 

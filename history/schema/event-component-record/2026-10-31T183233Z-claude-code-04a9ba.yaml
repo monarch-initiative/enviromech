@@ -1,0 +1,27 @@
+history_version: 1
+target:
+  kind: schema
+  slug: event-component-record
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-10-31T183233Z-claude-code-04a9ba
+  timestamp: '2026-10-31T18:32:33Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/5
+events:
+- type: CREATE
+  outcome: needs_followup
+  summary: Add the event component record kind and give each event component an EnviroMech id
+  details: 'Added EventComponentRecord to enviromech.yaml and six records under data/event_components/
+    (enviromech:ec-0001 to ec-0006), one per combination of action, object and process in the committed
+    Key Event records (KE 1542, 177, 890, 896, 1908, 1909), read from the 2026-10-03 AOP-Wiki XML export.
+    Each Key Event''s component now carries that id, as linkml-aop requires since b86b3b6. Moved the linkml-aop
+    pin to 11e16e4 (main after PR #13). Extended scripts/check_ids.py and added tests/test_ids.py. Left
+    for later: ids for the event components of the uncommitted Key Event records (KE 272, 396, 398, 826,
+    827), and a pointer from linkml-aop''s docs to this rule.'

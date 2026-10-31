@@ -12,7 +12,7 @@ ontology-grounded, evidence-backed knowledge base. EnviroMech records how exposu
 prose, titles). Lowercase `enviromech` is only for identifiers: the repository and
 directory name, paths, and package names.
 
-There are three kinds of record, one YAML file each:
+There are four kinds of record, one YAML file each:
 
 - **Observations**, under `data/observations/`, class `ObservationRecord`. This is the
   record kind the mechmaker tooling is built around: every command covers Observations.
@@ -21,6 +21,11 @@ There are three kinds of record, one YAML file each:
   `just report`, and shown in the record browser. `just validate`, `just compliance`,
   the term checks and the exports do not cover them yet; how they should be validated
   is issue #4.
+- **Event components**, under `data/event_components/`, class `EventComponentRecord`.
+  One combination of biological action, object and process, with an EnviroMech id
+  (`enviromech:ec-0001`). A Key Event record writes its components out in full, each
+  with the id of its record here. `just validate-event-components` checks the schema
+  and `just check-ids` the ids; `just qc` runs both.
 - **AOPs**, under `data/aops/`, class `AopRecord`. An AOP names its Key Events, each
   with its role (`MolecularInitiatingEvent`, `KeyEvent`, `AdverseOutcome`), and its Key
   Event Relationships by id. `just validate-aops` checks the schema and
@@ -28,7 +33,7 @@ There are three kinds of record, one YAML file each:
   Event, at the Molecular level, and at most one Adverse Outcome per level. `just qc`
   runs both. Nothing else covers AOPs yet.
 
-All three classes are in `src/enviromech/schema/enviromech.yaml`.
+All four classes are in `src/enviromech/schema/enviromech.yaml`.
 
 The pattern comes from [DisMech](https://github.com/monarch-initiative/dismech).
 The registry of Mechs is [MechRegistry](https://github.com/monarch-initiative/mechregistry).
@@ -60,9 +65,10 @@ just qc                # the offline gate CI blocks on
 just qc-full           # qc plus terms and quotes for every record (network)
 just validate FILE     # closed schema, ontology terms, verbatim quotes (an Observation)
 just validate-key-events   # closed schema, every Key Event record
+just validate-event-components   # closed schema, every event component record
 just validate-aops     # closed schema, every AOP record
 just check-aops        # one MIE, at the Molecular level; at most one AO per level
-just check-ids         # the Observation and Assay ids EnviroMech assigns
+just check-ids         # the Observation, Assay and event component ids EnviroMech assigns
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)
 just new-history ...   # scaffold a history record (dry-run unless --apply)
@@ -102,14 +108,18 @@ the commit in `pyproject.toml` and run `just install` again.
 A record holds an EMOD `Event` or `Observation` under `event:` or `observation:`, with
 EnviroMech's own fields around it.
 
-**Ids.** Terms, event components and levels of biological organization carry no `id`:
-linkml-aop makes it optional on those classes, and the term itself identifies them.
-Never invent one. A Key Event's `id` under `event:` is its AOP-Wiki id. Observations
+**Ids.** Terms and levels of biological organization carry no `id`: linkml-aop makes
+it optional on those classes, and the term itself identifies them. Never invent one.
+An event component keeps a required `id`, so one combination of action, object and
+process can be shared by Key Events. The AOP-Wiki XML gives none, so EnviroMech assigns
+it, as for Observations: it is the number in the event component's record id
+(`enviromech:ec-0001` has `id: 1`). Before giving a Key Event's component a new
+record, look under `data/event_components/` for the same combination and reuse its id. A Key Event's `id` under `event:` is its AOP-Wiki id. Observations
 and Assays keep a required integer `id`, because other EMOD classes refer to them by
 it. EnviroMech creates its own Observations and Assays, so it assigns these ids itself,
 as positive integers: an Observation's is the number in its record id
 (`enviromech:obs-0003` has `observation.id: 3`), and an Assay's is unique among Assays,
-shared when two Observations use the same Assay. `just check-ids` enforces both. The
+shared when two Observations use the same Assay. `just check-ids` enforces all three. The
 AOP-Wiki database ids for levels of biological organization and for biological actions
 are kept for reference in `aop_wiki_cli`, in `src/aop_wiki_cli/database_ids.py`.
 

@@ -1,0 +1,15 @@
+# The event component of AOP-Wiki KE 1542, Inhibition, Mitochondrial complex III, as
+# recorded in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0001
+event_component:
+  id: 1
+  biological_process_id:
+    source: HP
+    source_id: HP:0011924
+    term: Decreased activity of mitochondrial complex III
+  biological_object_id:
+    source: GO
+    source_id: GO:0005750
+    term: mitochondrial respiratory chain complex III
+  biological_action_id:
+    term: decreased

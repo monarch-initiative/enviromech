@@ -363,9 +363,9 @@ means this image.
 dependency pinned to a commit in `pyproject.toml`. `just install` copies the schema out
 of the installed package to where the import finds it. It was first a sibling checkout,
 then for a few hours a vendored copy; neither is used now. The pin is a commit on
-linkml-aop `main` from PR #10, where `id` is optional on the term lookup and event
-component classes. The commit after it makes `id` required on `EventComponent` again;
-the pin moves there once the Key Event records carry event component ids
+linkml-aop `main` after PR #13. `id` is optional on the term lookup classes (PR #10)
+and required on `EventComponent`; EnviroMech assigns event component ids itself, in
+records under `data/event_components/`
 ([issue #5](https://github.com/monarch-initiative/enviromech/issues/5)). It adds
 `KeyEventRecord`, `KeyEventScreening`, `ObservationRecord`, `CausalAgent`, `Term` and
 `EvidenceItem`. `Term` and `EvidenceItem` have the same shape as mechmaker's, so
@@ -404,7 +404,9 @@ linkml-reference-validator against the cached source.
 - **Q12. Placeholder ids. Answered 2026-10-03, then superseded the same day:** negative
   integers were used at first. linkml-aop PR #10 then made `id` optional on the term
   and event component classes, and records leave it out there. Observations and Assays
-  keep a required id; EnviroMech assigns those itself, as positive integers.
+  keep a required id; EnviroMech assigns those itself, as positive integers. Revised
+  2026-10-31: event components have a required id again, which EnviroMech assigns
+  through records under `data/event_components/`.
 - **Q13. One direction for the link. Answered 2026-10-03:** the link is written on the
   Observation only, in EMOD's own `Observation.events`. The list of Observations for a
   Key Event is generated, so the two cannot disagree. This replaces the earlier layout,

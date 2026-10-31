@@ -63,6 +63,10 @@ validate-all:
 validate-key-events:
     uv run linkml-validate -s {{schema}} -C KeyEventRecord data/key_events/*.yaml
 
+# Closed-schema validation of every event component record.
+validate-event-components:
+    uv run linkml-validate -s {{schema}} -C EventComponentRecord data/event_components/*.yaml
+
 # Closed-schema validation of every AOP record.
 validate-aops:
     uv run linkml-validate -s {{schema}} -C AopRecord data/aops/*.yaml
@@ -73,8 +77,9 @@ validate-aops:
 check-aops:
     uv run python scripts/check_aops.py
 
-# Check the ids EnviroMech assigns: each Observation's matches its record id,
-# and each Assay id names one Assay.
+# Check the ids EnviroMech assigns: each Observation's and event component's
+# matches its record id, each Assay id names one Assay, and each event component
+# in a Key Event record matches its event component record.
 check-ids:
     uv run python scripts/check_ids.py
 

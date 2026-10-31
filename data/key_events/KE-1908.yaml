@@ -18,7 +18,8 @@ event:
     source: UBERON
     term: lung epithelium
   event_components:
-  - biological_process_id:
+  - id: 5
+    biological_process_id:
       source: HP
       source_id: HP:0012262
       term: Abnormal ciliary motility

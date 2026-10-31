@@ -14,7 +14,8 @@ event:
     source: UBERON
     term: corpus striatum
   event_components:
-  - biological_process_id:
+  - id: 3
+    biological_process_id:
       source: MP
       source_id: MP:0003244
       term: loss of dopaminergic neurons

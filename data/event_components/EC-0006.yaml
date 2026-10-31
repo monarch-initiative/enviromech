@@ -1,0 +1,11 @@
+# The event component of AOP-Wiki KE 1909, Mucociliary Clearance, Decreased, as recorded
+# in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0006
+event_component:
+  id: 6
+  biological_process_id:
+    source: VT
+    source_id: VT:0001947
+    term: mucociliary clearance trait
+  biological_action_id:
+    term: decreased

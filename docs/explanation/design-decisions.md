@@ -120,4 +120,10 @@ typed, source-anchored evidence.
   out there. `Observation` and `Assay` keep a required id, because other EMOD classes
   refer to them by it. EnviroMech creates its own Observations and Assays, so it assigns
   those ids itself, as positive integers; they are EnviroMech's numbers, not database
-  ids.
+  ids. Revised 2026-10-31 for event components: linkml-aop keeps a required id on
+  `EventComponent`, so that one combination of action, object and process can be
+  shared by Key Events. EnviroMech assigns it, as for Observations: each combination has
+  a record under `data/event_components/` with an id such as `enviromech:ec-0001`, and
+  the component's `id` is the number in it. These are EnviroMech's numbers, not EMOD
+  database ids, and may coincide with them; other users of linkml-aop who need event
+  component ids can follow the same rule.

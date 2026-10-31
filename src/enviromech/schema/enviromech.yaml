@@ -194,6 +194,38 @@ classes:
         multivalued: true
       notes:
 
+  EventComponentRecord:
+    description: >-
+      One event component, in one file under data/event_components/: a
+      combination of a biological action, a biological object and a biological
+      process. The component itself is an EMOD EventComponent; this class gives
+      it an EnviroMech identifier.
+
+      EMOD requires an integer id on every EventComponent, and the AOP-Wiki XML
+      export does not carry the database's. EnviroMech assigns its own, as it
+      does for Observations: the id is the number in the record identifier
+      (enviromech:ec-0001 has event_component.id 1). One combination has one
+      record, so a Key Event that uses a combination already recorded reuses
+      its id. A Key Event record still writes each component out in full under
+      event.event_components, as EMOD requires, with this id; scripts/check_ids.py
+      checks that the two agree.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: >-
+          The event component's EnviroMech identifier, for example
+          enviromech:ec-0001.
+        pattern: "^enviromech:ec-\\d+$"
+        required: true
+      event_component:
+        description: >-
+          The event component, as an EMOD EventComponent. Its id is the number
+          in the record identifier.
+        range: EventComponent
+        inlined: true
+        required: true
+      notes:
 
   AopRecord:
     description: >-

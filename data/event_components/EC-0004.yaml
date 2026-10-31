@@ -1,0 +1,11 @@
+# The event component of AOP-Wiki KE 896, Parkinsonian motor deficits, as recorded in
+# the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0004
+event_component:
+  id: 4
+  biological_object_id:
+    source: MESH
+    source_id: D020734
+    term: Parkinsonian disorders
+  biological_action_id:
+    term: occurrence

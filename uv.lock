@@ -599,7 +599,7 @@ dev = [
 requires-dist = [
     { name = "jinja2", specifier = ">=3.1" },
     { name = "linkml", specifier = ">=1.11.1" },
-    { name = "linkml-aop", git = "https://github.com/EHS-Data-Standards/linkml-aop?rev=df924b2677603c8f4384bf1053a6e4752fd7244e" },
+    { name = "linkml-aop", git = "https://github.com/EHS-Data-Standards/linkml-aop?rev=11e16e4e283d90e6f445e2ea57a29778900cda8a" },
     { name = "linkml-reference-validator", specifier = ">=0.2.1" },
     { name = "linkml-runtime", specifier = ">=1.9.4" },
     { name = "linkml-term-validator", specifier = ">=0.4.5" },
@@ -1325,8 +1325,8 @@ wheels = [
 
 [[package]]
 name = "linkml-aop"
-version = "0.0.0.post43.dev0+df924b2"
-source = { git = "https://github.com/EHS-Data-Standards/linkml-aop?rev=df924b2677603c8f4384bf1053a6e4752fd7244e#df924b2677603c8f4384bf1053a6e4752fd7244e" }
+version = "0.0.0.post48.dev0+11e16e4"
+source = { git = "https://github.com/EHS-Data-Standards/linkml-aop?rev=11e16e4e283d90e6f445e2ea57a29778900cda8a#11e16e4e283d90e6f445e2ea57a29778900cda8a" }
 dependencies = [
     { name = "linkml-runtime" },
 ]

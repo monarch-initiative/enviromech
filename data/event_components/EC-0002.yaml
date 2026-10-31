@@ -1,0 +1,11 @@
+# The event component of AOP-Wiki KE 177, Increase, Mitochondrial dysfunction, as
+# recorded in the 2026-10-03 AOP-Wiki XML export.
+id: enviromech:ec-0002
+event_component:
+  id: 2
+  biological_object_id:
+    source: GO
+    source_id: GO:0005739
+    term: mitochondrion
+  biological_action_id:
+    term: functional change

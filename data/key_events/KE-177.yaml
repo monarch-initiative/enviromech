@@ -18,7 +18,8 @@ event:
     source: UBERON
     term: organ
   event_components:
-  - biological_object_id:
+  - id: 2
+    biological_object_id:
       source: GO
       source_id: GO:0005739
       term: mitochondrion

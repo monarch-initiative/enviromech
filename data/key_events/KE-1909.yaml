@@ -12,7 +12,8 @@ event:
   biological_organization_id:
     term: Individual
   event_components:
-  - biological_process_id:
+  - id: 6
+    biological_process_id:
       source: VT
       source_id: VT:0001947
       term: mucociliary clearance trait
