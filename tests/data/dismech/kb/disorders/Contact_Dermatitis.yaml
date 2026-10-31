@@ -1,0 +1,43 @@
+# Two pathophysiology nodes of dismech's Contact_Dermatitis entry, as on dismech main
+# on 2026-10-31, without evidence or edges. Fixture for tests/test_source_node.py.
+name: Contact Dermatitis
+pathophysiology:
+- name: Skin innate immune activation during sensitization
+  biological_scale: TISSUE
+  description: Early innate immune signaling in allergen-exposed skin shapes the sensitization phase and
+    supports subsequent adaptive immune priming.
+  cell_types:
+  - preferred_term: Langerhans cell
+    term:
+      id: CL:0000453
+      label: Langerhans cell
+  - preferred_term: dendritic cell
+    term:
+      id: CL:0000451
+      label: dendritic cell
+- name: Allergen-specific T-cell priming
+  biological_scale: CELLULAR
+  description: During sensitization, antigen-presenting cells prime allergen-specific T cells, establishing
+    the adaptive immune memory required for later flares.
+  cell_types:
+  - preferred_term: Langerhans cell
+    term:
+      id: CL:0000453
+      label: Langerhans cell
+  - preferred_term: dendritic cell
+    term:
+      id: CL:0000451
+      label: dendritic cell
+  - preferred_term: CD8-positive, alpha-beta T cell
+    term:
+      id: CL:0000625
+      label: CD8-positive, alpha-beta T cell
+  biological_processes:
+  - preferred_term: dendritic cell antigen processing and presentation
+    term:
+      id: GO:0002468
+      label: dendritic cell antigen processing and presentation
+  - preferred_term: T cell activation
+    term:
+      id: GO:0042110
+      label: T cell activation

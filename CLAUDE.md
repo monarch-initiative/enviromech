@@ -74,6 +74,8 @@ just validate-aops     # closed schema, every AOP record
 just check-aops        # one MIE, at the Molecular level; at most one AO per level
 just key-event-from-snapshot CACHE KE_ID   # start a Key Event record from an aop_wiki_cli events cache
 just crosswalk AOP_ID ENTRY...   # run dismech's AOP crosswalk for an AOP record (needs a dismech checkout)
+just source-node ENTRY "NODE"   # a dismech node as a source_nodes item (needs a dismech checkout)
+just check-source-nodes   # aggregated dismech nodes that changed since they were copied (needs a dismech checkout)
 just check-ids         # the Observation, Assay and event component ids EnviroMech assigns
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)
@@ -192,6 +194,7 @@ Project skills live in `.claude/skills/`. Use them.
 | `github-workflows` | turn on, configure, adapt or debug the GitHub workflows |
 | `site-design` | change how the documentation site and record browser look |
 | `screen-aop-key-event` | screen an AOP-Wiki Key Event's level before its properties are used |
+| `crosswalk-key-event` | map an AOP's Key Events onto dismech nodes and write each record's aggregation |
 
 
 ## Documentation

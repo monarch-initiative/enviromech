@@ -88,6 +88,16 @@ key-event-from-snapshot events_json ke_id:
 crosswalk aop_id +entries:
     uv run python scripts/crosswalk.py "{{aop_id}}" {{entries}}
 
+# Print a dismech node as a source_nodes item for a Key Event record's aggregation:
+# `just source-node Contact_Dermatitis "Allergen-specific T-cell priming"`. Uses $DISMECH_ROOT.
+source-node entry node:
+    uv run python scripts/source_node.py "{{entry}}" "{{node}}"
+
+# Check every dismech source node in data/key_events/ against the dismech checkout
+# at $DISMECH_ROOT: renamed or removed nodes, and changed levels or terms. Not in qc.
+check-source-nodes:
+    uv run python scripts/check_source_nodes.py
+
 # Check the ids EnviroMech assigns: each Observation's and event component's
 # matches its record id, each Assay id names one Assay, and each event component
 # in a Key Event record matches its event component record.

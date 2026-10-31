@@ -1,0 +1,30 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: crosswalk
+  path: scripts/source_node.py
+session:
+  id: 2026-10-31T234705Z-claude-code-7e624d
+  timestamp: '2026-10-31T23:47:05Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: CREATE
+  outcome: needs_followup
+  summary: Add just source-node, just check-source-nodes and the crosswalk-key-event skill
+  details: 'Added scripts/source_node.py (just source-node), which prints a dismech pathophysiology node
+    as a source_nodes item: reference, entry URI, level mapped to EMOD, process and object terms with
+    labels, action from process modifiers, confidence, and the description as a comment. Against dismech
+    it reproduces four of the five existing source_nodes items exactly. Added scripts/check_source_nodes.py
+    (just check-source-nodes), which compares every aggregated dismech node with dismech today; its first
+    run finds that KE 1908''s Ciliary Dysfunction node now also binds GO:0005929, GO:0005930, GO:0036157,
+    UBERON:0002185, UBERON:0003126 and UBERON:0005384, left for a curator. Added the crosswalk-key-event
+    skill for the judgement steps. Tests use tests/data/dismech, two Contact_Dermatitis nodes. Neither
+    recipe is in just qc. Follow-up: the AggregationRelationEnum value for a node broader than its Event
+    (KE 398), and KE 396''s wait on monarch-initiative/dismech#16068.'

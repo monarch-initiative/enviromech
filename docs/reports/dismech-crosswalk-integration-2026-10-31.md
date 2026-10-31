@@ -1,7 +1,8 @@
 # Using dismech's AOP crosswalk script from EnviroMech
 
 **Date:** 2026-10-31
-**Status:** step 1 is built (`just crosswalk`, `scripts/crosswalk.py`); the rest is a plan.
+**Status:** steps 1, 2, 3 and the drift check in step 5 are built; step 4 holds the decisions
+still open, and one item in step 5 is left for later.
 **Depends on:** [dismech#16232](https://github.com/monarch-initiative/dismech/pull/16232),
 which adds `scripts/aop_dismech_crosswalk.py`. Open and approved on this date.
 **For:** [#14](https://github.com/monarch-initiative/enviromech/issues/14), the AOP 40
@@ -62,7 +63,10 @@ of its branch.
   that checkout has uncommitted changes to `kb/`.
 - **Not in `just qc`.** It needs two sibling checkouts that CI does not have.
 
-### 2. A script that turns a chosen match into a `source_nodes` item
+### 2. A script that turns a chosen match into a `source_nodes` item (built)
+
+`just source-node ENTRY "NODE"`, `scripts/source_node.py`.
+
 
 Writing a `SourceNode` by hand means copying the node's name, level, process and
 object terms with their labels, and the entry's URI, from the dismech YAML. A small
@@ -81,9 +85,13 @@ record's `aggregation`, as `KE-272.yaml` has it:
 It reads the entry's YAML from the dismech checkout, which is content, not dismech
 code. It leaves `rationale`, `aggregation_relation` and `level_mismatch_note` to the
 curator. It is tested on fixtures; the existing `KE-272.yaml` node is the expected
-output for its case.
+output for its case. Against dismech today it reproduces four of the five existing
+`source_nodes` items exactly; the fifth is the drift case in step 5.
 
-### 3. A skill for the crosswalk itself
+### 3. A skill for the crosswalk itself (built)
+
+`.claude/skills/crosswalk-key-event/SKILL.md`.
+
 
 A `crosswalk-key-event` skill, for the judgement part. It is EnviroMech's own, because
 it ends in an EnviroMech record; it points at dismech's `aop-wiki` skill for the data
@@ -111,11 +119,15 @@ rather than copying it. Its steps:
 
 ### 5. Later
 
-- **A drift check.** A recipe that resolves every `source_node_ref` in
-  `data/key_events/` against the current dismech checkout and reports nodes that were
-  renamed, removed, or whose level or terms changed since the aggregation was written.
-- **The dismech commit in the script's own output.** Step 1 records it from the
-  outside. If more consumers appear, the script could print it itself; that would be a
+- **A drift check (built).** `just check-source-nodes`, `scripts/check_source_nodes.py`,
+  resolves every dismech source node in `data/key_events/` against the current dismech
+  checkout and reports nodes that were renamed, removed, or whose level or terms changed
+  since the aggregation was written. Its first run finds one: dismech's
+  `Primary_Ciliary_Dyskinesia` node `Ciliary Dysfunction`, aggregated into KE 1908, now
+  also binds three GO cellular components and three UBERON locations. Whether KE 1908's
+  aggregation should take them is a curation decision, left open.
+- **The dismech commit in the script's own output (not done).** Step 1 records it from
+  the outside. If more consumers appear, the script could print it itself; that would be a
   dismech change.
 
 ## Not planned
