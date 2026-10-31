@@ -1,0 +1,21 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: aop-report-browser
+  path: src/enviromech/render.py
+session:
+  id: 2026-10-31T200407Z-claude-code-ea7852
+  timestamp: '2026-10-31T20:04:07Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  summary: Count AOP records in the report and show them in the record browser
+  details: just report and the corpus page now count AOP records under data/aops/, by status. The record
+    browser has a page for each AOP, titled by its title; its Key Events link to their pages, and each
+    Key Event's page lists the AOPs it is in with its role. Enum values written in CamelCase (MolecularInitiatingEvent)
+    now read as words. KERs have no records yet, so they stay as ids.

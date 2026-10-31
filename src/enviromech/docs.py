@@ -131,9 +131,10 @@ def generate() -> None:
         f"| Measure | Count |\n|---|---|\n{rows}\n\n"
         f"## Records by status\n\n| Status | Records |\n|---|---|\n{status}\n"
         + "".join(
-            f"\n## {k.replace('_', ' ').capitalize()}\n\n| Value | Key Events |\n|---|---|\n"
+            f"\n## {heading} by {k.split('_by_')[1].replace('_', ' ')}\n\n| Value | {heading} |\n|---|---|\n"
             + ("\n".join(f"| {a} | {b} |" for a, b in v.items()) or "| none | 0 |") + "\n"
-            for k, v in stats.items() if k.startswith("key_events_by_")
+            for prefix, heading in (("key_events_by_", "Key Events"), ("aops_by_", "AOPs"))
+            for k, v in stats.items() if k.startswith(prefix)
         ),
         encoding="utf-8",
     )

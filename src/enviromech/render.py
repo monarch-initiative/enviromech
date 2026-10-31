@@ -39,6 +39,7 @@ from markupsafe import Markup, escape
 
 from . import site
 from .paths import (
+    AOPS_DIR,
     KEY_EVENTS_DIR,
     MECH_NAME,
     PACKAGE_DIR,
@@ -94,10 +95,16 @@ def schema_info() -> tuple[dict[str, tuple[str | None, str | None]], dict[str, s
     return slots, values
 
 
+# Sections a page derives from other records, which the schema does not name.
+DERIVED_LABELS = {"aops": "AOPs"}
+
+
 def label(key: str) -> str:
     title = schema_info()[0].get(key, (None, None))[0]
     if title:
         return title
+    if key in DERIVED_LABELS:
+        return DERIVED_LABELS[key]
     text = str(key).replace("_", " ")
     return text[:1].upper() + text[1:]
 
@@ -134,8 +141,13 @@ def ref_text(ref: str, keep: int = 64) -> str:
     return text[:head] + "…" + text[-(keep - head - 1):]
 
 
+def enum_text(value: str) -> str:
+    """An enum value as words: UPPER_SNAKE and CamelCase alike (MolecularInitiatingEvent)."""
+    return re.sub(r"(?<=[a-z])(?=[A-Z])", " ", str(value)).replace("_", " ").lower()
+
+
 def badge(value: str, kind: str = "") -> Markup:
-    text = str(value).replace("_", " ").lower()
+    text = enum_text(value)
     tip = schema_info()[1].get(str(value)) or str(value)
     cls = f"badge {kind} v-{str(value).lower()}".strip()
     return Markup('<span class="{}" title="{}">{}</span>').format(cls, tip, text)
@@ -366,7 +378,7 @@ def cell(v) -> str:
     if isinstance(v, list):
         return ", ".join(cell(x) for x in v)
     if isinstance(v, str) and v in schema_info()[1]:
-        return v.replace("_", " ").lower()
+        return enum_text(v)
     return "" if v is None else str(v)
 
 
@@ -403,6 +415,38 @@ def cross_link(records: list[dict]) -> None:
             r["data"] = {**r["data"], "observations": bearing[r["stem"]]}
 
 
+def cross_link_aops(records: list[dict]) -> None:
+    """Link each AOP to its Key Events, and each Key Event to the AOPs it is in.
+
+    An AOP names its Key Events by CURIE (aop.events:1542), each with its role.
+    Where a Key Event record has that id, the CURIE becomes a link to its page.
+    Each Key Event's page gains the list of AOPs that name it, with its role in
+    each; that list is not in the Key Event's file, it is derived here.
+    """
+    by_curie = {r["data"].get("id"): r for r in records if r["data"]["kind"] == "Key Event"}
+    member_of: dict[str, list[Markup]] = {}
+    for r in records:
+        if r["data"]["kind"] != "AOP":
+            continue
+        linked = []
+        for member in r["data"].get("key_events") or []:
+            target = by_curie.get(member.get("event"))
+            if target is None:
+                linked.append(member)
+                continue
+            number = (target["data"].get("event") or {}).get("id")
+            text = f"KE {number}: {target['data']['name']}"
+            linked.append({**member, "event": link(f"{target['stem']}.html", text)})
+            role = enum_text(member.get("role") or "")
+            name = str(r["data"]["name"])
+            back = link(f"{r['stem']}.html", f"{name} ({role})" if role else name)
+            member_of.setdefault(target["stem"], []).append(back)
+        r["data"] = {**r["data"], "key_events": linked}
+    for r in records:
+        if r["stem"] in member_of:
+            r["data"] = {**r["data"], "aops": member_of[r["stem"]]}
+
+
 def build() -> dict[Path, str]:
     settings = site.load()
     errors = site.problems(settings)
@@ -428,7 +472,15 @@ def build() -> dict[Path, str]:
             continue
         title = (data.get("event") or {}).get("title") or path.stem
         records.append({"stem": path.stem, "data": {"kind": "Key Event", "name": title, **data}})
+    # AOPs are a third record kind, titled by the AOP's title.
+    for path in iter_records(AOPS_DIR):
+        data = load(path) or {}
+        if not isinstance(data, dict):
+            continue
+        title = (data.get("aop") or {}).get("title") or path.stem
+        records.append({"stem": path.stem, "data": {"kind": "AOP", "name": title, **data}})
     cross_link(records)
+    cross_link_aops(records)
     kinds: dict[str, int] = {}
     for r in records:
         kinds[r["data"]["kind"]] = kinds.get(r["data"]["kind"], 0) + 1

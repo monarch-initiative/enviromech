@@ -31,7 +31,8 @@ There are four kinds of record, one YAML file each:
   Event Relationships by id. `just validate-aops` checks the schema and
   `just check-aops` the rules the schema cannot express: one Molecular Initiating
   Event, at the Molecular level, and at most one Adverse Outcome per level. `just qc`
-  runs both. Nothing else covers AOPs yet.
+  runs both. `just report` counts them and the record browser shows them, each AOP
+  linked to its Key Events and each Key Event to the AOPs it is in, with its role.
 
 All four classes are in `src/enviromech/schema/enviromech.yaml`.
 

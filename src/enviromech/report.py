@@ -12,7 +12,7 @@ import json
 import sys
 from collections import Counter
 
-from .paths import KEY_EVENTS_DIR, MECH_NAME, RECORDS_DIR, REPO_ROOT
+from .paths import AOPS_DIR, KEY_EVENTS_DIR, MECH_NAME, RECORDS_DIR, REPO_ROOT
 from .validate import iter_records, load
 
 
@@ -54,6 +54,20 @@ def key_events() -> dict:
     }
 
 
+def aops() -> dict:
+    """Counts of the AOP records: how many, and by review status."""
+    paths = iter_records(AOPS_DIR)
+    status: Counter = Counter()
+    for p in paths:
+        data = load(p) or {}
+        status[data.get("status", "UNSET")] += 1
+    return {
+        "aops_dir": str(AOPS_DIR.relative_to(REPO_ROOT)),
+        "aops": len(paths),
+        "aops_by_status": dict(sorted(status.items())),
+    }
+
+
 def compute() -> dict:
     paths = iter_records()
     status: Counter = Counter()
@@ -73,6 +87,7 @@ def compute() -> dict:
         "by_status": dict(sorted(status.items())),
         **{k: counts[k] for k in sorted(counts)},
         **key_events(),
+        **aops(),
     }
 
 

@@ -22,6 +22,8 @@ RECORDS_DIR = REPO_ROOT / "data/observations"
 # RECORDS_DIR only; the report and the record browser also read this
 # directory. Everything else about Key Events is issue #4.
 KEY_EVENTS_DIR = REPO_ROOT / "data/key_events"
+# AOPs are a third record kind, read by the report and the record browser.
+AOPS_DIR = REPO_ROOT / "data/aops"
 HISTORY_DIR = REPO_ROOT / "history"
 REFERENCES_DIR = REPO_ROOT / "references_cache"
 BUILD_DIR = REPO_ROOT / "build"
