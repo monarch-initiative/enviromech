@@ -1,0 +1,34 @@
+history_version: 1
+target:
+  kind: schema
+  slug: AggregationRelationEnum
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-01T040142Z-claude-code-b9469c
+  timestamp: '2026-11-01T04:01:42Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/32
+events:
+- type: REVIEW
+  outcome: changed
+  summary: 'Carry skos:mappingRelation on aggregation_relation after review of #32'
+  details: 'Review round on #32. The review observed that narrower_than is the only value whose name carries
+    a direction and that the name does not say which side is narrower, and asked for SKOS alignment through
+    slot_uri with local value names kept. Added slot_uri: skos:mappingRelation to KeyEventAggregation.aggregation_relation,
+    the SKOS superproperty of narrowMatch, broadMatch, relatedMatch and exactMatch, so an export emits
+    a standard predicate for a mapping between two knowledge bases. Confirmed the CURIE expands to http://www.w3.org/2004/02/skos/core#mappingRelation
+    through the prefix already declared in the schema. Deliberately did not map each permissible value
+    to a SKOS sub-property with meaning:. The slot is set-level where those properties are pairwise, and
+    both records using constitutes (KE-1908, KE-1909) lump two nodes, so exactMatch holds for the union
+    and not for any one source node; an asymmetric mapping of two values out of three would be worse than
+    none. Also stated the direction convention in the enum''s own description, that a value reads as ''the
+    source nodes <value> the Event'', so a directional value added later is unambiguous without a rename.
+    No value was renamed and no record changed, so no migration was needed.'

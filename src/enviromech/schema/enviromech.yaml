@@ -357,7 +357,17 @@ classes:
       specificity the Event simplifies away stays recoverable from the record.
     attributes:
       aggregation_relation:
-        description: How the set of source nodes, taken together, relates to the Event.
+        description: >-
+          How the set of source nodes, taken together, relates to the Event. This is
+          a mapping between concepts of two knowledge bases, which is what SKOS
+          calls a mapping relation, so the slot carries skos:mappingRelation and an
+          export emits that predicate. The permissible values keep local names
+          because they are read in the YAML, and because this slot is set-level
+          where the SKOS sub-properties (narrowMatch, broadMatch, relatedMatch,
+          exactMatch) are pairwise: in a lumping, exactMatch holds for the union of
+          the source nodes and not for any one of them, so no value is mapped to a
+          sub-property.
+        slot_uri: skos:mappingRelation
         range: AggregationRelationEnum
         required: true
       source_nodes:
@@ -875,7 +885,12 @@ enums:
         - rdfs:subClassOf
 
   AggregationRelationEnum:
-    description: How a set of source nodes relates to the Event they are aggregated into.
+    description: >-
+      How a set of source nodes relates to the Event they are aggregated into. Every
+      value is read in one direction, with the source nodes as the subject and the
+      Event as the object: "the source nodes <value> the Event". So narrower_than
+      says the nodes are narrower, not the Event. A directional value added later
+      must read the same way round.
     permissible_values:
       constitutes:
         description: >-
