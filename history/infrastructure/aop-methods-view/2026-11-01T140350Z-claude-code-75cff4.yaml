@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: aop-methods-view
+  path: src/enviromech/aop_graph.py
+session:
+  id: 2026-11-01T140350Z-claude-code-75cff4
+  timestamp: '2026-11-01T14:03:50Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/47
+events:
+- type: EDIT
+  outcome: changed
+  summary: 'Add a Methods view to the AOP graph: Key Events, assays only, in both, dismech models only,
+    dismech nodes'
+  details: 'aop_graph.py adds each Key Event''s assays (event.assays) to the graph and sorts assays and
+    models into three groups: EnviroMech assays with no SAME_METHOD match to a model in the graph, methods
+    in both (a SAME_METHOD match whose model is on a node a Key Event aggregates), and dismech models
+    with no such match. Models on nodes no Key Event aggregates never enter the graph. aop_graph.js was
+    reworked into one drawer with two views, switched by Pathway/Methods; Pathway is unchanged. In Methods,
+    Key Events join their assays and shared methods directly, methods join their nodes with dismech''s
+    relationship, and a SAME_READOUT_OTHER_SYSTEM match is a dashed line. For AOP 40: 10 assays only,
+    3 in both (h-CLAT, GARDskin, LLNA), 5 dismech models only. Checked in Chromium at 1440 px light and
+    dark and 390 px: no script errors, no page overflow; the figure may widen past the text column to
+    1240 px. 5 new tests.'

@@ -21,6 +21,10 @@ and reports:
   list does not have. These read dismech through scripts/source_models.py, which
   imports dismech's own iter_model_links and entity_refs from the checkout.
 
+Each assay record's model_matches under data/assays is checked too: a
+model_ref that no longer resolves in dismech is reported, since the match then
+names a model that was renamed or removed.
+
 A node with no models list is not compared, since absence means the list has not
 been written; the report notes how many models dismech links to it.
 
@@ -159,6 +163,30 @@ def check_with_notes(directory: Path, root: Path, *, models: bool | None = None
     return problems, checked, notes
 
 
+def check_model_matches(assays: Path, root: Path) -> tuple[list[str], int]:
+    """Assay records' model_matches whose model_ref no longer resolves in dismech."""
+    if not assays.is_dir() or not (root / "src" / "dismech" / "model_links.py").exists():
+        return [], 0
+    _, entity_refs = source_models.dismech_modules(root)
+    problems, checked, entries = [], 0, {}
+    for path in sorted(assays.glob("*.yaml")):
+        record = yaml.safe_load(path.read_text()) or {}
+        for match in record.get("model_matches") or []:
+            ref = match.get("model_ref") or ""
+            entry, _, local = ref.partition(":")
+            checked += 1
+            if entry not in entries:
+                try:
+                    entries[entry] = source_models.load_entry(root, entry)
+                except SystemExit as gone:
+                    problems.append(f"{path.name}: {ref}: {gone}")
+                    entries[entry] = None
+                    continue
+            if entries[entry] is not None and not entity_refs.resolve_entity_ref(entries[entry], local):
+                problems.append(f"{path.name}: matched model {ref}: renamed or removed in dismech")
+    return problems, checked
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("directory", nargs="?", type=Path, default=Path("data/key_events"))
@@ -168,11 +196,14 @@ def main(argv: list[str] | None = None) -> int:
     if not (root / "kb" / "disorders").is_dir():
         raise SystemExit(f"{root} is not a dismech checkout (no kb/disorders/)")
     problems, checked, notes = check_with_notes(args.directory, root)
+    matched_problems, matched = check_model_matches(args.directory.parent / "assays", root)
+    problems += matched_problems
     for problem in problems:
         print(f"DIFF {problem}")
     for note in notes:
         print(f"NOTE {note}")
-    print(f"{checked} dismech source node(s) checked against {root}, {len(problems)} difference(s).")
+    print(f"{checked} dismech source node(s) and {matched} matched model(s) checked against {root}, "
+          f"{len(problems)} difference(s).")
     return 1 if problems else 0
 
 

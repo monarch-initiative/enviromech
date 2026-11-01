@@ -523,6 +523,8 @@ def build() -> dict[Path, str]:
     aop_graphs = graphs(
         {r["stem"]: r["data"] for r in records if r["data"]["kind"] == "AOP"},
         {r["stem"]: r["data"] for r in records if r["data"]["kind"] == "Key Event"},
+        {path.stem: load(path) or {} for path in iter_records(ASSAYS_DIR)},
+        {path.stem: load(path) or {} for path in iter_records(TEST_GUIDELINES_DIR)},
     )
     for r in records:
         if r["stem"] in aop_graphs and r["data"]["kind"] == "AOP":

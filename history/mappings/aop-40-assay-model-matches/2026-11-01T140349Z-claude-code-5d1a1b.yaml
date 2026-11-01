@@ -1,0 +1,28 @@
+history_version: 1
+target:
+  kind: mapping
+  slug: aop-40-assay-model-matches
+  path: data/assays
+session:
+  id: 2026-11-01T140349Z-claude-code-5d1a1b
+  timestamp: '2026-11-01T14:03:49Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/47
+events:
+- type: EDIT
+  outcome: changed
+  summary: Match AOP 40's assays to dismech Contact_Dermatitis models
+  details: 'Compared each assay with the dismech models'' descriptions at dismech ecf1266123c. SAME_METHOD:
+    h-CLAT (assay 10), GARDskin (13), LLNA (14), GPMT (16), Buehler (17). SAME_READOUT_OTHER_SYSTEM: KeratinoSens
+    (8) and LuSens (9) with Keratinocyte Keap1-Nrf2-ARE sensitizer-response models, which reads Nrf2 in
+    primary and N/TERT keratinocytes and reconstructed epidermis and names KeratinoSens and LuSens as
+    methods for the same biology, not curating them itself. GPMT and Buehler''s dismech models are linked
+    to Re-exposure-driven effector T-cell recruitment, which no AOP 40 Key Event aggregates. No match
+    for DPRA, ADRA, kDPRA, U-SENS, IL-8 Luc or HRIPT: dismech curates none of them as a model. just check-source-nodes:
+    all 7 matched models resolve.'

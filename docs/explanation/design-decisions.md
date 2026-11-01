@@ -205,7 +205,15 @@ its assays the same way as any other. Matching assays to components, through EMO
 **Consequence:** Assay ids are one series across Assay records and the Observations'
 inline Assays. The first mappings are AOP 40's, from Aleksic et al. 2024
 (PMID:38385441), as extracted into dismech's skin sensitization models template.
-Linking an Assay to the dismech model that curates the same method is not done yet.
+An Assay record also says which dismech models match it (`model_matches`), each
+either `SAME_METHOD` (dismech's model is this assay, such as h-CLAT, GARDskin or the
+LLNA) or `SAME_READOUT_OTHER_SYSTEM` (dismech's model reads the same biology in other
+test systems, as its keratinocyte Keap1-Nrf2-ARE models do for KeratinoSens and
+LuSens). A match is EnviroMech's judgement from the two descriptions, and
+`just check-source-nodes` reports a matched model that dismech has renamed or removed.
+An AOP page's "Methods" view groups methods by these matches: assays only in
+EnviroMech, methods in both, and dismech models only in dismech. Only dismech models
+on a node that a Key Event aggregates are shown.
 
 **Status:** adopted 2026-11-01 ([#45](https://github.com/monarch-initiative/enviromech/issues/45)).
 

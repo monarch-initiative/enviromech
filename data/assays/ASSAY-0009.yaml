@@ -13,6 +13,13 @@ assay:
   - 2
 mapping_reference: PMID:38385441
 mapping_extraction: https://github.com/monarch-initiative/dismech/blob/a0dc2ff5bc7ef0cfad94825495d805aadbbdedf6/templates/skin_sensitization_aop_models.md
+model_matches:
+- model_ref: Contact_Dermatitis:experimental_models#Keratinocyte Keap1-Nrf2-ARE sensitizer-response models
+  match: SAME_READOUT_OTHER_SYSTEM
+  notes: >-
+    dismech's model reads Nrf2 activation in primary and N/TERT keratinocytes and
+    the Leiden and N/TERT reconstructed epidermis, and names LuSens as a TG 442D
+    method reading the same biology; it does not curate LuSens itself.
 notes: The Key Event mapping and the guideline are the review's, from the roster extracted
   into the dismech template; dismech caches only the review's abstract, so the roster has
   not been checked against its full text. The description follows the readout reported, with
