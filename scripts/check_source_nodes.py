@@ -13,7 +13,16 @@ and reports:
 - a node or entry that no longer exists;
 - a source_node_ref that does not agree with source_entry and node_name;
 - a source_level, process, object, action or confidence that differs from what
-  scripts/source_node.py would write for the node today.
+  scripts/source_node.py would write for the node today;
+- for a node with a models list, a model_ref that does not agree with its
+  model_section and model_name, a model that was renamed or removed (its ref no
+  longer resolves), a model that no longer links to the node or links to it with
+  another relationship, and a curated model dismech now links to the node that the
+  list does not have. These read dismech through scripts/source_models.py, which
+  imports dismech's own iter_model_links and entity_refs from the checkout.
+
+A node with no models list is not compared, since absence means the list has not
+been written; the report notes how many models dismech links to it.
 
 A difference is not always an error: the curator may have left a term out on
 purpose, and notes should then say so. The report is for a curator to read. Exits 1
@@ -31,6 +40,9 @@ HERE = Path(__file__).resolve().parent
 _spec = importlib.util.spec_from_file_location("source_node", HERE / "source_node.py")
 source_node = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(source_node)
+_spec = importlib.util.spec_from_file_location("source_models", HERE / "source_models.py")
+source_models = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(source_models)
 
 COMPARED = ("source_level", "biological_organization_id", "processes", "objects",
             "biological_action_id", "source_confidence")
@@ -62,8 +74,59 @@ def differences(recorded: dict, current: dict) -> list[str]:
     return found
 
 
-def check(directory: Path, root: Path) -> tuple[list[str], int]:
-    problems, checked = [], 0
+def _model_key(item: dict) -> tuple:
+    return item.get("model_ref"), item.get("source_relationship")
+
+
+def model_differences(entry: str, recorded: list[dict], current: list[dict],
+                      resolves) -> list[str]:
+    """Differences between a node's recorded models and what dismech links to it today.
+
+    ``current`` is what scripts/source_models.py writes for the node now, and
+    ``resolves`` says whether a SECTION#KEY reference resolves in the entry.
+    """
+    found, changed = [], set()
+    now = {_model_key(i) for i in current}
+    now_refs = {i["model_ref"]: i.get("source_relationship") for i in current}
+    for item in recorded:
+        ref, section, name = item.get("model_ref"), item.get("model_section"), item.get("model_name")
+        if ref != f"{entry}:{section}#{name}":
+            found.append(f"model {ref!r} does not agree with model_section and model_name")
+        if _model_key(item) in now:
+            continue
+        local = ref.split(":", 1)[1] if ref and ":" in ref else ref
+        if not resolves(local):
+            found.append(f"model {ref}: renamed or removed in dismech")
+        elif ref in now_refs:
+            changed.add(ref)
+            found.append(f"model {ref}: source_relationship {item.get('source_relationship')!r} here, "
+                         f"{now_refs[ref]!r} in dismech")
+        else:
+            found.append(f"model {ref}: no longer linked to this node in dismech")
+    was = {_model_key(i) for i in recorded}
+    for item in current:
+        if _model_key(item) not in was and item["model_ref"] not in changed:
+            found.append(f"model {item['model_ref']}: dismech now also links it to this node "
+                         f"({item.get('source_relationship')})")
+    return found
+
+
+def check(directory: Path, root: Path, *, models: bool | None = None) -> tuple[list[str], int]:
+    """Differences across the records, and the number of nodes checked.
+
+    ``models`` turns the model checks on or off; by default they run when ``root``
+    has dismech's code (src/dismech/model_links.py), which they import.
+    """
+    return check_with_notes(directory, root, models=models)[:2]
+
+
+def check_with_notes(directory: Path, root: Path, *, models: bool | None = None
+                     ) -> tuple[list[str], int, list[str]]:
+    if models is None:
+        models = (root / "src" / "dismech" / "model_links.py").exists()
+    if models:
+        _, entity_refs = source_models.dismech_modules(root)
+    problems, checked, notes = [], 0, []
     for path in sorted(directory.glob("*.yaml")):
         record = yaml.safe_load(path.read_text()) or {}
         for recorded in (record.get("aggregation") or {}).get("source_nodes") or []:
@@ -82,7 +145,18 @@ def check(directory: Path, root: Path) -> tuple[list[str], int]:
                 continue
             current, _ = source_node.source_node(entry, node)
             problems += [f"{where}: {d}" for d in differences(recorded, current)]
-    return problems, checked
+            if not models:
+                continue
+            linked, _ = source_models.models_for_node(root, entry, name)
+            if "models" not in recorded:
+                if linked:
+                    notes.append(f"{where}: no models list; dismech links {len(linked)} curated model(s)")
+                continue
+            data = source_models.load_entry(root, entry)
+            problems += [f"{where}: {d}" for d in model_differences(
+                entry, recorded["models"], linked,
+                lambda ref, data=data: entity_refs.resolve_entity_ref(data, ref))]
+    return problems, checked, notes
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -93,9 +167,11 @@ def main(argv: list[str] | None = None) -> int:
     root = source_node.dismech_root(args.dismech_root)
     if not (root / "kb" / "disorders").is_dir():
         raise SystemExit(f"{root} is not a dismech checkout (no kb/disorders/)")
-    problems, checked = check(args.directory, root)
+    problems, checked, notes = check_with_notes(args.directory, root)
     for problem in problems:
         print(f"DIFF {problem}")
+    for note in notes:
+        print(f"NOTE {note}")
     print(f"{checked} dismech source node(s) checked against {root}, {len(problems)} difference(s).")
     return 1 if problems else 0
 

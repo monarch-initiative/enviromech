@@ -1,0 +1,27 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-272
+  path: data/observations/KE-272.yaml
+session:
+  id: 2026-11-01T043008Z-claude-code-6d86de
+  timestamp: '2026-11-01T04:30:08Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/34
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Add the dismech models linked to KE 272's source node
+  details: 'Added aggregation.source_nodes[0].models from just source-models Contact_Dermatitis ''Allergen-specific
+    T-cell priming'' against dismech 4ab406e81bf: the Human T-cell priming assay (experimental_models,
+    RECAPITULATES) and the Mouse local lymph node assay (animal_models, MEASURES). Contact_Dermatitis
+    changed since aef740d7b8a only by quote_role on evidence, so the node and its links are as at the
+    aggregation. No other field changed; just check-source-nodes reports no model difference.'

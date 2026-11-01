@@ -93,8 +93,15 @@ crosswalk aop_id +entries:
 source-node entry node:
     uv run python scripts/source_node.py "{{entry}}" "{{node}}"
 
+# Print the curated dismech models linked to a node, as the models list of its
+# source_nodes item: `just source-models Contact_Dermatitis "Allergen-specific T-cell priming"`.
+# Imports dismech's iter_model_links from $DISMECH_ROOT.
+source-models entry node:
+    uv run python scripts/source_models.py "{{entry}}" "{{node}}"
+
 # Check every dismech source node in data/key_events/ against the dismech checkout
-# at $DISMECH_ROOT: renamed or removed nodes, and changed levels or terms. Not in qc.
+# at $DISMECH_ROOT: renamed or removed nodes, changed levels or terms, and models
+# renamed, removed or re-linked. Not in qc.
 check-source-nodes:
     uv run python scripts/check_source_nodes.py
 

@@ -122,7 +122,21 @@ just source-node <entry> "<node name>"
 prints the `source_nodes` item: the reference, level, terms with their labels and
 URI as dismech records them, with the node's description as a comment. Paste it
 under `aggregation.source_nodes`, and add the node's `notes` (what dismech curates on
-it that bears on the Event). Then write, in your own words:
+it that bears on the Event). Then add the models dismech links to the node:
+
+```bash
+just source-models <entry> "<node name>"
+```
+
+prints the node's `models` list: each curated model dismech links to the node, by
+its cross-entry reference, with the link's `relationship` as `source_relationship`.
+Paste it into the node's item, before its `notes`. It is copied, not judged: list
+every model the script prints, and none it does not. Model systems of a proposed
+experiment are left out, as dismech leaves them off the node. A model linked to two
+aggregated nodes is listed under each. If the script prints that dismech links no
+model, leave `models` out.
+
+Then write, in your own words:
 
 - **`rationale`**: why these nodes are this one measurable change. Compare the
   Event's components, not its title, with the nodes' terms (KE 1908 rests on its
@@ -156,7 +170,9 @@ further than `PROPOSED`.
 ## Later: when dismech changes
 
 `just check-source-nodes` reports aggregated nodes that dismech has renamed,
-removed, or re-bound since the aggregation was written. A difference is a prompt to
+removed, or re-bound since the aggregation was written, and, for a node with a
+`models` list, models renamed, removed, re-linked or newly linked. A node with no
+`models` list gets a NOTE with the number of models dismech links to it. A difference is a prompt to
 re-read the node, not an instruction to copy the new terms: decide whether the
 aggregation still holds, update it or its notes, and record that in a history
 record.

@@ -141,6 +141,36 @@ the outcome is part of an AOP. Text quoted from a source keeps its own wording.
 
 **Status:** adopted 2026-10-31.
 
+## 7. dismech models are referenced through the nodes they link to, not copied
+
+**Decision:** a dismech node aggregated into a Key Event carries, in
+`SourceNode.models`, a `SourceModel` reference to each curated dismech model linked to
+that node. The reference holds the model's cross-entry reference
+(`Contact_Dermatitis:animal_models#Mouse local lymph node assay`), its section, the
+name the reference resolves on, and the link's `relationship`, copied verbatim as
+`source_relationship`. Nothing else about the model is copied. The list has one item per
+dismech link, so a model linked to two aggregated nodes appears under each. Model systems
+of a proposed experiment are left out, as dismech leaves them off the node.
+`scripts/source_models.py` writes the list and `scripts/check_source_nodes.py` checks it.
+Both import dismech's own `iter_model_links` and `entity_refs` from a dismech checkout.
+They do not repeat that code.
+
+**Rationale:** the test methods for an AOP, such as the LLNA and h-CLAT for AOP 40, are
+already curated in dismech as models. Referencing them gives a chain a query can follow,
+from Key Event to node to model, without curating them a second time. `relationship` is
+kept because, for a regulatory assay, measuring a node and perturbing it are different
+claims. A model has no stable identifier in dismech, so a rename breaks the reference
+silently, which is why the check resolves every reference. Each link carries its own
+relationship, so the list is per link rather than per model.
+
+**Open:** whether a dismech model that predicts an Event with no dismech node, such as
+the two `Contact_Dermatitis` computational models for AOP 40's adverse outcome, KE 827,
+should be attached to the Key Event record directly. That relationship would be
+EnviroMech's own claim, not a copy of one of dismech's
+([#34](https://github.com/monarch-initiative/enviromech/issues/34)).
+
+**Status:** adopted 2026-11-01, for models reached through a node.
+
 ## Open and deferred decisions
 
 - Which dismech design principles EnviroMech inherits (see entry 2).

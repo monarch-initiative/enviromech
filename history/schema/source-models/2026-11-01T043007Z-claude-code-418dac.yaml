@@ -1,0 +1,33 @@
+history_version: 1
+target:
+  kind: schema
+  slug: source-models
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-01T043007Z-claude-code-418dac
+  timestamp: '2026-11-01T04:30:07Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/34
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - SourceNode
+  - SourceModel
+  summary: Reference the dismech models linked to an aggregated node
+  details: 'Added SourceModel and SourceNode.models, and SourceModelSectionEnum. A SourceModel holds a
+    dismech model''s cross-entry reference (model_ref), its section, the key the reference resolves on
+    (model_name), and the link''s relationship verbatim (source_relationship). Model details stay in dismech.
+    One item per ModelMechanismLink; model systems of proposed experiments are left out. Added scripts/source_models.py
+    (just source-models), which imports dismech.model_links.iter_model_links and dismech.entity_refs from
+    the checkout at DISMECH_ROOT rather than repeating them, and model checks in scripts/check_source_nodes.py
+    (renamed or removed, re-linked, relationship changed, newly linked; a NOTE for nodes with no models
+    list). Additive: no record became invalid. Recorded as decision 7 in the register. Left open: attaching
+    models with no dismech node, such as the two Contact_Dermatitis computational models, directly to
+    KE 827. Checked against dismech 4ab406e81bf.'

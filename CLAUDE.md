@@ -75,7 +75,8 @@ just check-aops        # one MIE, at the Molecular level; at most one AO per lev
 just key-event-from-snapshot CACHE KE_ID   # start a Key Event record from an aop_wiki_cli events cache
 just crosswalk AOP_ID ENTRY...   # run dismech's AOP crosswalk for an AOP record (needs a dismech checkout)
 just source-node ENTRY "NODE"   # a dismech node as a source_nodes item (needs a dismech checkout)
-just check-source-nodes   # aggregated dismech nodes that changed since they were copied (needs a dismech checkout)
+just source-models ENTRY "NODE"   # the dismech models linked to a node, as its models list (needs a dismech checkout)
+just check-source-nodes   # aggregated dismech nodes and their models that changed since they were copied (needs a dismech checkout)
 just check-ids         # the Observation, Assay and event component ids EnviroMech assigns
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)

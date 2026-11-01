@@ -499,6 +499,73 @@ classes:
           The source's own confidence marking on the node, verbatim, when it has
           one (for dismech, mechanism_confidence). Absent means the source did not
           mark it, not that it is established.
+      models:
+        description: >-
+          The source's curated models linked to this node: assays, cell systems,
+          animal models and computational models that the source says measure,
+          perturb, rescue or reproduce it. Each item names a model and how to find
+          it in the source, with the relationship the source's link asserts; the
+          model's details stay in the source. One item per link, so a model the
+          source links to this node twice, with two relationships, is listed
+          twice, and a model linked to two nodes of one aggregation is listed
+          under each. For dismech the list is every ModelMechanismLink in the
+          entry whose target is this node, from experimental_models,
+          animal_models and computational_models; model systems of a proposed
+          experiment are left out, because they have not been run.
+          scripts/source_models.py writes the list and
+          scripts/check_source_nodes.py checks it. Absent means the list has not
+          been written, not that the source links no model.
+        range: SourceModel
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      notes:
+
+  SourceModel:
+    description: >-
+      A reference to one model curated in an external knowledge base, reached
+      through a node that a Key Event aggregates, so that a query can go from the
+      Key Event to the node to the model. It names the model and how to find it in
+      the source, and nothing more: fidelity, limitations, readouts, divergences
+      and evidence stay in the source and are not copied. The values are copied
+      from the source, not curated here.
+
+      dismech gives a model no stable identifier, so the reference is its
+      cross-entry reference, which resolves on the model's name. A rename in
+      dismech breaks it without an error in either knowledge base, which is why
+      scripts/check_source_nodes.py resolves every model_ref against a dismech
+      checkout.
+    attributes:
+      model_ref:
+        description: >-
+          The model's identity in the source, written in the source's own
+          cross-entry reference grammar so it can be resolved there. For dismech
+          this is <entry>:<section>#<key>, for example
+          Contact_Dermatitis:experimental_models#GARDskin, where the key is the
+          model's name, or for an animal model with no name its species, then its
+          genotype, as dismech's entity_refs resolver reads it. model_section and
+          model_name are its readable parts and must agree with it.
+        required: true
+        pattern: "^[^:#]+:(experimental_models|animal_models|computational_models)#.+$"
+      model_section:
+        description: The section of the source entry the model is curated in.
+        range: SourceModelSectionEnum
+        required: true
+      model_name:
+        description: >-
+          The key model_ref resolves on, exactly as the source spells it: the
+          model's name, or for a dismech animal model with no name its species or
+          genotype.
+        required: true
+      source_relationship:
+        description: >-
+          What the source's link says the model does to the node, verbatim (for
+          dismech, the ModelMechanismLink relationship: RECAPITULATES,
+          PARTIALLY_RECAPITULATES, FAILS_TO_RECAPITULATE, PERTURBS, MEASURES or
+          RESCUES). It is kept because, for a regulatory assay, measuring a node
+          and perturbing it are different claims. Kept as a string because the
+          source's vocabulary is not EnviroMech's. Absent when the source's link
+          records none.
       notes:
 
   Term:
@@ -939,6 +1006,19 @@ enums:
         description: The description reads as another level, or spans levels.
       LEVEL_UNCONFIRMED:
         description: The Event has no description, or the screen could not tell.
+
+  SourceModelSectionEnum:
+    description: >-
+      The dismech section a curated model sits in. A model system that exists
+      only inside a proposed experiment, under discussions, is not one of these
+      and is not referenced.
+    permissible_values:
+      experimental_models:
+        description: An in vitro or ex vivo system, such as a cell line assay or a skin equivalent.
+      animal_models:
+        description: A non-human organism, such as a knockout mouse or a guinea pig test.
+      computational_models:
+        description: An in silico model, such as a QSAR model or a defined approach.
 
   CausalAgentTypeEnum:
     description: The kind of thing a Causal Agent is.

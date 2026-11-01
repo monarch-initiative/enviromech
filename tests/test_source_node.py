@@ -34,9 +34,10 @@ def ke272_node() -> dict:
 
 
 def test_the_ke272_source_node_is_reproduced_apart_from_the_curators_notes():
+    # models is written by scripts/source_models.py, tested in test_source_models.py.
     node = source_node.find_node(DISMECH, "Contact_Dermatitis", PRIMING)
     item, comments = source_node.source_node("Contact_Dermatitis", node)
-    expected = {k: v for k, v in ke272_node().items() if k != "notes"}
+    expected = {k: v for k, v in ke272_node().items() if k not in ("notes", "models")}
     assert item == expected
     assert comments == ["no biological_action_id: dismech binds no modifier to the node's processes"]
 

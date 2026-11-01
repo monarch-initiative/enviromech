@@ -134,6 +134,15 @@ aggregation:
     - source: CL
       source_id: CL:0000625
       term: CD8-positive, alpha-beta T cell
+    models:
+    - model_ref: Contact_Dermatitis:experimental_models#Human T-cell priming assay
+      model_section: experimental_models
+      model_name: Human T-cell priming assay
+      source_relationship: RECAPITULATES
+    - model_ref: Contact_Dermatitis:animal_models#Mouse local lymph node assay
+      model_section: animal_models
+      model_name: Mouse local lymph node assay
+      source_relationship: MEASURES
     notes: >-
       dismech binds no modifier to either process, so no biological action is
       recorded. Its description: "During sensitization, antigen-presenting
