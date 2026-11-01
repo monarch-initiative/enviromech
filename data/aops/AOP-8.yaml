@@ -1,0 +1,93 @@
+# AOP-Wiki AOP 8. Its title, Key Events with their roles, and Key Event
+# Relationships read from the 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+# The export marks one Molecular Initiating Event and one Adverse Outcome; the
+# other seven Key Events are listed under the AOP's key-events element.
+id: aop:8
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/aops/8
+aop:
+  id: 8
+  title: >-
+    Upregulation of Thyroid Hormone Catabolism via Activation of Hepatic Nuclear
+    Receptors, and Subsequent Adverse Neurodevelopmental Outcomes in Mammals
+  short_name: Nuclear receptor induced TH Catabolism and Developmental Hearing Loss
+  events:
+  - event_id: 239  # Activation, Pregnane-X receptor, NR1I2
+    type: MolecularInitiatingEvent
+  - event_id: 295  # Induction, Upregulation of glucuronyltransferase activity
+    type: KeyEvent
+  - event_id: 961  # Increased, Clearance of thyroxine from serum
+    type: KeyEvent
+  - event_id: 281  # Thyroxine (T4) in serum, Decreased
+    type: KeyEvent
+  - event_id: 280  # Thyroxine (T4) in neuronal tissue, Decreased
+    type: KeyEvent
+  - event_id: 756  # Hippocampal gene expression, Altered
+    type: KeyEvent
+  - event_id: 757  # Hippocampal anatomy, Altered
+    type: KeyEvent
+  - event_id: 758  # Hippocampal Physiology, Altered
+    type: KeyEvent
+  - event_id: 319  # Loss, Cochlear function
+    type: AdverseOutcome
+  ke_relationships:
+  - relationship_id: 2482  # KE 239 -> KE 295
+    directness_id:
+      term: adjacent
+  - relationship_id: 2478  # KE 295 -> KE 961
+    directness_id:
+      term: adjacent
+  - relationship_id: 2270  # KE 961 -> KE 281
+    directness_id:
+      term: adjacent
+  - relationship_id: 312  # KE 281 -> KE 280
+    directness_id:
+      term: adjacent
+  - relationship_id: 746  # KE 280 -> KE 756
+    directness_id:
+      term: adjacent
+  - relationship_id: 747  # KE 756 -> KE 757
+    directness_id:
+      term: adjacent
+  - relationship_id: 749  # KE 757 -> KE 758
+    directness_id:
+      term: adjacent
+  - relationship_id: 2484  # KE 758 -> KE 319
+    directness_id:
+      term: adjacent
+notes: >-
+  The eight Key Event Relationships form one linear chain, every one adjacent:
+  KE 239 -> 295 -> 961 -> 281 -> 280 -> 756 -> 757 -> 758 -> 319. Those links
+  will be recorded in the Key Event Relationship records.
+
+
+  Two features of the source record are worth a reader's attention, because
+  both differ from how this AOP is usually described.
+
+
+  The Molecular Initiating Event is the pregnane-X receptor alone (NR1I2). AOP
+  8 is often summarised as initiating at AhR, CAR and PXR together; the export
+  names only PXR, and neither AhR nor CAR appears among its nine Key Events.
+
+
+  The chain reaches the Adverse Outcome, loss of cochlear function, through
+  three hippocampal Key Events, and KER 2484 joins altered hippocampal
+  physiology directly to that loss. Hippocampal physiology is not an
+  established cause of cochlear dysfunction, so this step reads as a
+  placeholder in a pathway that has two outcome arms - a neurodevelopmental one
+  the title names and an auditory one the short name names - rather than as a
+  mechanistic claim. The AOP is "Under Development" and "Open for adoption",
+  so this is an unfinished record and not a settled position.
+curation_history:
+- timestamp: "2026-11-01T07:50:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-5
+  action: CREATE
+  description: >-
+    Read from the 2026-11-01 AOP-Wiki XML export with aop_wiki_cli: title,
+    short name, the role of each Key Event, and each Key Event Relationship
+    with its adjacency. Roles were taken from the export's own
+    molecular-initiating-event, key-events and adverse-outcome elements, and
+    the Key Event Relationship endpoints from the KER cache.

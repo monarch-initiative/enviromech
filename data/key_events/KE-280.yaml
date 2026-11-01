@@ -1,0 +1,113 @@
+# AOP-Wiki KE 280, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:280
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/280
+event:
+  id: 280
+  title: "Thyroxine (T4) in neuronal tissue, Decreased "
+  short_name: "T4 in neuronal tissue, Decreased"
+  biological_organization_id:
+    term: Organ
+  organ_term_id:
+    source: UBERON
+    term: brain
+  event_components:
+  - id: 19
+    biological_process_id:
+      source: GO
+      source_id: GO:0010817
+      term: regulation of hormone levels
+    biological_object_id:
+      source: CHEBI
+      source_id: CHEBI:30660
+      term: thyroxine
+    biological_action_id:
+      term: decreased
+  definition: >-
+    Thyroid hormones (TH) are present in brain tissue of most vertebrate species,
+    and thyroxine (T4) is converted to triiodothyronine (T3) locally in this tissue.
+    The amount of THs in brain is known to vary during development and to differ
+    among brain regions (Calvo et al., 1990; Kester et al., 2004; Tu et al., 1999).
+    In human cerebral cortex, T3 increases steadily from 13-weeks, reaching adult
+    levels by 20 weeks post conception. This occurs despite very low and unchanging
+    levels in fetal serum T3, when fetal serum T4 increases 3-fold over the same
+    period. This indicates that T3 in fetal brain is locally generated from
+    serum-derived T4 via the activity of deiodinases, primarily DIO2. DIO2 serves to
+    convert T4 to T3. During this time in fetal development DIO3 activity, which
+    converts T3 to the inactive reverse T3 (rT3), remains very low in cortex. In
+    contrast, in other brain regions including hippocampus and cerebellum, T3
+    remains low throughout early and mid-gestation and corresponds with high
+    activity of DIO3 in these brain regions. In late gestation and after birth, DIO3
+    levels drop in hippocampus and cerebellum with a corresponding increase in T3
+    concentrations (Kester et al., 2004).
+
+    A similar spatial and temporal profile of deiodinase activity and corresponding
+    brain hormone concentrations has been observed in rodent brain (Calvo et al.,
+    1990; Tu et al., 1999). In the rat, either whole brain or cortex have been
+    preferentially assessed due to the low levels of hormones present and the small
+    tissue volumes make quantitification difficult. Brain T3 and T4 rise in parallel
+    from gestational day 10 to gestational day 20 in rat. They are typically both
+    quite low until gestational 17 with steep increases between GD18 and GD20
+    corresponding to the onset of fetal thyroid function (Calvo et al., 1990; Ruiz
+    de Ono et al., 1988; Obergon et al., 1981). Just before birth, brain T3 and T4
+    concentrations are about one-third to one-half that of adult brain. Brain
+    development in the early postnatal period in rat is roughly equivalent to the 3
+    rd trimester in humans such that adult levels of T3 and T4 in brain are not
+    reached in rodents until the 2 nd -3 rd postnatal week.
+
+    For THs to gain access to brain tissue they need to cross the blood brain
+    barrier (BBB) which regulates the active transport of TH into neurons. Many
+    transporter proteins have been identified, and the monocarboxylate transporters
+    (Mct8, Mct10) and anion-transporting polypeptide (OATP1c1) show the highest
+    degree of affinity towards TH and are prevalent in brain (Jansen et al., 2007;
+    Mayer et al., 2014). Transporters express a distinct distribution pattern that
+    varies by tissue and age (Friesema et al., 2005; Henneman et al., 2001; Visser
+    et al., 2007; Heuer et al., 2005; Muller and Heuer, 2007). Although several
+    transporters have been identified, current knowledge of cell specific profile of
+    transporters is limited.
+
+    Most of the hormone transported across the blood brain barrier is in the form of
+    T4, primarily through the cellular membrane transporters (e.g., OATP1c1
+    transporter) into the astrocyte (Visser and Visser, 2012; Sugiyama et al., 2003;
+    Tohyama et al., 2004). Within the astrocyte, T4 is converted into T3 via the
+    local activity of deiodinase 2 (DIO2) (Guadano-Ferraz et al., 1997). A small
+    amount of T3 may cross the blood brain barrier directly via the T3-specific
+    transporter, MCT8 (Heuer et al., 2005). Although in mature brain T3 derives
+    partially from the circulation and from the deiodination of T4, in the fetal
+    brain T3 is exclusively a product of T4 deiodination (Calvo et al., 1990;
+    Grijota-Martinez et al., 2011). In both cases, only the required amount of T3 is
+    utilized in neurons and the excess is degraded by the neuron-specific deiodinase
+    DIO3 (Tu et al., 1999; St. Germain et al., 2009; Hernandez et al., 2010).
+
+    Both deiodinase and transporter expression in brain peak in different brain
+    regions at different times in fetal and neonatal life (Kester et al., 2004;
+    Bates et al., 1999; Muller and Heuer, 2014; Heuer, 2007). Collectively, these
+    spatial and temporal patterns of transporter expression and deiodinase activity
+    provide exquisite control of brain T3 available for nuclear receptor activation
+    and regulated gene expression.
+  measured_or_detected: >-
+    Radioimmunoassays (RIAs) are commonly used to detect TH in the brain (e.g.,
+    Obregon et al., 1982; Calvo et al., 1990; Morse et al., 1996; Bansal et al.,
+    2005; Gilbert et al., 2013). The method (and minor variants) is well established
+    in the published literature. However, it is not available in a simple 'kit' and
+    requires technical knowledge of RIAs, thus has not been used in most routine
+    toxicology studies. Evaluations in neuronal tissue are complicated by the
+    difficulty of the fatty matrix, heterogeneity of regions within the brain, and
+    low tissue concentrations and small tissue amounts especially in immature brain.
+    Most often whole brain homogenates are assessed, obfuscating the known temporal
+    and regional differences in brain hormone present. Two analytical techniques,
+    LC- and HPLC-inductively coupled plasma–mass spectrometry have recently been
+    used to measure brain concentrations of TH. These techniques have proven capable
+    of measuring very low levels in whole-body homogenates of frog tadpoles at
+    different developmental stages (e.g., Simon et al., 2002; Tietge et al., 2010).
+    The assay detects I–, MIT, DIT, T4, T3, and rT3. More recently, Wang and
+    Stapleton (2010) and Donzelli et al. (2016) used liquid chromatography-tandem
+    mass spectrometry for the simultaneous analysis of five THs including thyroxine
+    (T4), 3,3′,5-triidothyronine (T3), 3,3′,5′-triiodothyronine (rT3; reverse T3),
+    3,3′-diiodothyronine (3,3′-T2), and 3,5-diiodothyronine (3,5-T2) in serum and a
+    variety of tissues including brain. These analytical methods require expensive
+    equipment and technical expertise and as such are not routinely used.
+level_screening:
+  outcome: NOT_SCREENED

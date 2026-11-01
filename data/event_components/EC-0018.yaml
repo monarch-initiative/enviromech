@@ -1,0 +1,15 @@
+# The event component of AOP-Wiki KE 281 as recorded in the 2026-11-01
+# AOP-Wiki XML export.
+id: enviromech:ec-0018
+event_component:
+  id: 18
+  biological_process_id:
+    source: MP
+    source_id: MP:0005475
+    term: abnormal circulating thyroxine level
+  biological_object_id:
+    source: CHEBI
+    source_id: CHEBI:30660
+    term: thyroxine
+  biological_action_id:
+    term: decreased

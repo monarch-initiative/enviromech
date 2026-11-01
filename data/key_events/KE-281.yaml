@@ -1,0 +1,119 @@
+# AOP-Wiki KE 281, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:281
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/281
+event:
+  id: 281
+  title: " Thyroxine (T4) in serum, Decreased"
+  short_name: "T4 in serum, Decreased"
+  biological_organization_id:
+    term: Tissue
+  organ_term_id:
+    source: UBERON
+    term: serum
+  event_components:
+  - id: 18
+    biological_process_id:
+      source: MP
+      source_id: MP:0005475
+      term: abnormal circulating thyroxine level
+    biological_object_id:
+      source: CHEBI
+      source_id: CHEBI:30660
+      term: thyroxine
+    biological_action_id:
+      term: decreased
+  definition: >-
+    All iodothyronines are derived from the modification of tyrosine molecules
+    (Taurog, 2000). There are two biologically active thyroid hormones (THs) in
+    serum, triiodothyronine (T3) and T4, and a few less active iodothyronines,
+    reverse T3 (rT3), and 3,3'-Diiodothyronine (3,5-T2). T4 is the predominant TH in
+    circulation, comprising approximately 80% of the TH excreted from the thyroid
+    gland in mammals and is the pool from which the majority of T3 in serum is
+    generated (Zoeller et al., 2007). As such, serum T4 changes usually precede
+    changes in other serum THs. Decreased thyroxine (T4) in serum results from one
+    or more MIEs upstream and is considered a key biomarker of altered TH
+    homeostasis (DeVito et al., 1999).
+
+    Serum T4 is used as a biomarker of TH status because the circulatory system
+    serves as the major transport and delivery system for TH delivery to tissues.
+    The majority of THs in the blood are bound to transport proteins (Bartalena and
+    Robbins, 1993). In serum, it is the unbound, or ‘free’ form of the hormone that
+    is thought to be available for transport into tissues. Free hormones are
+    approximately 0.03 and 0.3 percent for T4 and T3, respectively. There are major
+    species differences in the predominant binding proteins and their affinities for
+    THs (see below). However, there is broad agreement that changes in serum
+    concentrations of THs is diagnostic of thyroid disease or chemical-induced
+    disruption of thyroid homeostasis across vertebrates (DeVito et al., 1999;
+    Miller et al., 2009; Zoeller et al., 2007; Carr and Patiño, 2011).
+
+    Normal serum T4 reference ranges can be species and lifestage specific. In
+    rodents, serum THs are low in the fetal circulation, increasing as the fetal
+    thyroid gland becomes functional on gestational day 17, just a few days prior to
+    birth. After birth serum hormones increase steadily, peaking at two weeks, and
+    falling slightly to adult levels by postnatal day 21 (Walker et al., 1980;
+    Harris et al., 1978; Goldey et al., 1995; Lau et al., 2003). Similarly, in
+    humans, adult reference ranges for THs do not reflect the normal ranges for
+    children at different developmental stages, with TH concentrations highest in
+    infants, still increased in childhood, prior to a decline to adult levels
+    coincident with pubertal development (Corcoran et al. 1977; Kapelari et al.,
+    2008).
+
+    In some frog species, there is an analogous peak in THs in tadpoles that starts
+    around embryonic NF stage 56, peaks at s tage 62 and the declines to lower
+    levels by s tage 56 (Sternberg et al., 2011; Leloup and Buscaglia, 1977).
+
+    Additionally, ample evidence is available from studies investigating responses
+    to inhibitors of TH synthesis in fish. For example, Stinckens et al. (2020)
+    showed reduced whole body T4 concentrations in zebrafish larvae exposed to 50 or
+    100 mg/L methimazole, a potent TPO inhibitor, from immediately after
+    fertilization until 21 or 32 days of age. Exposure to 37 or 111 mg/L
+    propylthiouracil also reduced T4 levels after exposure up to 14, 21 and 32 days
+    in the same study. Walter et al. (2019) showed that propylthiouracil had no
+    effect on T4 levels in 24h old zebrafish, but decreased T4 levels of 72h old
+    zebrafish. This difference is probably due to the onset of embryonic TH
+    production between the age of 24 and 72 hours (Opitz et al., 2011). Stinckens et
+    al. (2016) showed that exposure to 2-mercaptobenzothiazole (MBT), an
+    environmentally relevant TPO inhibitor, decreased whole body T4 levels in
+    continuously exposed 5 and 32 day old zebrafish larvae. A high concentration of
+    MBT also decreased whole body T4 levels in 6 day old fathead minnows, but
+    recovery was observed at the age of 21 days although the fish were kept in the
+    exposure medium (Nelson et al., 2016). Crane et al. (2006) showed decreased T4
+    levels in 28 day old fathead minnows continuously exposed to 32 or 100 µg/L
+    methimazole.
+  measured_or_detected: >-
+    Serum T3 and T4 can be measured as free (unbound) or total (bound + unbound).
+    Free hormone concentrations are clinically considered more direct indicators of
+    T4 and T3 activities in the body, but in animal studies, total T3 and T4 are
+    typically measured. Historically, the most widely used method in toxicology is
+    the radioimmunoassay (RIA). The method is routinely used in rodent endocrine and
+    toxicity studies. The ELISA method is commonly used as a human clinical test
+    method. Analytical determination of iodothyronines (T3, T4, rT3, T2) and their
+    conjugates, through methods employing HPLC, liquid chromatography, immuno
+    luminescence, and mass spectrometry are less common, but are becoming
+    increasingly available (Hornung et al., 2015; DeVito et al., 1999; Baret and
+    Fert, 1989; Spencer, 2013; Samanidou V.F et al., 2000; Rathmann D. et al.,
+    2015). In fish early life stages most evidence for the ontogeny of thyroid
+    hormone synthesis comes from measurements of whole body thyroid hormone levels
+    using LC-MS techniques (Hornung et al., 2015) which are increasingly used to
+    accurately quantify whole body thyroid hormone levels as a proxy for serum
+    thyroid hormone levels (Nelson et al., 2016; Stinckens et al., 2016; Stinckens
+    et al., 2020). It is important to note that thyroid hormones concentrations can
+    be influenced by a number of intrinsic and extrinsic factors (e.g., circadian
+    rhythms, stress, food intake, housing, noise) (see for example, Döhler et al.,
+    1979).
+
+    Any of these measurements should be evaluated for the relationship to the actual
+    endpoint of interest, repeatability, reproducibility, and lower limits of
+    quantification using a fit-for-purpose approach. This is of particular
+    significance when assessing the very low levels of TH present in fetal serum.
+    Detection limits of the assay must be compatible with the levels in the
+    biological sample. All three of the methods summarized above would be
+    fit-for-purpose, depending on the number of samples to be evaluated and the
+    associated costs of each method. Both RIA and ELISA measure THs by an indirect
+    methodology, whereas analytical determination is the most direct measurement
+    available. All these methods, particularly RIA, are repeatable and reproducible.
+level_screening:
+  outcome: NOT_SCREENED

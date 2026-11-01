@@ -1,0 +1,15 @@
+# The event component of AOP-Wiki KE 758 as recorded in the 2026-11-01
+# AOP-Wiki XML export.
+id: enviromech:ec-0022
+event_component:
+  id: 22
+  biological_process_id:
+    source: GO
+    source_id: GO:0007268
+    term: chemical synaptic transmission
+  biological_object_id:
+    source: GO
+    source_id: GO:0045202
+    term: synapse
+  biological_action_id:
+    term: abnormal

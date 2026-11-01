@@ -1,0 +1,139 @@
+# AOP-Wiki KE 758, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:758
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/758
+event:
+  id: 758
+  title: "Hippocampal Physiology, Altered"
+  short_name: "Hippocampal Physiology, Altered"
+  biological_organization_id:
+    term: Tissue
+  organ_term_id:
+    source: UBERON
+    term: brain
+  event_components:
+  - id: 22
+    biological_process_id:
+      source: GO
+      source_id: GO:0007268
+      term: chemical synaptic transmission
+    biological_object_id:
+      source: GO
+      source_id: GO:0045202
+      term: synapse
+    biological_action_id:
+      term: abnormal
+  definition: >-
+    The hippocampus functions as a highly integrated and organized communication and
+    information processing network with millions of interconnections among its
+    constitutive neurons. Neurons in the hippocampus and throughout the brain
+    transmit and receive information largely through chemical transmission across
+    the synaptic cleft, the space where the specialized ending of the presynaptic
+    axon terminus of the transmitting neuron meets the specialized postsynaptic
+    region of the neuron that is receiving that information (Kandell et al., 2012).
+
+    During development (see KE 657: Hippocampal anatomy, Altered), as neurons reach
+    their final destination and extend axonal processes, early patterns of
+    electrical synaptic activity emerge in the hippocampus. These are large fields
+    of axonal innervation of broad synaptic target sites that are replaced by more
+    elaborate, but highly targeted and refined axonal projections and synaptic
+    connectivity brought about by activity-dependent synaptic stabilization,
+    pruning, or synapse elimination. This is a classic case of the interaction
+    between physiological and anatomical development, where anatomy develops first,
+    and is ‘reshaped’ by physiological function (Kutsarova et al., 2017).
+
+    In the rat, excitatory processes are fully mature in area CA1 of hippocampus
+    within 2 weeks of birth with inhibitory processes lagging begin by several weeks
+    (Muller et al., 1989; Michelson and Lothman, 1988; Harris and Teyler, 1984). In
+    hippocampal slices, inhibitory function in area CA1 field is first seen on
+    postnatal day 5, increasing in strength at postnatal day 12 through 15. In vivo
+    studies fail to detect inhibition until postnatal day 18 with steady increase
+    thereafter to adult levels by postnatal day 28. Synaptic plasticity in the form
+    of long-term potentiation (LTP) is absent in the very young animal, only
+    emerging about postnatal day 14, appearing to require the stability of both
+    excitatory and inhibitory function to be established (Muller et al., 1989;
+    Bekenstein and Lothman, 1991). These features of the maturation of hippocampal
+    physiology are paralleled in dentate gyrus, but as with anatomical indices in
+    the rat, the development of these physiological parameters lag behind the CA1 by
+    about 1 week. As described in structural development in KE4, a very similar
+    pattern of maturation occurs in the human developing hippocampus, but with a
+    trajectory that is largely complete before birth.
+  measured_or_detected: >-
+    In animals, synaptic function in the hippocampus has been examined with imaging
+    techniques, but more routinely, electrical field potentials recorded in two
+    subregions of the hippocampus, area CA1 and dentate gyrus, have been assessed in
+    vivo or in vitro. Field potentials recorded in both regions of the hippocampus
+    reflect the summed synaptic response of a population of neurons following direct
+    stimulation of input pathways across a monosynaptic connection. Changes in
+    response amplitude due to chemical perturbations and other stressors (e.g.,
+    chemical exposures, nutritional deficits, gene knockouts) is evidence of altered
+    synaptic function. This can be measured in vitro, in vivo, or in hippocampal
+    slices taken from treated animals (Gilbert and Burdette, 1995). The most common
+    physiological measurements used to assess the function of the hippocampus are
+    excitatory synaptic transmission, inhibitory synaptic transmission, and synaptic
+    plasticity in the form of LTP.
+
+    Excitatory Synaptic Transmission: Two measures, the excitatory postsynaptic
+    potential (EPSP) and the population spike are derived from the compound field
+    potential at increasing stimulus strengths. The function described by the
+    relationship of current strength (input, I) and evoked response (output, O), the
+    I-O curve is the measure of excitatory synaptic transmission (Gilbert and
+    Burdette, 1995).
+
+    Inhibitory Synaptic Transmission: Pairs of stimulus pulses delivered in close
+    temporal proximity are used to probe the integrity of inhibitory synaptic
+    transmission. The response evoked by the second pulse of the pair at brief
+    intervals (<30 msec) arrives during the activation of feedback inhibitory loops
+    in the hippocampus. An alteration in the degree of suppression to the 2 nd pulse
+    of the pair reflects altered inhibitory synaptic function (Gilbert and Burdette,
+    1995).
+
+    Long Term Potentiation (LTP): LTP is widely accepted to be a major component of
+    the cellular processes that underlie learning and memory (Malenka and Bear,
+    2004; Bramham and Messaoudi, 2005). LTP represents, at the synapse and molecular
+    level, the coincident firing of large numbers of neurons that are engaged during
+    a learning event. The persistence of LTP emulates the duration of the memory.
+    Synaptic plasticity in the form of LTP is assessed by delivering trains of high
+    frequency stimulation to induce a prolonged augmentation of synaptic response.
+    Probe stimuli at midrange stimulus strengths are delivered before and after
+    application of LTP-inducing trains. The degree of increase in EPSP and PS
+    amplitude to the probe stimulus after train application, and the duration of the
+    induced synaptic enhancement are metrics of LTP. Additionally, contrasting I-O
+    functions of excitatory synaptic transmission before and after (hours to days)
+    LTP is induced is also a common measure of LTP maintenance (Bramham and
+    Messaoudi, 2005; Kandell et al., 2012; Malenka and Bear, 2004). LTP has been
+    assessed also using in vitro neuronal networks (Odawara et al., 2016; Pre et
+    al., 2022).
+
+    Excitatory and inhibitory synaptic currents (EPSCs and IPSCs) can also be
+    measured in single cells, mostly ex vivo within slices of hippocampus using
+    intracellular and patch clamp techniques as described in previous KEs. These
+    same outputs can evaluate the integrity of synaptic transmission and synaptic
+    plasticity.
+
+    Synaptic function in the human hippocampus has been assessed using
+    electroencephalography (EEG) and functional neuroimaging techniques (Clapp et
+    al., 2012). EEG is a measure of electrical activity over many brain regions but
+    primarily from the cortex using small flat metal discs (electrodes) placed over
+    the surface of the skull. It is a readily available test that provides evidence
+    of how the brain functions over time. Functional magnetic resonance imaging or
+    functional MRI (fMRI) uses MRI technology to measure brain activity by detecting
+    associated changes in blood flow. This technique relies on the fact that
+    cerebral blood flow and neuronal activation are coupled. Positron emission
+    tomography (PET) is a functional imaging technique that detects pairs of gamma
+    rays emitted indirectly by a radionuclide (tracer) injected into the body
+    (Tietze, 2012; McCarthy, 1995). Like fMRI, PET scans indirectly measure blood
+    flow to different parts of the brain – the higher the blood flow, the greater
+    the activation (McCarthy, 1995). These techniques have been widely applied in
+    clinical and research settings to assess learning and memory in humans and can
+    provide information targeted to hippocampal functionality (McCarthy, 1995; Smith
+    and Jonides, 1997; Willoughby et al., 2014; Wheeler et al., 2015; Gilbert et
+    al., 1998).
+
+    Assays of this type are fit for purpose, have been well accepted in the
+    literature, and are reproducible across laboratories. The assay directly
+    measures the key event of altered neurophysiological function.
+level_screening:
+  outcome: NOT_SCREENED

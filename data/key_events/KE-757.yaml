@@ -1,0 +1,207 @@
+# AOP-Wiki KE 757, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:757
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/757
+event:
+  id: 757
+  title: "Hippocampal anatomy, Altered "
+  short_name: "Hippocampal anatomy, Altered "
+  biological_organization_id:
+    term: Tissue
+  organ_term_id:
+    source: UBERON
+    term: brain
+  event_components:
+  - id: 21
+    biological_process_id:
+      source: GO
+      source_id: GO:0007420
+      term: brain development
+    biological_object_id:
+      source: UBERON
+      source_id: UBERON:0002421
+      term: hippocampal formation
+    biological_action_id:
+      term: morphological change
+  definition: >-
+    The hippocampus is a brain region located in the medial temporal lobe in humans
+    and other mammals (West, 1990). Developmentally it is derived from neuronal and
+    glial cells in the neural tube and differentiates in the proencephalon and
+    telencephalon. The hippocampus is a cortical structure, but only contains
+    3-layers, distinct from the 6-layered neocortical structures. For this reason,
+    it is known as archicortex or paleocortex meaning old cortex. In humans, at the
+    macro level, the structure is identified as early as fetal week 13 and continues
+    to mature until 2 to 3 years of age (Kier et al., 1997), with continuing slow
+    growth thereafter until adult ages (Utsunomiya et al., 1999). In rodents, the
+    hippocampus begins to form in mid-gestation, with the CA fields forming in
+    advance of the dentate gyrus (Altman and Bayer, 1990a; 1990b). The primary
+    structural and functional development of the hippocampus occurs in the third
+    trimester of pregnancy in humans, whereas in rodents, much of the maturation of
+    the CA fields and almost all dentate gyrus occurs in the first 2-3 postnatal
+    weeks.
+
+    The structure of the hippocampus has been divided into regions that include CA1
+    through CA4 and the dentate gyrus. The principal cell bodies of the CA field are
+    pyramidal neurons, those of the dentate gyrus are granule cells.
+
+    The major input pathway to the hippocampus is from the layer 2 neurons of the
+    entorhinal cortex to the dentate gyrus via the perforant path forming the first
+    connection of the trisynaptic loop of the hippocampal circuit (Figure 2). Direct
+    afferents from the dentate gyrus (mossy fibers) then synapse on CA3 pyramidal
+    cells which in turn send their axons (Schaeffer Collaterals) to CA1 neurons to
+    complete the trisynaptic circuit. Information from the CA fields then passes
+    through the subiculum entering the fiber pathways of the alveus, fimbria, and
+    fornix and is routed to other areas of the brain (Amaral and Lavenex, 2006).
+    Through the interconnectivity within the hippocampus and its connections to
+    amygdala, septum and cortex, the hippocampus plays a pivotal role in several
+    learning and memory processes, including spatial behaviors. The primary input
+    pathway to the CA regions of the hippocampus is from the septum by way of the
+    fornix and direct input from the amygdala. Reciprocal outputs from the
+    hippocampus back to these regions and beyond also exist.
+
+    Figure 2. Trisynaptic circuit of hippocampal formation. For further details see
+    Amaral and Lavenex, 2006.
+
+    At the cellular level, the components of the mammalian hippocampus undergo
+    typical stages of neurodevelopment. With each developmental time window,
+    distinct patterns of gene transcription and protein expression appear,
+    corresponding to cell proliferation, differentiation, migration, synapse
+    formation, and terminal neuronal/glial maturation, culminating in the structural
+    formation of a neuronal network (Mody et al., 2001; Laeremans et al., 2013). The
+    principal neurons of the CA fields develop in advance of the principal cells of
+    the dentate gyrus and the genes and proteins controlling the distinct phases are
+    expressed at different stages in these two sub-regions (Altman and Bayer, 1990
+    a, b; Laeremans et al., 2013). In the rodent brain, almost all neurons show
+    extensive growth and differentiation on axons and dendrites during the first
+    postnatal week. These cellular changes are marked by rapid protein expression
+    specific for different neuronal and glial subtypes including cytoskeletal
+    proteins (e.g. cofilin, actins, tubulins etc..), production of cell adhesion
+    molecules, and extracellular matrix formation which are critical structural
+    elements of a neuronal network.
+
+    As neurons mature, they extend dendritic processes that lengthen and branch, the
+    ends of which broaden to form a spine head. Dendritic spines form the
+    postsynaptic structural component of most excitatory synapses in the mammalian
+    brain, including hippocampus. The spine head has a greater potential for
+    connectivity and synapse formation (Dailey and Smith, 1996; Fiala et al., 1998;
+    Hardy, LR and Redmond, 2008, Pfeiffer et al., 2018). The postsynaptic density-95
+    (PSD-95) is one of the key proteins involved in dendritic spine maturation,
+    clustering of synaptic signalling proteins, and ultimately mediating synaptic
+    transmission. It also plays a critical role in regulating dendrite outgrowth and
+    branching and formation dendritic spines.
+
+    As the hippocampus matures during the postnatal period hippocampal circuits
+    become more active and exhibit increased activity-dependent plasticity. Many
+    genes and proteins are upregulated during this phase of development, especially
+    molecules involved in the axon guidance (e.g. BDNF/CREB) (Hinkemeyer et al.,
+    2003; Shen and Cowan., 2010), dendritic spine formation (e.g. Neuroligin,
+    Ephrins) and synaptogenesis. Increased expression of vesicle associated proteins
+    (e.g., SNAP-25), synaptic vesicle proteins (e.g., synaptophysin, synapsin I) and
+    proteins involved in sodium and calcium-mediated transmitter release occurs
+    during this period. These changes are accompanied by a parallel increase in
+    neurotrophins and neurotransmitters, receptors and ion channels (Sudhof, 2018;
+    Zhong et al., 2020; Rizo and Rosenmund, 2008). Therefore, any alterations in the
+    expression of these proteins (Figure 3) may result in changes of synapse
+    formation, followed by alteration of neuronal networks within the hippocampus.
+
+    Figure 3. The main structural components of the synapse: (A) a presynaptic and a
+    postsynaptic neuron, separated by a synaptic cleft; (B) the dendritic spines and
+    (C) the proteins involved in synaptic formation and transmission, including
+    synaptic vesicle (SV), presynaptic and postsynaptic proteins present in
+    excitatory and inhibitory synapse. Adapted from Serrano et al., 2022.
+
+    The dendritic spine represents the primary site of synaptic activity at the
+    postsynaptic site. A variety of proteins present in the presynaptic terminal and
+    the postsynaptic dendritic spine are expressed at different times during
+    synaptogenesis, perturbation of which can negatively impact synaptic formation
+    and structure at the macro- and ultra- structural level.
+
+    The use of genetically modified mouse models has been widely applied to
+    delineate a host of different proteins involved in the structural development of
+    the hippocampus (Joo et al., 2020). With this approach, changes in neuronal
+    morphology, synapse and network formation in the hippocampus are contrasted in
+    animals lacking this protein vs ‘wild type’ mice where the protein has been
+    maintained. These comparisons have adopted a variety of techniques, several
+    described below. In KE4, differential expression of proteins identified in these
+    model systems is taken as evidence of altered structure.
+
+    However, it is essential to consider the timing of events during development,
+    when their detection is optimal (Hevner, 2007; Garman et al., 2001; Zgraggen et
+    al., 2012). Some macrolevel structural changes may be transient yet still
+    significantly impact downstream events. In the case of knockout models, it is
+    also important to recognize that in most cases, the protein has been removed for
+    the entire lifespan of the animal, in the brain and elsewhere in the body, a
+    scenario distinct from a chemical perturbation.
+  measured_or_detected: >-
+    Data in support of this key event have been collected using a wide variety of
+    standard biochemical, molecular, cellular, histological and anatomical methods
+    (e.g., morphometrics, protein quantification using different types of cellular
+    staining, immunohistochemistry, and imaging procedures) at different stages of
+    hippocampus development. Many of methods applied are routine neurohistopathology
+    procedures like those recommended in EPA and OECD developmental neurotoxicity
+    guidelines (US EPA, 1998; OCED, 2007). The quantification of cell body and
+    neurite proteins can be carried out by performing immunocytochemistry and
+    automated high content imaging analyses in in vitro and in vivo preparations
+    (Harrill and Mundy, 2011, Meng et al., 2002), Pistollato et al., 2020). Subtle
+    cytoarchitectural features depend on more specialized birth dating procedures
+    and staining techniques. At the micro- and ultra- structural levels, changes in
+    neuronal and glial morphology, alterations in synapse structure, dendritic spine
+    formation (size, shape, number, distribution of head/neck ratios in hippocampal
+    cultures or in vivo studies) and dendritic morphology (branching points, length
+    etc..) can be assessed in Golgi-Cox impregnated neurons (Bongmbaa et al., 2011),
+    two-photon microscopy (Ehrlich et al., 2007), transmission electron (TEM) and
+    fluorescent microscopy (Runge et al., 2020; Pchitskaya et al., 2020)
+
+    Two-photon time-lapse images can be used to visualise dendrites in
+    GFP-transfected neurons, whereas Golgi Stain is used to measure both dendrites
+    and dendritic spines. A combination of Golgi-Cox and immunofluorescence using
+    confocal microscopy has also been suggested for the visualisation of dendrites
+    in brain slices derived either from rodents or non-human primates (Levine et
+    al., 2013).
+
+    Fluorescent markers, such as Dil
+    (1,1'-dioctadecyl-3,3,3',3'-tetramethylindocarbocyanine perchlorate) permits not
+    only the visualisation of detailed dendritic arborizations and spines in cell
+    culture and tissue sections but is also compatible with the quantitative
+    analysis of dendritic spine number (Cheng et al., 2014).
+
+    Immunostaining with specific antibodies that recognize presynaptic proteins of
+    excitatory and inhibitory neurons (i.e., vesicular glutamate transporters,
+    vesicular GABA proteins and transporters) and the postsynaptic density
+    protein-95 kDa (PSD-95) can be applied to enumerate synapse number (Gatto and
+    Broadie, 2010, Akashi et al., 2009). There are commercially available
+    ‘synaptogenesis assay kits’ that rely on the immunostaining of cells with common
+    synaptic marker proteins such as MAP-2, PSD-95 and synaptophysin. Some other
+    presynaptic (Bassoon) and postsynaptic (ProSAP1/Shank2) markers have been shown
+    to correlate well with the ultrastructural studies in cultured hippocampus
+    primary cells (Grabrucker et al., 2009).
+
+    Electron microscopy can also be applied to assess the prevalence of excitatory
+    and inhibitory synapses amongst convergent contacts (Megias et al., 2001).
+    Recently, a high content image analysis based on RNAi screening protocols has
+    been suggested as a useful tool to create imaging algorithm for use in both in
+    vitro and in vivo synaptic punctae analysis (Nieland et al., 2014).
+
+    Some of the same techniques used in rodent studies have been applied to
+    postmortem tissue in humans. In addition, non-invasive, structural neuroimaging
+    techniques in living subjects are also widely used in human studies to assess
+    hippocampal volume using voxel-based morphometry (VBM). With this approach,
+    volume of brain regions is measured by drawing ‘regions of interest’ on images
+    from brain scans obtained from magnetic resonance imaging (MRI) or positron
+    emission tomography (PET) scans calculating the volume enclosed (Mechelli et
+    al., 2005). These imaging techniques can be applied in rodent models (Powell et
+    al., 2009; Hasegawa et al., 2010; Pirko et al., 2005; Pirko and Johnson, 2008).
+
+    It is recognized that most of these biochemical, molecular, cellular,
+    histological and anatomical methods (e.g., morphometrics, protein quantification
+    using different types of cellular staining, immunohistochemistry, and imaging
+    procedures) can also be applied to complex in vitro test systems (Pamies et al.,
+    2016; Hartman et al., 2023; Pomeshchik et al., 2020) Human brain spheres or
+    brain organoids could be developed in three-dimensional cell culture, resembling
+    hippocampus at different stages development (Sakaguchi et al., 2015). These new
+    methods, if assessed as robust, reliable and reproducible, would allow
+    measurement of the KE in a human-relevant test system.
+level_screening:
+  outcome: NOT_SCREENED

@@ -1,0 +1,348 @@
+# AOP-Wiki KE 961, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:961
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/961
+event:
+  id: 961
+  title: "Increased, Clearance of thyroxine from serum"
+  short_name: "Increased, Clearance of thyroxine from serum"
+  biological_organization_id:
+    term: Tissue
+  organ_term_id:
+    source: UBERON
+    term: liver
+  event_components:
+  - id: 17
+    biological_process_id:
+      source: GO
+      source_id: GO:0008152
+      term: metabolic process
+    biological_object_id:
+      source: CHEBI
+      source_id: CHEBI:30660
+      term: thyroxine
+    biological_action_id:
+      term: increased
+  definition: >-
+    Thyroxin (T4) and T3 are metabolized and cleared from tissues in a number of
+    ways: inner ring or outer ring deiodination via specific enzymes, conjugation
+    (glucuronidation or sulfation), oxidative deamination and ether-linked cleavage
+    (Zoeller et al 2007).
+
+    Deiodination:
+
+    There are three types of deiodinase enzymes. D1 and D2 convert T4 to T3 by
+    removing an iodine atom from the outer ring while D3 removes an iodine atom from
+    the inner ring, converting T4 to reverse T3. Differential expression of these
+    enzymes during brain development are critical to the functionality of thyroid
+    hormone in different areas of the fetal brain.
+
+    Much of the T4 is carried to the liver, where it is transported across the
+    cellular membrane, converted into T3 via deiodination as mediated by deiodinase
+    enzymes, and it is this T3 that triggers the TH receptors found in the nucleus.
+    Roughly 80% of the T3 needed is produced via outer-ring deiodination of T4,
+    which "activates" T4 to T3 (as opposed to inner-ring deiodination, which
+    "degrades" T4 to reverse T3 which is eliminated). About 30% of the T4 produced
+    daily (~ 130 nmol) is converted to roughly 40 nmol of T3 (Visser 2012) via
+    enzyme D1 (liver, kidney) while conversion to rT3 accounts for roughly 40% of T4
+    turnover and is mediated via enzyme D3 (brain, placenta, fetus).
+
+    Conjugation:
+
+    Glucuronidation and sulfation of T4 accounts for the rest of the metabolized T4
+    and leads to rapid elimination through bile. It is thought that 20% of daily T4
+    production is eliminated through biliary excretion of glucuronide conjugates.
+    Glucuronidation is carried out by UDP-glucuronoyltransferase (UGT) enzymes (Hood
+    and Klaassen 2000a, 2000b) and appears to be more important in murine species
+    than in man (Henneman and Visser 1997) and sulfation of T4 is done largely
+    through an initial inner ring deiodination step (via D3). Circulating levels of
+    THs in serum can be affected by compounds that induce the activity of UDP-UGT
+    enzymes.
+
+    Uptake into the liver involves "high affinity, low capacity" and "low affinity,
+    high capacity" processes with Km values in the nano- to micro-molar range (as
+    opposed to the free T3 and T4 concentrations, which are in the picomolar range)
+    (Henneman et al 2001 from Visser 2010). Both MCT8 and MCT 10 can transport THs;
+    however, MCT8 is expressed in human liver where MCT10 is not and MCT8 display
+    higher efficacy of cellular uptake and efflux relative to T3 (Ref 12 in Visser
+    2010).
+
+    Data in animals for PCBs
+
+    Previous reports have been made showing serum TH decreases in rats and mice in
+    response to PCBs, PCB congeners and TCDD and these decreases have been thought
+    to be driven by UDP-UGT (particularly 1A1 and 1A6)(Barter and Klaassen 1994,
+    Schuur et al 1997, Van Birgelen et al 1995, Visser 1996)
+
+    Hallgren et al 2001, Hallgren and Darnerud 2002 showed that both T4 and T3 are
+    significantly decreased following exposure to PCB mixtures or individual
+    congeners.
+
+    Kato et al 2003 (and Kato et al 2002) showed for the first time that a
+    commercial PCB mixture (Kanechlor-500, KC500) decreased serum TH without an
+    increase in glucuronidation of T4. Male Wistar rats and ddy mice were given a
+    single ip injection of 100 mg/kg and 4 days later, organ weights were measured
+    and microsomal enzymes measured. Significant increases were noted for both
+    endpoints in both species; however, treatment with PCBs led to significant
+    increases in UDP-UGT activity in rats but not mice. Gene expression of UDP-UGTs
+    was also examined and, again, rats (but not mice) displayed time-dependent
+    increases in levels of UGT1A1 and UGT1A6 following treatment with PCBs. This
+    agrees with past reports showing that clofibrate, phenobarbital,
+    pregnenolone-16-alpha-carbonitrile and beta-naphthoflavone decrease serum TH and
+    increase hepatic UDP-UGT activity in rats but not mice (Viollon-Abadie et al
+    1999).
+
+    This implies that mice may reduce serum TH through a mechanism that does not
+    involve increased glucuronidation, but may involve a TTR-associated pathway (as
+    hydroxylated metabolites of PCBs have been displayed high affinity for TTR in in
+    vitro studies). Kanechlor-500 does not display any appreciable amount of outer
+    ring deiodination activity (which would convert serum T4 to T3) and treatment
+    with the mixture did not significantly change TSH levels (indicating there is no
+    induction of the thyroid feedback loop from the measured decreases in serum TH).
+
+    Kato et al 2004 performed the same experiment next with Wistar and Gunn rats,
+    the latter species being a Wistar mutant strain that lacks UGT1A isoforms. Both
+    species showed serum T4 (free and total) decrease after single injection of
+    either KC500 or pentaCB and only Wistar rats showed an associated increase in
+    UDP-UGT activity. Significant decrease in type I deiodinase was observed in both
+    rats in addition to detection of hydroxylated PCB metabolites bound to TTR. Gunn
+    rats treated with clofibrate also showed decreased serum T4 without an increase
+    in UDP-UGT activity (Visser et al 1993). These results imply that decreases of
+    serum TH by PCB or pentaCB were managed by formation of OH-PCB metabolites that
+    were then transported by TTR. This is supported by the fact that the main
+    metabolite found in KC500-treated rats was 4-OH-2,3,3’,4’,5-pentachlorobiphenyl,
+    which displays a binding affinity towards TTR that exceeds that of T4 by more
+    than 3-fold (Meerts et al 2002). In fact, the dihydrohxylated PCBs show several
+    fold higher affinity than the monohydroxylated PCBs (Lans et al 1993). It should
+    be noted that an increase in sulfation via SULT enzymes may also offer an
+    esxplanation for the observed results.
+
+    Kato et al 2007 treated Wistar and Gunn rats with KC500 at a lower dose (10
+    mg/kg) once daily for 10 days, noting decrease in total and free serum T4 as
+    well as the differential UDP-UGT response across the different strains.
+    Clearance of [ 125 I]T4 from serum was higher in both species treated with KC500
+    and accumulation in several tissues, particularly the liver, was observed. These
+    data imply that reduction of serum TH from exposure to KC500 would be mediated
+    through accumulation in the tissues and not through an increase in
+    glucuronidation. In addition, competitive inhibition by PCB or its metabolites
+    with serum transport proteins (like TTR) could also decrease serum T4 by
+    inducing a change in tissue distribution, especially the liver where more than
+    40% of[ 125 I]T4 accumulated following treatment.
+
+    Kato et al 2009 treated C57BL/6 and DBA/2 mice with the heptaCB metabolite
+    4-OH-CB187, decreasing free and total serum T4 with no observed UDP-UGT activity
+    or effect on TSH. A number of OH-PCBs have been identified in human serum,
+    including 4-OH-CB107, 3-OH-CB153, 4-OH-CB146, 3’-OH-CB138 and 4-OH-CB187 (which
+    specifically has a 5-fold higher affinity for TTR relative to T4)(Hovander et al
+    2002). Levels of [ 125 I]T4-TTR were decreased with accompanying increases in
+    binding to TBG and albumin in both strains of mice. Finally, T4 levels increased
+    in tissues, particularly the liver and kidney. Decreases in total and free serum
+    T4 mediated by 4-OH-CB187 were observed in wild-type and TTR-heterozygous mice
+    but not in TTR-deficient mice, with heterozygous mice displaying a smaller
+    decrease in T4 relative to TTR-deficient mice. In both strains of mice,
+    treatment with 4-OH-CB187 promoted clearance of [ 125 I]T4 from serum relative
+    to controls and serum pharmacokinetic data were estimated, along with
+    tissue-to-serum (K p value) concentration ratios and [ 125 I]T4 tissue
+    distribution levels. These data imply that 4-OH-CB187 inhibits formation of the
+    [ 125 I]T4-TTR complex, which may lead to a change in tissue distribution, with
+    accumulation in the liver and kidney mainly.
+
+    Kato et al 2012 treated C57BL/6 (wild type) and TTR-null mice with single ip
+    injections of pentaCB at 112 mg/kg, noting significant decreases in total serum
+    T4 and T4-TTR complex and measuring [ 125 I]T4 clearance from serum and
+    accumulation in tissues. Treatment with pentaCB resulted in decrease of [ 125
+    I]T4-TTR and increase in [ 125 I]T4-albumin and [ 125 I]T4-TBG complexes in wild
+    type mice, but not in TTR-deficient mice, although liver accumulation was noted
+    in both strains independent of UDP-UGT activity. These data imply that penta-CB
+    mediated increases in T4 liver concentration occurs mainly through inhibition of
+    efflux of T4 and/or promotion on influx of T4 into hepatic cells (which is a
+    receptor mediated process independent of TTR transport at the liver).
+
+    Kato et al 2013 treated C57BL/6 and DBA/2 mice with 50 mg/kg CB118 (pentaCB) in
+    a single ip injection for 5 days, noting decreased serum T4 in both strains and
+    decrease in TSH for the DBA/2 mice but not C57BL/6. CB118-mediated changes in [
+    125 I]T4 complexes with TBG, albumin and TTR were only observed in C57BL/6 mice
+    (and not DBA/2), despite [ 125 I]T4 accumulation in the liver of both strains.
+    It is thought that the strain differences are dependent on differences in
+    induction of CYP1A enzymes responsible for the hydroxylation of PCBs (creating
+    metabolites that display far greater affinity for TTR than the natural T4
+    ligand).
+
+    Martin and Klaassen 2010 treated male Sprague Dawley rats with Aroclors 1242 and
+    1254; PCBs 95, 99, 118, 126 or TCDD at 4 doses via gavage daily for 7 days, then
+    measured serum TH via radioimmunoassay and induction of hepatic Cyp1a and Cyp2b.
+    This study was the first to examine all three classes of PCB congeners:
+    TCDD-type (no chlorine substitutions in ortho position, high affinity for
+    arylhydrocarbon receptor, induce Cyp1a, PCBs 77 and 126), PB-type (at least 2
+    ortho substitutions, low affinity for AhR, induce Cyp2b, PCBs 28, 95, 99, 101
+    and 153) or mixed type (1 ortho substitution, low affinity for AhR, induce both
+    Cyp1a and Cyp2b, Aroclors and PCB 118). This study showed that PB-type and mixed
+    type PCB congeners are more effective than TCDD type in reducing serum T4, with
+    Aroclor 1254 (mixed) and PCBs 99 (PB) and 118 (mixed) producing the greatest
+    reduction in serum T4 (as well as T3). Serum TSH was not affected by any
+    compound. Total and free serum T4 was decreased by all treatments in a
+    dose-dependent manner; however marked reduction were noted following treatment
+    with Aroclor 1254, PCB 99 and PCB 118. PCB 118 and 126 caused significant
+    increase in Cyp1a activity while Aroclor 1254 and PCBs 99 and 118 significantly
+    induced Cyp2b. Thus, it appears TCDD type congeners induce CYP1A2 (EROD)
+    activity and UGT-UDP activity in the liver (associated wth binding at AhR) while
+    PB type congeners induce CYP1B2 (PROD) activity and do not induce UGT-UDPs in
+    the liver (associated with increased tissue uptake).
+
+    The PB type congeners may induce Oatp1a4 activity to increase clearance from
+    plasma and enhance tissue uptake. Guo et al 2002 reported increase of Oatp1a4
+    following treatment with PCB 99 (and a decrease following treatment with PCB
+    126, a TCDD type congener). There are also reports of PB type congeners that
+    accumulate in the liver with little to no increase in glucuronidation or biliary
+    excretion and no changes in serum binding proteins, such as PCB 153, which
+    implies a possible induction of OATP hepatic cellular transport proteins (Kato
+    et al 2011).
+
+    Martin et al 2012 treated male Wistar rats with Aroclors 1242 and 1254, PCBs 95,
+    99, 118 and 126 and TCDD via gavage one per day for 7 days, followed 24 hours
+    later with injection of [ 125 I]T4 and collection of urine, blood, bile and
+    urine. No treatments increased urinary excretion of [ 125 I]T4, but serum T4 was
+    reduced in all treatments and biliary excretion increased following treatment of
+    Aroclor 1254, PCBs 118 and 126, and TCDD as measured by induction of UDP-UGT
+    activity in the liver. PCBs 95 and 99 (PB type congeners) did not induce UGT-UDP
+    activity despite very large and rapid decrease of serum [ 125 I]T4 by PCB 99.
+    These data imply that increased tissue uptake (perhaps through increased TH
+    transport across cell membranes) is another mechanism by which serum T4 can be
+    reduced.
+
+    Kato et al 2013 showed that PCB 118 (mixed type) mediated changes in tissue
+    distribution and transport proteins in C57BL/6 mice, but not DBA/2 mice. Kato et
+    al 2012 showed the same with synthesized 2,2’,4,5,5’-pentaCB (PCB 101, PB type).
+    Kato et al 2014 showed that PCB 77 (TCDD type) mediated changes in tissue
+    distribution and transport proteins in DBA/2 mice, but not C57BL/6 mice.
+
+    Erratico et al 2012 used pooled and single-donor human liver microsomes, human
+    recombinant cytochrome P450 (CYP) enzymes and CYP-specific antibodies to
+    evaluate the oxidative metabolism of BDE-99. Ten (10) hydroxylated metabolites
+    were produced by human microsomes and identified via HPLC-MS/MS and rates of
+    formation were determined, including several that are much more potent than the
+    natural ligand. All ten were found to be catalyzed solely by CYP2B6. Previous
+    studies had also shown formation of hydroxylated metabolites of BDE-99 by human
+    hepatic preparations (Lupton et al 2009, 2010; Stapleton et al 2009); however,
+    fewer OH-PBDEs and additional CYP enzymes were found in similar work done with
+    rat microsomes (Erratico et al 2011).
+
+    Feo et al 2013 incubated BDE-47 and recombinant CYPs, measuring the metabolites
+    via GC-MS/MS, as well as specific kinetic studies with BDE-47, CYP2B6 and pooled
+    human liver microsomes. Six (6) OH-PBDEs were found to be catalyzed by CYP2B6
+    and additional metabolites were identified upon GC-MS/MS (including the novel
+    finding of dihydroxylated metabolites) and these metabolites have been
+    previously found in human serum (Athanasiadou et al 2008; Qui et al 2009). The
+    kinetic studies showed that hydroxylation can occur at low concentrations and
+    that CYPT2B6 has high affinity for BDE-47. CYP2C19 and CYP3A4 were also
+    suggested to play minor roles in the formation of OH-PBDEs.
+  measured_or_detected: >-
+    Methods that have been previously reviewed and approved by a recognized
+    authority should be included in the Overview section above. All other methods,
+    including those well established in the published literature, should be
+    described here. Consider the following criteria when describing each method: 1.
+    Is the assay fit for purpose? 2. Is the assay directly or indirectly (i.e. a
+    surrogate) related to a key event relevant to the final adverse effect in
+    question? 3. Is the assay repeatable? 4. Is the assay reproducible?
+
+    Thyroid hormone uptake into human tissues has been measured by analyzing the
+    rate of disappearance of radiolabeled TH from plasma into rapidly and slowly
+    equilibrating tissue compartments (Visser 2010).
+
+    Measuring the rate of T4 glucuronidation and sulfation as well as biliary
+    excretion informs the mechanism of action of thyroid system modulation. Studies
+    involving knock/out mice and thyroidectomized rats also inform this mechanism.
+
+    Total T4 is most often measured using human serum based diagnostic kits, but
+    free T4 (and T3) is only directly measured through equilibrium dialysis and
+    ultrafiltration (Midgley 2001). Large volumes of serum must be used due to the
+    very low concentrations of free T4 normally found (0.1% of total T4), which
+    requires pooling of samples taken from fetus or pup. Some researchers have tried
+    to “micronize” this process through combining RIA to measure total TH and
+    dialysis to estimate the free fraction (Zoeller et al 2007). Extracted materials
+    can also be quantified by HPLC. The reference range for free T4 is 9.8 to 18.8
+    pM/L (Dirinck et al 2016).
+
+    T3 is found in similar plasma concentrations to T4 (i.e. 5-10 pM) with < 0.4%
+    being in the unbound state. Measuring free serum T3 is labor intensive and
+    requires equipment not available in many clinical reference laboratories and
+    thus ultrafiltration is often used (Abdalla and Bianco 2014). Immunoassays and
+    MS/MS are also used.
+
+    Measuring displacement of T4 from serum transport proteins is done mainly via
+    one of three in vitro methods: radioligand binding assay, plasmon
+    resonance-based biosensor, or fluorescence displacement.
+
+    Radioligand binding assays, using [ 125 I]-T4 as a label, were developed to
+    demonstrate affinity for xenobiotics to human or rat TTR and TBG (Brouwer and
+    van den Berg 1986, Lans et al 1994). The most commonly used method was first
+    published by Somack et al 1982 and adapted by Hamers et al 2006, Lans et al 1993
+    and Ucan-Marin et al 2010. Similar assays have been developed using [ 125 I]-T3
+    as a label for affinity to chicken and bullfrog TTR (Yamauchi et al 2003).
+    Radioligand methods suffer from having to use heavily regulated isotopes and
+    lower throughput to provide free T4 measurements (due to the extra
+    wash/separation procedure needed). The most well-known protocol uses TTR
+    purified from human serum (which may not be as stable as recombinant) and
+    performed in a pure aqueous solution, which may not be as stable for lipophilic
+    compounds (Chauhan et al 2000 is an example using PCBs).
+
+    Purkey et al 2001 published a binding assay using polyclonal TTR antibodies
+    covalently bound to sepharose resin which is then mixed with plasma pre-treated
+    with compound of interest, washed and analyzed via HPLC.
+
+    Marchesini et al 2006 reported on the development of two surface plasmon
+    resonance(SPR)-based biosensor assays using recombinant TTR and TBG, validated
+    with known thyroid disruptors and structurally related compounds including
+    halogenated phenols, polychlorinated biphenyls, bisphenols and a hydroxylated
+    PCB metabolite (4-OH-CB 14). TH is covalently bound to a gold-layered chip and a
+    mixture of the compound of interest and transport protein are injected in a flow
+    cell passing over the bound TH. The authors found that these biosensor methods
+    were more sensitive (IC50 of 8.6 ± 0.7 nM for rTTR), easier to perform and more
+    rapid that radioligand binding assays and immunoprecipitation-HPLC.
+
+    Marchesini et al 2008 applied their biosensor-based screen to 62 chemicals of
+    public health concern and found that hydroxylated metabolites of PCBs
+    (particularly para-hydroxylated ones) and PBDEs (BDEs 47, 49 and 99) displayed
+    the most potent binding to TBG and TTR, confirming many other previous studies.
+    The authors conclude their optimized assays are suitable for high-throughput
+    screening for potential thyroid disruption.
+
+    Cao et al 2010, Cao et al 2011 and Ren and Guo 2012 developed the FLU-TTR, based
+    on a protein-binding fluorescent probe (ANSA, or 8-anilo-1-naphthalenesulfonic
+    acid ammonium salt) that becomes highly fluorescent after binding to T4. When
+    the compound of interest is introduced and displaces the ANSA-thyroxine probe,
+    this fluorescence is reduced. This allows generation of binding constant (K)
+    data as opposed to past efforts that generated IC 50 values. Cao et al 2011
+    developed a fluorescent microtiter method for pTTR and TBG tested with bisphenol
+    A.
+
+    Montano et al 2012 developed a competitive T4-TTR fluorescence displacement
+    assay in a 96-well format, modified from the original method (Nilsson and
+    Petersen 1975) and using a new selective method to extract hydroxylated
+    metabolites while reducing fatty acid interference (modified from Hovander et al
+    2000).
+
+    Aqai et al 2012 described a rapid and isotope-free (13 C 6 -T4) screening of
+    thyroid transport protein ligands, using a competitive binding assay for rTTR
+    using fast ultrahigh performance LC-electrospray ionization triple-quadrupole
+    MS. The method involves the use of immunomagnetic beads followed by screening
+    with flow cytometry and UPLC-MS. The high-throughput screening mode is capable
+    of detecting T4 in water at the part-per-trillion level and in the
+    part-per-billion level in urine.
+
+    Relevant Phase II enzymes that are responsible for TH metabolism include UGT1A1,
+    UGT1A6 and SULT2A1 while relevant cellular import/export transport proteins
+    include MCT8, OATP1A4 and MRP2. All contribute towards systemic clearance of TH
+    and conjugates from serum whether increasing biliary excretion or moving TH into
+    tissues and across the placenta and BBB. Enzyme induction can only be measured
+    via in vitro cell-based assays and since these enzymes are all controlled by
+    specific nuclear receptors, assays targeting these receptors might act as
+    surrogate measurement (Murk et al 2013). Several methods measuring expression of
+    UGT or SULT mRNA have been published; however, there have been limited efforts
+    to develop higher-throughput methods. The EPA ToxCast Phase I efforts used
+    quantitative nuclease protection assays (qNPA) to screen several hundred
+    chemicals for UGT1A1 and SULT2A1 (Rotroff et al 2010, Sinz et al 2006).
+level_screening:
+  outcome: NOT_SCREENED

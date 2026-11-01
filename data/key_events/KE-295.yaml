@@ -1,0 +1,40 @@
+# AOP-Wiki KE 295, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:295
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/295
+event:
+  id: 295
+  title: "Induction, Upregulation of glucuronyltransferase activity"
+  short_name: "Induction, Upregulation of glucuronyltransferase activity"
+  biological_organization_id:
+    term: Molecular
+  cell_term_id:
+    source: CL
+    term: eukaryotic cell
+  event_components:
+  - id: 15
+    biological_process_id:
+      source: GO
+      source_id: GO:0015020
+      term: glucuronosyltransferase activity
+    biological_object_id:
+      source: PR
+      source_id: PR:000001325
+      term: beta-1,3-glucuronyltransferase
+    biological_action_id:
+      term: increased
+  - id: 16
+    biological_process_id:
+      source: GO
+      source_id: GO:0003824
+      term: catalytic activity
+    biological_object_id:
+      source: PR
+      source_id: PR:000001325
+      term: beta-1,3-glucuronyltransferase
+    biological_action_id:
+      term: increased
+level_screening:
+  outcome: NOT_SCREENED
