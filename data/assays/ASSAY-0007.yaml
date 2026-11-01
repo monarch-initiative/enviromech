@@ -1,0 +1,20 @@
+# kinetic Direct Peptide Reactivity Assay (kDPRA), mapped to AOP 40 Key Event 396 by Aleksic et al. 2024
+# (PMID:38385441), as extracted into dismech's skin sensitization models
+# template in monarch-initiative/dismech#15958.
+id: enviromech:assay-0007
+assay:
+  id: 7
+  title: kinetic Direct Peptide Reactivity Assay (kDPRA)
+  description: Cell-free assay of the reaction kinetics of the test chemical with a synthetic
+    cysteine-containing peptide; the rate constant is used to identify the strongest (GHS
+    1A) sensitizers.
+  events:
+  - 396
+  test_guidelines:
+  - 1
+mapping_reference: PMID:38385441
+mapping_extraction: https://github.com/monarch-initiative/dismech/blob/a0dc2ff5bc7ef0cfad94825495d805aadbbdedf6/templates/skin_sensitization_aop_models.md
+notes: The Key Event mapping and the guideline are the review's, from the roster extracted
+  into the dismech template; dismech caches only the review's abstract, so the roster has
+  not been checked against its full text. The description follows the readout reported, with
+  a quote from PMID:32521036, in dismech's research/Contact_Dermatitis-skin-sensitization-aop-models-deep-research-openscientist.md.

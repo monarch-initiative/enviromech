@@ -67,6 +67,11 @@ validate-key-events:
 validate-event-components:
     uv run linkml-validate -s {{schema}} -C EventComponentRecord data/event_components/*.yaml
 
+# Closed-schema validation of every assay record and every test guideline record.
+validate-assays:
+    uv run linkml-validate -s {{schema}} -C AssayRecord data/assays/*.yaml
+    uv run linkml-validate -s {{schema}} -C TestGuidelineRecord data/test_guidelines/*.yaml
+
 # Closed-schema validation of every AOP record.
 validate-aops:
     uv run linkml-validate -s {{schema}} -C AopRecord data/aops/*.yaml

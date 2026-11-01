@@ -38,6 +38,12 @@ event:
       term: memory T cell
     biological_action_id:
       term: increased
+  assays:
+  - 14  # Murine local lymph node assay (LLNA)
+  test_guidelines:
+  - 4  # OECD TG 429
+  - 5  # OECD TG 442A
+  - 6  # OECD TG 442B
   definition: >-
     T-cells are typically affected by protein-hapten complexes presented by
     dendritic cells on Major Histocompatibility Complex (MHC) molecules. Molecular

@@ -227,6 +227,77 @@ classes:
         required: true
       notes:
 
+  AssayRecord:
+    description: >-
+      One assay, in one file under data/assays/: a defined method for measuring a
+      biological change, as an EMOD Assay. This class gives it an EnviroMech
+      identifier and says where its link to Key Events comes from.
+
+      A Key Event names the assays that measure it in event.assays, EMOD's own
+      slot, by Assay id; the Assay names the same Key Events in assay.events, by
+      AOP-Wiki Event id. scripts/check_ids.py checks that the two agree. This is
+      a direct Key Event to assay link, independent of any dismech node.
+
+      EMOD requires an integer id on every Assay. EnviroMech assigns it, as for
+      Observations and event components: the id is the number in the record
+      identifier (enviromech:assay-0005 has assay.id 5). An Observation that
+      writes an Assay inline gives it an id from the same series, so an id names
+      one Assay across both.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: The assay's EnviroMech identifier, for example enviromech:assay-0005.
+        pattern: "^enviromech:assay-\\d+$"
+        required: true
+      assay:
+        description: >-
+          The assay, as an EMOD Assay. Its id is the number in the record
+          identifier; its events are the AOP-Wiki ids of the Key Events it
+          measures; its test_guidelines are the ids of TestGuidelineRecords.
+        range: Assay
+        inlined: true
+        required: true
+      mapping_reference:
+        description: >-
+          The publication that maps this assay to its Key Events, as a CURIE, for
+          example PMID:38385441. The mapping is that source's claim, recorded
+          here, not EnviroMech's own judgement.
+        range: uriorcurie
+        required: true
+      mapping_extraction:
+        description: >-
+          Where the mapping was extracted from the publication, when it was not
+          read from the publication directly: a resolvable URL to the extraction,
+          such as a dismech research template at a fixed commit.
+        range: uri
+      notes:
+
+  TestGuidelineRecord:
+    description: >-
+      One test guideline, in one file under data/test_guidelines/: a standardized
+      test method published by a regulatory body, as an EMOD TestGuideline. A Key
+      Event names its guidelines in event.test_guidelines and an Assay in
+      assay.test_guidelines, both by id. The id is the number in the record
+      identifier (enviromech:tg-0001 has test_guideline.id 1).
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: The test guideline's EnviroMech identifier, for example enviromech:tg-0001.
+        pattern: "^enviromech:tg-\\d+$"
+        required: true
+      test_guideline:
+        description: >-
+          The test guideline, as an EMOD TestGuideline. short_title is the
+          issuing body and number, such as OECD TG 442C. full_title is left
+          unset until it has been checked against the issuing body's published
+          title.
+        range: TestGuideline
+        inlined: true
+        required: true
+      notes:
+
   AopRecord:
     description: >-
       One Adverse Outcome Pathway, in one file under data/aops/. The AOP itself

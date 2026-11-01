@@ -29,6 +29,13 @@ event:
       term: MHC protein complex assembly
     biological_action_id:
       term: increased
+  assays:
+  - 10  # human Cell Line Activation Test (h-CLAT)
+  - 11  # U-SENS
+  - 12  # IL-8 Luc assay
+  - 13  # GARDskin
+  test_guidelines:
+  - 3  # OECD TG 442E
   definition: >-
     Immature epidermal dendritic cells, known as Langerhans cells, and dermal
     dendritic cells serve as antigen-presenting cells ([1]; [2]; [3]; [4]). In this

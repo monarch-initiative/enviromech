@@ -171,6 +171,33 @@ EnviroMech's own claim, not a copy of one of dismech's
 
 **Status:** adopted 2026-11-01, for models reached through a node.
 
+## 8. A Key Event names its assays through EMOD's `Event.assays`
+
+**Decision:** the methods that measure a Key Event are recorded as EMOD `Assay` objects,
+one per file under `data/assays/` (`AssayRecord`), and a Key Event record names them by
+id in EMOD's own `event.assays`. Each Assay names its Key Events back in `assay.events`.
+Test guidelines are EMOD `TestGuideline` objects under `data/test_guidelines/`
+(`TestGuidelineRecord`), named by id in `event.test_guidelines` and
+`assay.test_guidelines`. `scripts/check_ids.py` checks that every id has a record, that
+the two directions agree, and that a Key Event's guidelines are those of its assays. An
+Assay record says which publication makes the mapping (`mapping_reference`) and, when
+the mapping was not read from that publication directly, where it was extracted
+(`mapping_extraction`).
+
+**Rationale:** EMOD already links an Event to the assays that measure it, so EnviroMech
+uses that link rather than adding its own (entry 5). This is a direct Key Event to assay
+link, independent of the dismech chain from Key Event to node to model (entry 7). It
+covers what that chain cannot reach: an adverse outcome with no dismech node (KE 827),
+and a node with no linked model (KE 396, where DPRA is). `Event.assays` names Assays by
+id, so the Assay objects need a place to live, which follows the event component pattern.
+
+**Consequence:** Assay ids are one series across Assay records and the Observations'
+inline Assays. The first mappings are AOP 40's, from Aleksic et al. 2024
+(PMID:38385441), as extracted into dismech's skin sensitization models template.
+Linking an Assay to the dismech model that curates the same method is not done yet.
+
+**Status:** adopted 2026-11-01 ([#45](https://github.com/monarch-initiative/enviromech/issues/45)).
+
 ## Open and deferred decisions
 
 - Which dismech design principles EnviroMech inherits (see entry 2).

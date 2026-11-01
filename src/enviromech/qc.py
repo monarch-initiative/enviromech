@@ -20,6 +20,7 @@ OFFLINE = [
     ("records: closed schema", ["just", "validate-all"]),
     ("key events: closed schema", ["just", "validate-key-events"]),
     ("event components: closed schema", ["just", "validate-event-components"]),
+    ("assays and test guidelines: closed schema", ["just", "validate-assays"]),
     ("aops: closed schema", ["just", "validate-aops"]),
     ("aops: event roles", ["just", "check-aops"]),
     ("assigned ids", ["just", "check-ids"]),
