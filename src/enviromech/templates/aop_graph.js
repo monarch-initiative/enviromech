@@ -199,7 +199,7 @@
       anchor(details, d.href, "dismech entry page");
     } else {
       var ns = links.filter(function (l) { return l.b === d.id; })
-        .map(function (l) { return byId[l.a].label + " (" + l.label.toLowerCase() + ")"; });
+        .map(function (l) { return byId[l.a].label + " (" + l.label.replace(/_/g, " ").toLowerCase() + ")"; });
       para(details, "Linked to", ns.join("; "));
       para(details, "dismech reference", d.ref);
       anchor(details, d.href, "dismech entry page");
