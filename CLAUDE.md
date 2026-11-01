@@ -212,3 +212,22 @@ files; see the `github-workflows` skill.
 
 Branch before the first edit. One pull request per coherent change. The pull
 request is the human review gate. Do not merge without approval.
+
+**Say who wrote it.** Everything an agent posts to GitHub ends with the
+attribution line, after a blank line:
+
+```
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+```
+
+That means every post, not only the ones a harness reminder happens to name:
+issue bodies, pull request bodies, issue comments, pull request comments,
+review bodies and review replies. A one-line reply still gets it. Commits
+carry the separate `Co-Authored-By:` trailer instead, with the model named
+exactly as the current session states it; a model copied from an older commit
+is wrong, because it changes between and within sessions.
+
+This repository is curated mostly by agents, so a reader needs to know which
+voice a comment is, and the line is the only thing that says so. An
+unattributed comment is a defect to fix by editing the comment, not something
+to leave and do better next time.
