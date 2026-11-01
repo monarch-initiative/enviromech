@@ -1,0 +1,27 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-398
+  path: data/key_events/KE-398.yaml
+session:
+  id: 2026-11-01T061736Z-claude-code-9ecbf3
+  timestamp: '2026-11-01T06:17:36Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/39
+events:
+- type: AUDIT
+  outcome: no_change
+  sections:
+  - aggregation
+  summary: Re-check KE 398's aggregation after dismech added the KE 826 nodes
+  details: Re-read against dismech ecf1266123c, which contains monarch-initiative/dismech#16244. The aggregated
+    nodes' levels, terms and models are unchanged (just check-source-nodes reports no difference), and
+    the adduct node keeps its direct edge to Skin innate immune activation during sensitization, AOP 40's
+    KER 377 branch. The two new keratinocyte nodes sit on the other branch, KER 833 and KER 834, so the
+    rationale still reads correctly. Nothing edited.

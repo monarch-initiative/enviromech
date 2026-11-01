@@ -26,7 +26,8 @@ For how it reaches AOP-Wiki data, read dismech's `aop-wiki` skill in that checko
 `KE-396.yaml` is the worked example of a one-node `nodes_narrower_than_event`, `KE-272.yaml`
 of a correspondence with a level mismatch, and `KE-398.yaml` of `overlaps`
 across two nodes; `KE-1908.yaml` and `KE-1909.yaml` are lumpings of two nodes.
-`KE-826.yaml` and `KE-827.yaml` show what to record when no node fits.
+`KE-826.yaml` is a `constitutes` across two parallel nodes that leaves out a third
+on the same term, and `KE-827.yaml` shows what to record when no node fits.
 
 ## Before starting
 
@@ -72,9 +73,11 @@ components AOP-Wiki left empty: it can only be found by reading.
 Open the dismech entry and read each candidate node with its `description`, its
 upstream and downstream nodes, and the entry's `discussions`. The script cannot see:
 
-- **which arm of the pathograph a node is in.** KE 826's only keratinocyte node sits
-  in the irritant arm, downstream of barrier disruption, while the Event is
-  hapten-driven. Same level, same process term, wrong cause.
+- **which arm of the pathograph a node is in.** `Contact_Dermatitis` has three
+  keratinocyte nodes that match KE 826 on GO:0032980 at CELLULAR. One sits in the
+  irritant arm, downstream of barrier disruption, while the Event is hapten-driven:
+  same level, same process term, wrong cause. Only the two hapten-driven nodes are
+  aggregated.
 - **knowledge gaps.** dismech records missing steps as `KNOWLEDGE_GAP` discussions
   (`no_node_for_covalent_haptenation`). A gap attached near the Event is often the
   answer.

@@ -1,5 +1,6 @@
-# AOP-Wiki KE 826, a Key Event of AOP 40. Structured properties read from the
-# 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+# AOP-Wiki KE 826, a Key Event of AOP 40, with the dismech nodes that constitute
+# it. Event properties read from the 2026-10-03 AOP-Wiki XML export with
+# aop_wiki_cli; node fields from dismech main at ecf1266123c on 2026-11-01.
 id: aop.events:826
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -92,15 +93,113 @@ level_screening:
     No finding: the description carries words for the Cellular level. It
     describes changes within keratinocytes: inflammasome activation, IL-18
     release and induction of Nrf2-dependent cytoprotective genes.
-notes: >-
-  No aggregation. dismech's Contact_Dermatitis entry has one keratinocyte
-  activation node, Keratinocyte activation and proinflammatory mediator
-  release, at CELLULAR, binding GO:0032980 keratinocyte activation and
-  GO:0006954 inflammatory response. Its level and process match the Event, but
-  the node sits in the irritant arm, downstream of Epidermal barrier
-  disruption, and its description is of barrier-injured keratinocytes. This
-  Event is keratinocyte activation caused by hapten-protein complexes, with no
-  barrier injury in the path. dismech records the missing step itself, as the
-  knowledge gap no_node_for_hapten_driven_keratinocyte_activation. Aggregating
-  the irritant node here would assert a cause the node does not carry, so
-  nothing is aggregated until dismech has a sensitization-arm node.
+aggregation:
+  aggregation_relation: constitutes
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Hapten-driven keratinocyte electrophile sensing
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Hapten-driven keratinocyte electrophile sensing
+    source_level: CELLULAR
+    biological_organization_id:
+      term: Cellular
+    processes:
+    - source: GO
+      source_id: GO:0032980
+      term: keratinocyte activation
+    - source: GO
+      source_id: GO:0062197
+      term: cellular response to chemical stress
+    objects:
+    - source: CL
+      source_id: CL:0000312
+      term: keratinocyte
+    biological_action_id:
+      term: increased
+    models:
+    - model_ref: Contact_Dermatitis:experimental_models#Keratinocyte Keap1-Nrf2-ARE sensitizer-response models
+      model_section: experimental_models
+      model_name: Keratinocyte Keap1-Nrf2-ARE sensitizer-response models
+      source_relationship: MEASURES
+    notes: >-
+      dismech binds GO:0062197 with the preferred term "Keap1-Nrf2-ARE
+      electrophile sensing", and curates the node as the keratinocyte's sensor
+      readout, not as an established driver of the steps below it. Its
+      description places the node as the electrophile-sensing arm of KE 826,
+      caused by the hapten's chemistry rather than by barrier injury, which is
+      the biology the OECD TG 442D methods measure. dismech's model on the node
+      covers those methods, KeratinoSens among them.
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Keratinocyte inflammasome danger signalling
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Keratinocyte inflammasome danger signalling
+    source_level: CELLULAR
+    biological_organization_id:
+      term: Cellular
+    processes:
+    - source: GO
+      source_id: GO:0032980
+      term: keratinocyte activation
+    - source: GO
+      source_id: GO:0044546
+      term: NLRP3 inflammasome complex assembly
+    - source: GO
+      source_id: GO:0141084
+      term: inflammasome-mediated signaling pathway
+    - source: GO
+      source_id: GO:0032611
+      term: interleukin-1 beta production
+    - source: GO
+      source_id: GO:0032621
+      term: interleukin-18 production
+    objects:
+    - source: CL
+      source_id: CL:0000312
+      term: keratinocyte
+    biological_action_id:
+      term: increased
+    models:
+    - model_ref: Contact_Dermatitis:animal_models#NALP3- and ASC-deficient contact hypersensitivity mouse
+      model_section: animal_models
+      model_name: NALP3- and ASC-deficient contact hypersensitivity mouse
+      source_relationship: PERTURBS
+    notes: >-
+      Its description: the hapten acts as a danger signal, the NLRP3 and ASC
+      inflammasome assembles and activates caspase-1, and mature IL-1beta and
+      IL-18 are released. dismech curates it as running in parallel with the
+      electrophile-sensing arm, not downstream of it.
+  rationale: >-
+    The Event's definition describes two responses of keratinocytes to the
+    hapten-protein complex: inflammasome activation with caspase-1 cleavage of
+    IL-18, and induction of the Keap1-Nrf2-ARE cytoprotective pathway. dismech
+    curates these as two parallel nodes, both driven by the hapten rather than
+    by barrier injury. Both bind GO:0032980 keratinocyte activation, increased,
+    in keratinocytes, which is the Event's first component. The inflammasome
+    node carries the second component, cytokine production involved in
+    inflammatory response, through IL-1beta and IL-18 production; that link
+    is read from the descriptions, since GO places both terms under cytokine
+    production and not under GO:0002534. The sensing node's GO:0062197
+    cellular response to chemical stress is in neither component, but it is
+    the Nrf2-ARE induction the Event's definition names, and the OECD TG 442D
+    assay the Event lists in its measurement section reads it. So the
+    components are narrower than the Event as AOP-Wiki defines it. Read
+    against the definition, the two nodes together are the Event, and
+    neither asserts biology outside it, so they constitute it. Neither node
+    alone is the Event: an assay of one arm measures part of it.
+  notes: >-
+    dismech's third keratinocyte node, Keratinocyte activation and
+    proinflammatory mediator release, binds GO:0032980 too, at CELLULAR, but
+    sits in the irritant arm downstream of Epidermal barrier disruption. It is
+    not aggregated: it would assert a cause, barrier injury, that the Event
+    does not have. The two aggregated nodes were added in
+    monarch-initiative/dismech#16244, which resolved dismech's knowledge gap
+    no_node_for_hapten_driven_keratinocyte_activation; before it, this record
+    had no aggregation. dismech draws no edge between the two nodes, so there
+    are no internal edges. Both take their inbound edge from the adduct node,
+    which dismech's edge descriptions identify with AOP 40's KER 833. Both lead
+    to Skin innate immune activation during sensitization, which is aggregated
+    into KE 398, so those two edges correspond to KER 834. In the 2026-10-03
+    snapshot KE 826 is in AOP 40 only. The aggregation is asserted for the
+    Event, not for the pathway.

@@ -1,0 +1,35 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-826
+  path: data/key_events/KE-826.yaml
+session:
+  id: 2026-11-01T061733Z-claude-code-87e81b
+  timestamp: '2026-11-01T06:17:33Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/39
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  - notes
+  summary: Aggregate KE 826 onto dismech's two hapten-driven keratinocyte nodes, with their models
+  details: 'monarch-initiative/dismech#16244 added Hapten-driven keratinocyte electrophile sensing and
+    Keratinocyte inflammasome danger signalling to Contact_Dermatitis. Ran just crosswalk 40 Contact_Dermatitis
+    against dismech ecf1266123c and the 2026-10-03 snapshot (dismech''s committed copy, tests/data/aop_crosswalk);
+    both nodes match on GO:0032980 at CELLULAR, as does the irritant-arm node. Aggregated the two hapten-driven
+    nodes as constitutes: together they are the two responses the Event''s definition names (inflammasome
+    and IL-18; Keap1-Nrf2-ARE), neither asserts biology outside it. The inflammasome node carries component
+    2 by reading, since GO places IL-1beta and IL-18 production under cytokine production, not GO:0002534;
+    GO:0062197 on the sensing node is in neither component but is the Nrf2-ARE induction the definition
+    names and TG 442D measures. Irritant-arm node not aggregated (barrier-injury cause). No internal edges.
+    Models from just source-models: Keap1-Nrf2-ARE sensitizer-response models (MEASURES) on the sensing
+    node; NALP3- and ASC-deficient mouse (PERTURBS) on the inflammasome node. Replaced the old no-node
+    notes; header cites the dismech commit.'
