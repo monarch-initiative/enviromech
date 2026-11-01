@@ -4,7 +4,7 @@
 **Status:** steps 1, 2, 3 and the drift check in step 5 are built; step 4 holds the decisions
 still open, and one item in step 5 is left for later.
 **Depends on:** [dismech#16232](https://github.com/monarch-initiative/dismech/pull/16232),
-which adds `scripts/aop_dismech_crosswalk.py`. Open and approved on this date.
+which adds `scripts/aop_dismech_crosswalk.py`. Merged on 2026-11-01 as `aef740d7b8a`.
 **For:** [#14](https://github.com/monarch-initiative/enviromech/issues/14), the AOP 40
 crosswalk, and every AOP after it.
 
@@ -48,8 +48,8 @@ or KE 827.
 
 `just crosswalk AOP ENTRY...` runs the script against a dismech checkout and an
 `aop-wiki-cli` data directory, and writes `build/crosswalk/AOP-<id>.json` and `.txt`,
-which are not committed. Until dismech#16232 merges, point `DISMECH_ROOT` at a checkout
-of its branch.
+which are not committed. It needs a dismech checkout at or after `aef740d7b8a`, the merge
+of dismech#16232.
 
 - **Where the two checkouts are.** Read from `$DISMECH_ROOT` and
   `$AOP_WIKI_CLI_DATA_DIR`, defaulting to `~/Developer/dismech` and
@@ -115,7 +115,11 @@ rather than copying it. Its steps:
 - **A relation for a node broader than the Event.** `AggregationRelationEnum` has
   `constitutes` and `narrower_than`. KE 398's closest node is wider than the Event, and
   neither value fits. Adding a value is an `extend-schema` change.
-- **KE 396.** Waits for dismech's covalent-binding node (monarch-initiative/dismech#16068).
+- **KE 396.** dismech's covalent-binding node, asked for in monarch-initiative/dismech#16068,
+  was added by monarch-initiative/dismech#16226 on 2026-10-31:
+  `Covalent hapten-protein adduct formation`, at `MOLECULAR`. Against dismech `aef740d7b8a`
+  the crosswalk finds it for KE 396 on the `name` basis only: the node does not bind the
+  Event's component terms (GO:0005515, CHEBI:59739). The aggregation is still to be written.
 
 ### 5. Later
 
