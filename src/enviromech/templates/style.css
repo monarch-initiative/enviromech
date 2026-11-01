@@ -112,3 +112,24 @@ footer { color: var(--muted); font-size: .85rem; margin: 2.5rem auto 2rem; }
   table.data td:empty { display: none; }
   #records th button { display: none; }
 }
+/* The pathway graph on an AOP's page (aop_graph.html, aop_graph.js). */
+.pathway-controls { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; margin: .4rem 0 .6rem; font-size: .92rem; }
+.pathway-legend { display: inline-flex; flex-wrap: wrap; gap: .3rem .5rem; align-items: center; color: var(--muted); }
+.pathway-legend .sw { display: inline-block; width: 1.6rem; height: .7rem; border-radius: 4px; border: 2px solid; margin-left: .5rem; vertical-align: -1px; background: var(--card); }
+.sw-ke { border-color: var(--primary); } .sw-node { border-color: var(--good); } .sw-model { border-color: var(--muted); }
+.sw-gap { border-style: dashed; border-color: var(--muted); }
+.pathway-figure { overflow-x: auto; background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px; }
+.pathway-svg { display: block; font: 13px system-ui, -apple-system, "Segoe UI", sans-serif; }
+.g-box { cursor: pointer; outline: none; }
+.g-box rect { fill: var(--card); stroke-width: 2; }
+.g-ke rect { stroke: var(--primary); } .g-node rect { stroke: var(--good); } .g-model rect { stroke: var(--muted); }
+.g-gap rect { stroke-dasharray: 5 4; }
+.g-box.is-on rect, .g-box:focus-visible rect { stroke-width: 3.5; fill: var(--plain-bg); }
+.g-label { fill: var(--fg); font-weight: 600; }
+.g-sub { fill: var(--muted); font-size: 12px; }
+.g-edge path { fill: none; stroke: var(--line); stroke-width: 2; }
+.g-ke-node path { stroke: var(--good); stroke-opacity: .55; }
+.g-edge-label { fill: var(--muted); font-size: 11px; paint-order: stroke; stroke: var(--card); stroke-width: 4px; }
+.is-dim { opacity: .18; transition: opacity .15s; }
+.pathway-details { margin-top: .8rem; }
+.pathway-details p { margin: .3rem 0; }

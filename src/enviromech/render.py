@@ -38,6 +38,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from markupsafe import Markup, escape
 
 from . import site
+from .aop_graph import graphs
 from .paths import (
     AOPS_DIR,
     KEY_EVENTS_DIR,
@@ -482,6 +483,15 @@ def build() -> dict[Path, str]:
             continue
         title = (data.get("aop") or {}).get("title") or path.stem
         records.append({"stem": path.stem, "data": {"kind": "AOP", "name": title, **data}})
+    # The pathway graph is built from the records as loaded, before cross-linking
+    # turns AOP-Wiki ids into links.
+    aop_graphs = graphs(
+        {r["stem"]: r["data"] for r in records if r["data"]["kind"] == "AOP"},
+        {r["stem"]: r["data"] for r in records if r["data"]["kind"] == "Key Event"},
+    )
+    for r in records:
+        if r["stem"] in aop_graphs and r["data"]["kind"] == "AOP":
+            r["graph"] = aop_graphs[r["stem"]]
     cross_link(records)
     cross_link_aops(records)
     kinds: dict[str, int] = {}

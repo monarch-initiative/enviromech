@@ -1,0 +1,19 @@
+{#- The pathway graph on an AOP's page: its Key Events, the dismech nodes they
+    aggregate, and the dismech models linked to those nodes. The data is built by
+    aop_graph.py and embedded as JSON; aop_graph.js draws it. -#}
+<section id="pathway" class="pathway">
+<h2>Key Events, dismech nodes and models</h2>
+<p class="help">Each Key Event of the AOP, the dismech pathophysiology nodes aggregated into it, and the dismech models linked to those nodes. Hover over or select a box to follow its chain. Every link is read from the records; a dashed box is a gap in them.</p>
+<div class="pathway-controls">
+<label><input type="checkbox" id="pathway-models" checked> Show models</label>
+<span class="pathway-legend"><span class="sw sw-ke"></span>Key Event <span class="sw sw-node"></span>dismech node <span class="sw sw-model"></span>dismech model <span class="sw sw-gap"></span>gap</span>
+</div>
+<div class="pathway-figure" id="pathway-figure" role="group" aria-label="Pathway graph"></div>
+<div class="pathway-details card" id="pathway-details" aria-live="polite"><p class="muted">Select a Key Event, node or model to see what links it.</p></div>
+<p class="help">Key Events are listed in the order the AOP record gives them. The Key Event Relationships between them are not drawn yet: the AOP record names them by id only, and their endpoints will come from Key Event Relationship records.</p>
+<noscript><p class="muted">The graph needs JavaScript; the same links are in the Key Event pages.</p></noscript>
+<script type="application/json" id="pathway-data">{{ record.graph | tojson }}</script>
+<script>
+{% include "aop_graph.js" %}
+</script>
+</section>

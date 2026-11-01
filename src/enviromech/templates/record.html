@@ -35,6 +35,9 @@
 </table>
 </section>
 {%- endif %}
+{%- if record.graph %}
+{% include "aop_graph.html" %}
+{%- endif %}
 {%- if body.sections | length > 2 %}
 <nav class="toc">{% for s in body.sections %}<a href="#{{ s.key }}">{{ s.label }}{% if s.count %} <span class="count">{{ s.count }}</span>{% endif %}</a>{% endfor %}</nav>
 {%- endif %}
