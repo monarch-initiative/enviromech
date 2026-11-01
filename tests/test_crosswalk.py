@@ -68,6 +68,7 @@ def test_main_writes_the_output_with_the_run_recorded(tmp_path, monkeypatch, cap
     (aops / "AOP-40.yaml").write_text(yaml.safe_dump({"id": "aop:40", "aop_wiki_snapshot": "2026-10-03"}))
     monkeypatch.setenv("DISMECH_ROOT", str(tmp_path / "dismech"))
     monkeypatch.setattr(crosswalk, "dismech_commit", lambda root: "a" * 40)
+    monkeypatch.setattr(crosswalk, "check_entries", lambda root, entries: None)
     calls = []
 
     def fake_run(found, root):
@@ -90,3 +91,14 @@ def test_main_writes_the_output_with_the_run_recorded(tmp_path, monkeypatch, cap
 def test_main_refuses_an_aop_with_no_record(tmp_path):
     with pytest.raises(SystemExit, match="no AOP record"):
         crosswalk.main(["999", "Contact_Dermatitis", "--aops", str(tmp_path)])
+
+
+def test_an_entry_typed_with_a_space_is_refused_with_the_slug_suggested(tmp_path):
+    disorders = tmp_path / "kb" / "disorders"
+    disorders.mkdir(parents=True)
+    (disorders / "Contact_Dermatitis.yaml").write_text("name: Contact Dermatitis\n")
+    crosswalk.check_entries(tmp_path, ["Contact_Dermatitis"])
+    with pytest.raises(SystemExit, match="did you mean Contact_Dermatitis"):
+        crosswalk.check_entries(tmp_path, ["Contact", "Dermatitis"])
+    with pytest.raises(SystemExit, match="Contact_Dermatits: did you mean Contact_Dermatitis"):
+        crosswalk.check_entries(tmp_path, ["Contact_Dermatits"])

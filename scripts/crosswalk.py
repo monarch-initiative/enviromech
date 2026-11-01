@@ -25,6 +25,7 @@ which CI does not have.
 """
 
 import argparse
+import difflib
 import json
 import os
 import subprocess
@@ -96,6 +97,28 @@ def run(found: list[str], root: Path) -> str:
     return done.stdout
 
 
+def check_entries(root: Path, entries: list[str]) -> None:
+    """Refuse entry names dismech does not have, suggesting the slug that was meant.
+
+    A dismech entry is named by its file name, with underscores. A name typed with
+    spaces reaches this script as several words, so words that join with
+    underscores into an entry are suggested as that entry.
+    """
+    slugs = {p.stem for p in (root / "kb" / "disorders").glob("*.yaml")}
+    missing = [e for e in entries if e not in slugs]
+    if not missing:
+        return
+    lines = [f"no dismech entry named {', '.join(missing)} in {root / 'kb' / 'disorders'}"]
+    joined = "_".join(entries)
+    if joined in slugs:
+        lines.append(f"Entries are named with underscores: did you mean {joined}?")
+    for name in missing:
+        close = difflib.get_close_matches(name, sorted(slugs), n=3, cutoff=0.6)
+        if close:
+            lines.append(f"{name}: did you mean {', '.join(close)}?")
+    raise SystemExit("\n".join(lines))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("aop_id", help="the AOP's number, as in data/aops/AOP-<id>.yaml")
@@ -112,6 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     root = location("DISMECH_ROOT", DEFAULT_DISMECH)
     data_dir = location("AOP_WIKI_CLI_DATA_DIR", DEFAULT_DATA_DIR)
     commit = dismech_commit(root)
+    check_entries(root, args.entries)
 
     as_json = command(root, data_dir, date, args.aop_id, args.entries, args.rules, "json")
     result = json.loads(run(as_json, root))
