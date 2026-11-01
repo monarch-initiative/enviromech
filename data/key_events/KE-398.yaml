@@ -249,8 +249,12 @@ aggregation:
     rather than an error on either side. Allergen-specific T-cell priming is
     CELLULAR and agrees.
   notes: >-
-    KE 398 sits in AOPs 39 and 40. The aggregation is asserted for the Event,
-    not for either pathway. The priming node is also aggregated into KE 272,
+    The relation is overlaps rather than nodes_broader_than_event even though
+    the innate activation node does contain the Event, because the relation is
+    asserted for the set and the priming node overlaps the Event without
+    containing it. Recording the two separately would need a relation per
+    source node. KE 398 sits in AOPs 39 and 40. The aggregation is asserted
+    for the Event, not for either pathway. The priming node is also aggregated into KE 272,
     so the dismech edge from the innate activation node to it falls inside
     this Event and also corresponds in part to KER 379, from this Event to
     KE 272.

@@ -1,0 +1,36 @@
+history_version: 1
+target:
+  kind: schema
+  slug: AggregationRelationEnum
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-01T041427Z-claude-code-36bbc9
+  timestamp: '2026-11-01T04:14:27Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/32
+events:
+- type: EDIT
+  outcome: changed
+  summary: Add nodes_broader_than_event, completing the directional pair
+  details: 'Review round on #32, third pass, at the reviewer''s request: establish the symmetry now rather
+    than when a record needs it. Added nodes_broader_than_event, for source nodes that each contain the
+    Event while asserting biology beyond it, as the mirror of nodes_narrower_than_event. No record uses
+    it yet. Adding it required narrowing overlaps, whose description had claimed the single-broader-node
+    shape: overlaps is now for a set where neither side contains the other, or where the set is mixed,
+    and a node wholly containing the Event takes the new value instead. The enum description now states
+    the set-level constraint directly, that a directional value requires every source node to stand in
+    that relation, since that is what decides between the two in a mixed set. No existing record changed
+    relation: KE 398 has one broader node beside one partly-overlapping node, so it stays overlaps, and
+    a note on its aggregation now says why, so a reader does not take the omission for an oversight. KE
+    272''s node is not broader, so it stays overlaps too. Also updated the crosswalk-key-event skill''s
+    decide list and the 2026-10-31 report''s resolution note. Gates: validate-key-events clean, check-ids
+    clean, 196 tests pass, export read back every file, qc 12 gates, lint unchanged at 138 warnings and
+    no errors.'

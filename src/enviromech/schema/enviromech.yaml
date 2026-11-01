@@ -888,11 +888,16 @@ enums:
     description: >-
       How a set of source nodes relates to the Event they are aggregated into. A
       value that compares the two in extent names both sides, as
-      nodes_narrower_than_event does, so the direction is readable without opening
-      the description; the counterpart for the opposite direction is
-      nodes_broader_than_event, which is not a value yet because no record can use
-      it while this relation is set-level. A value that needs no direction, because
-      it is a verb or because it is symmetric, does not take the longer form.
+      nodes_narrower_than_event and nodes_broader_than_event do, so the direction
+      is readable without opening the description. A value that needs no
+      direction, because it is a verb or because it is symmetric, does not take
+      the longer form.
+
+      The relation is asserted for the set, so a directional value requires every
+      source node to stand in that relation to the Event. A set whose nodes stand
+      in different relations, as KE 398's two do, takes overlaps however many
+      values this enum has; making that case expressible means moving the relation
+      onto each SourceNode, which is a separate question.
     permissible_values:
       constitutes:
         description: >-
@@ -903,18 +908,25 @@ enums:
         description: >-
           The source nodes are each a narrower case of the Event. The Event
           covers biology the nodes do not assert.
+      nodes_broader_than_event:
+        description: >-
+          The source nodes are each broader than the Event: the Event's biology
+          lies within each node, and each node asserts biology the Event does
+          not. The mirror of nodes_narrower_than_event. Measuring a node does not
+          measure the Event, because the node answers for more than the Event
+          asks, which is why the rationale has to say what else each node carries.
       overlaps:
         description: >-
-          The source nodes share biology with the Event, and at least one of
-          them also asserts biology outside it. The Event may cover biology
-          that none of the nodes asserts as well. This covers a single node
-          broader than the Event, and an Event that falls across parts of
-          several nodes without being the whole of any. Use it only when
-          neither constitutes nor nodes_narrower_than_event holds. It is the weakest of
-          the three: it does not say that measuring the Event measures any of
-          the nodes, or the reverse. The rationale must say, for each node,
-          which part of it falls within the Event and which part falls
-          outside.
+          The source nodes share biology with the Event without either side
+          containing the other, or the set is mixed, with its nodes standing in
+          different relations to the Event. The Event may cover biology that none
+          of the nodes asserts. Use it only when none of the other three values
+          holds for every node: a node wholly containing the Event is
+          nodes_broader_than_event, not this. It is the weakest value here,
+          asserting no containment in either direction, so it does not say that
+          measuring the Event measures any of the nodes, or the reverse. The
+          rationale must say, for each node, which part of it falls within the
+          Event and which part falls outside.
 
   ScreeningOutcomeEnum:
     description: The outcome of screening a Key Event's level of biological organization.

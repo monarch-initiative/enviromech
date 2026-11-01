@@ -116,10 +116,12 @@ rather than copying it. Its steps:
   `constitutes` and `narrower_than` (since renamed `nodes_narrower_than_event`). KE 398's
   closest node is wider than the Event, and
   neither value fits. Adding a value is an `extend-schema` change. *Resolved
-  2026-11-01:* `overlaps` was added, for nodes that share biology with the Event while
-  asserting biology outside it. KE 398 is aggregated with it across two nodes, and KE 272
-  moved to it from the narrower-than value, because its node also binds KE 398's antigen
-  presentation.
+  2026-11-01:* two values were added. `nodes_broader_than_event` is the direct answer, for
+  nodes that each contain the Event, and `overlaps` covers the case where neither side
+  contains the other or the set is mixed. KE 398 is the mixed case, one broader node beside
+  one partly-overlapping one, so it takes `overlaps` across the two; KE 272 moved to
+  `overlaps` as well, because its node also binds KE 398's antigen presentation. A
+  per-`SourceNode` relation would be needed to record KE 398's broader node as such.
 - **KE 396.** dismech's covalent-binding node, asked for in monarch-initiative/dismech#16068,
   was added by monarch-initiative/dismech#16226 on 2026-10-31:
   `Covalent hapten-protein adduct formation`, at `MOLECULAR`. Against dismech `aef740d7b8a`

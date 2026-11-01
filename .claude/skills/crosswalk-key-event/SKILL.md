@@ -90,12 +90,16 @@ upstream and downstream nodes, and the entry's `discussions`. The script cannot 
   Event covers biology they do not assert. The value names both sides because the
   comparison has a direction; a value that needs none, such as `constitutes` or
   `overlaps`, does not.
-- `overlaps`: the nodes share biology with the Event, but at least one of them
-  also asserts biology outside it. Use this for a node broader than the Event,
-  and for an Event that falls across parts of several nodes without being the
-  whole of any (KE 398). It is the weakest of the three, so use it only when the
-  other two fail, and say in the rationale which part of each node is inside
-  the Event and which is outside.
+- `nodes_broader_than_event`: each node contains the Event and asserts biology
+  beyond it. The mirror of the previous value.
+- `overlaps`: neither side contains the other, or the set is mixed, its nodes
+  standing in different relations to the Event (KE 398). It is the weakest value,
+  so use it only when none of the other three holds for every node, and say in the
+  rationale which part of each node is inside the Event and which is outside.
+
+The relation is asserted for the whole set, so a directional value needs every
+node to stand in that relation. One broader node beside one partly-overlapping
+node is `overlaps`, not `nodes_broader_than_event`.
 
 A node that binds a process belonging to a neighbouring Key Event is asserting
 biology outside this Event, so `nodes_narrower_than_event` does not hold for it (KE 272's

@@ -1,0 +1,30 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-398
+  path: data/key_events/KE-398.yaml
+session:
+  id: 2026-11-01T041427Z-claude-code-9cd162
+  timestamp: '2026-11-01T04:14:27Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/32
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Say why KE 398 keeps overlaps now that a broader value exists
+  details: 'nodes_broader_than_event was added to AggregationRelationEnum in the same change, and KE 398''s
+    innate activation node is broader than the Event, so the record would read as having missed the new
+    value. Added a sentence to the aggregation''s notes: the relation is asserted for the set, and the
+    priming node overlaps the Event without containing it, so overlaps is still the only value that holds
+    for both nodes, and recording them separately would need a relation per source node. The relation,
+    the rationale and the source nodes are unchanged.'
