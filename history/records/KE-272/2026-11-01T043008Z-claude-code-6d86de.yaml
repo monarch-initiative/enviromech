@@ -2,7 +2,7 @@ history_version: 1
 target:
   kind: record
   slug: KE-272
-  path: data/observations/KE-272.yaml
+  path: data/key_events/KE-272.yaml
 session:
   id: 2026-11-01T043008Z-claude-code-6d86de
   timestamp: '2026-11-01T04:30:08Z'
