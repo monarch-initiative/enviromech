@@ -1,0 +1,36 @@
+history_version: 1
+target:
+  kind: schema
+  slug: AggregationRelationEnum
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-01T040910Z-claude-code-00ed5d
+  timestamp: '2026-11-01T04:09:10Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/32
+events:
+- type: EDIT
+  outcome: changed
+  summary: Rename narrower_than to nodes_narrower_than_event
+  details: 'Review round on #32, second pass. The earlier pass added slot_uri: skos:mappingRelation and
+    stated the direction convention in prose, keeping the value name; the review asked for the subject
+    in the name itself. Renamed the permissible value narrower_than to nodes_narrower_than_event, so the
+    comparison names both sides and a later nodes_broader_than_event cannot be confused with it. constitutes
+    and overlaps keep their short names, one being a verb and the other symmetric, and the enum description
+    now states that rule rather than a per-value reading convention. nodes_broader_than_event is named
+    in that description as the counterpart but is not added as a value: no record could use it while aggregation_relation
+    is set-level, since KE 398''s two nodes stand in different relations to the Event, and the per-SourceNode
+    question is open on #34. Migrated with scripts/migrations/rename_narrower_than_to_nodes_narrower_than_event.py,
+    which substitutes the value textually because a YAML round-trip would drop a Key Event record''s header
+    comment, and refuses to write unless parsing before and after shows the value is the only thing that
+    moved. One record carried the value, KE-396. The slot_uri from the first pass is unchanged. Gates:
+    validate-key-events clean, check-ids clean, 196 tests pass, export read back every file, qc 12 gates,
+    lint unchanged at 138 warnings and no errors.'

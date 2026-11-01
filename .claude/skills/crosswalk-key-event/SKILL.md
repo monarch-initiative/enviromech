@@ -23,7 +23,7 @@ dismech, and this repository runs it in a dismech checkout; do not copy it here.
 For how it reaches AOP-Wiki data, read dismech's `aop-wiki` skill in that checkout
 (`.claude/skills/aop-wiki/SKILL.md`), not a copy.
 
-`KE-396.yaml` is the worked example of a one-node `narrower_than`, `KE-272.yaml`
+`KE-396.yaml` is the worked example of a one-node `nodes_narrower_than_event`, `KE-272.yaml`
 of a correspondence with a level mismatch, and `KE-398.yaml` of `overlaps`
 across two nodes; `KE-1908.yaml` and `KE-1909.yaml` are lumpings of two nodes.
 `KE-826.yaml` and `KE-827.yaml` show what to record when no node fits.
@@ -86,8 +86,10 @@ upstream and downstream nodes, and the entry's `discussions`. The script cannot 
 **A node, or a set of nodes, corresponds.** Choose the `aggregation_relation`:
 
 - `constitutes`: the nodes together are the Event, nothing more and nothing less.
-- `narrower_than`: each node is a narrower case of the Event; the Event covers
-  biology they do not assert.
+- `nodes_narrower_than_event`: each node is a narrower case of the Event; the
+  Event covers biology they do not assert. The value names both sides because the
+  comparison has a direction; a value that needs none, such as `constitutes` or
+  `overlaps`, does not.
 - `overlaps`: the nodes share biology with the Event, but at least one of them
   also asserts biology outside it. Use this for a node broader than the Event,
   and for an Event that falls across parts of several nodes without being the
@@ -96,7 +98,7 @@ upstream and downstream nodes, and the entry's `discussions`. The script cannot 
   the Event and which is outside.
 
 A node that binds a process belonging to a neighbouring Key Event is asserting
-biology outside this Event, so `narrower_than` does not hold for it (KE 272's
+biology outside this Event, so `nodes_narrower_than_event` does not hold for it (KE 272's
 node also binds dendritic cell antigen presentation, which is KE 398's).
 
 Then write the record's `aggregation` (step 5).

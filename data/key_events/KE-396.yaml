@@ -166,7 +166,7 @@ term_findings:
   reagent, rather than the protein it binds. The Event's description says the
   target protein is not identified and is not considered critical.
 aggregation:
-  aggregation_relation: narrower_than
+  aggregation_relation: nodes_narrower_than_event
   source_nodes:
   - source_knowledge_base: dismech
     source_node_ref: Contact_Dermatitis:pathophysiology#Covalent hapten-protein adduct formation
