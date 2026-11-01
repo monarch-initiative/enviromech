@@ -1,0 +1,32 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: aop-pathway-graph
+  path: src/enviromech/aop_graph.py
+session:
+  id: 2026-11-01T075426Z-claude-code-a6ab4b
+  timestamp: '2026-11-01T07:54:26Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/42
+events:
+- type: CREATE
+  outcome: changed
+  summary: Draw each AOP's Key Events, dismech nodes and models as an interactive graph on its browser
+    page
+  details: 'Issue #42. src/enviromech/aop_graph.py joins an AOP record''s aop.events with each Key Event
+    record''s aggregation.source_nodes and their models into one graph; render.py embeds it as JSON on
+    the AOP''s record page, and templates/aop_graph.js draws it as inline SVG with no dependency: three
+    columns (Key Events in the record''s order, MIE first and AO last; dismech nodes; dismech models),
+    the aggregation_relation labelled once per Key Event, each model''s section and relationship in its
+    box. A node or model shared by two Key Events is drawn once. Gaps are dashed: a Key Event with no
+    dismech node (KE 827), a node with no linked model (KE 396''s adduct node). Hover or select follows
+    a chain; selection shows the rationale or notes and links to the Key Event record or dismech entry;
+    models can be hidden. Checked in Chromium at 1280 px light and dark and at 390 px: no script errors,
+    no page overflow. Key Event Relationships are not drawn: the AOP record names them by id only, so
+    their endpoints need KER records. Tests in tests/test_aop_pages.py.'

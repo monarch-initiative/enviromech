@@ -36,6 +36,9 @@ There are four kinds of record, one YAML file each:
   Adverse Outcome per level. `just qc`
   runs both. `just report` counts them and the record browser shows them, each AOP
   linked to its Key Events and each Key Event to the AOPs it is in, with its role.
+  An AOP's page also draws its pathway graph: each Key Event, the dismech nodes
+  aggregated into it and the dismech models linked to those nodes, built from the
+  records by `src/enviromech/aop_graph.py`.
 
 All four classes are in `src/enviromech/schema/enviromech.yaml`.
 
