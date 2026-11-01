@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-826
+  path: data/key_events/KE-826.yaml
+session:
+  id: 2026-11-01T070936Z-claude-code-90b577
+  timestamp: '2026-11-01T07:09:36Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/39
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/40
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Say where KE 826's dismech nodes are more specific than the Event
+  details: 'Review on #40 asked whether IL-1beta, which the inflammasome node binds (GO:0032611) but the
+    Event''s definition does not name, was misread. It was not; both cytokine terms are dismech''s and
+    match GO. The rationale had absorbed IL-1beta into the definition''s pro-inflammatory cytokines without
+    saying so. Rewrote the rationale''s close and the inflammasome node''s notes to state what the nodes
+    add below the Event''s resolution: two parallel arms read by different models; IL-1beta beside IL-18;
+    inflammasome assembly (GO:0044546) and signalling (GO:0141084) bound as processes; and a model that
+    perturbs the shared caspase-1 step. aggregation_relation stays constitutes. No terms or models changed.'

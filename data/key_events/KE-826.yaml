@@ -169,7 +169,15 @@ aggregation:
       Its description: the hapten acts as a danger signal, the NLRP3 and ASC
       inflammasome assembles and activates caspase-1, and mature IL-1beta and
       IL-18 are released. dismech curates it as running in parallel with the
-      electrophile-sensing arm, not downstream of it.
+      electrophile-sensing arm, not downstream of it. The node is more specific
+      than the Event in three ways. It binds IL-1beta production (GO:0032611)
+      beside IL-18 production (GO:0032621), where the Event's definition names
+      IL-18 alone as its example of a pro-inflammatory cytokine. It binds NLRP3
+      inflammasome complex assembly (GO:0044546) and inflammasome-mediated
+      signalling (GO:0141084) as processes, where the Event describes
+      inflammasome activation in prose and binds neither. And its model, the
+      NALP3- and ASC-deficient mouse, perturbs the inflammasome step that
+      matures both cytokines, so it does not separate them.
   rationale: >-
     The Event's definition describes two responses of keratinocytes to the
     hapten-protein complex: inflammasome activation with caspase-1 cleavage of
@@ -186,8 +194,18 @@ aggregation:
     assay the Event lists in its measurement section reads it. So the
     components are narrower than the Event as AOP-Wiki defines it. Read
     against the definition, the two nodes together are the Event, and
-    neither asserts biology outside it, so they constitute it. Neither node
-    alone is the Event: an assay of one arm measures part of it.
+    neither asserts a change the Event does not cover, so they constitute it.
+    Neither node alone is the Event: an assay of one arm measures part of it.
+    The nodes are more specific than the Event, and that specificity is what
+    the Event simplifies away. They split it into two parallel arms, each
+    read by a different model. The inflammasome node names IL-1beta beside
+    the IL-18 the Event names, and binds inflammasome assembly and signalling
+    as processes, which the Event describes only in prose. The sensing node
+    binds the chemical-stress response the Event's components leave out. The
+    IL-1beta is counted inside the Event as one of the pro-inflammatory
+    cytokines its definition covers, since the same caspase-1 step matures
+    both, but the Event does not name it. It is recorded here so that it
+    stays recoverable.
   notes: >-
     dismech's third keratinocyte node, Keratinocyte activation and
     proinflammatory mediator release, binds GO:0032980 too, at CELLULAR, but
