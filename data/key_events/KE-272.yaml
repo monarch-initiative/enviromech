@@ -153,7 +153,11 @@ aggregation:
     part of the node because priming is named from the T cell's side but needs
     the presenting cell. That process lies outside this Event, so the node
     asserts biology the Event does not, and the relation is overlaps rather
-    than nodes_narrower_than_event.
+    than nodes_narrower_than_event. Neither side contains the other: each
+    asserts something the other does not, so nodes_broader_than_event is
+    equally wrong. This is overlaps in its strict sense, not the mixed-set
+    fallback KE 398 uses it for, and it would stay overlaps if the relation
+    were recorded per source node.
   level_mismatch_note: >-
     The node is CELLULAR; the Event is Organ in AOP-Wiki. The evidence
     supports Cellular: the Event's description and both of its components are
