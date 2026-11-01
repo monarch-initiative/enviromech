@@ -1,0 +1,5 @@
+# OECD TG 442C, a test guideline for an assay mapped to AOP 40.
+id: enviromech:tg-0001
+test_guideline:
+  id: 1
+  short_title: OECD TG 442C

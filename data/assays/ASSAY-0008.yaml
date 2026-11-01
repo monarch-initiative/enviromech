@@ -1,0 +1,19 @@
+# KeratinoSens, mapped to AOP 40 Key Event 826 by Aleksic et al. 2024
+# (PMID:38385441), as extracted into dismech's skin sensitization models
+# template in monarch-initiative/dismech#15958.
+id: enviromech:assay-0008
+assay:
+  id: 8
+  title: KeratinoSens
+  description: Luciferase reporter under an antioxidant response element in an immortalized
+    human keratinocyte line, reading Keap1-Nrf2-ARE pathway activation.
+  events:
+  - 826
+  test_guidelines:
+  - 2
+mapping_reference: PMID:38385441
+mapping_extraction: https://github.com/monarch-initiative/dismech/blob/a0dc2ff5bc7ef0cfad94825495d805aadbbdedf6/templates/skin_sensitization_aop_models.md
+notes: The Key Event mapping and the guideline are the review's, from the roster extracted
+  into the dismech template; dismech caches only the review's abstract, so the roster has
+  not been checked against its full text. The description follows the readout reported, with
+  a quote from PMID:32335162, in dismech's research/Contact_Dermatitis-skin-sensitization-aop-models-deep-research-openscientist.md.

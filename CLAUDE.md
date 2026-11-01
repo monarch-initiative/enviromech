@@ -12,7 +12,7 @@ ontology-grounded, evidence-backed knowledge base. EnviroMech records how exposu
 prose, titles). Lowercase `enviromech` is only for identifiers: the repository and
 directory name, paths, and package names.
 
-There are four kinds of record, one YAML file each:
+There are six kinds of record, one YAML file each:
 
 - **Observations**, under `data/observations/`, class `ObservationRecord`. This is the
   record kind the mechmaker tooling is built around: every command covers Observations.
@@ -40,7 +40,17 @@ There are four kinds of record, one YAML file each:
   aggregated into it and the dismech models linked to those nodes, built from the
   records by `src/enviromech/aop_graph.py`.
 
-All four classes are in `src/enviromech/schema/enviromech.yaml`.
+- **Assays** and **test guidelines**, under `data/assays/` and `data/test_guidelines/`,
+  classes `AssayRecord` and `TestGuidelineRecord`. Each holds an EMOD `Assay` or
+  `TestGuideline` with an EnviroMech id (`enviromech:assay-0005`, `enviromech:tg-0001`).
+  A Key Event names its assays in EMOD's `event.assays` and its guidelines in
+  `event.test_guidelines`, by id; an Assay names its Key Events in `assay.events`, and
+  says in `mapping_reference` which publication makes the mapping. Assay ids share one
+  series with the Observations' inline Assays. `just validate-assays` checks the
+  schema and `just check-ids` the ids and that both directions agree; `just qc` runs
+  both. Key Event pages show the assays by name.
+
+All six classes are in `src/enviromech/schema/enviromech.yaml`.
 
 The pattern comes from [DisMech](https://github.com/monarch-initiative/dismech).
 The registry of Mechs is [MechRegistry](https://github.com/monarch-initiative/mechregistry).
@@ -75,12 +85,13 @@ just validate-key-events   # closed schema, every Key Event record
 just validate-event-components   # closed schema, every event component record
 just validate-aops     # closed schema, every AOP record
 just check-aops        # one MIE, at the Molecular level; at most one AO per level
+just validate-assays   # closed schema, every assay and test guideline record
 just key-event-from-snapshot CACHE KE_ID   # start a Key Event record from an aop_wiki_cli events cache
 just crosswalk AOP_ID ENTRY...   # run dismech's AOP crosswalk for an AOP record (needs a dismech checkout)
 just source-node ENTRY "NODE"   # a dismech node as a source_nodes item (needs a dismech checkout)
 just source-models ENTRY "NODE"   # the dismech models linked to a node, as its models list (needs a dismech checkout)
 just check-source-nodes   # aggregated dismech nodes and their models that changed since they were copied (needs a dismech checkout)
-just check-ids         # the Observation, Assay and event component ids EnviroMech assigns
+just check-ids         # the Observation, Assay, test guideline and event component ids EnviroMech assigns
 just new-record ...    # scaffold a record (dry-run unless --apply)
 just import-schema SRC --record-class C   # start the schema from an existing one (dry-run unless --apply)
 just new-history ...   # scaffold a history record (dry-run unless --apply)

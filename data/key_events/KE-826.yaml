@@ -29,6 +29,11 @@ event:
       term: cytokine production involved in inflammatory response
     biological_action_id:
       term: increased
+  assays:
+  - 8  # KeratinoSens
+  - 9  # LuSens
+  test_guidelines:
+  - 2  # OECD TG 442D
   definition: >-
     Keratinocytes are the major cell type of the epidermis of the skin. They are
     known to be the primary site of skin metabolism and play an important role in

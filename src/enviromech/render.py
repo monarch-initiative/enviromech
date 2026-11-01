@@ -41,6 +41,7 @@ from . import site
 from .aop_graph import graphs
 from .paths import (
     AOPS_DIR,
+    ASSAYS_DIR,
     KEY_EVENTS_DIR,
     MECH_NAME,
     PACKAGE_DIR,
@@ -49,6 +50,7 @@ from .paths import (
     REPO_ROOT,
     REPO_URL,
     SCHEMA_PATH,
+    TEST_GUIDELINES_DIR,
 )
 from .validate import iter_records, load
 
@@ -451,6 +453,39 @@ def cross_link_aops(records: list[dict]) -> None:
             r["data"] = {**r["data"], "aops": member_of[r["stem"]]}
 
 
+def name_assays(records: list[dict]) -> None:
+    """Show each Key Event's assays and test guidelines by name, not by id.
+
+    A Key Event names its assays in event.assays and its guidelines in
+    event.test_guidelines, EMOD's own slots, by id; the assays and guidelines are
+    records under data/assays/ and data/test_guidelines/, with no pages of their
+    own. Each id is replaced by the assay's title and its guidelines, or by the
+    guideline's short title.
+    """
+    guidelines = {}
+    for path in iter_records(TEST_GUIDELINES_DIR):
+        guideline = (load(path) or {}).get("test_guideline") or {}
+        guidelines[guideline.get("id")] = guideline.get("short_title") or str(guideline.get("id"))
+    assays = {}
+    for path in iter_records(ASSAYS_DIR):
+        assay = (load(path) or {}).get("assay") or {}
+        named = [guidelines.get(g, str(g)) for g in assay.get("test_guidelines") or []]
+        title = assay.get("title") or str(assay.get("id"))
+        assays[assay.get("id")] = f"{title} ({', '.join(named)})" if named else title
+    for r in records:
+        event = r["data"].get("event")
+        if r["data"]["kind"] != "Key Event" or not isinstance(event, dict):
+            continue
+        if not (event.get("assays") or event.get("test_guidelines")):
+            continue
+        named_event = dict(event)
+        if event.get("assays"):
+            named_event["assays"] = [assays.get(a, str(a)) for a in event["assays"]]
+        if event.get("test_guidelines"):
+            named_event["test_guidelines"] = [guidelines.get(g, str(g)) for g in event["test_guidelines"]]
+        r["data"] = {**r["data"], "event": named_event}
+
+
 def build() -> dict[Path, str]:
     settings = site.load()
     errors = site.problems(settings)
@@ -494,6 +529,7 @@ def build() -> dict[Path, str]:
             r["graph"] = aop_graphs[r["stem"]]
     cross_link(records)
     cross_link_aops(records)
+    name_assays(records)
     kinds: dict[str, int] = {}
     for r in records:
         kinds[r["data"]["kind"]] = kinds.get(r["data"]["kind"], 0) + 1

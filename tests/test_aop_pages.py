@@ -126,3 +126,13 @@ def test_aop_pages_embed_the_graph_and_its_script():
         assert 'id="pathway-figure"' in page and "createElementNS" in page
     for stem in KEY_EVENTS:
         assert 'id="pathway-data"' not in pages[PAGES_DIR / "records" / f"{stem}.html"]
+
+
+def test_key_event_pages_name_their_assays_and_guidelines():
+    """event.assays and event.test_guidelines hold ids; the page shows names (issue #45)."""
+    pages = render.build()
+    page = pages[PAGES_DIR / "records" / "KE-398.html"]
+    assert "GARDskin (OECD TG 442E)" in page
+    assert "human Cell Line Activation Test (h-CLAT) (OECD TG 442E)" in page
+    page = pages[PAGES_DIR / "records" / "KE-827.html"]
+    assert "Human repeat insult patch test (HRIPT)" in page

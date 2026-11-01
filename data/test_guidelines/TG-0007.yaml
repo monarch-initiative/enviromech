@@ -1,0 +1,5 @@
+# OECD TG 406, a test guideline for an assay mapped to AOP 40.
+id: enviromech:tg-0007
+test_guideline:
+  id: 7
+  short_title: OECD TG 406

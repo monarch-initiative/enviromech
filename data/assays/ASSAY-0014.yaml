@@ -1,0 +1,22 @@
+# Murine local lymph node assay (LLNA), mapped to AOP 40 Key Event 272 by Aleksic et al. 2024
+# (PMID:38385441), as extracted into dismech's skin sensitization models
+# template in monarch-initiative/dismech#15958.
+id: enviromech:assay-0014
+assay:
+  id: 14
+  title: Murine local lymph node assay (LLNA)
+  description: Proliferation of draining lymph node cells in mice after topical application
+    of the test chemical; potency is read as the EC3, the concentration giving a threefold
+    increase.
+  events:
+  - 272
+  test_guidelines:
+  - 4
+  - 5
+  - 6
+mapping_reference: PMID:38385441
+mapping_extraction: https://github.com/monarch-initiative/dismech/blob/a0dc2ff5bc7ef0cfad94825495d805aadbbdedf6/templates/skin_sensitization_aop_models.md
+notes: The Key Event mapping and the guideline are the review's, from the roster extracted
+  into the dismech template; dismech caches only the review's abstract, so the roster has
+  not been checked against its full text. The description follows the readout reported, with
+  a quote from PMID:24532485, in dismech's research/Contact_Dermatitis-skin-sensitization-aop-models-deep-research-openscientist.md.

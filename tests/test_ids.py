@@ -90,3 +90,72 @@ def test_key_event_component_differing_from_its_record_fails(tmp_path):
     component(tmp_path, "enviromech:ec-0001", 1, MITOCHONDRION)
     key_event(tmp_path, 177, [{"id": 1, **DECREASED}])
     assert any("differs from" in p for p in problems(tmp_path))
+
+
+# Assays and test guidelines (issue #45): a Key Event's event.assays and an Assay's
+# events must agree, and every id must have a record.
+
+
+def assay_setup(tmp_path: Path, *, assay_events=(396,), event_assays=(5,), assay_guidelines=(1,),
+                event_guidelines=(1,), assay_record_id="enviromech:assay-0005", assay_number=5,
+                observation_assay=None) -> list[str]:
+    assay = {"id": assay_number, "title": "DPRA", "events": list(assay_events)}
+    if assay_guidelines:
+        assay["test_guidelines"] = list(assay_guidelines)
+    write(tmp_path / "assays", "ASSAY-0005.yaml",
+          {"id": assay_record_id, "assay": assay, "mapping_reference": "PMID:38385441"})
+    write(tmp_path / "test_guidelines", "TG-0001.yaml",
+          {"id": "enviromech:tg-0001", "test_guideline": {"id": 1, "short_title": "OECD TG 442C"}})
+    event = {"id": 396, "title": "Covalent Binding, Protein", "assays": list(event_assays)}
+    if event_guidelines:
+        event["test_guidelines"] = list(event_guidelines)
+    write(tmp_path / "key_events", "KE-396.yaml", {"id": "aop.events:396", "event": event})
+    (tmp_path / "observations").mkdir(exist_ok=True)
+    if observation_assay is not None:
+        write(tmp_path / "observations", "obs.yaml",
+              {"observation": {"id": 1, "assay_id": {"id": observation_assay, "title": "other"}}})
+    return check_ids.check_assays(tmp_path / "assays", tmp_path / "test_guidelines",
+                                  tmp_path / "key_events", tmp_path / "observations")
+
+
+def test_matching_assays_pass(tmp_path):
+    assert assay_setup(tmp_path) == []
+
+
+def test_the_real_records_pass():
+    root = REPO_ROOT / "data"
+    assert check_ids.check_assays(root / "assays", root / "test_guidelines",
+                                  root / "key_events", root / "observations") == []
+
+
+def test_assay_id_not_the_record_number_fails(tmp_path):
+    found = assay_setup(tmp_path, assay_number=6, event_assays=(6,))
+    assert any("assay.id is 6 but the record id" in p for p in found)
+
+
+def test_key_event_naming_an_unknown_assay_fails(tmp_path):
+    found = assay_setup(tmp_path, event_assays=(5, 9))
+    assert any("assay id 9 has no record" in p for p in found)
+
+
+def test_one_direction_only_fails(tmp_path):
+    found = assay_setup(tmp_path, event_assays=(), event_guidelines=())
+    assert any("does not list assay 5 in event.assays" in p for p in found)
+    (tmp_path / "b").mkdir()
+    found = assay_setup(tmp_path / "b", assay_events=())
+    assert any("does not list Key Event 396 in assay.events" in p for p in found)
+
+
+def test_guidelines_must_be_those_of_the_assays(tmp_path):
+    found = assay_setup(tmp_path, event_guidelines=())
+    assert any("are not the guidelines of its assays" in p for p in found)
+
+
+def test_unknown_guideline_fails(tmp_path):
+    found = assay_setup(tmp_path, assay_guidelines=(2,), event_guidelines=(2,))
+    assert any("test guideline id 2 has no record" in p for p in found)
+
+
+def test_assay_id_already_an_observations_assay_fails(tmp_path):
+    found = assay_setup(tmp_path, observation_assay=5)
+    assert any("already the Assay of obs.yaml" in p for p in found)

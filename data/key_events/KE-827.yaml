@@ -10,6 +10,12 @@ event:
   short_name: "sensitisation, skin"
   biological_organization_id:
     term: Organ
+  assays:
+  - 15  # Human repeat insult patch test (HRIPT)
+  - 16  # Guinea pig maximization test (GPMT)
+  - 17  # Buehler test
+  test_guidelines:
+  - 7  # OECD TG 406
   definition: >-
     Skin sensitisation is an immunological process that is described in two phases:
     the induction of sensitisation and the subsequent elicitation of the immune

@@ -1,0 +1,30 @@
+history_version: 1
+target:
+  kind: mapping
+  slug: aop-40-assays
+  path: data/assays
+session:
+  id: 2026-11-01T134704Z-claude-code-0a6348
+  timestamp: '2026-11-01T13:47:04Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/45
+events:
+- type: CREATE
+  outcome: changed
+  summary: Map AOP 40's Key Events to the 13 assays Aleksic 2024 lists, with 7 OECD test guidelines
+  details: 'Source: Aleksic M et al. 2024, Crit Rev Toxicol, PMID:38385441, via the roster extracted into
+    dismech templates/skin_sensitization_aop_models.md at a0dc2ff5bc (monarch-initiative/dismech#15958);
+    dismech caches only the abstract, so the roster was not checked against the full text, and each record
+    says so. KE 396: DPRA, ADRA, kDPRA (TG 442C). KE 826: KeratinoSens, LuSens (TG 442D). KE 398: h-CLAT,
+    U-SENS, IL-8 Luc, GARDskin (TG 442E). KE 272: LLNA (TG 429, 442A, 442B). KE 827: HRIPT (no guideline),
+    GPMT and Buehler (TG 406). Assay ids 5-17; guideline ids 1-7, short titles only, full titles left
+    unset until checked against OECD. Descriptions follow the readouts dismech''s OpenScientist models
+    report quotes from primary papers, cited in each record''s notes. Not done: the newer non-guideline
+    systems the report maps (EpiSensA, SENS-IS, MUTZ-3 skin equivalent, skin-on-chip, hTCPA, patch-test
+    datasets), and links from assays to dismech models.'

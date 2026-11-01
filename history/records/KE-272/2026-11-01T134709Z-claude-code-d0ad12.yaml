@@ -1,0 +1,26 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-272
+  path: data/key_events/KE-272.yaml
+session:
+  id: 2026-11-01T134709Z-claude-code-d0ad12
+  timestamp: '2026-11-01T13:47:09Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/45
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - event
+  summary: Name KE 272's assays and test guidelines in event.assays and event.test_guidelines
+  details: Added the ids of the assays Aleksic et al. 2024 (PMID:38385441) map to this Key Event, from
+    the roster in dismech's skin sensitization models template at a0dc2ff5bc, with their test guidelines;
+    each id has a record under data/assays/ or data/test_guidelines/, named in a comment beside it. No
+    other field changed.

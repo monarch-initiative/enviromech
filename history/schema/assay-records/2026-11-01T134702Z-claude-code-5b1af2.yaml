@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: schema
+  slug: assay-records
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-01T134702Z-claude-code-5b1af2
+  timestamp: '2026-11-01T13:47:02Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/45
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - AssayRecord
+  - TestGuidelineRecord
+  summary: Give EMOD Assays and TestGuidelines their own records, so Key Events can name assays in event.assays
+  details: 'Added AssayRecord (data/assays/, enviromech:assay-NNNN, an EMOD Assay with mapping_reference
+    and mapping_extraction) and TestGuidelineRecord (data/test_guidelines/, enviromech:tg-NNNN, an EMOD
+    TestGuideline). Key Events use EMOD''s own event.assays and event.test_guidelines, by id; nothing
+    in EMOD is overridden. just validate-assays added to qc. scripts/check_ids.py checks record ids, that
+    every referenced id has a record, that event.assays and assay.events agree, that a Key Event''s guidelines
+    are its assays'' guidelines, and that assay ids do not collide with the Observations'' inline Assays
+    1-4. Key Event pages name assays and guidelines. Decision 8 in the register. Additive: no record became
+    invalid.'

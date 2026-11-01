@@ -27,6 +27,12 @@ event:
       term: electrophilic reagant
     biological_action_id:
       term: increased
+  assays:
+  - 5  # Direct Peptide Reactivity Assay (DPRA)
+  - 6  # Amino acid Derivative Reactivity Assay (ADRA)
+  - 7  # kinetic Direct Peptide Reactivity Assay (kDPRA)
+  test_guidelines:
+  - 1  # OECD TG 442C
   definition: >-
     The molecular initiating event is covalent binding of electrophilic chemical
     species with selected nucleophilic molecular sites of action in proteins
