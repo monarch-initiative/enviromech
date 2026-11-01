@@ -279,6 +279,35 @@ classes:
           read from the publication directly: a resolvable URL to the extraction,
           such as a dismech research template at a fixed commit.
         range: uri
+      model_matches:
+        description: >-
+          dismech models that curate this assay, or that read the same biology in
+          other test systems, each with the kind of match. This is EnviroMech's
+          judgement, made by comparing the assay with the dismech model's
+          description; it lets a reader see where an AOP's assays and dismech's
+          models are the same method. scripts/check_source_nodes.py checks that
+          each model_ref still resolves in dismech.
+        range: ModelMatch
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      notes:
+
+  ModelMatch:
+    description: >-
+      A dismech model matched to an EnviroMech assay, and how they match.
+    attributes:
+      model_ref:
+        description: >-
+          The model's dismech cross-entry reference, as SourceModel.model_ref
+          writes it, for example
+          Contact_Dermatitis:experimental_models#GARDskin.
+        required: true
+        pattern: "^[^:#]+:(experimental_models|animal_models|computational_models)#.+$"
+      match:
+        description: How the dismech model relates to the assay.
+        range: ModelMatchEnum
+        required: true
       notes:
 
   TestGuidelineRecord:
@@ -1085,6 +1114,21 @@ enums:
         description: The description reads as another level, or spans levels.
       LEVEL_UNCONFIRMED:
         description: The Event has no description, or the screen could not tell.
+
+  ModelMatchEnum:
+    description: How a dismech model relates to an EnviroMech assay.
+    permissible_values:
+      SAME_METHOD:
+        description: >-
+          The dismech model is this assay: the same test method, test system and
+          readout, curated in dismech as a model.
+      SAME_READOUT_OTHER_SYSTEM:
+        description: >-
+          The dismech model reads the biology this assay reads, in other test
+          systems, so it is not the same method. For example, dismech's
+          keratinocyte Keap1-Nrf2-ARE models read Nrf2 activation in primary
+          and N/TERT keratinocytes and reconstructed epidermis, while KeratinoSens
+          reads it with a reporter in an immortalized line.
 
   SourceModelSectionEnum:
     description: >-

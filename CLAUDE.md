@@ -36,16 +36,19 @@ There are six kinds of record, one YAML file each:
   Adverse Outcome per level. `just qc`
   runs both. `just report` counts them and the record browser shows them, each AOP
   linked to its Key Events and each Key Event to the AOPs it is in, with its role.
-  An AOP's page also draws its pathway graph: each Key Event, the dismech nodes
-  aggregated into it and the dismech models linked to those nodes, built from the
-  records by `src/enviromech/aop_graph.py`.
+  An AOP's page also draws its graph, built from the records by
+  `src/enviromech/aop_graph.py`, in two views: "Pathway" (each Key Event, the dismech
+  nodes aggregated into it, and the dismech models linked to those nodes) and
+  "Methods" (Key Events; EnviroMech assays only; methods that are both an assay and a
+  dismech model, by `model_matches`; dismech models only; dismech nodes).
 
 - **Assays** and **test guidelines**, under `data/assays/` and `data/test_guidelines/`,
   classes `AssayRecord` and `TestGuidelineRecord`. Each holds an EMOD `Assay` or
   `TestGuideline` with an EnviroMech id (`enviromech:assay-0005`, `enviromech:tg-0001`).
   A Key Event names its assays in EMOD's `event.assays` and its guidelines in
   `event.test_guidelines`, by id; an Assay names its Key Events in `assay.events`, and
-  says in `mapping_reference` which publication makes the mapping. Assay ids share one
+  says in `mapping_reference` which publication makes the mapping, and in
+  `model_matches` which dismech models are the same method or read the same biology. Assay ids share one
   series with the Observations' inline Assays. `just validate-assays` checks the
   schema and `just check-ids` the ids and that both directions agree; `just qc` runs
   both. Key Event pages show the assays by name.

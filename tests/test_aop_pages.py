@@ -5,7 +5,7 @@ import re
 
 from enviromech import render, report
 from enviromech.aop_graph import aop_graph, graphs
-from enviromech.paths import AOPS_DIR, KEY_EVENTS_DIR, PAGES_DIR
+from enviromech.paths import AOPS_DIR, ASSAYS_DIR, KEY_EVENTS_DIR, PAGES_DIR, TEST_GUIDELINES_DIR
 from enviromech.validate import iter_records, load
 
 AOPS = iter_records(AOPS_DIR)
@@ -122,7 +122,7 @@ def test_aop_pages_embed_the_graph_and_its_script():
         page = pages[PAGES_DIR / "records" / f"{path.stem}.html"]
         found = re.search(r'<script type="application/json" id="pathway-data">(.*?)</script>', page, re.S)
         assert found, f"{path.stem} has no pathway data"
-        assert json.loads(found.group(1)) == GRAPHS[path.stem]
+        assert json.loads(found.group(1)) == FULL[path.stem]
         assert 'id="pathway-figure"' in page and "createElementNS" in page
     for stem in KEY_EVENTS:
         assert 'id="pathway-data"' not in pages[PAGES_DIR / "records" / f"{stem}.html"]
@@ -136,3 +136,57 @@ def test_key_event_pages_name_their_assays_and_guidelines():
     assert "human Cell Line Activation Test (h-CLAT) (OECD TG 442E)" in page
     page = pages[PAGES_DIR / "records" / "KE-827.html"]
     assert "Human repeat insult patch test (HRIPT)" in page
+
+
+# The methods view (issue #47): EnviroMech assays only, methods in both, dismech
+# models only. A dismech model counts only if it is on a node a Key Event aggregates.
+
+FULL = graphs({p.stem: load(p) for p in AOPS}, KEY_EVENTS,
+              {p.stem: load(p) for p in iter_records(ASSAYS_DIR)},
+              {p.stem: load(p) for p in iter_records(TEST_GUIDELINES_DIR)})
+
+
+def test_methods_partition_assays_and_models():
+    for graph in FULL.values():
+        methods = graph["methods"]
+        shared_assays = {pair["assay"] for pair in methods["shared"]}
+        shared_models = {pair["model"] for pair in methods["shared"]}
+        assert set(methods["assays_only"]) | shared_assays == {a["id"] for a in graph["assays"]}
+        assert not set(methods["assays_only"]) & shared_assays
+        assert set(methods["models_only"]) | shared_models == {m["id"] for m in graph["models"]}
+        assert not set(methods["models_only"]) & shared_models
+
+
+def test_shared_methods_are_same_method_matches_on_mapped_nodes():
+    graph = FULL["AOP-40"]
+    in_graph = {m["id"] for m in graph["models"]}
+    for pair in graph["methods"]["shared"]:
+        assay = next(a for a in graph["assays"] if a["id"] == pair["assay"])
+        assert pair["model"] in assay["same_method"] and pair["model"] in in_graph
+    labels = {a["id"]: a["label"] for a in graph["assays"]}
+    shared = sorted(labels[p["assay"]] for p in graph["methods"]["shared"])
+    assert shared == ["GARDskin", "Murine local lymph node assay (LLNA)",
+                      "human Cell Line Activation Test (h-CLAT)"]
+
+
+def test_a_match_to_a_model_on_an_unmapped_node_stays_enviromech_only():
+    """GPMT matches a dismech model linked only to a node no AOP 40 Key Event aggregates."""
+    graph = FULL["AOP-40"]
+    gpmt = next(a for a in graph["assays"] if a["label"].startswith("Guinea pig maximization"))
+    assert gpmt["same_method"] and gpmt["id"] in graph["methods"]["assays_only"]
+    assert not set(gpmt["same_method"]) & {m["id"] for m in graph["models"]}
+
+
+def test_same_readout_is_not_counted_as_shared():
+    graph = FULL["AOP-40"]
+    keratinosens = next(a for a in graph["assays"] if a["label"] == "KeratinoSens")
+    assert keratinosens["same_readout"] and not keratinosens["same_method"]
+    assert keratinosens["id"] in graph["methods"]["assays_only"]
+    assert set(keratinosens["same_readout"]) <= set(graph["methods"]["models_only"])
+
+
+def test_every_key_event_assay_is_in_the_graph():
+    graph = FULL["AOP-40"]
+    expected = {(f"ke:{n}", f"assay:{a}") for n, data in BY_EVENT_ID.items()
+                for a in data["event"].get("assays") or []}
+    assert {(link["source"], link["target"]) for link in graph["ke_assay"]} == expected

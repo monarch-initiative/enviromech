@@ -13,6 +13,13 @@ assay:
   - 7
 mapping_reference: PMID:38385441
 mapping_extraction: https://github.com/monarch-initiative/dismech/blob/a0dc2ff5bc7ef0cfad94825495d805aadbbdedf6/templates/skin_sensitization_aop_models.md
+model_matches:
+- model_ref: Contact_Dermatitis:animal_models#Buehler occluded patch test
+  match: SAME_METHOD
+  notes: >-
+    dismech's model is the Buehler test, OECD TG 406. dismech links it to Re-
+    exposure-driven effector T-cell recruitment, which no AOP 40 Key Event
+    aggregates.
 notes: The Key Event mapping and the guideline are the review's, from the roster extracted
   into the dismech template; dismech caches only the review's abstract, so the roster has
   not been checked against its full text. The description follows the readout reported, with

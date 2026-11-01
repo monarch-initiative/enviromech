@@ -11,6 +11,14 @@ Nothing here is curated: every value is read from the records, and a gap in them
 shows as a gap in the graph. A Key Event with no record, or with no aggregation,
 is still drawn, and a node with no models is marked so.
 
+The graph also carries the assays each Key Event names in event.assays (EnviroMech's
+assay records, mapped from the AOP literature), and, for the "methods" view, sorts
+the assays and the dismech models into three groups: assays with no dismech
+counterpart, assays that are the same method as a dismech model on one of the AOP's
+aggregated nodes (model_matches, SAME_METHOD), and dismech models with no
+EnviroMech counterpart. A dismech model on a node no Key Event aggregates is never
+in the graph, so an assay matching only such a model counts as EnviroMech's alone.
+
 Key Event Relationships are not drawn yet. The AOP record names them by id only;
 their upstream and downstream Key Events are not in any record until EnviroMech has
 Key Event Relationship records. The Key Events are laid out in the order the AOP
@@ -101,9 +109,64 @@ def aop_graph(aop_record: dict, key_events: dict[int, tuple[str, dict]]) -> dict
     return graph
 
 
-def graphs(aop_records: dict[str, dict], key_event_records: dict[str, dict]) -> dict[str, dict]:
+def add_assays(graph: dict, key_events: dict[int, tuple[str, dict]], assays: dict[int, dict],
+               guidelines: dict[int, str]) -> dict:
+    """Add the Key Events' assays, and the three method groups, to a graph."""
+    graph["assays"], graph["ke_assay"] = [], []
+    seen = {}
+    for ke in graph["key_events"]:
+        _, record = key_events.get(ke["number"], (None, {}))
+        for number in (record.get("event") or {}).get("assays") or []:
+            assay_record = assays.get(number)
+            if assay_record is None:
+                continue
+            assay = assay_record.get("assay") or {}
+            assay_id = f"assay:{number}"
+            if assay_id not in seen:
+                matches = assay_record.get("model_matches") or []
+                seen[assay_id] = {
+                    "id": assay_id,
+                    "number": number,
+                    "label": _text(assay.get("title")) or f"Assay {number}",
+                    "description": _text(assay.get("description")),
+                    "guidelines": [guidelines.get(g, str(g)) for g in assay.get("test_guidelines") or []],
+                    "reference": assay_record.get("mapping_reference") or "",
+                    "same_method": [f"model:{m['model_ref']}" for m in matches
+                                    if m.get("match") == "SAME_METHOD"],
+                    "same_readout": [f"model:{m['model_ref']}" for m in matches
+                                     if m.get("match") == "SAME_READOUT_OTHER_SYSTEM"],
+                }
+                graph["assays"].append(seen[assay_id])
+            graph["ke_assay"].append({"source": ke["id"], "target": assay_id})
+    in_graph = {m["id"] for m in graph["models"]}
+    shared = []
+    for assay in graph["assays"]:
+        for model_id in assay["same_method"]:
+            if model_id in in_graph:
+                shared.append({"assay": assay["id"], "model": model_id})
+    shared_assays = {pair["assay"] for pair in shared}
+    shared_models = {pair["model"] for pair in shared}
+    graph["methods"] = {
+        "assays_only": [a["id"] for a in graph["assays"] if a["id"] not in shared_assays],
+        "shared": shared,
+        "models_only": [m["id"] for m in graph["models"] if m["id"] not in shared_models],
+    }
+    return graph
+
+
+def graphs(aop_records: dict[str, dict], key_event_records: dict[str, dict],
+           assay_records: dict[str, dict] | None = None,
+           guideline_records: dict[str, dict] | None = None) -> dict[str, dict]:
     """The graph for every AOP record, keyed by the AOP record's stem."""
     by_event_id = {
         (data.get("event") or {}).get("id"): (stem, data) for stem, data in key_event_records.items()
     }
-    return {stem: aop_graph(data, by_event_id) for stem, data in aop_records.items()}
+    assays = {(data.get("assay") or {}).get("id"): data for data in (assay_records or {}).values()}
+    guidelines = {
+        (data.get("test_guideline") or {}).get("id"): (data.get("test_guideline") or {}).get("short_title")
+        for data in (guideline_records or {}).values()
+    }
+    return {
+        stem: add_assays(aop_graph(data, by_event_id), by_event_id, assays, guidelines)
+        for stem, data in aop_records.items()
+    }
