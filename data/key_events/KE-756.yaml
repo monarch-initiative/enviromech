@@ -1,0 +1,88 @@
+# AOP-Wiki KE 756, a Key Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:756
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/756
+event:
+  id: 756
+  title: "Hippocampal gene expression, Altered "
+  short_name: "Hippocampal gene expression, Altered "
+  biological_organization_id:
+    term: Tissue
+  organ_term_id:
+    source: UBERON
+    term: brain
+  event_components:
+  - id: 20
+    biological_process_id:
+      source: GO
+      source_id: GO:0010468
+      term: regulation of gene expression
+    biological_object_id:
+      source: UBERON
+      source_id: UBERON:0002421
+      term: hippocampal formation
+    biological_action_id:
+      term: abnormal
+  definition: >-
+    Thyroid hormones control genes in the developing brain by classical ligand (T3)
+    activation of thyroid receptors which leads to DNA binding and subsequent
+    transcription and translation (for a review of TH rols in brain development see,
+    Bernal 2015). Gene expression profiles have been published for the developing
+    human and rodent hippocampus (Zhang et al., 2002; Mody et al., 2001). In both
+    humans and rodents, the hippocampus undergoes typical stages of neurodevelopment
+    found in most brain regions, including: cell proliferation, migration,
+    differentiation, synapse formation, and the maturation of synaptic function. In
+    the rodent, peak windows during pre- and post-natal periods have been identified
+    during which major cellular and physiological events occur (see Figure 1). Each
+    window expresses distinct patterns of gene transcription and clusters of genes
+    increase their expression corresponding to the progression of events of
+    hippocampal ontogeny (see Mody et al., 2001). Tables of gene clusters associated
+    with these phases can be found in Supplementary Tables of Mody et al. (2001).
+
+    During the very early prenatal period, genes corresponding to general cellular
+    function are prominent (Mody et al., 2001). These are followed in time by genes
+    regulating neuronal differentiation and migration in the mid to late gestational
+    period. From late gestation (gestational day 15) until birth almost all the
+    cells in the CA fields switch from a highly active proliferation state to a
+    postmitotic state, and then undergo differentiation and migration. Expression of
+    proliferative genes involved in cell cycle progression are highly expressed at
+    gestational day 16, then subsequently are silent immediately after birth when
+    genes directing neuronal growth switch on. The pyramidal neurons of the CA
+    fields in the hippocampus proper develop in advance of the granule cells that
+    comprise the principal cells of the dentate gyrus. As such, the genes
+    controlling the distinct phases of neurodevelopment are expressed at different
+    times in these two hippocampal subregions (Altman and Bayer, 1990a; b). In both
+    subregions, however, many phenotypic changes within the hippocampal neuron occur
+    in the period immediately after birth (postnatal day 1 to 7). Almost all neurons
+    show extensive growth and differentiation during the first postnatal week. These
+    cellular changes are marked by rapid cytoskeletal changes, production of cell
+    adhesion molecules, and extracellular matrix formation. The gene families
+    involved in these processes include actins, tubulins, and chaperonin proteins
+    essential for promoting correct protein folding of cytoskeletal components. Cell
+    adhesion and extracellular matrix proteins are also upregulated during this
+    period as these genes are critical for differentiation and synaptogenesis.
+
+    During late postnatal hippocampal development (postnatal day 16-30), hippocampal
+    circuits become more active and exhibit increased synaptic plasticity. Many
+    genes upregulated during this phase of development are involved in synaptic
+    function and include genes regulating vesicle associated proteins and
+    calcium-mediated transmitter release, neurotrophins, and neurotransmitter
+    receptors. Efficient energy utilization is essential during this period of
+    increased synaptic activity, events mirrored by an upregulation of enzymes
+    involved in glucose and oxidative metabolism.
+  measured_or_detected: >-
+    Measurement of genomic profiles in developing brain use methods that are well
+    established and accepted in the published literature. Microarray studies with
+    expression profile analyses have been conducted in cortex and hippocampus of
+    humans (Zhang et al., 2002), non-human primates, and rodent brains of various
+    ages (Mody et al., 2001; Royland et al., 2008; Dong et al., 2015). More
+    commonly, quantitative rtPCR or in situ hybridization have been used to probe
+    individual gene transcripts (Dowling et al., 2000, Morte et al., 2010) or their
+    protein products (Alvarez-Dolado et al., 1994; Gilbert et al., 2007). Recently
+    RNA-Seq technology was applied to T3-treated primary mouse cortical cells and
+    gene targets enriched in astrocytes and neurons to identify TH-responsive genes
+    (Gil-Ibanez et al, 2015).
+level_screening:
+  outcome: NOT_SCREENED

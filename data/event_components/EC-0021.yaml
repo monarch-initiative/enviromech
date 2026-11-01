@@ -1,0 +1,15 @@
+# The event component of AOP-Wiki KE 757 as recorded in the 2026-11-01
+# AOP-Wiki XML export.
+id: enviromech:ec-0021
+event_component:
+  id: 21
+  biological_process_id:
+    source: GO
+    source_id: GO:0007420
+    term: brain development
+  biological_object_id:
+    source: UBERON
+    source_id: UBERON:0002421
+    term: hippocampal formation
+  biological_action_id:
+    term: morphological change

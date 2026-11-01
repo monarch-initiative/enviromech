@@ -1,0 +1,25 @@
+# AOP-Wiki KE 319, the Adverse Outcome of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:319
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/319
+event:
+  id: 319
+  title: "Loss, Cochlear function"
+  short_name: "Loss, Cochlear function"
+  biological_organization_id:
+    term: Organ
+  organ_term_id:
+    source: UBERON
+    term: ear
+  event_components:
+  - id: 23
+    biological_process_id:
+      source: MP
+      source_id: MP:0000032
+      term: cochlear degeneration
+    biological_action_id:
+      term: increased
+level_screening:
+  outcome: NOT_SCREENED
