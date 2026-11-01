@@ -114,12 +114,18 @@ rather than copying it. Its steps:
 
 - **A relation for a node broader than the Event.** `AggregationRelationEnum` has
   `constitutes` and `narrower_than`. KE 398's closest node is wider than the Event, and
-  neither value fits. Adding a value is an `extend-schema` change.
+  neither value fits. Adding a value is an `extend-schema` change. *Resolved
+  2026-11-01:* `overlaps` was added, for nodes that share biology with the Event while
+  asserting biology outside it. KE 398 is aggregated with it across two nodes, and KE 272
+  moved to it from `narrower_than`, because its node also binds KE 398's antigen
+  presentation.
 - **KE 396.** dismech's covalent-binding node, asked for in monarch-initiative/dismech#16068,
   was added by monarch-initiative/dismech#16226 on 2026-10-31:
   `Covalent hapten-protein adduct formation`, at `MOLECULAR`. Against dismech `aef740d7b8a`
   the crosswalk finds it for KE 396 on the `name` basis only: the node does not bind the
-  Event's component terms (GO:0005515, CHEBI:59739). The aggregation is still to be written.
+  Event's component terms (GO:0005515, CHEBI:59739). *Resolved 2026-11-01:* KE 396 is
+  aggregated onto it as `narrower_than`, since the node is skin protein only, while the
+  Event is also the initiating event of AOP 39.
 
 ### 5. Later
 

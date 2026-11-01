@@ -1,5 +1,7 @@
-# AOP-Wiki KE 396, the Molecular Initiating Event of AOP 40. Structured
-# properties read from the 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+# AOP-Wiki KE 396, the Molecular Initiating Event of AOP 40, with the dismech
+# node aggregated into it. Event properties read from the 2026-10-03 AOP-Wiki
+# XML export with aop_wiki_cli; node fields from dismech main at aef740d7b8a on
+# 2026-11-01.
 id: aop.events:396
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -152,13 +154,57 @@ term_findings:
   AOP-Wiki; ChEBI's label is "electrophilic reagent". Checked against OLS on
   2026-10-31.
 - >-
+  The biological process GO:0005515 protein binding is a child of GO:0005488
+  binding, which GO defines as "the selective, non-covalent, often
+  stoichiometric, interaction of a molecule with one or more specific sites on
+  another molecule". So the component term asserts non-covalent binding, where
+  the Event is covalent binding. GO has no term for non-enzymatic covalent
+  modification of a protein by a xenobiotic electrophile, which is also why
+  dismech leaves its node unbound. Checked against OLS on 2026-11-01.
+- >-
   The biological object is the class of the stressor, an electrophilic
   reagent, rather than the protein it binds. The Event's description says the
   target protein is not identified and is not considered critical.
-notes: >-
-  No aggregation yet. dismech's Contact_Dermatitis entry has no node for the
-  covalent reaction between hapten and skin protein: it goes from Hapten
-  exposure to Skin innate immune activation during sensitization, and records
-  the absence as the knowledge gap no_node_for_covalent_haptenation. The node is
-  being added by monarch-initiative/dismech#16068, open on 2026-10-31. Once it
-  merges, the aggregation is to be written against it.
+aggregation:
+  aggregation_relation: narrower_than
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Covalent hapten-protein adduct formation
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Covalent hapten-protein adduct formation
+    source_level: MOLECULAR
+    biological_organization_id:
+      term: Molecular
+    notes: >-
+      dismech binds no process, chemical or modifier to the node, so no terms
+      and no biological action are recorded. Its notes give the reason: GO has
+      no term for non-enzymatic covalent modification of protein by a
+      xenobiotic electrophile, GO:0008213 protein alkylation does not cover
+      the arylating electrophiles its evidence uses, and CHEBI:59174 hapten is
+      a role outside the entry's chemical enum. Its description: "A reactive
+      small chemical forms a covalent bond with a skin protein, generating the
+      hapten-protein adduct that downstream innate and adaptive responses
+      recognize."
+  rationale: >-
+    The node and the Event describe the same molecular change: an electrophilic
+    chemical forms a covalent bond with a protein, giving a hapten-protein
+    adduct. Neither side can be compared on terms. The node binds none, and the
+    Event's one component pairs GO:0005515 protein binding, which GO defines as
+    non-covalent, with the stressor class CHEBI:59739 electrophilic reagent
+    rather than with the protein that is modified. The comparison rests on the
+    two descriptions, which agree that the protein target is not identified:
+    AOP-Wiki says identifying it is not considered critical, and dismech says
+    which epidermal protein must be modified remains unresolved. The node is
+    narrower in where the protein is. It is the adduct with a skin protein in
+    allergic contact dermatitis, while the Event names a eukaryotic cell and
+    is also the initiating event of AOP 39, which leads to allergic
+    respiratory hypersensitivity; its measurement text covers respiratory
+    sensitisers as well as skin ones. So the node is a narrower case of the
+    Event.
+  notes: >-
+    KE 396 sits in AOPs 39 and 40. The aggregation is asserted for the Event,
+    not for either pathway. dismech records the metal route that does not pass
+    through covalent binding, nickel and cobalt coordinating TLR4, as the
+    knowledge gap no_node_for_non_covalent_metal_initiation; it is outside this
+    Event.

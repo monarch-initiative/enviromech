@@ -886,6 +886,18 @@ enums:
         description: >-
           The source nodes are each a narrower case of the Event. The Event
           covers biology the nodes do not assert.
+      overlaps:
+        description: >-
+          The source nodes share biology with the Event, and at least one of
+          them also asserts biology outside it. The Event may cover biology
+          that none of the nodes asserts as well. This covers a single node
+          broader than the Event, and an Event that falls across parts of
+          several nodes without being the whole of any. Use it only when
+          neither constitutes nor narrower_than holds. It is the weakest of
+          the three: it does not say that measuring the Event measures any of
+          the nodes, or the reverse. The rationale must say, for each node,
+          which part of it falls within the Event and which part falls
+          outside.
 
   ScreeningOutcomeEnum:
     description: The outcome of screening a Key Event's level of biological organization.

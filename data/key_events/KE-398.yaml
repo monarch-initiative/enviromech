@@ -1,5 +1,6 @@
-# AOP-Wiki KE 398, a Key Event of AOP 40. Structured properties read from the
-# 2026-10-03 AOP-Wiki XML export with aop_wiki_cli.
+# AOP-Wiki KE 398, a Key Event of AOP 40, with the dismech nodes it overlaps.
+# Event properties read from the 2026-10-03 AOP-Wiki XML export with
+# aop_wiki_cli; node fields from dismech main at aef740d7b8a on 2026-11-01.
 id: aop.events:398
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -164,15 +165,92 @@ term_findings:
   Event carries dendritic cell only in its cell term. GO's nearest narrower
   term is myeloid dendritic cell activation (GO:0001773), which is narrower
   than the Event's cell term as well, so it is not proposed as a replacement.
-notes: >-
-  No aggregation yet. The closest dismech node is Skin innate immune
-  activation during sensitization, at TISSUE, with Langerhans cell and
-  dendritic cell as its cell types and no process bound. It is broader than
-  this Event: innate signalling in allergen-exposed skin, of which dendritic
-  cell activation is one part. AggregationRelationEnum has constitutes, where
-  the nodes are the Event, and narrower_than, where each node is a narrower
-  case of it; neither fits a node that is wider than the Event, so no relation
-  can be recorded. The Event's other component, MHC protein complex assembly,
-  is nearer to dismech's Allergen-specific T-cell priming, which binds
-  GO:0002468 dendritic cell antigen processing and presentation. So the Event
-  spans parts of two dismech nodes and is the whole of neither.
+aggregation:
+  aggregation_relation: overlaps
+  source_nodes:
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Skin innate immune activation during sensitization
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Skin innate immune activation during sensitization
+    source_level: TISSUE
+    biological_organization_id:
+      term: Tissue
+    objects:
+    - source: CL
+      source_id: CL:0000453
+      term: Langerhans cell
+    - source: CL
+      source_id: CL:0000451
+      term: dendritic cell
+    notes: >-
+      dismech binds no process and no modifier to the node, so no biological
+      action is recorded. Its description: "Early innate immune signaling in
+      allergen-exposed skin shapes the sensitization phase and supports
+      subsequent adaptive immune priming."
+  - source_knowledge_base: dismech
+    source_node_ref: Contact_Dermatitis:pathophysiology#Allergen-specific T-cell priming
+    source_entry: Contact_Dermatitis
+    source_entry_uri: https://dismech.monarchinitiative.org/pages/disorders/Contact_Dermatitis.html
+    node_name: Allergen-specific T-cell priming
+    source_level: CELLULAR
+    biological_organization_id:
+      term: Cellular
+    processes:
+    - source: GO
+      source_id: GO:0002468
+      term: dendritic cell antigen processing and presentation
+    - source: GO
+      source_id: GO:0042110
+      term: T cell activation
+    objects:
+    - source: CL
+      source_id: CL:0000453
+      term: Langerhans cell
+    - source: CL
+      source_id: CL:0000451
+      term: dendritic cell
+    - source: CL
+      source_id: CL:0000625
+      term: CD8-positive, alpha-beta T cell
+    notes: >-
+      dismech binds no modifier to either process, so no biological action is
+      recorded. The same node is aggregated into KE 272 for its T cell
+      activation; here only its dendritic-cell side is taken.
+  rationale: >-
+    The Event is dendritic cell activation by the hapten-protein complex: the
+    cell takes up the complex, matures, loads the antigen onto MHC and
+    migrates to the lymph node to present it. Its two components are GO:0001775
+    cell activation in a dendritic cell, and GO:0002396 MHC protein complex
+    assembly. dismech splits that biology across two nodes and has no node for
+    it alone. The innate activation node carries the first component: it binds
+    Langerhans cells and dendritic cells and is the step that follows the
+    adduct in skin. It is broader than the Event, since it is innate signalling
+    in the whole allergen-exposed skin, of which dendritic cell activation is
+    one part. The priming node carries the second component by reading, not by
+    term: loading antigen onto MHC is part of the dendritic cell antigen
+    processing and presentation it binds as GO:0002468, although GO does not
+    relate GO:0002396 to GO:0002468. Its other process, T cell activation, lies
+    outside this Event and belongs to KE 272. Each node asserts biology outside
+    the Event, and neither is the Event, so the relation is overlaps. Neither
+    node can stand in for the Event in a measurement.
+  internal_edges:
+  - upstream_node: Skin innate immune activation during sensitization
+    downstream_node: Allergen-specific T-cell priming
+    source_link_type: DIRECT
+    description: >-
+      Innate activation in skin supports dendritic-cell-mediated priming of
+      allergen-specific T cells.
+  level_mismatch_note: >-
+    Skin innate immune activation during sensitization is TISSUE; the Event is
+    Cellular, and its level screen found the description fits Cellular. The
+    node is at TISSUE because it covers signalling across the skin, not one
+    cell type, so the mismatch reflects the node being broader than the Event
+    rather than an error on either side. Allergen-specific T-cell priming is
+    CELLULAR and agrees.
+  notes: >-
+    KE 398 sits in AOPs 39 and 40. The aggregation is asserted for the Event,
+    not for either pathway. The priming node is also aggregated into KE 272,
+    so the dismech edge from the innate activation node to it falls inside
+    this Event and also corresponds in part to KER 379, from this Event to
+    KE 272.

@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-272
+  path: data/key_events/KE-272.yaml
+session:
+  id: 2026-11-01T025801Z-claude-code-ec95ba
+  timestamp: '2026-11-01T02:58:01Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: REVIEW
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Review KE 272's aggregation with the rest of AOP 40; relation changed to overlaps
+  details: 'The aggregation onto Allergen-specific T-cell priming was written before the AOP-Wiki information
+    for AOP 40 was collected, so it was re-read with the other four Key Events. The crosswalk against
+    dismech aef740d7b8a still finds the node on the shared GO:0042110 T cell activation, and just check-source-nodes
+    reports the node unchanged since 8727e500eef. The level_mismatch_note still holds. The relation did
+    not: the node also binds GO:0002468 dendritic cell antigen processing and presentation, which belongs
+    to KE 398, so it asserts biology outside this Event and is not a narrower case of it. Changed aggregation_relation
+    from narrower_than to overlaps, added in the same change, and reworded the end of the rationale to
+    say so. KE 398 now aggregates the same node for its dendritic-cell side, so the two records treat
+    it consistently.'

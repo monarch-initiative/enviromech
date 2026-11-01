@@ -1,6 +1,7 @@
 # AOP-Wiki KE 272, a Key Event of AOP 40, with the dismech node aggregated into
 # it. Event properties read from the 2026-10-03 AOP-Wiki XML export with
-# aop_wiki_cli; node fields from dismech main at 8727e500eef on 2026-10-31.
+# aop_wiki_cli; node fields from dismech main at 8727e500eef on 2026-10-31,
+# re-checked against aef740d7b8a on 2026-11-01 (node unchanged).
 id: aop.events:272
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -106,7 +107,7 @@ term_findings:
   AOP-Wiki; GO's current label is "cell population proliferation". Checked
   against OLS on 2026-10-31.
 aggregation:
-  aggregation_relation: narrower_than
+  aggregation_relation: overlaps
   source_nodes:
   - source_knowledge_base: dismech
     source_node_ref: Contact_Dermatitis:pathophysiology#Allergen-specific T-cell priming
@@ -146,11 +147,13 @@ aggregation:
     cells, because dismech curates the CD8 effector arm of allergic contact
     dermatitis. It is also narrower in what it asserts: it binds no
     proliferation process, while the Event's second component is proliferation
-    of memory T cells. So the node is a narrower case of the Event. The node
-    also binds dendritic cell antigen processing and presentation, which in
-    AOP 40 falls on the upstream side, in KE 398 and KER 379; it is part of the
-    node because priming is named from the T cell's side but needs the
-    presenting cell. That process is not taken to be part of this Event.
+    of memory T cells. On its T-cell side, then, the node is narrower than the
+    Event. It also binds dendritic cell antigen processing and presentation,
+    which in AOP 40 falls on the upstream side, in KE 398 and KER 379; it is
+    part of the node because priming is named from the T cell's side but needs
+    the presenting cell. That process lies outside this Event, so the node
+    asserts biology the Event does not, and the relation is overlaps rather
+    than narrower_than.
   level_mismatch_note: >-
     The node is CELLULAR; the Event is Organ in AOP-Wiki. The evidence
     supports Cellular: the Event's description and both of its components are

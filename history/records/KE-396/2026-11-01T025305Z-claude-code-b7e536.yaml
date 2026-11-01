@@ -1,0 +1,33 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-396
+  path: data/key_events/KE-396.yaml
+session:
+  id: 2026-11-01T025305Z-claude-code-b7e536
+  timestamp: '2026-11-01T02:53:05Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  - term_findings
+  - notes
+  summary: Aggregate dismech's Covalent hapten-protein adduct formation into KE 396
+  details: 'Ran just crosswalk 40 Contact_Dermatitis against dismech aef740d7b8a and the 2026-10-03 AOP-Wiki
+    snapshot. The only candidate was Covalent hapten-protein adduct formation (MOLECULAR, added by monarch-initiative/dismech#16226),
+    matched on title words alone because the node binds no terms. Read the node and its notes in Contact_Dermatitis.yaml
+    and wrote the aggregation from just source-node output with aggregation_relation narrower_than: the
+    node is the adduct with a skin protein, while the Event names a eukaryotic cell and is also the initiating
+    event of AOP 39 (allergic respiratory hypersensitivity). Levels agree, so no level_mismatch_note;
+    one node, so no internal_edges. Added a term finding that GO:0005515 protein binding inherits ''non-covalent''
+    from GO:0005488 binding (OLS, 2026-11-01), and replaced the notes, which said the node was still being
+    added under dismech#16068. AOP membership (39, 40) read from the snapshot XML. Status left at DRAFT.'

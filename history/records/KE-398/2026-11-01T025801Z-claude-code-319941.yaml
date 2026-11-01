@@ -1,0 +1,32 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-398
+  path: data/key_events/KE-398.yaml
+session:
+  id: 2026-11-01T025801Z-claude-code-319941
+  timestamp: '2026-11-01T02:58:01Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/14
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  - notes
+  summary: Aggregate KE 398 across two dismech nodes with overlaps
+  details: 'Ran just crosswalk 40 Contact_Dermatitis against dismech aef740d7b8a and the 2026-10-03 snapshot;
+    the candidates, all on the dendritic cell label, were Inflammatory cell recruitment (irritant arm,
+    not used), Skin innate immune activation during sensitization (TISSUE) and Allergen-specific T-cell
+    priming (CELLULAR). Aggregated the last two with the new overlaps value: the innate node carries the
+    Event''s dendritic cell activation but is innate signalling across the skin, and the priming node
+    carries the MHC-assembly component through GO:0002468 dendritic cell antigen processing and presentation,
+    by reading, since GO does not relate GO:0002396 to GO:0002468 (OLS ancestors checked 2026-11-01).
+    Recorded the dismech DIRECT edge between the two as an internal edge, and a level_mismatch_note for
+    the TISSUE node. AOP membership (39, 40) read from the snapshot XML. Status left at DRAFT.'
