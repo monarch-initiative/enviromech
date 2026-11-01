@@ -62,23 +62,24 @@ notes: >-
   will be recorded in the Key Event Relationship records.
 
 
-  Two features of the source record are worth a reader's attention, because
-  both differ from how this AOP is usually described.
-
-
-  The Molecular Initiating Event is the pregnane-X receptor alone (NR1I2). AOP
-  8 is often summarised as initiating at AhR, CAR and PXR together; the export
+  The Molecular Initiating Event is the pregnane-X receptor alone (NR1I2).
+  AOP 8 is often summarised as initiating at AhR, CAR and PXR together, and
+  its own title names hepatic nuclear receptors in the plural; the export
   names only PXR, and neither AhR nor CAR appears among its nine Key Events.
 
 
-  The chain reaches the Adverse Outcome, loss of cochlear function, through
-  three hippocampal Key Events, and KER 2484 joins altered hippocampal
-  physiology directly to that loss. Hippocampal physiology is not an
-  established cause of cochlear dysfunction, so this step reads as a
-  placeholder in a pathway that has two outcome arms - a neurodevelopmental one
-  the title names and an auditory one the short name names - rather than as a
-  mechanistic claim. The AOP is "Under Development" and "Open for adoption",
-  so this is an unfinished record and not a settled position.
+  Half the Key Event Relationships carry no text. KER 312, 746, 747 and 749 -
+  the segment from decreased serum thyroxine through thyroxine in neuronal
+  tissue to the three hippocampal events - each have a description, biological
+  plausibility, weight of evidence and empirical support, and score 76 to 88
+  per cent complete. KER 2482, 2478 and 2270, the whole hepatic segment from
+  PXR activation to decreased serum thyroxine, and KER 2484, the step from
+  altered hippocampal physiology to loss of cochlear function, have all four
+  fields empty and score 35 per cent. So the documented middle of this AOP is
+  the serum-to-hippocampus segment, and both ends are relationship records
+  that exist without stated evidence. That is a fact about the completeness of
+  the wiki record, not a judgement about the biology. The AOP is "Under
+  Development" and "Open for adoption".
 curation_history:
 - timestamp: "2026-11-01T07:50:00Z"
   curator: claude-code
