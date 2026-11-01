@@ -2,7 +2,7 @@ id: https://w3id.org/monarch-initiative/enviromech
 name: enviromech
 title: Environmental Health Mechanisms Knowledge Base
 description: >-
-  EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways.
+  EnviroMech records how exposures to chemicals and other hazards relate to adverse outcomes, from associations with no known mechanism to mature Adverse Outcome Pathways.
 license: CC-BY-4.0
 see_also:
   - https://github.com/monarch-initiative/enviromech

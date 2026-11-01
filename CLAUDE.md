@@ -6,7 +6,7 @@ Operational guidance for Claude Code and other agents in this repository.
 ## What this is
 
 EnviroMech (Environmental Health Mechanisms Knowledge Base) is a Mech: an AI agent-curated,
-ontology-grounded, evidence-backed knowledge base. EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways.
+ontology-grounded, evidence-backed knowledge base. EnviroMech records how exposures to chemicals and other hazards relate to adverse outcomes, from associations with no known mechanism to mature Adverse Outcome Pathways.
 
 **Naming:** write the project name as **EnviroMech** in anything a person reads (docs,
 prose, titles). Lowercase `enviromech` is only for identifiers: the repository and

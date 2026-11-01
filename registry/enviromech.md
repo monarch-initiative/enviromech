@@ -10,7 +10,7 @@ name: EnviroMech
 synonyms:
   - Environmental Health Mechanisms Knowledge Base
 description: >-
-  EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways.
+  EnviroMech records how exposures to chemicals and other hazards relate to adverse outcomes, from associations with no known mechanism to mature Adverse Outcome Pathways.
 activity_status: active
 maturity: seeded
 homepage_url: https://monarch-initiative.github.io/enviromech/

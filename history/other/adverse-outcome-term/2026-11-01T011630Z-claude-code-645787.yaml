@@ -1,0 +1,23 @@
+history_version: 1
+target:
+  kind: other
+  slug: adverse-outcome-term
+  path: docs/explanation/design-decisions.md
+session:
+  id: 2026-11-01T011630Z-claude-code-645787
+  timestamp: '2026-11-01T01:16:30Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  summary: Say "adverse outcome", not "adverse effect"
+  details: 'Added design decision 6: EnviroMech says "adverse outcome" (chemical safety, and an AOP entity:
+    a Key Event with type AdverseOutcome in linkml-aop), not "adverse effect" (drug safety, no role in
+    linkml-aop). Changed "adverse effect(s)" to "adverse outcome(s)" in the project description in CLAUDE.md,
+    README.md, docs/index.md, mkdocs.yml, pyproject.toml, registry/enviromech.md and the schema, and in
+    entry 1 of the register. Left unchanged: AOP-Wiki text quoted in KE-272, KE-826 and KE-827, and .copier-answers.yml,
+    which Copier writes.'

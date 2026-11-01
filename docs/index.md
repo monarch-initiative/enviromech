@@ -2,14 +2,14 @@
 
 EnviroMech is an environmental health mechanisms repository built from AI-curated
 literature sources. It records how exposures to chemicals and other hazards external to
-the body relate to adverse effects, represented as phenotypes and diseases.
+the body relate to adverse outcomes, represented as phenotypes and diseases.
 
 ## What it holds
 
 EnviroMech holds exposure-outcome knowledge whatever the strength of the evidence behind
 it:
 
-- associations between an exposure and an adverse effect, with no known mechanism;
+- associations between an exposure and an adverse outcome, with no known mechanism;
 - hypothesized mechanisms proposed to explain such associations;
 - mature Adverse Outcome Pathways (AOPs), used in chemical safety risk assessment
   decisions.

@@ -24,7 +24,7 @@ AOPs and AI-curated literature sources from DisMech. It records how exposures to
 chemicals and other hazards external to the body relate to adverse outcomes, whatever the
 strength of the evidence behind them:
 
-- associations between an exposure and an adverse effect, with no known mechanism;
+- associations between an exposure and an adverse outcome, with no known mechanism;
 - hypothesized mechanisms proposed to explain such associations;
 - mature Adverse Outcome Pathways, used in chemical safety risk assessment decisions,
   whose mechanisms carry substantial evidential support.
@@ -122,6 +122,22 @@ EnviroMech classes repeated EMOD's with different names, and they were removed.
 (`event_id: 1542`), not by CURIE; the record browser builds the link. Rules the schema
 cannot express, such as one Molecular Initiating Event per AOP, stay in EnviroMech's
 `scripts/check_aops.py`.
+
+**Status:** adopted 2026-10-31.
+
+## 6. "Adverse outcome", not "adverse effect"
+
+**Decision:** EnviroMech says "adverse outcome" for what an exposure leads to, never
+"adverse effect". This covers the project's description and its records, whether or not
+the outcome is part of an AOP. Text quoted from a source keeps its own wording.
+
+**Rationale:** the two terms belong to different fields and do different work:
+
+- "Adverse effect" comes from drug safety, where it usually means a side effect of a
+  drug. "Adverse outcome" is the term used in chemical safety and environmental health.
+- An Adverse Outcome is an entity in the AOP framework: in linkml-aop it is a Key Event
+  whose `AopToEvent.type` is `AdverseOutcome`. "Adverse effect" is a concept with no role
+  in linkml-aop.
 
 **Status:** adopted 2026-10-31.
 

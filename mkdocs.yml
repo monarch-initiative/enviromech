@@ -6,7 +6,7 @@
 # LinkML's gen-doc on every build; do not edit them. Edit the other pages in
 # docs/ directly.
 site_name: "EnviroMech"
-site_description: "EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways."
+site_description: "EnviroMech records how exposures to chemicals and other hazards relate to adverse outcomes, from associations with no known mechanism to mature Adverse Outcome Pathways."
 site_url: https://monarch-initiative.github.io/enviromech/
 repo_url: https://github.com/monarch-initiative/enviromech
 edit_uri: edit/main/docs/

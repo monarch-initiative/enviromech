@@ -1,7 +1,7 @@
 [project]
 name = "enviromech"
 version = "0.1.0"
-description = "EnviroMech records how exposures to chemicals and other hazards relate to adverse effects, from associations with no known mechanism to mature Adverse Outcome Pathways."
+description = "EnviroMech records how exposures to chemicals and other hazards relate to adverse outcomes, from associations with no known mechanism to mature Adverse Outcome Pathways."
 authors = [{ name = "Ginnie Hench", email = "ginniehench@gmail.com" }]
 readme = "README.md"
 license = { text = "BSD-3-Clause" }

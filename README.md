@@ -1,7 +1,7 @@
 # EnviroMech
 
 An environmental health mechanisms repository built from AI-curated literature sources,
-recording how exposures to chemicals and other hazards relate to adverse effects
+recording how exposures to chemicals and other hazards relate to adverse outcomes
 represented as phenotypes and diseases, ranging from associations with no known mechanism
 to mature Adverse Outcome Pathways.
 It follows the approach of the
