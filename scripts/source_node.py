@@ -106,6 +106,8 @@ def source_node(entry: str, node: dict) -> tuple[dict, list[str]]:
         item["source_level"] = scale
         if scale in LEVEL_FOR_SCALE:
             item["biological_organization_id"] = {"term": LEVEL_FOR_SCALE[scale]}
+        else:
+            comments.append(f"no biological_organization_id: dismech scale {scale!r} has no EMOD level")
     else:
         comments.append("dismech records no biological_scale for this node")
     for key, fields in (("processes", PROCESS_FIELDS), ("objects", OBJECT_FIELDS)):
