@@ -1,0 +1,45 @@
+# AOP-Wiki KE 239, the Molecular Initiating Event of AOP 8. Structured properties read from the
+# 2026-11-01 AOP-Wiki XML export with aop_wiki_cli.
+id: aop.events:239
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/events/239
+event:
+  id: 239
+  title: "Activation, Pregnane-X receptor, NR1I2"
+  short_name: "Activation, Pregnane-X receptor, NR1I2"
+  biological_organization_id:
+    term: Molecular
+  cell_term_id:
+    source: CL
+    term: eukaryotic cell
+  event_components:
+  - id: 14
+    biological_process_id:
+      source: GO
+      source_id: GO:0023052
+      term: signaling
+    biological_object_id:
+      source: PR
+      source_id: PR:000011397
+      term: nuclear receptor subfamily 1 group I member 2
+    biological_action_id:
+      term: increased
+  definition: >-
+    Pregnane X receptor (PXR), also known as steroid NR subfamily 1, group I, member
+    2 (NR1I2), is a nuclear receptor that can be activated by pregnenolone and
+    progesterone and many chemicals due to low specificity; once activated it binds
+    to Retinoid X receptor (RXR) and increases upregulation of target genes (Mellor
+    et al. 2016). PXR has an important role in lipid homeostasis by regulating the
+    rate of lipid intake particularly through activation of cluster of
+    differentiation 36, also known as platelet glycoprotein 4 [(CD36) (Zhou et al.
+    2006; Gwag et al. 2019)].
+  measured_or_detected: >-
+    Effects of Pregnane X receptor (PXR) activation on expression of downstream
+    genes can be investigating using transcriptomics and/or RT-qPCR approaches. The
+    following ToxCast assays measure PXR activation: ATG_PXRE_CIS; ATG_PXR_TRANS;
+    TOX21_PXR_agonist; ATG_mPXR_XSP2; NVS_NR_hPXR (U.S. EPA 2024). Indigo
+    Biosciences sells a commercial assay for human PXR activation (INDIGO
+    Biosciences 2024).
+level_screening:
+  outcome: NOT_SCREENED
