@@ -189,7 +189,18 @@ uses that link rather than adding its own (entry 5). This is a direct Key Event 
 link, independent of the dismech chain from Key Event to node to model (entry 7). It
 covers what that chain cannot reach: an adverse outcome with no dismech node (KE 827),
 and a node with no linked model (KE 396, where DPRA is). `Event.assays` names Assays by
-id, so the Assay objects need a place to live, which follows the event component pattern.
+id, so the Assay objects need a place to live. They are kept one per file with an
+EnviroMech id, the same file convention event components use, but nothing more is
+shared with event components.
+
+**The mapping does not depend on event components.** A Key Event is mapped to an assay
+directly, by id, as the literature states it ("DPRA addresses KE 1"). It is never
+derived by matching an assay's objects or processes to the Key Event's event
+components. Assays were mapped to the skin sensitization AOP's Key Events long before
+EMOD introduced event components, and the mapping must not rest on an entity the model
+added after the science. A Key Event with no event components, such as KE 827, carries
+its assays the same way as any other. Matching assays to components, through EMOD's
+`Assay.objects` and `Assay.processes`, may come later as an optional layer on top.
 
 **Consequence:** Assay ids are one series across Assay records and the Observations'
 inline Assays. The first mappings are AOP 40's, from Aleksic et al. 2024

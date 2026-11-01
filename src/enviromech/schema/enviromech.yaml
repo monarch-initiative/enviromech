@@ -238,6 +238,14 @@ classes:
       AOP-Wiki Event id. scripts/check_ids.py checks that the two agree. This is
       a direct Key Event to assay link, independent of any dismech node.
 
+      The link is stated directly, never derived from event components. Assays
+      were mapped to Key Events, as in the skin sensitization AOP, long before
+      EMOD introduced event components, so a mapping must not depend on them: a
+      Key Event with no event components, such as KE 827, carries its assays
+      the same way. EMOD's Assay.objects and Assay.processes could later support
+      matching an assay to components, as an optional layer on top of the
+      mapping, not as its basis.
+
       EMOD requires an integer id on every Assay. EnviroMech assigns it, as for
       Observations and event components: the id is the number in the record
       identifier (enviromech:assay-0005 has assay.id 5). An Observation that
