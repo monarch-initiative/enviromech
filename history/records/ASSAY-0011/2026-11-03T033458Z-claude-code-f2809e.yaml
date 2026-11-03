@@ -1,0 +1,29 @@
+history_version: 1
+target:
+  kind: record
+  slug: ASSAY-0011
+  path: data/assays/ASSAY-0011.yaml
+session:
+  id: 2026-11-03T033458Z-claude-code-f2809e
+  timestamp: '2026-11-03T03:34:58Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/48
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - model_matches
+  summary: Match assay 11 to dismech's U-SENS (Myeloid U937 Skin Sensitization Test) model as SAME_METHOD
+  details: monarch-initiative/dismech#16269 added Contact_Dermatitis:experimental_models#U-SENS (Myeloid
+    U937 Skin Sensitization Test), linked MEASURES to Skin innate immune activation during sensitization,
+    which KE 398 aggregates. dismech describes it as CD86 surface expression on the U937 human myeloid
+    cell line by flow cytometry, under OECD TG 442E, from PMID:25820135; the assay record describes the
+    same readout from the same paper. Recorded as SAME_METHOD, so the assay moves into the AOP 40 Methods
+    view's In both column, which now holds 5 (h-CLAT, U-SENS, IL-8 Luc, GARDskin, LLNA). just check-source-nodes
+    resolves the match.

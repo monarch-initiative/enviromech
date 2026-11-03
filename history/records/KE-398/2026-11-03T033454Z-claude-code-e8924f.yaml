@@ -1,0 +1,28 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-398
+  path: data/key_events/KE-398.yaml
+session:
+  id: 2026-11-03T033454Z-claude-code-e8924f
+  timestamp: '2026-11-03T03:34:54Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/48
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Refresh the models of KE 398's dismech nodes from dismech main at 809a8f5fa
+  details: 'Reran just source-models Contact_Dermatitis for both source nodes against dismech 809a8f5fa,
+    after monarch-initiative/dismech#16269. Skin innate immune activation during sensitization gains four
+    MEASURES models: U-SENS (Myeloid U937 Skin Sensitization Test), IL-8 Luc assay, SENS-IS, and Endothelialised
+    skin-on-chip with flowing immune cells (MMA-6MWP), from 4 to 8. Allergen-specific T-cell priming is
+    unchanged. The aggregation relation, rationale and notes are unchanged. just check-source-nodes reports
+    no model difference for this record.'

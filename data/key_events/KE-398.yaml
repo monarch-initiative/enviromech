@@ -1,6 +1,7 @@
 # AOP-Wiki KE 398, a Key Event of AOP 40, with the dismech nodes it overlaps.
 # Event properties read from the 2026-10-03 AOP-Wiki XML export with
-# aop_wiki_cli; node fields from dismech main at aef740d7b8a on 2026-11-01.
+# aop_wiki_cli; node fields from dismech main at aef740d7b8a on 2026-11-01, and
+# their models from 809a8f5fa on 2026-11-03.
 id: aop.events:398
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -203,6 +204,22 @@ aggregation:
       model_section: experimental_models
       model_name: Full-thickness skin equivalent with MUTZ-3-derived Langerhans cells
       source_relationship: PARTIALLY_RECAPITULATES
+    - model_ref: Contact_Dermatitis:experimental_models#U-SENS (Myeloid U937 Skin Sensitization Test)
+      model_section: experimental_models
+      model_name: U-SENS (Myeloid U937 Skin Sensitization Test)
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#IL-8 Luc assay
+      model_section: experimental_models
+      model_name: IL-8 Luc assay
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#SENS-IS
+      model_section: experimental_models
+      model_name: SENS-IS
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#Endothelialised skin-on-chip with flowing immune cells (MMA-6MWP)
+      model_section: experimental_models
+      model_name: Endothelialised skin-on-chip with flowing immune cells (MMA-6MWP)
+      source_relationship: MEASURES
     - model_ref: Contact_Dermatitis:animal_models#Langerin-DTA Langerhans-cell-deficient mouse
       model_section: animal_models
       model_name: Langerin-DTA Langerhans-cell-deficient mouse

@@ -1,7 +1,7 @@
 # AOP-Wiki KE 396, the Molecular Initiating Event of AOP 40, with the dismech
 # node aggregated into it. Event properties read from the 2026-10-03 AOP-Wiki
 # XML export with aop_wiki_cli; node fields from dismech main at aef740d7b8a on
-# 2026-11-01.
+# 2026-11-01, and the aggregation re-checked against 809a8f5fa on 2026-11-03.
 id: aop.events:396
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -213,4 +213,14 @@ aggregation:
     not for either pathway. dismech records the metal route that does not pass
     through covalent binding, nickel and cobalt coordinating TLR4, as the
     knowledge gap no_node_for_non_covalent_metal_initiation; it is outside this
-    Event.
+    Event. dismech now has two nodes upstream of the adduct node, added in
+    monarch-initiative/dismech#16269: Abiotic pre-hapten autoxidation to a
+    reactive electrophile, and Keratinocyte pro-hapten bioactivation to a
+    reactive electrophile. Neither is aggregated. Each turns a chemical that
+    does not bind protein into one that does, and leads to the adduct by an
+    INDIRECT_KNOWN_INTERMEDIATES edge; the Event's definition calls that
+    metabolism or abiotic transformation an ancillary event in identifying
+    protein binding, not part of the binding. They are upstream of the
+    Molecular Initiating Event, where AOP-Wiki has no Key Event, so the
+    aggregation is unchanged. Checked against dismech main at 809a8f5fa on
+    2026-11-03.

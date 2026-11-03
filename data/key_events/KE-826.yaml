@@ -1,6 +1,7 @@
 # AOP-Wiki KE 826, a Key Event of AOP 40, with the dismech nodes that constitute
 # it. Event properties read from the 2026-10-03 AOP-Wiki XML export with
-# aop_wiki_cli; node fields from dismech main at ecf1266123c on 2026-11-01.
+# aop_wiki_cli; node fields from dismech main at ecf1266123c on 2026-11-01, and
+# their models from 809a8f5fa on 2026-11-03.
 id: aop.events:826
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -127,6 +128,10 @@ aggregation:
       model_section: experimental_models
       model_name: Keratinocyte Keap1-Nrf2-ARE sensitizer-response models
       source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#EpiSensA
+      model_section: experimental_models
+      model_name: EpiSensA
+      source_relationship: MEASURES
     notes: >-
       dismech binds GO:0062197 with the preferred term "Keap1-Nrf2-ARE
       electrophile sensing", and curates the node as the keratinocyte's sensor
@@ -166,6 +171,10 @@ aggregation:
     biological_action_id:
       term: increased
     models:
+    - model_ref: Contact_Dermatitis:experimental_models#Reconstructed human skin organ-on-chip with neopapillae (RhS-NP)
+      model_section: experimental_models
+      model_name: Reconstructed human skin organ-on-chip with neopapillae (RhS-NP)
+      source_relationship: MEASURES
     - model_ref: Contact_Dermatitis:animal_models#NALP3- and ASC-deficient contact hypersensitivity mouse
       model_section: animal_models
       model_name: NALP3- and ASC-deficient contact hypersensitivity mouse
@@ -226,3 +235,9 @@ aggregation:
     into KE 398, so those two edges correspond to KER 834. In the 2026-10-03
     snapshot KE 826 is in AOP 40 only. The aggregation is asserted for the
     Event, not for the pathway.
+    monarch-initiative/dismech#16269 declared that Keratinocyte inflammasome
+    danger signalling conforms_to the nlrp3_inflammasome_activation module's
+    node NLRP3 Inflammasome Assembly and Caspase-1 Activation. That adds no
+    term, level or edge to the node and asks for the inflammasome assembly and
+    caspase-1 step the Event's definition already names, so the aggregation is
+    unchanged. Checked against dismech main at 809a8f5fa on 2026-11-03.

@@ -165,8 +165,8 @@ def test_shared_methods_are_same_method_matches_on_mapped_nodes():
         assert pair["model"] in assay["same_method"] and pair["model"] in in_graph
     labels = {a["id"]: a["label"] for a in graph["assays"]}
     shared = sorted(labels[p["assay"]] for p in graph["methods"]["shared"])
-    assert shared == ["GARDskin", "Murine local lymph node assay (LLNA)",
-                      "human Cell Line Activation Test (h-CLAT)"]
+    assert shared == ["GARDskin", "IL-8 Luc assay", "Murine local lymph node assay (LLNA)",
+                      "U-SENS", "human Cell Line Activation Test (h-CLAT)"]
 
 
 def test_a_match_to_a_model_on_an_unmapped_node_stays_enviromech_only():

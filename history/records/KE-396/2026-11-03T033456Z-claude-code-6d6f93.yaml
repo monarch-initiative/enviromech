@@ -1,0 +1,30 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-396
+  path: data/key_events/KE-396.yaml
+session:
+  id: 2026-11-03T033456Z-claude-code-6d6f93
+  timestamp: '2026-11-03T03:34:56Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/48
+events:
+- type: AUDIT
+  outcome: changed
+  sections:
+  - aggregation
+  summary: Re-check KE 396's aggregation against dismech 809a8f5fa; the new pre-hapten and pro-hapten
+    nodes are not aggregated
+  details: monarch-initiative/dismech#16269 added Abiotic pre-hapten autoxidation to a reactive electrophile
+    and Keratinocyte pro-hapten bioactivation to a reactive electrophile, each with an INDIRECT_KNOWN_INTERMEDIATES
+    edge to Covalent hapten-protein adduct formation. They make a chemical protein-reactive and sit upstream
+    of the Molecular Initiating Event; the Event's definition calls metabolism or abiotic transformation
+    an ancillary event in identifying protein binding. The aggregation (nodes_narrower_than_event, one
+    node) is unchanged; the decision is added to aggregation.notes. The adduct node still links no curated
+    model, as just source-models confirms.

@@ -1,0 +1,29 @@
+history_version: 1
+target:
+  kind: record
+  slug: ASSAY-0012
+  path: data/assays/ASSAY-0012.yaml
+session:
+  id: 2026-11-03T033459Z-claude-code-91f7e2
+  timestamp: '2026-11-03T03:34:59Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/48
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - model_matches
+  summary: Match assay 12 to dismech's IL-8 Luc assay model as SAME_METHOD
+  details: monarch-initiative/dismech#16269 added Contact_Dermatitis:experimental_models#IL-8 Luc assay,
+    linked MEASURES to Skin innate immune activation during sensitization, which KE 398 aggregates. dismech
+    describes it as IL-8 promoter-driven luciferase in the THP-G8 monocytic reporter line with a parallel
+    GAPDH-promoter luciferase to flag cytotoxicity, under OECD TG 442E; the assay record describes the
+    same reporter pair in the same cells. Recorded as SAME_METHOD, so the assay moves into the AOP 40
+    Methods view's In both column, which now holds 5 (h-CLAT, U-SENS, IL-8 Luc, GARDskin, LLNA). just
+    check-source-nodes resolves the match.

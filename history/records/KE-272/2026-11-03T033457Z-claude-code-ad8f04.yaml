@@ -1,0 +1,25 @@
+history_version: 1
+target:
+  kind: record
+  slug: KE-272
+  path: data/key_events/KE-272.yaml
+session:
+  id: 2026-11-03T033457Z-claude-code-ad8f04
+  timestamp: '2026-11-03T03:34:57Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/48
+events:
+- type: AUDIT
+  outcome: no_change
+  sections:
+  - aggregation
+  summary: Re-check KE 272's dismech node and models against dismech 809a8f5fa
+  details: 'Reran just source-models Contact_Dermatitis "Allergen-specific T-cell priming" against dismech
+    809a8f5fa, after monarch-initiative/dismech#16269: the models list is unchanged, and just check-source-nodes
+    reports no difference for this record. Nothing edited.'
