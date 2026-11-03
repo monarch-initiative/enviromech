@@ -15,7 +15,7 @@ links:
   issues:
   - https://github.com/monarch-initiative/enviromech/issues/48
 events:
-- type: AUDIT
+- type: EDIT
   outcome: changed
   sections:
   - aggregation
