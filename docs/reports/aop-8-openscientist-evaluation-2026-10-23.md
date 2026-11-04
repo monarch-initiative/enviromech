@@ -26,10 +26,14 @@ confidence in interspecies concordance, the human arm of the upstream half is no
 unquantified but unsupported. That is why AOP 8 is recorded here as a hypothesis rather
 than as dismech disease mechanism.
 
-Otherwise the citations hold: all six upstream PMIDs resolve, every title matches its
-claim, and the quoted sentences verify as exact substrings for Craft 2002, Martin 2012,
-Judzinska 2026 and Sauer 2020. Those six are cached in `references_cache/` on this
-branch. Papers the report cites for the terminal branch are **not** cached.
+Otherwise the citations hold. The six upstream citations were read against the claims
+they were cited for: every title matches, and the quoted sentences verify as exact
+substrings for Craft 2002, Martin 2012, Judzinska 2026 and Sauer 2020. Separately,
+`linkml-reference-validator` 0.3.0 resolved all 18 of the report's references with none
+unresolved, which establishes that they exist rather than that each supports its claim.
+All 18 are cached in `references_cache/` on this branch, the terminal-branch papers
+among them, alongside two further papers (PMID:29535325, PMID:38417253) behind a later
+curator review.
 
 One note on provenance for the missing-KE recommendation (carrier-mediated TH uptake,
 MCT8/OATP1C1), since it is the run's own contribution rather than something read off
