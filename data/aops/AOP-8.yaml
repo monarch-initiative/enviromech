@@ -68,18 +68,7 @@ notes: >-
   names only PXR, and neither AhR nor CAR appears among its nine Key Events.
 
 
-  Half the Key Event Relationships carry no text. KER 312, 746, 747 and 749 -
-  the segment from decreased serum thyroxine through thyroxine in neuronal
-  tissue to the three hippocampal events - each have a description, biological
-  plausibility, weight of evidence and empirical support, and score 76 to 88
-  per cent complete. KER 2482, 2478 and 2270, the whole hepatic segment from
-  PXR activation to decreased serum thyroxine, and KER 2484, the step from
-  altered hippocampal physiology to loss of cochlear function, have all four
-  fields empty and score 35 per cent. So the documented middle of this AOP is
-  the serum-to-hippocampus segment, and both ends are relationship records
-  that exist without stated evidence. That is a fact about the completeness of
-  the wiki record, not a judgement about the biology. The AOP is "Under
-  Development" and "Open for adoption".
+  The AOP is "Under Development" and "Open for adoption".
 curation_history:
 - timestamp: "2026-11-01T07:50:00Z"
   curator: claude-code
