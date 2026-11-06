@@ -35,13 +35,23 @@ linkml-aop.
 
 ## Documentation
 
-The documentation site is built with [MkDocs](https://www.mkdocs.org/) and the
-[Material](https://squidfunk.github.io/mkdocs-material/) theme. To preview it locally,
-with both installed:
+The documentation site is published at
+**<https://monarch-initiative.github.io/enviromech/>**. It carries the schema
+reference, the domain and curation guides, the corpus counts, and the record browser
+at [`/records/`](https://monarch-initiative.github.io/enviromech/records/), where each
+AOP's page draws its pathway and methods graphs.
+
+The site is built with [MkDocs](https://www.mkdocs.org/) and the
+[Material](https://squidfunk.github.io/mkdocs-material/) theme, from the hand-written
+pages under `docs/` plus the schema and record pages generated at build time. To
+preview it locally, with the generated pages in place:
 
 ```bash
-mkdocs serve
+just docs-serve
 ```
+
+`mkdocs serve` alone serves only the hand-written pages, so the schema reference and
+the record browser are missing from the preview.
 
 ## Contributing
 
