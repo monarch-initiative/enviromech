@@ -1,0 +1,24 @@
+history_version: 1
+target:
+  kind: other
+  slug: CLAUDE.md
+  path: CLAUDE.md
+session:
+  id: 2026-11-01T045139Z-claude-code-422715
+  timestamp: '2026-11-01T04:51:39Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  summary: State in CLAUDE.md that every GitHub post carries the attribution line
+  details: 'The harness attribution reminder names commit messages and pull request descriptions. Followed
+    to the letter, that leaves comments unsigned: on 2026-11-01 five comments on #32 and one on monarch-initiative/dismech#15944
+    went up with no attribution, while the PR and issue bodies carried it. Both repositories'' existing
+    comments carry the line, so the convention was practice with nothing stating it. Added it to the Git
+    section of CLAUDE.md, naming every kind of post rather than a category, and separating the commit
+    trailer, whose model name has to come from the current session. The six comments were edited to add
+    the line.'
