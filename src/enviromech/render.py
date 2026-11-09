@@ -385,6 +385,25 @@ def cell(v) -> str:
     return "" if v is None else str(v)
 
 
+def key_events_by_event_id(records: list[dict]) -> dict:
+    """The Key Event records, by AOP-Wiki id.
+
+    A record with no `event.id` is left out. EMOD makes the id an identifier,
+    so a Key Event file cannot validate without one, but the browser renders
+    the working tree rather than a validated corpus: a half-written record has
+    no id yet, and filing it under `None` would make it the match for every
+    reference that names no Key Event at all.
+    """
+    out = {}
+    for r in records:
+        if r["data"]["kind"] != "Key Event":
+            continue
+        event_id = (r["data"].get("event") or {}).get("id")
+        if event_id is not None:
+            out[event_id] = r
+    return out
+
+
 def cross_link(records: list[dict]) -> None:
     """Link each Observation to the Key Events it bears on, and back.
 
@@ -393,9 +412,7 @@ def cross_link(records: list[dict]) -> None:
     page. Each Key Event's page gains the list of Observations that name it;
     that list is not in the Key Event's file, it is derived here.
     """
-    by_event_id = {
-        (r["data"].get("event") or {}).get("id"): r for r in records if r["data"]["kind"] == "Key Event"
-    }
+    by_event_id = key_events_by_event_id(records)
     bearing: dict[str, list[Markup]] = {}
     for r in records:
         observation = r["data"].get("observation")
@@ -403,7 +420,8 @@ def cross_link(records: list[dict]) -> None:
             continue
         linked = []
         for event_id in observation.get("events") or []:
-            target = by_event_id.get(event_id)
+            # An id of None names no Key Event, so it must match no record.
+            target = by_event_id.get(event_id) if event_id is not None else None
             if target is None:
                 linked.append(event_id)
                 continue
@@ -427,9 +445,7 @@ def cross_link_aops(records: list[dict]) -> None:
     AOPs that name it, with its role in each; that list is not in the Key
     Event's file, it is derived here.
     """
-    by_event_id = {
-        (r["data"].get("event") or {}).get("id"): r for r in records if r["data"]["kind"] == "Key Event"
-    }
+    by_event_id = key_events_by_event_id(records)
     member_of: dict[str, list[Markup]] = {}
     for r in records:
         aop = r["data"].get("aop")
@@ -437,7 +453,10 @@ def cross_link_aops(records: list[dict]) -> None:
             continue
         linked = []
         for member in aop.get("events") or []:
-            target = by_event_id.get(member.get("event_id"))
+            # EMOD leaves event_id optional, so a member may name no Key Event
+            # at all; that must match no record.
+            event_id = member.get("event_id")
+            target = by_event_id.get(event_id) if event_id is not None else None
             if target is None:
                 linked.append(member)
                 continue
