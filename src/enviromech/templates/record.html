@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-<nav><a href="../index.html">{{ site.title }}</a></nav>
+<nav aria-label="Record kinds">{% for v in views %}{{ " · " if not loop.first }}<a href="../{{ v.slug }}.html"{% if v.kind == record.data.kind %} aria-current="page"{% endif %}>{{ site.title if v.mixed else v.heading }}</a>{% endfor %}</nav>
 <h1>{{ record.data.name }}</h1>
 <p class="meta">
 {%- if record.data.id %}<a class="id" href="{{ record.data.id | curie_url }}">{{ record.data.id }}</a>{% endif %}

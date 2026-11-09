@@ -1,0 +1,34 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: record-browser-list-views
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-09T001025Z-claude-code-62d77d
+  timestamp: '2026-11-09T00:10:25Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/53
+events:
+- type: EDIT
+  outcome: changed
+  summary: Give the record browser a list view per record kind, beside the mixed index
+  details: 'The browser rendered one table over every record, with columns from conf/site.yaml''s index_columns,
+    so an AOP, a Key Event and an Observation were described by the same four. render.py now builds one
+    list view per record kind in render.KINDS (AOP, Key Event, Observation) and keeps the mixed view as
+    the front page, because filtering across kinds has its uses; a kind with no records gets no view and
+    no dead link to one. Each kind''s columns come from the new kind_columns setting, falling back to
+    index_columns. A column names a field of the record and may reach into a nested one with dots; render.list_cells
+    derives the rest - how many Key Events, Key Event Relationships, dismech nodes and dismech models
+    a record has, a Key Event''s AOP-Wiki id, biological level and level screening outcome, and the AOPs
+    it appears in with its role in each, named by the AOP''s short name. templates/index.html became templates/list.html,
+    rendered once per view to index.html and to aops.html, key-events.html and observations.html; every
+    list page and every record page carries the view links, with the one shown marked. Assays, test guidelines
+    and event components stay out: they have no record pages, so their rows would link nowhere, and report.py
+    does not count them, so a view would disagree with docs/corpus.md. 15 new tests. Looked at all four
+    pages in Chromium at 1200 px light and dark and at 390 px.'
