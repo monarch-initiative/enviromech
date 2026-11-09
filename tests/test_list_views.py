@@ -1,6 +1,7 @@
 """A list view per record kind, beside the mixed one over every record (issue #53)."""
 
 import re
+from functools import cache
 
 import pytest
 
@@ -8,8 +9,13 @@ from enviromech import render, site
 from enviromech.paths import AOPS_DIR, KEY_EVENTS_DIR, PAGES_DIR
 from enviromech.validate import iter_records
 
-PAGES = render.build()
 SETTINGS = site.load()
+
+
+@cache
+def pages():
+    """The whole browser, built once and only if a test asks for it."""
+    return render.build()
 # How many records each kind has, read from the directories themselves.
 HELD = {
     "AOP": len(iter_records(AOPS_DIR)),
@@ -19,7 +25,7 @@ HELD = {
 
 
 def view_page(slug):
-    return PAGES[PAGES_DIR / f"{slug}.html"]
+    return pages()[PAGES_DIR / f"{slug}.html"]
 
 
 def headings(page):
@@ -76,7 +82,7 @@ def test_every_page_links_to_every_view_and_marks_the_one_shown():
 
 
 def test_a_record_page_links_back_to_its_own_kind():
-    page = PAGES[PAGES_DIR / "records" / "KE-396.html"]
+    page = pages()[PAGES_DIR / "records" / "KE-396.html"]
     assert 'href="../key-events.html" aria-current="page"' in page
     assert 'href="../index.html"' in page and 'href="../aops.html"' in page
 
@@ -142,6 +148,28 @@ def test_a_key_event_in_no_aop_has_no_aops_and_no_nodes():
     render.list_cells(records)
     assert records[0]["cells"]["aops"] == ""
     assert records[0]["cells"]["dismech_nodes"] == "0"
+
+
+def test_an_aop_member_naming_no_key_event_matches_no_record():
+    """EMOD leaves event_id optional, so None must match nothing, not a record
+    that is itself missing an id."""
+    records = [
+        {"stem": "KE-unnumbered", "data": {"kind": "Key Event", "name": "No id", "event": {}}},
+        {"stem": "AOP-1", "data": {"kind": "AOP", "name": "A pathway", "aop": {
+            "events": [{"type": "KeyEvent"}]}}},  # a member with no event_id
+    ]
+    render.list_cells(records)
+    assert records[0]["cells"]["aops"] == ""
+
+
+def test_a_model_with_no_reference_does_not_count_as_a_model():
+    records = [{"stem": "KE-9", "data": {
+        "kind": "Key Event", "name": "A start", "event": {"id": 9},
+        "aggregation": {"source_nodes": [
+            {"source_node_ref": "Entry:pathophysiology#A node",
+             "models": [{"model_ref": "one"}, {"model_section": "animal_models"}]}]}}}]
+    render.list_cells(records)
+    assert records[0]["cells"]["dismech_models"] == "1"
 
 
 def test_an_observation_counts_the_key_events_it_bears_on(derived):
