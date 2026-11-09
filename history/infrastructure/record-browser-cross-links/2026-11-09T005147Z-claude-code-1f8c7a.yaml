@@ -1,0 +1,31 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: record-browser-cross-links
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-09T005147Z-claude-code-1f8c7a
+  timestamp: '2026-11-09T00:51:47Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-5
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/56
+events:
+- type: EDIT
+  outcome: changed
+  summary: Match no record when a reference names no Key Event, in both cross-linking passes
+  details: 'cross_link and cross_link_aops each built their own map from AOP-Wiki id to Key Event record,
+    keyed on event.id without checking it, so a record with no id was filed under None. cross_link_aops
+    then looked a member''s event_id up without checking that either, and since EMOD leaves event_id optional
+    on an AOP''s event member, an AOP that validates can hold a member naming no Key Event: None found
+    the None entry and the AOP was cross-linked to an unrelated record, each page gaining the other with
+    a role it does not have. cross_link had the same map and the same shape from observation.events. One
+    builder, key_events_by_event_id, now leaves out a record with no id, and both call sites treat a missing
+    id as matching nothing. The missing event.id cannot survive validation, since EMOD makes it an identifier,
+    but render and docs-build render the working tree rather than a validated corpus, which is what a
+    curator looks at mid-edit. Three tests, each checked to fail against main. The same hole in list_cells
+    was fixed in PR 55, which this does not depend on.'
