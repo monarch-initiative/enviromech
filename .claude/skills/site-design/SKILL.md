@@ -21,7 +21,8 @@ templates only for what the settings cannot do.
 | `palette` | Main color: docs header, browser header band, links | red, pink, purple, deep-purple, indigo, blue, light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, deep-orange, brown, grey, blue-grey |
 | `accent` | Hover and focus color | the palette names except brown, grey, blue-grey |
 | `theme` | Light or dark pages, for both sites | `auto` (follows the visitor's system), `light`, `dark` |
-| `index_columns` | Columns of the browser's front-page table, in order; the first links to the record | record field names, e.g. `name`, `id`, `status` |
+| `index_columns` | Columns of the front page, which lists every record, in order; the first links to the record | record field names, e.g. `name`, `id`, `status` |
+| `kind_columns` | Columns of each record kind's own list view; a kind left out uses `index_columns` | a mapping of record kind (`AOP`, `Key Event`, `Observation`) to its column names |
 | `hidden_sections` | Record sections left off browser record pages; the data keeps them | record field names |
 | `footer` | Footer on every browser page | text |
 
@@ -64,12 +65,33 @@ The page frames are Jinja templates in `src/enviromech/templates/`:
 
 | File | Page |
 |---|---|
-| `index.html` | the front page table: sortable, filterable |
+| `list.html` | one list view: sortable, filterable. Rendered once per view, to `index.html` and to one page per record kind |
 | `record.html` | one record: header, overview, section menu, sections |
 | `style.css` | the stylesheet; colors arrive as variables from `conf/site.yaml` |
 
 To change how a kind of value is drawn (say, show a list as cards rather
 than a table), change the rule in `render.py` and keep its docstring true.
+
+## The list views
+
+The browser has one list view per record kind, and the mixed view over every
+record as its front page. `render.views` builds them; `render.KINDS` is the
+ordered list of kinds that get one, and a kind with no records gets no view.
+`kind_columns` in `conf/site.yaml` gives each kind its columns, because an AOP
+and a Key Event are not described by the same ones. A column names a field of
+the record and may reach into a nested one with dots (`event.short_name`); a
+column no field holds is derived in `render.list_cells` — the counts
+(`key_events`, `ke_relationships`, `dismech_nodes`, `dismech_models`), a Key
+Event's `level`, `level_screening` and `aop_wiki_id`, and the `aops` it appears
+in with its role in each. To add a column of a kind the records do not hold,
+derive it there and give it a heading in `DERIVED_LABELS`; everything the
+schema does name takes its heading from the schema, as above.
+
+Changing `KINDS` changes the views. Assays, test guidelines and event
+components are record kinds with no pages of their own, so they are not in it:
+a row of theirs would link nowhere. Giving them views means giving them record
+pages first, and counting them in `report.py` so the browser and
+`docs/corpus.md` agree.
 
 Rules:
 

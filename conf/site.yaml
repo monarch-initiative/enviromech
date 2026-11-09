@@ -19,13 +19,43 @@ accent: indigo
 # auto follows each visitor's system setting; light or dark fixes it.
 theme: auto
 
-# Columns of the browser's front-page table: fields of the record, in order.
-# A field holding an ontology term shows its label.
+# Columns of the browser's front page, which lists every record: fields of the
+# record, in order. A field holding an ontology term shows its label.
 index_columns:
   - name
   - kind
   - id
   - status
+
+# Columns of each record kind's own list view, which the front page's kind
+# links lead to. A kind left out here uses index_columns. A column names a
+# field of the record, reaching into a nested one with dots (event.short_name),
+# or one of the values render.py derives: aop_wiki_id, key_events,
+# ke_relationships, dismech_nodes, dismech_models, level, level_screening and,
+# for a Key Event, aops (the AOPs it appears in, with its role in each).
+kind_columns:
+  AOP:
+    - name
+    - aop_wiki_id
+    - key_events
+    - ke_relationships
+    - dismech_nodes
+    - dismech_models
+    - status
+  Key Event:
+    - name
+    - aop_wiki_id
+    - level
+    - aops
+    - level_screening
+    - dismech_nodes
+    - status
+  Observation:
+    - name
+    - causal_agent
+    - asserted_relation
+    - key_events
+    - status
 
 # Record sections left off the browser's record pages. They stay in the data.
 hidden_sections:

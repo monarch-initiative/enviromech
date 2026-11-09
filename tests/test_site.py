@@ -40,6 +40,9 @@ def test_committed_settings_are_valid():
     {"accent": "brown"},
     {"theme": "sepia"},
     {"index_columns": "name"},
+    {"kind_columns": ["name"]},
+    {"kind_columns": {"AOP": "name"}},
+    {"kind_columns": {"AOP": ["name", 7]}},
 ])
 def test_bad_settings_are_rejected(bad):
     assert site.problems({**site.DEFAULTS, **bad})

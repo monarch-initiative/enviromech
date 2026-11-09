@@ -8,6 +8,11 @@ Edit the templates in src/<slug>/templates/ or the layout rules below, never
 the files in pages/. Colors, title, columns and hidden sections come from
 conf/site.yaml.
 
+The browser has a list view per record kind, plus the mixed one over every
+record at index.html. A kind's view has its own columns, because an AOP, a
+Key Event and an Observation are not described by the same ones: see
+`views` and `list_cells` below, and `kind_columns` in conf/site.yaml.
+
 A record page is laid out from the shape of the data, with names and help
 text from the schema:
 
@@ -70,6 +75,13 @@ TITLE_KEYS = ("preferred_term", "name", "title", "label", "category", "infores",
 MAX_TABLE_COLUMNS = 6
 # Longest text a table cell may hold before the list shows as cards.
 MAX_CELL_TEXT = 90
+# The record kinds the browser shows, in the order their list views are
+# offered: an AOP is the top of a pathway, the Key Events sit under it, and the
+# Observations are the kind the rest of the tooling is built around. Assays,
+# test guidelines and event components have no pages of their own, so they have
+# no view either; a Key Event's page names its assays, and an event component is
+# reached from the Key Event that uses it.
+KINDS = ("AOP", "Key Event", "Observation")
 
 
 def curie_url(curie: str) -> str:
@@ -98,8 +110,17 @@ def schema_info() -> tuple[dict[str, tuple[str | None, str | None]], dict[str, s
     return slots, values
 
 
-# Sections a page derives from other records, which the schema does not name.
-DERIVED_LABELS = {"aops": "AOPs"}
+# Sections and list-view columns a page derives from other records or by
+# counting, which the schema does not name.
+DERIVED_LABELS = {
+    "aops": "AOPs",
+    "aop_wiki_id": "AOP-Wiki id",
+    "key_events": "Key Events",
+    "ke_relationships": "Key Event Relationships",
+    "level": "Biological level",
+    "dismech_nodes": "dismech nodes",
+    "dismech_models": "dismech models",
+}
 
 
 def label(key: str) -> str:
@@ -404,6 +425,138 @@ def key_events_by_event_id(records: list[dict]) -> dict:
     return out
 
 
+# ---------------------------------------------------------------- list views
+
+
+def kind_slug(kind: str) -> str:
+    """The page name of a kind's list view: "Key Event" -> "key-events"."""
+    return kind.lower().replace(" ", "-") + "s"
+
+
+def plural(noun: str, count: int) -> str:
+    return noun if count == 1 else f"{noun}s"
+
+
+def list_cells(records: list[dict]) -> None:
+    """Fill each record's `cells`: the list-view values no field of it holds.
+
+    A list view's columns name fields of the record (conf/site.yaml,
+    `kind_columns`), reaching into a nested one with dots. These are the rest:
+    how many Key Events, Key Event Relationships, dismech nodes and dismech
+    models a record has, the level a Key Event sits at, the outcome of
+    screening it, and the AOPs it appears in with its role in each. They are
+    plain text, as every list-view cell is.
+
+    Run this before the cross-linking, which replaces AOP-Wiki ids with links.
+    """
+    stem_by_event_id = {
+        (r["data"].get("event") or {}).get("id"): r["stem"]
+        for r in records if r["data"]["kind"] == "Key Event"
+    }
+    in_aops: dict[str, list[str]] = {}
+    for r in records:
+        if r["data"]["kind"] != "AOP":
+            continue
+        aop = r["data"].get("aop") or {}
+        # An AOP's title runs to a line of prose; its short name is what fits
+        # in a cell beside every other Key Event's AOPs.
+        name = str(aop.get("short_name") or r["data"].get("name") or r["stem"])
+        for member in aop.get("events") or []:
+            stem = stem_by_event_id.get(member.get("event_id"))
+            if stem is None:  # a Key Event the AOP names but no record holds
+                continue
+            role = enum_text(member.get("type") or "")
+            in_aops.setdefault(stem, []).append(f"{name} ({role})" if role else name)
+    for r in records:
+        data = r["data"]
+        cells: dict[str, str] = {}
+        if data["kind"] == "AOP":
+            aop = data.get("aop") or {}
+            graph = r.get("graph") or {}
+            cells["aop_wiki_id"] = str(aop.get("id", ""))
+            cells["key_events"] = str(len(aop.get("events") or []))
+            cells["ke_relationships"] = str(len(aop.get("ke_relationships") or []))
+            # The graph counts the nodes and models the AOP's Key Events
+            # aggregate, each once however many Key Events reach it.
+            cells["dismech_nodes"] = str(len(graph.get("nodes") or []))
+            cells["dismech_models"] = str(len(graph.get("models") or []))
+        elif data["kind"] == "Key Event":
+            event = data.get("event") or {}
+            sources = (data.get("aggregation") or {}).get("source_nodes") or []
+            cells["aop_wiki_id"] = str(event.get("id", ""))
+            cells["level"] = cell((event.get("biological_organization_id") or {}).get("term"))
+            cells["aops"] = ", ".join(in_aops.get(r["stem"], []))
+            cells["level_screening"] = cell((data.get("level_screening") or {}).get("outcome"))
+            cells["dismech_nodes"] = str(len(sources))
+            cells["dismech_models"] = str(len({
+                model.get("model_ref") for source in sources
+                for model in source.get("models") or []
+            }))
+        elif data["kind"] == "Observation":
+            cells["key_events"] = str(len((data.get("observation") or {}).get("events") or []))
+        r["cells"] = cells
+
+
+def column_value(record: dict, column: str) -> str:
+    """A record's value for one list-view column, as plain text.
+
+    Its `cells` first, so a derived value wins over a field of the same name;
+    then the record's own fields, reaching into a nested one with dots
+    (`event.short_name`). A column the record has nothing for is empty.
+    """
+    if column in record.get("cells", {}):
+        return record["cells"][column]
+    value = record["data"]
+    for part in column.split("."):
+        if not isinstance(value, dict):
+            return ""
+        value = value.get(part)
+    return cell(value)
+
+
+def column_label(column: str) -> str:
+    """The heading of a list-view column: a dotted path is named by its last step."""
+    return label(column.rsplit(".", 1)[-1])
+
+
+def views(records: list[dict], settings: dict) -> list[dict]:
+    """The browser's list views: every record, then one per record kind.
+
+    The mixed view stays, as the front page, because filtering and sorting
+    across kinds has its uses. Each kind that has records gets its own view,
+    with its own columns from `kind_columns`, falling back to `index_columns`.
+    """
+    unknown = sorted(set(settings["kind_columns"]) - set(KINDS))
+    if unknown:
+        raise SystemExit(
+            f"conf/site.yaml: kind_columns names no record kind {unknown}; "
+            f"the kinds are {list(KINDS)}"
+        )
+    out = [{"slug": "index", "kind": None, "heading": settings["title"],
+            "columns": settings["index_columns"], "records": records, "mixed": True}]
+    for kind in KINDS:
+        held = [r for r in records if r["data"]["kind"] == kind]
+        if not held:  # no records of this kind: no view, and no dead link to one
+            continue
+        out.append({"slug": kind_slug(kind), "kind": kind, "heading": f"{kind}s",
+                    "columns": settings["kind_columns"].get(kind) or settings["index_columns"],
+                    "records": held, "mixed": False})
+    for view in out:
+        held = view["records"]
+        view["count"] = len(held)
+        view["noun"] = plural("record" if view["mixed"] else view["kind"], view["count"])
+        counts: dict[str, int] = {}
+        statuses: dict[str, int] = {}
+        for r in held:
+            if view["mixed"]:
+                counts[r["data"]["kind"]] = counts.get(r["data"]["kind"], 0) + 1
+            if r["data"].get("status"):
+                statuses[str(r["data"]["status"])] = statuses.get(str(r["data"]["status"]), 0) + 1
+        view["kinds"] = sorted(counts.items())
+        view["statuses"] = sorted(statuses.items())
+    return out
+
+
 def cross_link(records: list[dict]) -> None:
     """Link each Observation to the Key Events it bears on, and back.
 
@@ -515,7 +668,9 @@ def build() -> dict[Path, str]:
         autoescape=select_autoescape(["html"]),
         keep_trailing_newline=True,
     )
-    env.filters.update(curie_url=curie_url, cell=cell, label=label, scalar=scalar, badge=badge, term=term)
+    env.filters.update(curie_url=curie_url, cell=cell, label=label, scalar=scalar, badge=badge, term=term,
+                       column_label=column_label)
+    env.globals.update(column_value=column_value)
     records = []
     for path in iter_records():
         data = load(path) or {}
@@ -548,21 +703,20 @@ def build() -> dict[Path, str]:
     for r in records:
         if r["stem"] in aop_graphs and r["data"]["kind"] == "AOP":
             r["graph"] = aop_graphs[r["stem"]]
+    # The list-view cells are read from the records as loaded, before
+    # cross-linking turns AOP-Wiki ids into links.
+    list_cells(records)
     cross_link(records)
     cross_link_aops(records)
     name_assays(records)
-    kinds: dict[str, int] = {}
-    for r in records:
-        kinds[r["data"]["kind"]] = kinds.get(r["data"]["kind"], 0) + 1
     records.sort(key=lambda r: str(r["data"].get("name", r["stem"])).lower())
-    statuses: dict[str, int] = {}
-    for r in records:
-        s = str(r["data"].get("status") or "")
-        if s:
-            statuses[s] = statuses.get(s, 0) + 1
-    ctx = {"mech_name": MECH_NAME, "record_noun": RECORD_NOUN, "repo_url": REPO_URL, "site": settings}
-    out = {PAGES_DIR / "index.html": env.get_template("index.html").render(
-        records=records, statuses=sorted(statuses.items()), kinds=sorted(kinds.items()), **ctx)}
+    all_views = views(records, settings)
+    ctx = {"mech_name": MECH_NAME, "record_noun": RECORD_NOUN, "repo_url": REPO_URL,
+           "site": settings, "views": all_views}
+    out = {}
+    listing = env.get_template("list.html")
+    for view in all_views:
+        out[PAGES_DIR / f"{view['slug']}.html"] = listing.render(view=view, **ctx)
     tmpl = env.get_template("record.html")
     for r in records:
         body = record_body(r["data"], settings["hidden_sections"])

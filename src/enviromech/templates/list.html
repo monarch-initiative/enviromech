@@ -1,30 +1,39 @@
+{#- One list view: every record, or one record kind. Rendered once per view by
+    render.py, to index.html and to <kind>s.html. The columns come from
+    conf/site.yaml (index_columns, kind_columns); a value the record does not
+    hold directly is derived in render.list_cells. -#}
 <!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ site.title }}</title>
+<title>{% if view.kind %}{{ view.heading }} | {% endif %}{{ site.title }}</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
 <nav><a href="../index.html">Documentation</a> · <a href="{{ repo_url }}">Repository</a></nav>
-<h1>{{ site.title }}</h1>
-<p class="meta">{{ records | length }} record{{ "" if records | length == 1 else "s" }}
-{%- for k, n in kinds %}{{ ": " if loop.first else ", " }}{{ n }} {{ k }}{{ "" if n == 1 else "s" }}{% endfor %}
-{%- for s, n in statuses %} · {{ s | badge("status") }} {{ n }}{% endfor %}</p>
+<h1>{{ view.heading }}</h1>
+<p class="meta">{{ view.count }} {{ view.noun }}
+{%- for k, n in view.kinds %}{{ ": " if loop.first else ", " }}{{ n }} {{ k }}{{ "" if n == 1 else "s" }}{% endfor %}
+{%- for s, n in view.statuses %} · {{ s | badge("status") }} {{ n }}{% endfor %}</p>
 </header>
 <main>
-<input id="filter" type="search" placeholder="Filter records" aria-label="Filter">
+<nav class="views" aria-label="Record kinds">
+{%- for v in views %}
+<a href="{{ v.slug }}.html"{% if v.slug == view.slug %} aria-current="page"{% endif %}>{{ "All records" if v.mixed else v.heading }} <span class="count">{{ v.count }}</span></a>
+{%- endfor %}
+</nav>
+<input id="filter" type="search" placeholder="Filter {{ view.noun }}" aria-label="Filter">
 <div class="table-wrap">
 <table id="records" class="data">
-<thead><tr>{% for col in site.index_columns %}<th><button type="button" data-col="{{ loop.index0 }}">{{ col | label }}</button></th>{% endfor %}</tr></thead>
+<thead><tr>{% for col in view.columns %}<th><button type="button" data-col="{{ loop.index0 }}">{{ col | column_label }}</button></th>{% endfor %}</tr></thead>
 <tbody>
-{%- for r in records %}
-<tr>{% for col in site.index_columns %}<td data-label="{{ col | label }}">
-{%- if loop.first %}<a href="records/{{ r.stem }}.html">{{ r.data.get(col) | cell or r.stem }}</a>
+{%- for r in view.records %}
+<tr>{% for col in view.columns %}<td data-label="{{ col | column_label }}">
+{%- if loop.first %}<a href="records/{{ r.stem }}.html">{{ column_value(r, col) or r.stem }}</a>
 {%- elif col == "status" and r.data.get(col) %}{{ r.data.get(col) | badge("status") }}
-{%- else %}{{ r.data.get(col) | cell }}{% endif %}</td>{% endfor %}</tr>
+{%- else %}{{ column_value(r, col) }}{% endif %}</td>{% endfor %}</tr>
 {%- endfor %}
 </tbody>
 </table>

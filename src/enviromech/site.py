@@ -56,6 +56,7 @@ DEFAULTS = {
     "accent": "indigo",
     "theme": "auto",
     "index_columns": ["name", "id", "status"],
+    "kind_columns": {},
     "hidden_sections": [],
     "footer": (
         "AI-curated. Validation checks that citations exist, quotes are exact and "
@@ -114,6 +115,12 @@ def problems(settings: dict) -> list[str]:
     for key in ("index_columns", "hidden_sections"):
         if not isinstance(settings[key], list):
             out.append(f"{key} must be a list")
+    if not isinstance(settings["kind_columns"], dict):
+        out.append("kind_columns must be a mapping of record kind to its columns")
+    else:
+        for kind, cols in settings["kind_columns"].items():
+            if not isinstance(cols, list) or not all(isinstance(c, str) for c in cols):
+                out.append(f"kind_columns[{kind!r}] must be a list of column names")
     return out
 
 
