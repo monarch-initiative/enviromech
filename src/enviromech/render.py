@@ -449,13 +449,9 @@ def list_cells(records: list[dict]) -> None:
 
     Run this before the cross-linking, which replaces AOP-Wiki ids with links.
     """
-    stem_by_event_id = {}
-    for r in records:
-        if r["data"]["kind"] != "Key Event":
-            continue
-        event_id = (r["data"].get("event") or {}).get("id")
-        if event_id is not None:  # a record with no AOP-Wiki id is nobody's match
-            stem_by_event_id[event_id] = r["stem"]
+    stem_by_event_id = {
+        event_id: r["stem"] for event_id, r in key_events_by_event_id(records).items()
+    }
     in_aops: dict[str, list[str]] = {}
     for r in records:
         if r["data"]["kind"] != "AOP":

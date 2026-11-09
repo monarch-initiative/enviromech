@@ -47,3 +47,16 @@ events:
     test module built the whole browser at import, so pytest paid for it during
     collection even when no test using it was selected; it is behind a cached function
     now. Two tests, each checked to fail against the previous commit.
+- type: EDIT
+  outcome: changed
+  summary: >-
+    Rebase onto the cross-link fix and build the list-view map with its shared
+    Key Event index
+  details: >-
+    PR 57 landed first, adding key_events_by_event_id and guarding both cross-linking
+    passes. Both branches had inserted new code immediately before cross_link, so this
+    one was rebased onto the new main and the two insertions kept side by side. list_cells
+    had been building its own map from AOP-Wiki id to Key Event record, with its own copy
+    of the same guard; it now derives that map from key_events_by_event_id, so the rule
+    that a record with no event.id is nobody's match lives in one place. No list view,
+    column or derived value changed. 245 tests pass, ruff is clean and just qc is green.
