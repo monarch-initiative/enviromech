@@ -449,10 +449,13 @@ def list_cells(records: list[dict]) -> None:
 
     Run this before the cross-linking, which replaces AOP-Wiki ids with links.
     """
-    stem_by_event_id = {
-        (r["data"].get("event") or {}).get("id"): r["stem"]
-        for r in records if r["data"]["kind"] == "Key Event"
-    }
+    stem_by_event_id = {}
+    for r in records:
+        if r["data"]["kind"] != "Key Event":
+            continue
+        event_id = (r["data"].get("event") or {}).get("id")
+        if event_id is not None:  # a record with no AOP-Wiki id is nobody's match
+            stem_by_event_id[event_id] = r["stem"]
     in_aops: dict[str, list[str]] = {}
     for r in records:
         if r["data"]["kind"] != "AOP":
@@ -462,7 +465,11 @@ def list_cells(records: list[dict]) -> None:
         # in a cell beside every other Key Event's AOPs.
         name = str(aop.get("short_name") or r["data"].get("name") or r["stem"])
         for member in aop.get("events") or []:
-            stem = stem_by_event_id.get(member.get("event_id"))
+            # EMOD leaves event_id optional, so a member may name no Key Event
+            # at all; that must match no record rather than the first one
+            # missing an id of its own.
+            event_id = member.get("event_id")
+            stem = stem_by_event_id.get(event_id) if event_id is not None else None
             if stem is None:  # a Key Event the AOP names but no record holds
                 continue
             role = enum_text(member.get("type") or "")
@@ -489,8 +496,9 @@ def list_cells(records: list[dict]) -> None:
             cells["level_screening"] = cell((data.get("level_screening") or {}).get("outcome"))
             cells["dismech_nodes"] = str(len(sources))
             cells["dismech_models"] = str(len({
-                model.get("model_ref") for source in sources
+                model["model_ref"] for source in sources
                 for model in source.get("models") or []
+                if model.get("model_ref")  # an unnamed model is not another model
             }))
         elif data["kind"] == "Observation":
             cells["key_events"] = str(len((data.get("observation") or {}).get("events") or []))

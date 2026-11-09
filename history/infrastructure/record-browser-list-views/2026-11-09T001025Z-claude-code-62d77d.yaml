@@ -32,3 +32,18 @@ events:
     and event components stay out: they have no record pages, so their rows would link nowhere, and report.py
     does not count them, so a view would disagree with docs/corpus.md. 15 new tests. Looked at all four
     pages in Chromium at 1200 px light and dark and at 390 px.'
+- type: EDIT
+  outcome: changed
+  summary: >-
+    Guard the Key Event match and the dismech model count, and build the browser lazily
+    in the tests
+  details: >-
+    Copilot read two reachable defects in list_cells. EMOD leaves event_id optional on an
+    AOP's event member, so a member naming no Key Event looked that None up in a map that
+    could itself hold a None key, for a Key Event record with no event.id, and linked the
+    AOP to that unrelated record; the map now drops records with no id and a member with
+    no event_id matches nothing. A source node's model with no model_ref put None in the
+    set behind dismech models and inflated the count by one; falsy refs are excluded. The
+    test module built the whole browser at import, so pytest paid for it during
+    collection even when no test using it was selected; it is behind a cached function
+    now. Two tests, each checked to fail against the previous commit.
