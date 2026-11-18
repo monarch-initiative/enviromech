@@ -677,7 +677,8 @@ def name_assays(records: list[dict]) -> None:
         assay = (load(path) or {}).get("assay") or {}
         named = [guidelines.get(g, str(g)) for g in assay.get("test_guidelines") or []]
         title = assay.get("title") or str(assay.get("id"))
-        assays[assay.get("id")] = f"{title} ({', '.join(named)})" if named else title
+        text = f"{title} ({', '.join(named)})" if named else title
+        assays[assay.get("id")] = link(f"{path.stem}.html", text)
     for r in records:
         event = r["data"].get("event")
         if r["data"]["kind"] != "Key Event" or not isinstance(event, dict):
@@ -690,6 +691,37 @@ def name_assays(records: list[dict]) -> None:
         if event.get("test_guidelines"):
             named_event["test_guidelines"] = [guidelines.get(g, str(g)) for g in event["test_guidelines"]]
         r["data"] = {**r["data"], "event": named_event}
+
+
+def assay_pages(records: list[dict]) -> list[dict]:
+    """One page per assay record, reached from the graph and from Key Event pages.
+
+    An assay has no list view, so these records stay out of `views`. Its Key
+    Events become links and its test guidelines are named.
+    """
+    guidelines = {}
+    for path in iter_records(TEST_GUIDELINES_DIR):
+        guideline = (load(path) or {}).get("test_guideline") or {}
+        guidelines[guideline.get("id")] = guideline.get("short_title") or str(guideline.get("id"))
+    by_event_id = key_events_by_event_id(records)
+    pages = []
+    for path in iter_records(ASSAYS_DIR):
+        data = load(path) or {}
+        if not isinstance(data, dict):
+            continue
+        assay = dict(data.get("assay") or {})
+        if assay.get("events"):
+            assay["events"] = [
+                link(f"{by_event_id[e]['stem']}.html", f"KE {e}: {by_event_id[e]['data']['name']}")
+                if e in by_event_id else e for e in assay["events"]]
+        if assay.get("test_guidelines"):
+            assay["test_guidelines"] = [guidelines.get(g, str(g)) for g in assay["test_guidelines"]]
+        # The id is an enviromech: CURIE no resolver knows; the page's own address is its id.
+        shown = {k: v for k, v in data.items() if k != "id"}
+        pages.append({"stem": path.stem, "data": {
+            "kind": "Assay", "name": assay.get("title") or path.stem,
+            "description": assay.pop("description", None), **shown, "assay": assay}})
+    return pages
 
 
 def build() -> dict[Path, str]:
@@ -756,6 +788,9 @@ def build() -> dict[Path, str]:
         out[PAGES_DIR / f"{view['slug']}.html"] = listing.render(view=view, **ctx)
     tmpl = env.get_template("record.html")
     for r in records:
+        body = record_body(r["data"], settings["hidden_sections"])
+        out[PAGES_DIR / "records" / f"{r['stem']}.html"] = tmpl.render(record=r, body=body, **ctx)
+    for r in assay_pages(records):
         body = record_body(r["data"], settings["hidden_sections"])
         out[PAGES_DIR / "records" / f"{r['stem']}.html"] = tmpl.render(record=r, body=body, **ctx)
     css = env.get_template("style.css").render(theme=settings["theme"], **site.colors(settings))
