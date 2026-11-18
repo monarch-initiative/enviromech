@@ -1,9 +1,9 @@
 {#- Rendered by render.py from conf/site.yaml. Colors: primary, on_primary,
     accent, link_light, link_dark; theme: auto, light or dark. -#}
 {%- set light %}
-  --bg: #f6f6f8; --card: #ffffff; --fg: #1d1d1f; --muted: #5f5f66; --line: #dcdce1; --link: {{ link_light }};
+  --bg: #fbf7ec; --card: #ffffff; --fg: #222018; --muted: #666050; --line: #e6dfca; --link: {{ link_light }};
   --good: #1e6b34; --good-bg: #e3f3e7; --warn: #7a4b00; --warn-bg: #fdf0d5; --bad: #9b1c1c; --bad-bg: #fbe4e4;
-  --plain-bg: #ececf0;
+  --plain-bg: #f2ecda;
 {%- endset %}
 {%- set dark %}
   --bg: #121214; --card: #1c1c20; --fg: #ececef; --muted: #a0a0a8; --line: #34343a; --link: {{ link_dark }};
