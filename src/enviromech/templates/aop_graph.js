@@ -104,7 +104,7 @@
     }
     if (d.kind === "node") return [d.level, d.has_models ? "" : "no linked model"].filter(Boolean).join(" · ");
     if (d.kind === "assay") return d.guidelines.join(", ") || "no test guideline";
-    if (d.kind === "shared") return [d.assay.guidelines.join(", "), "also a dismech model"].filter(Boolean).join(" · ");
+    if (d.kind === "shared") return d.assay.guidelines.join(", ") || "no test guideline";
     // A model: its section, and in the pathway view its relationships to its nodes
     // (the methods view labels them on the lines instead).
     var rels = view !== "pathway" ? [] : V.links.filter(function (l) { return l.kind === "node-model" && l.b === d.id; })
