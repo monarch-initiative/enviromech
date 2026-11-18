@@ -87,6 +87,14 @@ table.data tbody tr:hover { background: var(--plain-bg); }
 /* A list view's first column holds the record's name, and the rest are short:
    keep the name wide enough not to break mid-word. */
 #records td:first-child { min-width: 13rem; }
+.pager { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4rem; margin: .5rem 0 1rem; }
+.pager button { font: inherit; font-size: .95rem; min-width: 2.4rem; padding: .3rem .7rem; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--link); cursor: pointer; }
+.pager button:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
+.pager button:focus-visible { outline: 2px solid var(--accent); }
+.pager button[aria-current] { background: var(--link); border-color: var(--link); color: var(--bg); font-weight: 600; }
+.pager button:disabled { color: var(--muted); cursor: default; opacity: .6; }
+.pager span { color: var(--muted); }
 #records th button { all: unset; cursor: pointer; }
 #records th button::after { content: " ↕"; opacity: .4; }
 #records th button[data-dir=up]::after { content: " ↑"; opacity: 1; }

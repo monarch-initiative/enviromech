@@ -73,12 +73,14 @@ def test_the_committed_settings_give_every_kind_its_columns():
 
 
 def test_every_page_links_to_every_view_and_marks_the_one_shown():
-    slugs = ["index", *(render.kind_slug(k) for k in render.KINDS)]
-    for slug in slugs:
+    slugs = [render.kind_slug(k) for k in render.KINDS]
+    for slug in ["index", *slugs]:
         page = view_page(slug)
         for other in slugs:
             assert f'href="{other}.html"' in page
-        assert f'href="{slug}.html" aria-current="page"' in page
+        assert "All records" not in page
+        if slug != "index":
+            assert f'href="{slug}.html" aria-current="page"' in page
 
 
 def test_a_record_page_links_back_to_its_own_kind():

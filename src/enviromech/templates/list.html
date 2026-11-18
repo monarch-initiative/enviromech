@@ -13,18 +13,20 @@
 <body>
 <header>
 <nav><a href="../index.html">Documentation</a> · <a href="{{ repo_url }}">Repository</a></nav>
-<h1>{{ view.heading }}</h1>
+<h1>{{ site.title }}</h1>
 <p class="meta">{{ view.count }} {{ view.noun }}
 {%- for k, n in view.kinds %}{{ ": " if loop.first else ", " }}{{ n }} {{ k }}{{ "" if n == 1 else "s" }}{% endfor %}
 {%- for s, n in view.statuses %} · {{ s | badge("status") }} {{ n }}{% endfor %}</p>
 </header>
 <main>
 <nav class="views" aria-label="Record kinds">
-{%- for v in views %}
-<a href="{{ v.slug }}.html"{% if v.slug == view.slug %} aria-current="page"{% endif %}>{{ "All records" if v.mixed else v.heading }} <span class="count">{{ v.count }}</span></a>
+{%- for v in views if not v.mixed %}
+<a href="{{ v.slug }}.html"{% if v.slug == view.slug %} aria-current="page"{% endif %}>{{ v.heading }} <span class="count">{{ v.count }}</span></a>
 {%- endfor %}
 </nav>
 <input id="filter" type="search" placeholder="Filter {{ view.noun }}" aria-label="Filter">
+<p id="range" class="muted" aria-live="polite"></p>
+<nav id="pager" class="pager" aria-label="Pagination"></nav>
 <div class="table-wrap">
 <table id="records" class="data">
 <thead><tr>{% for col in view.columns %}<th><button type="button" data-col="{{ loop.index0 }}">{{ col | column_label }}</button></th>{% endfor %}</tr></thead>
@@ -43,14 +45,43 @@
 <footer><p>{{ site.footer }}</p></footer>
 <script>
 const rows = [...document.querySelectorAll("#records tbody tr")];
-document.getElementById("filter").addEventListener("input", e => {
-  const q = e.target.value.toLowerCase();
-  let shown = 0;
-  for (const row of rows) {
-    row.hidden = !row.textContent.toLowerCase().includes(q);
-    if (!row.hidden) shown++;
+const PAGE = 25, noun = {{ view.noun | tojson }};
+let page = 1, query = "";
+const matching = () => rows.filter(r => r.textContent.toLowerCase().includes(query));
+function pageList(cur, last) {
+  if (last <= 7) return Array.from({length: last}, (_, i) => i + 1);
+  if (cur <= 4) return [1, 2, 3, 4, 5, "…", last];
+  if (cur >= last - 3) return [1, "…", ...Array.from({length: 5}, (_, i) => last - 4 + i)];
+  return [1, "…", cur - 1, cur, cur + 1, "…", last];
+}
+function render() {
+  const hit = matching(), last = Math.max(1, Math.ceil(hit.length / PAGE));
+  page = Math.min(page, last);
+  const from = (page - 1) * PAGE, shown = new Set(hit.slice(from, from + PAGE));
+  for (const r of rows) r.hidden = !shown.has(r);
+  document.getElementById("none").hidden = hit.length > 0;
+  document.getElementById("range").textContent = hit.length
+    ? `${from + 1}–${from + shown.size} of ${hit.length} ${noun}` : "";
+  const pager = document.getElementById("pager");
+  pager.replaceChildren();
+  pager.hidden = last === 1;
+  const add = (label, to, opts = {}) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.textContent = label;
+    if (opts.current) { b.setAttribute("aria-current", "page"); }
+    if (opts.disabled) b.disabled = true;
+    b.addEventListener("click", () => { page = to; render(); });
+    pager.appendChild(b);
+  };
+  add("← Previous", page - 1, {disabled: page === 1});
+  for (const n of pageList(page, last)) {
+    if (n === "…") { const s = document.createElement("span"); s.textContent = "…"; pager.appendChild(s); }
+    else add(String(n), n, {current: n === page});
   }
-  document.getElementById("none").hidden = shown > 0;
+  add("Next →", page + 1, {disabled: page === last});
+}
+document.getElementById("filter").addEventListener("input", e => {
+  query = e.target.value.toLowerCase(); page = 1; render();
 });
 for (const b of document.querySelectorAll("#records th button")) {
   b.addEventListener("click", () => {
@@ -61,8 +92,10 @@ for (const b of document.querySelectorAll("#records th button")) {
     rows.sort((a, c) => key(a).localeCompare(key(c), undefined, {numeric: true}) * (up ? 1 : -1));
     const body = document.querySelector("#records tbody");
     for (const r of rows) body.appendChild(r);
+    page = 1; render();
   });
 }
+render();
 </script>
 </body>
 </html>
