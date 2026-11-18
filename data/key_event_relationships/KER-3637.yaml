@@ -1,0 +1,10 @@
+# AOP-Wiki KER 3637, from KE 1542 to KE 177. The upstream and downstream Events
+# were read from the 2026-10-03 AOP-Wiki XML export.
+id: aop.relationships:3637
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/relationships/3637
+ke_relationship:
+  id: 3637
+  upstream_event_id: 1542
+  downstream_event_id: 177

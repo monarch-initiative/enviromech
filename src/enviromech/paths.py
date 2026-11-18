@@ -24,6 +24,8 @@ RECORDS_DIR = REPO_ROOT / "data/observations"
 KEY_EVENTS_DIR = REPO_ROOT / "data/key_events"
 # AOPs are a third record kind, read by the report and the record browser.
 AOPS_DIR = REPO_ROOT / "data/aops"
+# Key Event Relationships: the endpoints an AOP names only by id.
+KERS_DIR = REPO_ROOT / "data/key_event_relationships"
 ASSAYS_DIR = REPO_ROOT / "data/assays"
 TEST_GUIDELINES_DIR = REPO_ROOT / "data/test_guidelines"
 HISTORY_DIR = REPO_ROOT / "history"

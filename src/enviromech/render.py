@@ -47,6 +47,7 @@ from .aop_graph import graphs
 from .paths import (
     AOPS_DIR,
     ASSAYS_DIR,
+    KERS_DIR,
     KEY_EVENTS_DIR,
     MECH_NAME,
     PACKAGE_DIR,
@@ -245,6 +246,8 @@ def card_title(v: dict) -> tuple[str | None, str | None]:
 
 
 def card(v: dict, skip: tuple = ()) -> Markup:
+    if set(v) == {"line"}:  # one rendered sentence, such as a Key Event Relationship
+        return Markup('<div class="card"><table class="kv"><tr><td>{}</td></tr></table></div>').format(v["line"])
     title_key, title = card_title(v)
     parts = []
     if title:
@@ -593,7 +596,7 @@ def cross_link(records: list[dict]) -> None:
             r["data"] = {**r["data"], "observations": bearing[r["stem"]]}
 
 
-def cross_link_aops(records: list[dict]) -> None:
+def cross_link_aops(records: list[dict], kers: dict | None = None) -> None:
     """Link each AOP to its Key Events, and each Key Event to the AOPs it is in.
 
     An AOP names its Key Events in EMOD's aop.events, each by its AOP-Wiki id
@@ -623,10 +626,37 @@ def cross_link_aops(records: list[dict]) -> None:
             name = str(r["data"]["name"])
             back = link(f"{r['stem']}.html", f"{name} ({role})" if role else name)
             member_of.setdefault(target["stem"], []).append(back)
-        r["data"] = {**r["data"], "aop": {**aop, "events": linked}}
+        relationships = [ker_line(rel, kers or {}, by_event_id) for rel in aop.get("ke_relationships") or []]
+        # One card each, below the events, as the events are.
+        relationships = [{"line": x} if isinstance(x, Markup) else x for x in relationships]
+        r["data"] = {**r["data"], "aop": {**aop, "events": linked, "ke_relationships": relationships}}
     for r in records:
         if r["stem"] in member_of:
             r["data"] = {**r["data"], "aops": member_of[r["stem"]]}
+
+
+def ker_line(rel: dict, kers: dict, by_event_id: dict) -> Markup | dict:
+    """One AOP-Wiki KER as a line: "3637: Upstream leads to Downstream (adjacent)".
+
+    The endpoints come from the Key Event Relationship record; the directness is
+    the AOP's own. With no record for the id, the entry is left as it is.
+    """
+    ker = kers.get(rel.get("relationship_id"))
+    if ker is None:
+        return rel
+
+    def event(event_id) -> Markup:
+        target = by_event_id.get(event_id)
+        if target is None:
+            return Markup("KE {}").format(event_id)
+        return link(f"{target['stem']}.html", target["data"]["name"])
+
+    relationship = ker.get("ke_relationship") or {}
+    directness = (rel.get("directness_id") or {}).get("term")
+    tail = Markup(" ({})").format(directness) if directness else Markup("")
+    return Markup("{}: {} leads to {}{}").format(
+        rel["relationship_id"], event(relationship.get("upstream_event_id")),
+        event(relationship.get("downstream_event_id")), tail)
 
 
 def name_assays(records: list[dict]) -> None:
@@ -711,7 +741,10 @@ def build() -> dict[Path, str]:
     # cross-linking turns AOP-Wiki ids into links.
     list_cells(records)
     cross_link(records)
-    cross_link_aops(records)
+    cross_link_aops(records, {
+        (load(path) or {}).get("ke_relationship", {}).get("id"): load(path) or {}
+        for path in iter_records(KERS_DIR)
+    })
     name_assays(records)
     records.sort(key=lambda r: str(r["data"].get("name", r["stem"])).lower())
     all_views = views(records, settings)

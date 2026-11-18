@@ -1,0 +1,10 @@
+# AOP-Wiki KER 835, from KE 272 to KE 827. The upstream and downstream Events
+# were read from the 2026-10-03 AOP-Wiki XML export.
+id: aop.relationships:835
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/relationships/835
+ke_relationship:
+  id: 835
+  upstream_event_id: 272
+  downstream_event_id: 827

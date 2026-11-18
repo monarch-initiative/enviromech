@@ -1,0 +1,10 @@
+# AOP-Wiki KER 908, from KE 177 to KE 890. The upstream and downstream Events
+# were read from the 2026-10-03 AOP-Wiki XML export.
+id: aop.relationships:908
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/relationships/908
+ke_relationship:
+  id: 908
+  upstream_event_id: 177
+  downstream_event_id: 890
