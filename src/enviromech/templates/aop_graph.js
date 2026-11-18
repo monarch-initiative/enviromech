@@ -1,9 +1,9 @@
 // Draws an AOP's graph from the JSON aop_graph.py embeds, in two views:
 //   Pathway: Key Events, then the dismech nodes they aggregate, then the dismech
 //            models linked to those nodes.
-//   Methods: Key Events; EnviroMech assays with no dismech counterpart; methods
-//            that are both an EnviroMech assay and a dismech model; dismech models
-//            with no EnviroMech counterpart; then the dismech nodes.
+//   Methods: EnviroMech assays with no dismech counterpart; Key Events; methods
+//            that are both an EnviroMech assay and a dismech model; the dismech
+//            nodes; then dismech models with no EnviroMech counterpart.
 // No dependencies. Text from the records is set with textContent, never as HTML.
 (function () {
   "use strict";
@@ -66,14 +66,14 @@
       });
     });
     cols = [
-      { head: "Key Events", w: 180, ids: data.key_events.map(function (d) { return d.id; }) },
       { head: "EnviroMech assays only", w: 180, ids: methods.assays_only },
+      { head: "Key Events", w: 180, ids: data.key_events.map(function (d) { return d.id; }) },
       { head: "In both", w: 190, ids: methods.shared.map(function (p) { return sharedOf[p.assay]; }) },
-      { head: "dismech models only", w: 180, ids: methods.models_only },
       { head: "dismech nodes", w: 190, ids: data.nodes.map(function (d) { return d.id; }) },
+      { head: "dismech models only", w: 180, ids: methods.models_only },
     ];
-    // Nodes are placed before the dismech-only models, so those models sit by their nodes.
-    return { cols: cols, order: [0, 1, 2, 4, 3], gaps: [50, 50, 70, 120], links: links };
+    // Placement starts from the Key Events, then each column is set beside the ones it links to.
+    return { cols: cols, order: [1, 0, 2, 3, 4], gaps: [50, 50, 70, 120], links: links };
   }
 
   function el(name, attrs, parent) {
