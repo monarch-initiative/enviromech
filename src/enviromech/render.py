@@ -9,7 +9,8 @@ the files in pages/. Colors, title, columns and hidden sections come from
 conf/site.yaml.
 
 The browser has a list view per record kind; the first, the AOPs, is the landing
-page at index.html, and records of different kinds are never listed together. A kind's view has its own columns, because an AOP, a
+page at index.html, and records of different kinds are never listed together. A
+kind's view has its own columns, because an AOP, a
 Key Event and an Observation are not described by the same ones: see
 `views` and `list_cells` below, and `kind_columns` in conf/site.yaml.
 
@@ -247,7 +248,8 @@ def card_title(v: dict) -> tuple[str | None, str | None]:
 
 def card(v: dict, skip: tuple = ()) -> Markup:
     if set(v) == {"line"}:  # one rendered sentence, such as a Key Event Relationship
-        return Markup('<div class="card"><table class="kv"><tr><td>{}</td></tr></table></div>').format(v["line"])
+        return Markup(
+            '<div class="card"><table class="kv"><tr><td>{}</td></tr></table></div>').format(v["line"])
     title_key, title = card_title(v)
     parts = []
     if title:
@@ -668,7 +670,8 @@ def ker_line(rel: dict, kers: dict, by_event_id: dict) -> Markup | dict:
     tail = Markup(" ({})").format(directness) if directness else Markup("")
     return Markup("{}: {} leads to {}{}").format(
         link(f"{ker['stem']}.html", rel["relationship_id"]),
-        event_link(ker["ker"]["upstream"], by_event_id), event_link(ker["ker"]["downstream"], by_event_id), tail)
+        event_link(ker["ker"]["upstream"], by_event_id),
+        event_link(ker["ker"]["downstream"], by_event_id), tail)
 
 
 def event_link(event_id, by_event_id: dict) -> Markup:
@@ -743,8 +746,9 @@ def ker_and_method_records(records: list[dict]) -> list[dict]:
         shown["ke_relationship"] = {
             "upstream_event_id": event_link(up, by_event_id),
             "downstream_event_id": event_link(down, by_event_id)}
-        out.append({"stem": path.stem, "ker": {"id": relationship.get("id"), "upstream": up, "downstream": down},
-                    "data": {"kind": "KER", "name": f"{title(up)} leads to {title(down)}", **shown}})
+        ker = {"id": relationship.get("id"), "upstream": up, "downstream": down}
+        out.append({"stem": path.stem, "ker": ker, "data": {
+            "kind": "KER", "name": f"{title(up)} leads to {title(down)}", **shown}})
     for path in iter_records(ASSAYS_DIR):
         data = load(path) or {}
         if not isinstance(data, dict):
