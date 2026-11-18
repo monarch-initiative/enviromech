@@ -88,6 +88,7 @@ table.data tbody tr:hover { background: var(--plain-bg); }
    keep the name wide enough not to break mid-word. */
 #records td:first-child { min-width: 13rem; }
 .pager { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: .4rem; margin: .5rem 0 1rem; }
+.pager[hidden] { display: none; }
 .pager button { font: inherit; font-size: .95rem; min-width: 2.4rem; padding: .3rem .7rem; border: 1px solid var(--line);
   border-radius: 8px; background: var(--card); color: var(--link); cursor: pointer; }
 .pager button:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }

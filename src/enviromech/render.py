@@ -247,7 +247,8 @@ def card_title(v: dict) -> tuple[str | None, str | None]:
 
 
 def card(v: dict, skip: tuple = ()) -> Markup:
-    if set(v) == {"line"}:  # one rendered sentence, such as a Key Event Relationship
+    # One rendered sentence, such as a Key Event Relationship.
+    if set(v) == {"line"} and isinstance(v["line"], Markup):
         return Markup(
             '<div class="card"><table class="kv"><tr><td>{}</td></tr></table></div>').format(v["line"])
     title_key, title = card_title(v)

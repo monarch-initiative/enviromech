@@ -291,6 +291,8 @@
   }
   document.addEventListener("click", function (e) { if (menu && !menu.contains(e.target)) closeMenu(); });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  // Capture phase: runs before a box opens its own menu, so only the last one stays.
+  document.addEventListener("contextmenu", function (e) { if (menu && !menu.contains(e.target)) closeMenu(); }, true);
   window.addEventListener("scroll", closeMenu, true);
   window.addEventListener("resize", closeMenu);
 

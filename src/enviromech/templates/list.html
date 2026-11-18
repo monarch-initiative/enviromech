@@ -70,7 +70,7 @@ function render() {
     b.type = "button"; b.textContent = label;
     if (opts.current) { b.setAttribute("aria-current", "page"); }
     if (opts.disabled) b.disabled = true;
-    b.addEventListener("click", () => { page = to; render(); });
+    b.addEventListener("click", () => { page = to; render(); pager.querySelector("[aria-current]")?.focus(); });
     pager.appendChild(b);
   };
   add("← Previous", page - 1, {disabled: page === 1});

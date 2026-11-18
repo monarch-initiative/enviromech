@@ -30,7 +30,7 @@ highlight: "#4b2f7f"
 accent: indigo
 
 # auto follows each visitor's system setting; light or dark fixes it.
-theme: light
+theme: auto
 
 # Columns of the browser's front page, which lists every record: fields of the
 # record, in order. A field holding an ontology term shows its label.

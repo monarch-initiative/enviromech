@@ -143,7 +143,8 @@ def colors(settings: dict) -> dict[str, str]:
         # One brand color: the banner, the links (darkened or lightened to be
         # readable) and the hover and focus color, a lighter variation of it.
         primary = banner
-        accent = _hex(tuple(c + (1 - c) * 0.25 for c in _rgb(settings.get("highlight") or banner)))
+        accent = readable(
+            _hex(tuple(c + (1 - c) * 0.25 for c in _rgb(settings.get("highlight") or banner))), LIGHT_BG)
     else:
         accent = ACCENT[settings["accent"]]
     banner = primary
