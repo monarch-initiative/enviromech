@@ -12,11 +12,18 @@ title: "EnviroMech records"
 # amber, orange, deep-orange, brown, grey, blue-grey.
 palette: indigo
 
-# The record browser's brand color, as #rrggbb: the green of the SAAOP logo.
+# The record browser's brand color, as #rrggbb: the dark green of the logo.
 # It colors the header band, the links and the hover color, in lighter and
 # darker variations. Leave it out to use palette and accent. It does not
 # change the docs site.
-banner: "#297c2b"
+banner: "#2f5d1f"
+
+# A second brand color, #rrggbb: the dark purple of the logo. It colors the left
+# edge of cards and of the box at the top of a record page, the selected tab and
+# page, and the dismech boxes in the graph, with a wash of it on pills and a
+# lighter variation for hover. Leave it out to use
+# the banner color throughout.
+highlight: "#4b2f7f"
 
 # Highlight color, for hover and focus. A Material accent name: the palette
 # names above except brown, grey and blue-grey.
