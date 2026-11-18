@@ -8,8 +8,8 @@ Edit the templates in src/<slug>/templates/ or the layout rules below, never
 the files in pages/. Colors, title, columns and hidden sections come from
 conf/site.yaml.
 
-The browser has a list view per record kind, plus the mixed one over every
-record at index.html. A kind's view has its own columns, because an AOP, a
+The browser has a list view per record kind; the first, the AOPs, is the landing
+page at index.html, and records of different kinds are never listed together. A kind's view has its own columns, because an AOP, a
 Key Event and an Observation are not described by the same ones: see
 `views` and `list_cells` below, and `kind_columns` in conf/site.yaml.
 
@@ -69,7 +69,7 @@ CURIE_BASES = {
 CURIE = re.compile(r"^[A-Za-z][A-Za-z0-9_.]*:[^\s]+$")
 URL = re.compile(r"^https?://\S+$")
 # Keys whose CURIE values are identifiers to link, not text.
-ID_KEYS = {"id", "reference", "accession", "infores", "category", "predicates"}
+ID_KEYS = {"id", "reference", "accession", "infores", "category", "predicates", "mapping_reference"}
 # Keys that name an object, in the order tried for a card's title.
 TITLE_KEYS = ("preferred_term", "name", "title", "label", "category", "infores", "relation", "id")
 # Most columns a list of objects may have and still show as a table.
@@ -82,7 +82,7 @@ MAX_CELL_TEXT = 90
 # test guidelines and event components have no pages of their own, so they have
 # no view either; a Key Event's page names its assays, and an event component is
 # reached from the Key Event that uses it.
-KINDS = ("AOP", "Key Event", "Observation")
+KINDS = ("AOP", "Key Event", "KER", "Method", "Observation")
 
 
 def curie_url(curie: str) -> str:
@@ -473,10 +473,24 @@ def list_cells(records: list[dict]) -> None:
                 continue
             role = enum_text(member.get("type") or "")
             in_aops.setdefault(stem, []).append(f"{name} ({role})" if role else name)
+    ker_in_aops: dict[int, list[str]] = {}
+    for r in records:
+        if r["data"]["kind"] == "AOP":
+            aop = r["data"].get("aop") or {}
+            name = str(aop.get("short_name") or r["data"].get("name") or r["stem"])
+            for rel in aop.get("ke_relationships") or []:
+                ker_in_aops.setdefault(rel.get("relationship_id"), []).append(name)
     for r in records:
         data = r["data"]
         cells: dict[str, str] = {}
-        if data["kind"] == "AOP":
+        if data["kind"] == "KER":
+            cells["relationship_id"] = str(r["ker"]["id"])
+            cells["aops"] = ", ".join(ker_in_aops.get(r["ker"]["id"], []))
+        elif data["kind"] == "Method":
+            assay = data.get("assay") or {}
+            cells["test_guidelines"] = ", ".join(data.get("guideline_names") or [])
+            cells["key_events"] = ", ".join(f"KE {e}" for e in assay.get("events") or [])
+        elif data["kind"] == "AOP":
             aop = data.get("aop") or {}
             graph = r.get("graph") or {}
             cells["aop_wiki_id"] = str(aop.get("id", ""))
@@ -527,11 +541,10 @@ def column_label(column: str) -> str:
 
 
 def views(records: list[dict], settings: dict) -> list[dict]:
-    """The browser's list views: every record, then one per record kind.
+    """The browser's list views, one per record kind that has records.
 
-    The mixed view stays, as the front page, because filtering and sorting
-    across kinds has its uses. Each kind that has records gets its own view,
-    with its own columns from `kind_columns`, falling back to `index_columns`.
+    The first is the landing page, index.html. Each has its own columns from
+    `kind_columns`, falling back to `index_columns`.
     """
     unknown = sorted(set(settings["kind_columns"]) - set(KINDS))
     if unknown:
@@ -539,27 +552,25 @@ def views(records: list[dict], settings: dict) -> list[dict]:
             f"conf/site.yaml: kind_columns names no record kind {unknown}; "
             f"the kinds are {list(KINDS)}"
         )
-    out = [{"slug": "index", "kind": None, "heading": settings["title"],
-            "columns": settings["index_columns"], "records": records, "mixed": True}]
+    out = []
     for kind in KINDS:
         held = [r for r in records if r["data"]["kind"] == kind]
         if not held:  # no records of this kind: no view, and no dead link to one
             continue
-        out.append({"slug": kind_slug(kind), "kind": kind, "heading": f"{kind}s",
+        # The first view is the landing page. Records of different kinds are never
+        # listed together: their columns differ, and the mix is confusing.
+        out.append({"slug": "index" if not out else kind_slug(kind), "kind": kind, "heading": f"{kind}s",
                     "columns": settings["kind_columns"].get(kind) or settings["index_columns"],
-                    "records": held, "mixed": False})
+                    "records": held})
     for view in out:
         held = view["records"]
         view["count"] = len(held)
-        view["noun"] = plural("record" if view["mixed"] else view["kind"], view["count"])
-        counts: dict[str, int] = {}
+        view["noun"] = plural(view["kind"], view["count"])
         statuses: dict[str, int] = {}
         for r in held:
-            if view["mixed"]:
-                counts[r["data"]["kind"]] = counts.get(r["data"]["kind"], 0) + 1
             if r["data"].get("status"):
                 statuses[str(r["data"]["status"])] = statuses.get(str(r["data"]["status"]), 0) + 1
-        view["kinds"] = sorted(counts.items())
+        view["kinds"] = []
         view["statuses"] = sorted(statuses.items())
     return out
 
@@ -596,7 +607,7 @@ def cross_link(records: list[dict]) -> None:
             r["data"] = {**r["data"], "observations": bearing[r["stem"]]}
 
 
-def cross_link_aops(records: list[dict], kers: dict | None = None) -> None:
+def cross_link_aops(records: list[dict]) -> None:
     """Link each AOP to its Key Events, and each Key Event to the AOPs it is in.
 
     An AOP names its Key Events in EMOD's aop.events, each by its AOP-Wiki id
@@ -606,6 +617,7 @@ def cross_link_aops(records: list[dict], kers: dict | None = None) -> None:
     Event's file, it is derived here.
     """
     by_event_id = key_events_by_event_id(records)
+    kers = {r["ker"]["id"]: r for r in records if r["data"]["kind"] == "KER"}
     member_of: dict[str, list[Markup]] = {}
     for r in records:
         aop = r["data"].get("aop")
@@ -626,7 +638,14 @@ def cross_link_aops(records: list[dict], kers: dict | None = None) -> None:
             name = str(r["data"]["name"])
             back = link(f"{r['stem']}.html", f"{name} ({role})" if role else name)
             member_of.setdefault(target["stem"], []).append(back)
-        relationships = [ker_line(rel, kers or {}, by_event_id) for rel in aop.get("ke_relationships") or []]
+        relationships = []
+        for rel in aop.get("ke_relationships") or []:
+            relationships.append(ker_line(rel, kers, by_event_id))
+            if rel.get("relationship_id") in kers:
+                directness = (rel.get("directness_id") or {}).get("term")
+                name = str(r["data"]["name"])
+                back = link(f"{r['stem']}.html", f"{name} ({directness})" if directness else name)
+                member_of.setdefault(kers[rel["relationship_id"]]["stem"], []).append(back)
         # One card each, below the events, as the events are.
         relationships = [{"line": x} if isinstance(x, Markup) else x for x in relationships]
         r["data"] = {**r["data"], "aop": {**aop, "events": linked, "ke_relationships": relationships}}
@@ -638,25 +657,26 @@ def cross_link_aops(records: list[dict], kers: dict | None = None) -> None:
 def ker_line(rel: dict, kers: dict, by_event_id: dict) -> Markup | dict:
     """One AOP-Wiki KER as a line: "3637: Upstream leads to Downstream (adjacent)".
 
-    The endpoints come from the Key Event Relationship record; the directness is
-    the AOP's own. With no record for the id, the entry is left as it is.
+    The endpoints come from the Key Event Relationship record, whose page the
+    number links to; the directness is the AOP's own. With no record for the
+    id, the entry is left as it is.
     """
     ker = kers.get(rel.get("relationship_id"))
     if ker is None:
         return rel
-
-    def event(event_id) -> Markup:
-        target = by_event_id.get(event_id)
-        if target is None:
-            return Markup("KE {}").format(event_id)
-        return link(f"{target['stem']}.html", target["data"]["name"])
-
-    relationship = ker.get("ke_relationship") or {}
     directness = (rel.get("directness_id") or {}).get("term")
     tail = Markup(" ({})").format(directness) if directness else Markup("")
     return Markup("{}: {} leads to {}{}").format(
-        rel["relationship_id"], event(relationship.get("upstream_event_id")),
-        event(relationship.get("downstream_event_id")), tail)
+        link(f"{ker['stem']}.html", rel["relationship_id"]),
+        event_link(ker["ker"]["upstream"], by_event_id), event_link(ker["ker"]["downstream"], by_event_id), tail)
+
+
+def event_link(event_id, by_event_id: dict) -> Markup:
+    """A Key Event by its title, linked to its page when it has one."""
+    target = by_event_id.get(event_id)
+    if target is None:
+        return Markup("KE {}").format(event_id)
+    return link(f"{target['stem']}.html", target["data"]["name"])
 
 
 def name_assays(records: list[dict]) -> None:
@@ -693,35 +713,60 @@ def name_assays(records: list[dict]) -> None:
         r["data"] = {**r["data"], "event": named_event}
 
 
-def assay_pages(records: list[dict]) -> list[dict]:
-    """One page per assay record, reached from the graph and from Key Event pages.
+def ker_and_method_records(records: list[dict]) -> list[dict]:
+    """The KER and Method (assay) records, as records of their own kinds.
 
-    An assay has no list view, so these records stay out of `views`. Its Key
-    Events become links and its test guidelines are named.
+    A KER is titled by its two Key Events, "Upstream leads to Downstream". A
+    Method is an assay record: its page reads the description, then a card of
+    its Key Events and test guidelines, then the mapping reference and the
+    curator's notes (`body` below replaces the generic layout). Neither shows
+    its id: an enviromech: CURIE resolves nowhere, and a KER's is in its title.
     """
     guidelines = {}
     for path in iter_records(TEST_GUIDELINES_DIR):
         guideline = (load(path) or {}).get("test_guideline") or {}
         guidelines[guideline.get("id")] = guideline.get("short_title") or str(guideline.get("id"))
     by_event_id = key_events_by_event_id(records)
-    pages = []
+    out = []
+    for path in iter_records(KERS_DIR):
+        data = load(path) or {}
+        if not isinstance(data, dict):
+            continue
+        relationship = data.get("ke_relationship") or {}
+        up, down = relationship.get("upstream_event_id"), relationship.get("downstream_event_id")
+
+        def title(event_id):
+            target = by_event_id.get(event_id)
+            return target["data"]["name"] if target else f"KE {event_id}"
+
+        shown = dict(data)
+        shown["ke_relationship"] = {
+            "upstream_event_id": event_link(up, by_event_id),
+            "downstream_event_id": event_link(down, by_event_id)}
+        out.append({"stem": path.stem, "ker": {"id": relationship.get("id"), "upstream": up, "downstream": down},
+                    "data": {"kind": "KER", "name": f"{title(up)} leads to {title(down)}", **shown}})
     for path in iter_records(ASSAYS_DIR):
         data = load(path) or {}
         if not isinstance(data, dict):
             continue
-        assay = dict(data.get("assay") or {})
+        raw = data.get("assay") or {}
+        assay = dict(raw)
         if assay.get("events"):
             assay["events"] = [
                 link(f"{by_event_id[e]['stem']}.html", f"KE {e}: {by_event_id[e]['data']['name']}")
                 if e in by_event_id else e for e in assay["events"]]
-        if assay.get("test_guidelines"):
-            assay["test_guidelines"] = [guidelines.get(g, str(g)) for g in assay["test_guidelines"]]
-        # The id is an enviromech: CURIE no resolver knows; the page's own address is its id.
-        shown = {k: v for k, v in data.items() if k != "id"}
-        pages.append({"stem": path.stem, "data": {
-            "kind": "Assay", "name": assay.get("title") or path.stem,
-            "description": assay.pop("description", None), **shown, "assay": assay}})
-    return pages
+        names = [guidelines.get(g, str(g)) for g in raw.get("test_guidelines") or []]
+        if names:
+            assay["test_guidelines"] = names
+        facts = {k: assay[k] for k in ("events", "test_guidelines") if assay.get(k)}
+        closing = record_body({k: data[k] for k in ("mapping_reference", "notes") if data.get(k)}, [])
+        body = {"overview": [], "sections": [], "description_evidence": None, "description_quotes": 0,
+                "detail": card(facts) if facts else None, "footer": closing["overview"]}
+        out.append({"stem": path.stem, "body": body, "data": {
+            "kind": "Method", "name": raw.get("title") or path.stem, "description": raw.get("description"),
+            "assay": raw, "guideline_names": names,
+            **{k: v for k, v in data.items() if k not in ("id", "assay")}}})
+    return out
 
 
 def build() -> dict[Path, str]:
@@ -758,6 +803,8 @@ def build() -> dict[Path, str]:
             continue
         title = (data.get("aop") or {}).get("title") or path.stem
         records.append({"stem": path.stem, "data": {"kind": "AOP", "name": title, **data}})
+    # KERs and Methods (assays) are records of their own kinds, with their own views.
+    records.extend(ker_and_method_records(records))
     # The pathway graph is built from the records as loaded, before cross-linking
     # turns AOP-Wiki ids into links.
     aop_graphs = graphs(
@@ -773,10 +820,7 @@ def build() -> dict[Path, str]:
     # cross-linking turns AOP-Wiki ids into links.
     list_cells(records)
     cross_link(records)
-    cross_link_aops(records, {
-        (load(path) or {}).get("ke_relationship", {}).get("id"): load(path) or {}
-        for path in iter_records(KERS_DIR)
-    })
+    cross_link_aops(records)
     name_assays(records)
     records.sort(key=lambda r: str(r["data"].get("name", r["stem"])).lower())
     all_views = views(records, settings)
@@ -788,10 +832,7 @@ def build() -> dict[Path, str]:
         out[PAGES_DIR / f"{view['slug']}.html"] = listing.render(view=view, **ctx)
     tmpl = env.get_template("record.html")
     for r in records:
-        body = record_body(r["data"], settings["hidden_sections"])
-        out[PAGES_DIR / "records" / f"{r['stem']}.html"] = tmpl.render(record=r, body=body, **ctx)
-    for r in assay_pages(records):
-        body = record_body(r["data"], settings["hidden_sections"])
+        body = r.get("body") or record_body(r["data"], settings["hidden_sections"])
         out[PAGES_DIR / "records" / f"{r['stem']}.html"] = tmpl.render(record=r, body=body, **ctx)
     css = env.get_template("style.css").render(theme=settings["theme"], **site.colors(settings))
     out[PAGES_DIR / "style.css"] = css

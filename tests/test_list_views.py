@@ -1,4 +1,4 @@
-"""A list view per record kind, beside the mixed one over every record (issue #53)."""
+"""A list view per record kind; the first is the landing page (issue #53)."""
 
 import re
 from functools import cache
@@ -6,7 +6,7 @@ from functools import cache
 import pytest
 
 from enviromech import render, site
-from enviromech.paths import AOPS_DIR, KEY_EVENTS_DIR, PAGES_DIR
+from enviromech.paths import AOPS_DIR, ASSAYS_DIR, KERS_DIR, KEY_EVENTS_DIR, PAGES_DIR
 from enviromech.validate import iter_records
 
 SETTINGS = site.load()
@@ -20,12 +20,19 @@ def pages():
 HELD = {
     "AOP": len(iter_records(AOPS_DIR)),
     "Key Event": len(iter_records(KEY_EVENTS_DIR)),
+    "KER": len(iter_records(KERS_DIR)),
+    "Method": len(iter_records(ASSAYS_DIR)),
     "Observation": len(iter_records()),
 }
 
 
 def view_page(slug):
     return pages()[PAGES_DIR / f"{slug}.html"]
+
+
+def kind_page(kind):
+    """A kind's list page: the AOPs, the first kind, are the landing page."""
+    return view_page("index" if kind == render.KINDS[0] else render.kind_slug(kind))
 
 
 def headings(page):
@@ -45,27 +52,30 @@ def rows(page):
 
 
 def test_every_kind_with_records_gets_a_view_of_its_own():
-    assert view_page("index")  # the mixed view stays, as the front page
     for kind in render.KINDS:
-        assert view_page(render.kind_slug(kind)), kind
+        assert kind_page(kind), kind
+
+
+def test_the_landing_page_lists_only_aops_and_no_view_mixes_kinds():
+    assert len(rows(view_page("index"))) == HELD["AOP"]
+    assert PAGES_DIR / "aops.html" not in pages()
+    assert "All records" not in view_page("index")
 
 
 def test_a_view_holds_only_its_own_kind_and_all_of_it():
     for kind, n in HELD.items():
-        page = view_page(render.kind_slug(kind))
+        page = kind_page(kind)
         assert len(rows(page)) == n, kind
         assert f"{n} {kind}" in page
-    assert len(rows(view_page("index"))) == sum(HELD.values())
 
 
 def test_each_view_has_the_columns_its_kind_needs():
-    aops, key_events = view_page("aops"), view_page("key-events")
+    aops, key_events = kind_page("AOP"), kind_page("Key Event")
     assert headings(aops) == [render.column_label(c) for c in SETTINGS["kind_columns"]["AOP"]]
     assert "Key Event Relationships" in headings(aops)
     assert "AOP-Wiki id" in headings(key_events) and "Biological level" in headings(key_events)
-    # The kinds' columns differ; the mixed view keeps the generic ones.
+    # The kinds' columns differ.
     assert headings(aops) != headings(key_events)
-    assert headings(view_page("index")) == [render.column_label(c) for c in SETTINGS["index_columns"]]
 
 
 def test_the_committed_settings_give_every_kind_its_columns():
@@ -73,25 +83,23 @@ def test_the_committed_settings_give_every_kind_its_columns():
 
 
 def test_every_page_links_to_every_view_and_marks_the_one_shown():
-    slugs = [render.kind_slug(k) for k in render.KINDS]
-    for slug in ["index", *slugs]:
+    slugs = ["index", *(render.kind_slug(k) for k in render.KINDS[1:])]
+    for slug in slugs:
         page = view_page(slug)
         for other in slugs:
             assert f'href="{other}.html"' in page
-        assert "All records" not in page
-        if slug != "index":
-            assert f'href="{slug}.html" aria-current="page"' in page
+        assert f'href="{slug}.html" aria-current="page"' in page
 
 
 def test_a_record_page_links_back_to_its_own_kind():
     page = pages()[PAGES_DIR / "records" / "KE-396.html"]
     assert 'href="../key-events.html" aria-current="page"' in page
-    assert 'href="../index.html"' in page and 'href="../aops.html"' in page
+    assert 'href="../index.html"' in page and 'href="../aops.html"' not in page
 
 
 def test_a_kind_with_no_records_gets_no_view():
     one = [{"stem": "obs-1", "data": {"kind": "Observation", "name": "An observation"}}]
-    assert [v["slug"] for v in render.views(one, SETTINGS)] == ["index", "observations"]
+    assert [v["slug"] for v in render.views(one, SETTINGS)] == ["index"]
 
 
 def test_kind_columns_naming_no_record_kind_is_refused():

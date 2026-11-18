@@ -20,7 +20,7 @@
 </header>
 <main>
 <nav class="views" aria-label="Record kinds">
-{%- for v in views if not v.mixed %}
+{%- for v in views %}
 <a href="{{ v.slug }}.html"{% if v.slug == view.slug %} aria-current="page"{% endif %}>{{ v.heading }} <span class="count">{{ v.count }}</span></a>
 {%- endfor %}
 </nav>
@@ -42,7 +42,7 @@
 </div>
 <p id="none" class="muted" hidden>No record matches.</p>
 </main>
-<footer><p>{{ site.footer }}</p></footer>
+<footer>{% if site.footer %}<p>{{ site.footer }}</p>{% endif %}</footer>
 <script>
 const rows = [...document.querySelectorAll("#records tbody tr")];
 const PAGE = 25, noun = {{ view.noun | tojson }};

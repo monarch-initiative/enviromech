@@ -38,7 +38,8 @@ index_columns:
 # field of the record, reaching into a nested one with dots (event.short_name),
 # or one of the values render.py derives: aop_wiki_id, key_events,
 # ke_relationships, dismech_nodes, dismech_models, level, level_screening and,
-# for a Key Event, aops (the AOPs it appears in, with its role in each).
+# for a Key Event, aops (the AOPs it appears in, with its role in each) and,
+# for a KER, relationship_id and aops, and for a Method, test_guidelines.
 kind_columns:
   AOP:
     - name
@@ -56,6 +57,16 @@ kind_columns:
     - level_screening
     - dismech_nodes
     - status
+  KER:
+    - name
+    - relationship_id
+    - aops
+    - status
+  Method:
+    - name
+    - test_guidelines
+    - key_events
+    - mapping_reference
   Observation:
     - name
     - causal_agent
@@ -66,8 +77,7 @@ kind_columns:
 # Record sections left off the browser's record pages. They stay in the data.
 hidden_sections:
   - curation_history
+  - mapping_extraction
 
-# Footer text on every browser page.
-footer: >-
-  AI-curated. Validation checks that citations exist, quotes are exact and
-  ontology terms are real. It does not check that the science is right.
+# Footer text on every browser page; empty for none.
+footer: ""

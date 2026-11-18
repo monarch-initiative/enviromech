@@ -27,12 +27,13 @@ def test_browser_has_a_page_for_every_key_event():
         assert f"<h1>{title}</h1>" in page.replace("&#39;", "'")
 
 
-def test_front_page_lists_both_kinds():
-    index = render.build()[PAGES_DIR / "index.html"]
-    assert f"{len(KEY_EVENTS)} Key Event" in index
-    assert f"{len(iter_records())} Observation" in index
+def test_each_kind_lists_its_records():
+    pages = render.build()
+    listing = pages[PAGES_DIR / "key-events.html"]
+    assert f"{len(KEY_EVENTS)} Key Event" in listing
     for path in KEY_EVENTS:
-        assert f'href="records/{path.stem}.html"' in index
+        assert f'href="records/{path.stem}.html"' in listing
+    assert f"{len(iter_records())} Observation" in pages[PAGES_DIR / "observations.html"]
 
 
 def test_observations_and_key_events_link_to_each_other():
