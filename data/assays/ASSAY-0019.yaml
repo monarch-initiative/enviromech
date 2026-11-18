@@ -1,0 +1,25 @@
+# Epi2SensA, an OECD TG 442D method that dismech curates as measuring the node AOP 40
+# Key Event 826 aggregates. Added on 2026-11-17 from dismech main at 16d89f0.
+id: enviromech:assay-0019
+assay:
+  id: 19
+  title: "Epi2SensA"
+  description: "The second reconstructed human epidermis marker-gene method of OECD TG 442D: the same four genes as EpiSensA, read in the EpiDerm (EPI-200) model, with a 1-hour exposure and 5-hour post-incubation."
+  events:
+  - 826
+  test_guidelines:
+  - 2
+mapping_reference: DOI:10.3390/toxics14040295
+mapping_extraction: https://github.com/monarch-initiative/dismech/blob/16d89f0f9d07ad627e7eb25a72e6a9385d3090c6/kb/disorders/Contact_Dermatitis.yaml
+model_matches:
+- model_ref: Contact_Dermatitis:experimental_models#Epi2SensA
+  match: SAME_METHOD
+  notes: >-
+    dismech's model is Epi2SensA, validated against EpiSensA, linked as MEASURES to Hapten-driven keratinocyte
+    electrophile sensing.
+notes: >-
+  Not one of the methods in the Aleksic et al. 2024 roster (PMID:38385441) that the
+  other AOP 40 assays come from. The mapping to Key Event 826 is dismech's: its
+  Epi2SensA model is linked to the node that Key Event aggregates, and OECD TG 442D
+  covers the method. mapping_reference is the method's own publication, not a
+  paper that maps it to the Key Event. Not yet checked against the guideline text.

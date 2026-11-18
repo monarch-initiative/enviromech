@@ -165,8 +165,9 @@ def test_shared_methods_are_same_method_matches_on_mapped_nodes():
         assert pair["model"] in assay["same_method"] and pair["model"] in in_graph
     labels = {a["id"]: a["label"] for a in graph["assays"]}
     shared = sorted(labels[p["assay"]] for p in graph["methods"]["shared"])
-    assert shared == ["GARDskin", "IL-8 Luc assay", "Murine local lymph node assay (LLNA)",
-                      "U-SENS", "human Cell Line Activation Test (h-CLAT)"]
+    assert shared == ["Epi2SensA", "EpiSensA", "GARDskin", "IL-8 Luc assay", "KeratinoSens", "LuSens",
+                      "Murine local lymph node assay (LLNA)", "U-SENS", "human Cell Line Activation Test (h-CLAT)",
+                      "α-Sens®"]
 
 
 def test_a_match_to_a_model_on_an_unmapped_node_stays_enviromech_only():
@@ -178,7 +179,13 @@ def test_a_match_to_a_model_on_an_unmapped_node_stays_enviromech_only():
 
 
 def test_same_readout_is_not_counted_as_shared():
-    graph = FULL["AOP-40"]
+    """No AOP 40 assay is a same-readout match now, so make KeratinoSens one."""
+    assays = {p.stem: load(p) for p in iter_records(ASSAYS_DIR)}
+    keap1 = "Contact_Dermatitis:experimental_models#Keratinocyte Keap1-Nrf2-ARE sensitizer-response models"
+    assays["ASSAY-0008"] = {**assays["ASSAY-0008"], "model_matches": [
+        {"model_ref": keap1, "match": "SAME_READOUT_OTHER_SYSTEM"}]}
+    graph = graphs({"AOP-40": load(AOPS_DIR / "AOP-40.yaml")}, KEY_EVENTS, assays,
+                   {p.stem: load(p) for p in iter_records(TEST_GUIDELINES_DIR)})["AOP-40"]
     keratinosens = next(a for a in graph["assays"] if a["label"] == "KeratinoSens")
     assert keratinosens["same_readout"] and not keratinosens["same_method"]
     assert keratinosens["id"] in graph["methods"]["assays_only"]

@@ -1,7 +1,8 @@
 # AOP-Wiki KE 826, a Key Event of AOP 40, with the dismech nodes that constitute
 # it. Event properties read from the 2026-10-03 AOP-Wiki XML export with
 # aop_wiki_cli; node fields from dismech main at ecf1266123c on 2026-11-01, and
-# their models from 809a8f5fa on 2026-11-03.
+# their models from 809a8f5fa on 2026-11-03; the KeratinoSens and LuSens models
+# were added from dismech main at 16d89f0 on 2026-11-17, as were Epi2SensA and α-Sens®.
 id: aop.events:826
 status: DRAFT
 aop_wiki_snapshot: "2026-10-03"
@@ -33,6 +34,9 @@ event:
   assays:
   - 8  # KeratinoSens
   - 9  # LuSens
+  - 18  # EpiSensA
+  - 19  # Epi2SensA
+  - 20  # α-Sens®
   test_guidelines:
   - 2  # OECD TG 442D
   definition: >-
@@ -131,6 +135,22 @@ aggregation:
     - model_ref: Contact_Dermatitis:experimental_models#EpiSensA
       model_section: experimental_models
       model_name: EpiSensA
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#Epi2SensA
+      model_section: experimental_models
+      model_name: Epi2SensA
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#α-Sens®
+      model_section: experimental_models
+      model_name: α-Sens®
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#KeratinoSens
+      model_section: experimental_models
+      model_name: KeratinoSens
+      source_relationship: MEASURES
+    - model_ref: Contact_Dermatitis:experimental_models#LuSens
+      model_section: experimental_models
+      model_name: LuSens
       source_relationship: MEASURES
     notes: >-
       dismech binds GO:0062197 with the preferred term "Keap1-Nrf2-ARE
