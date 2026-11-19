@@ -20,6 +20,10 @@ templates only for what the settings cannot do.
 | `title` | Title of the record browser's front page | text |
 | `palette` | Main color: docs header, browser header band, links | red, pink, purple, deep-purple, indigo, blue, light-blue, cyan, teal, green, light-green, lime, yellow, amber, orange, deep-orange, brown, grey, blue-grey |
 | `accent` | Hover and focus color | the palette names except brown, grey, blue-grey |
+| `banner` | The record browser's header band and links, `#rrggbb`; the docs site is not affected | a hex color; leave out to use `palette` |
+| `highlight` | Left edge of cards and of the top box on a record page, the selected tab and page number, the dismech boxes in the graph | a hex color; leave out to use the banner color |
+| `tint` | Wash behind counts and chips | a hex color; leave out to derive it from `highlight` |
+| `hover` | Background of a hovered link | a hex color; leave out for none |
 | `theme` | Light or dark pages, for both sites | `auto` (follows the visitor's system), `light`, `dark` |
 | `index_columns` | Columns of the front page, which lists every record, in order; the first links to the record | record field names, e.g. `name`, `id`, `status` |
 | `kind_columns` | Columns of each record kind's own list view; a kind left out uses `index_columns` | a mapping of record kind (`AOP`, `Key Event`, `Observation`) to its column names |
@@ -48,6 +52,41 @@ just docs-serve     # look at both sites at http://127.0.0.1:8000
   readable.
 - Ask the person before changing an established color. It is part of how
   people recognize the site.
+
+## Earlier color schemes
+
+Each scheme the site has had is a commit on the `ui-updates` branch (PR #58),
+so it can be looked at and brought back. The page surface (background, borders,
+text) is in `style.css`, not in `site.yaml`, so a scheme is the settings below
+plus that file's colors at the same commit.
+
+| Scheme | Commit | Settings | Page surface |
+|---|---|---|---|
+| **AOP-Wiki: charcoal and green** (current) | the commit that added it | `banner #3b3f3f`, `highlight #b5d5a7`, `tint #e3f0dc`, `hover #e3f0dc`, `theme light` | off-white `#fafaf7`, grey borders `#d6d6d6` |
+| **Green and lilac** (tag `theme-green-lilac`) | `a276d98` | `banner #2f5d1f` (the logo's dark green), `highlight #4b2f7f` (dark purple), `theme light` | pale sage `#f3f6ee`, sage borders `#d4dcc6` |
+| SAAOP green on ivory | `eb724c9` | `banner #297c2b`, `theme light` | pale ivory `#fbf7ec` |
+| Original | `e712e54` (`main`) | `palette indigo`, `accent indigo`, `theme auto` | grey `#f6f6f8`, with a dark scheme |
+
+To look at one without touching your work, make a second checkout and open its
+pages:
+
+```bash
+git worktree add ../enviromech-theme theme-green-lilac    # or a commit from the table
+cd ../enviromech-theme && just render && open pages/index.html
+```
+
+To bring one back, copy its values from the table into `conf/site.yaml` and the
+page surface colors into the `light` block at the top of `style.css`. Do not
+check out the old files over the current ones: `site.py` and `style.css` have
+had other fixes since, and the old copies would undo them.
+
+The tag is local to the checkout that made it. If the branch is squash-merged
+the commit hashes above stop resolving, so push the tag (`git push origin
+theme-green-lilac`) or keep a branch at that commit.
+
+The AOP-Wiki logo also has a pastel yellow (`#ffe599`) and red (`#ee9b9b`)
+that this scheme does not use yet; its green (`#b5d5a7`) and charcoal
+(`#333838`) are the ones in use.
 
 ## Beyond the settings
 

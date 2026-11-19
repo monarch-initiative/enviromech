@@ -45,7 +45,7 @@ ACCENT = {
 THEMES = ("auto", "light", "dark")
 # The record browser surfaces links sit on that are closest to the link color:
 # a hovered table row (style.css --plain-bg). Contrast is checked against these.
-LIGHT_BG, DARK_BG = "#e6ecda", "#2a2a30"
+LIGHT_BG, DARK_BG = "#efefea", "#2a2a30"
 MIN_CONTRAST = 4.5  # WCAG AA for body text
 MIN_HEADER_CONTRAST = 3.0  # WCAG AA for large text, such as a header title
 # The record browser is optional; without it, only the docs site's colors apply.
@@ -57,6 +57,8 @@ DEFAULTS = {
     "accent": "indigo",
     "banner": None,
     "highlight": None,
+    "tint": None,
+    "hover": None,
     "theme": "auto",
     "index_columns": ["name", "id", "status"],
     "kind_columns": {},
@@ -113,12 +115,10 @@ def problems(settings: dict) -> list[str]:
         out.append(f"palette {settings['palette']!r} is not one of: {', '.join(PRIMARY)}")
     if settings["accent"] not in ACCENT:
         out.append(f"accent {settings['accent']!r} is not one of: {', '.join(ACCENT)}")
-    banner = settings.get("banner")
-    if banner is not None and not re.fullmatch(r"#[0-9a-fA-F]{6}", str(banner)):
-        out.append(f"banner {banner!r} is not a color like #297c2b")
-    highlight = settings.get("highlight")
-    if highlight is not None and not re.fullmatch(r"#[0-9a-fA-F]{6}", str(highlight)):
-        out.append(f"highlight {highlight!r} is not a color like #4b2f7f")
+    for key in ("banner", "highlight", "tint", "hover"):
+        value = settings.get(key)
+        if value is not None and not re.fullmatch(r"#[0-9a-fA-F]{6}", str(value)):
+            out.append(f"{key} {value!r} is not a color like #3b3f3f")
     if settings["theme"] not in THEMES:
         out.append(f"theme {settings['theme']!r} is not one of: {', '.join(THEMES)}")
     for key in ("index_columns", "hidden_sections"):
@@ -147,6 +147,9 @@ def colors(settings: dict) -> dict[str, str]:
             _hex(tuple(c + (1 - c) * 0.25 for c in _rgb(settings.get("highlight") or banner))), LIGHT_BG)
     else:
         accent = ACCENT[settings["accent"]]
+    if settings.get("hover"):
+        # A hovered link is dark text on the hover color, not a color of its own.
+        accent = "#1f1f1f"
     banner = primary
     on_primary = max(("#ffffff", "#1f1f1f"), key=lambda t: contrast(t, banner))
     # A second brand color, for card edges and what is selected; the banner's
@@ -159,7 +162,8 @@ def colors(settings: dict) -> dict[str, str]:
         "highlight": highlight,
         "highlight_dark": readable(highlight, DARK_BG),
         "on_highlight": max(("#ffffff", "#1f1f1f"), key=lambda t: contrast(t, highlight)),
-        "tint": _hex(tuple(c + (1 - c) * 0.86 for c in _rgb(highlight))),
+        "tint": settings.get("tint") or _hex(tuple(c + (1 - c) * 0.86 for c in _rgb(highlight))),
+        "hover_bg": settings.get("hover") or "transparent",
         "link_light": readable(primary, LIGHT_BG),
         "link_dark": readable(primary, DARK_BG),
     }

@@ -12,25 +12,26 @@ title: "EnviroMech records"
 # amber, orange, deep-orange, brown, grey, blue-grey.
 palette: indigo
 
-# The record browser's brand color, as #rrggbb: the dark green of the logo.
-# It colors the header band, the links and the hover color, in lighter and
-# darker variations. Leave it out to use palette and accent. It does not
-# change the docs site.
-banner: "#2f5d1f"
-
-# A second brand color, #rrggbb: the dark purple of the logo. It colors the left
-# edge of cards and of the box at the top of a record page, the selected tab and
-# page, and the dismech boxes in the graph, with a wash of it on pills and a
-# lighter variation for hover. Leave it out to use
-# the banner color throughout.
-highlight: "#4b2f7f"
+# The record browser's colors, each #rrggbb, from the AOP-Wiki logo. None of them
+# changes the docs site. Leave one out to derive it from the others.
+# banner: the header band (the logo's charcoal), and the links, which are the
+# banner color made readable on the page.
+banner: "#3b3f3f"
+# highlight: the left edge of cards and of the box at the top of a record page,
+# the selected tab and page number, and the dismech boxes in the graph (the
+# logo's green).
+highlight: "#b5d5a7"
+# tint: the wash behind counts and chips (a paler green).
+tint: "#e3f0dc"
+# hover: the background of a hovered link (a pale green).
+hover: "#e3f0dc"
 
 # Highlight color, for hover and focus. A Material accent name: the palette
 # names above except brown, grey and blue-grey.
 accent: indigo
 
 # auto follows each visitor's system setting; light or dark fixes it.
-theme: auto
+theme: light
 
 # Columns of the browser's front page, which lists every record: fields of the
 # record, in order. A field holding an ontology term shows its label.

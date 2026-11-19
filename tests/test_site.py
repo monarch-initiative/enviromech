@@ -41,6 +41,8 @@ def test_committed_settings_are_valid():
     {"theme": "sepia"},
     {"banner": "green"},
     {"highlight": "purple"},
+    {"tint": "green"},
+    {"hover": "yellow"},
     {"index_columns": "name"},
     {"kind_columns": ["name"]},
     {"kind_columns": {"AOP": "name"}},

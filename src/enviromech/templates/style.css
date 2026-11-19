@@ -1,9 +1,9 @@
 {#- Rendered by render.py from conf/site.yaml. Colors: primary, on_primary,
-    accent, highlight, on_highlight, tint, link_light, link_dark; theme: auto, light or dark. -#}
+    accent, hover_bg, highlight, on_highlight, tint, link_light, link_dark; theme: auto, light or dark. -#}
 {%- set light %}
-  --bg: #f3f6ee; --card: #ffffff; --fg: #1f261a; --muted: #5a6450; --line: #d4dcc6; --tint: {{ tint }}; --purple: {{ highlight }}; --link: {{ link_light }};
+  --bg: #fafaf7; --card: #ffffff; --fg: #333838; --muted: #5f6363; --line: #d6d6d6; --tint: {{ tint }}; --purple: {{ highlight }}; --link: {{ link_light }};
   --good: #1e6b34; --good-bg: #e3f3e7; --warn: #7a4b00; --warn-bg: #fdf0d5; --bad: #9b1c1c; --bad-bg: #fbe4e4;
-  --plain-bg: #e6ecda;
+  --plain-bg: #efefea;
 {%- endset %}
 {%- set dark %}
   --bg: #121214; --card: #1c1c20; --fg: #ececef; --muted: #a0a0a8; --line: #34343a; --purple: {{ highlight_dark }}; --link: {{ link_dark }};
@@ -11,7 +11,7 @@
   --plain-bg: #2a2a30;
 {%- endset -%}
 :root {
-  --primary: {{ primary }}; --on-primary: {{ on_primary }}; --on-purple: {{ on_highlight }}; --accent: {{ accent }};
+  --primary: {{ primary }}; --on-primary: {{ on_primary }}; --on-purple: {{ on_highlight }}; --accent: {{ accent }}; --hover: {{ hover_bg }};
 {%- if theme == "dark" %}{{ dark }}{% else %}{{ light }}{% endif %}
 }
 {%- if theme == "auto" %}
@@ -33,8 +33,8 @@ header .term code { color: var(--on-primary); opacity: .8; }
 main, footer { max-width: 64rem; margin: 0 auto; padding: 0 16px; }
 main { padding-top: 1.25rem; }
 a { color: var(--link); text-underline-offset: 2px; }
-a:hover, a:focus { color: var(--accent); }
-header a:hover, header a:focus { color: var(--on-primary); text-decoration-thickness: 2px; }
+a:hover, a:focus { color: var(--accent); background: var(--hover); }
+header a:hover, header a:focus { color: var(--on-primary); background: none; text-decoration-thickness: 2px; }
 code { font-family: ui-monospace, monospace; font-size: .85em; color: var(--muted); }
 .muted, .help { color: var(--muted); }
 .help { margin: -.35rem 0 .8rem; font-size: .92rem; }
@@ -60,8 +60,8 @@ header .badge { background: rgba(255, 255, 255, .85); color: #1d1d1f; }
 .views { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0 0 1rem; }
 .views a { display: flex; align-items: center; gap: .4rem; padding: .25rem .7rem; border: 1px solid var(--line);
   border-radius: 999px; text-decoration: none; background: var(--card); font-size: .95rem; }
-.views a[aria-current] { background: var(--purple); border-color: var(--purple); color: var(--on-purple); font-weight: 600; }
-.views a[aria-current] .count { background: rgba(255, 255, 255, .25); color: inherit; }
+.views a[aria-current] { background: var(--purple); border-color: var(--muted); color: var(--on-purple); font-weight: 600; }
+.views a[aria-current] .count { background: var(--tint); color: inherit; }
 header nav a[aria-current] { font-weight: 600; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22rem), 1fr)); gap: .8rem; }
 .card { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--purple); border-radius: 8px; padding: .8rem .95rem; min-width: 0; }
@@ -93,7 +93,7 @@ table.data tbody tr:hover { background: var(--plain-bg); }
   border-radius: 8px; background: var(--card); color: var(--link); cursor: pointer; }
 .pager button:hover:not(:disabled) { color: var(--accent); border-color: var(--accent); }
 .pager button:focus-visible { outline: 2px solid var(--accent); }
-.pager button[aria-current] { background: var(--purple); border-color: var(--purple); color: var(--on-purple); font-weight: 600; }
+.pager button[aria-current] { background: var(--purple); border-color: var(--muted); color: var(--on-purple); font-weight: 600; }
 .pager button:disabled { color: var(--muted); cursor: default; opacity: .6; }
 .pager span { color: var(--muted); }
 #records th button { all: unset; cursor: pointer; }
