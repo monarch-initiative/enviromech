@@ -914,6 +914,15 @@ classes:
       source_model_uri:
         description: A runnable/deposited model, e.g. a BioModels id or repo path.
         range: uriorcurie
+      simulation_run:
+        description: >-
+          Repo-relative path to a committed model-run directory holding
+          inputs.json (measured data + parameters, transcribed from the cited
+          source) and simulation.json (the derived, regenerable model output).
+          When present, the record browser draws the observed-vs-simulated time
+          course from it. The simulation is derived: regenerate with
+          `just simulate-nrf2-srxn1`, never hand-edit simulation.json.
+        range: string
       notes:
 
   ModelParameter:

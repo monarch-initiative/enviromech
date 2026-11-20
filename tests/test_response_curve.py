@@ -33,8 +33,9 @@ def test_the_committed_record_shows_faithful_model_figures_not_a_dose_response()
     assert "Response curve pending" not in ker
     assert "EC50" not in ker
     assert "130492" in ker  # a transcribed value (Vmax) renders
-    # The two faithful figures, and the note that SRXN1(t) is deliberately not drawn.
-    assert ker.count('class="resp-fig"') == 2
+    # The faithful figures: observed-vs-simulated SRXN1(t) (from the committed
+    # model run), plus the f(t) and Hill-arm mechanism breakdown.
+    assert ker.count('class="resp-fig"') == 3
+    assert "Observed vs simulated SRXN1" in ker
     assert "Dynamic modified-NRF2 fraction" in ker
     assert "Production arms" in ker
-    assert "SRXN1(t) itself is not drawn" in ker

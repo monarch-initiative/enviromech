@@ -201,3 +201,7 @@ a.epair-obs:hover, a.epair-obs:focus { background: var(--hover); }
 .response-svg .resp-legend { fill: var(--muted); font-size: 8.5px; }
 .response-svg .resp-swatch { fill: var(--purple); }
 .response-svg .resp-swatch-2 { fill: var(--accent); }
+/* Observed-vs-simulated SRXN1 figure. */
+.response-svg .resp-band { fill: var(--purple); opacity: .12; stroke: none; }
+.response-svg .resp-obs { fill: var(--fg); }
+.response-svg .resp-err { stroke: var(--muted); stroke-width: .8; }

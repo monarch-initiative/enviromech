@@ -1,0 +1,43 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: render
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-20T161127Z-claude-code-7a4a71
+  timestamp: '2026-11-20T16:11:27Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+links:
+  issues:
+  - https://github.com/monarch-initiative/enviromech/issues/66
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - response_relationships
+  - schema
+  - simulate_nrf2_srxn1
+  summary: 'Record browser: observed-vs-simulated SRXN1(t) from a committed NRF2->SRXN1 model run'
+  details: 'Follow-up visualization building on #65. Adds the faithful SRXN1(t) time course the f(t)/Hill
+    figures could not draw, by reproducing Sharma et al.''s model (PMID:40972999; deposit doi:10.5281/zenodo.17181465)
+    from real data. New committed model run data/model_runs/nrf2_srxn1_sulforaphane_continuous/: inputs.json
+    transcribes the deposit''s measured NRF2 and SRXN1 continuous-exposure time courses (6 concentrations,
+    hourly, au) plus Parameters_set.csv, with per-file sha256 provenance; simulation.json is the derived
+    model output. scripts/simulate_nrf2_srxn1.py is a deterministic stdlib-only port (RK4 + monotone cubic
+    Hermite NRF2 input, no scipy/numpy) of the authors'' Generic_model_final.R continuous branch; just
+    simulate-nrf2-srxn1 regenerates it. Pooled observed-vs-simulated R-squared 0.9823 over 294 points
+    reproduces the paper''s fit (>0.9). Schema: added an optional ResponseRelationship.simulation_run
+    slot (repo-relative path to the run dir); the KER response_relationship points at it. render.py gains
+    obs_sim_svg (observed points +-SD vs simulated line + min/max NRF2 envelope, highest concentration,
+    pooled R-squared) wired into model_figures ahead of the f(t)/Hill mechanism figures, with an honest
+    note that SRXN1(t) is a derived simulation. The kp discrepancy (Table S3 0.0023 vs deposit 0.02262,
+    a likely paper typo corroborated by Tables S1/S2) is recorded in the KER notes and tracked in issue
+    #66; the record keeps the Table S3 values as published while the simulation uses the deposit set.
+    Tests: tests/test_nrf2_srxn1_simulation.py (transcription provenance, byte-deterministic regeneration,
+    R-squared and fraction-at-f_i checks, the rendered figure, graceful degradation); test_response_curve.py
+    committed-record assertion updated for three figures. ruff, linkml-lint, closed-schema validation
+    for all record classes, render, and pytest (273 passed) all pass.'
