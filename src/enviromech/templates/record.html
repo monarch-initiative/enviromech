@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-<nav aria-label="Record kinds">{% for v in views %}{{ " · " if not loop.first }}<a href="../{{ v.slug }}.html"{% if v.kind == record.data.kind %} aria-current="page"{% endif %}>{{ site.title if v.mixed else v.heading }}</a>{% endfor %}</nav>
+<nav aria-label="Record kinds">{% for v in views %}{{ " · " if not loop.first }}<a href="../{{ v.slug }}.html"{% if v.kind == record.data.kind %} aria-current="page"{% endif %}>{{ v.heading }}</a>{% endfor %}</nav>
 <h1>{{ record.data.name }}</h1>
 <p class="meta">
 {%- if record.data.id %}<a class="id" href="{{ record.data.id | curie_url }}">{{ record.data.id }}</a>{% endif %}
@@ -35,6 +35,9 @@
 </table>
 </section>
 {%- endif %}
+{%- if body.detail %}
+{{ body.detail }}
+{%- endif %}
 {%- if record.graph %}
 {% include "aop_graph.html" %}
 {%- endif %}
@@ -50,7 +53,16 @@
 {{ s.html }}
 </section>
 {%- endfor %}
+{%- if body.footer %}
+<section class="overview">
+<table class="kv">
+{%- for name, help, html in body.footer %}
+<tr><th{% if help %} title="{{ help }}"{% endif %}>{{ name }}</th><td>{{ html }}</td></tr>
+{%- endfor %}
+</table>
+</section>
+{%- endif %}
 </main>
-<footer><p>{{ site.footer }}</p><p><a href="{{ repo_url }}">Repository</a></p></footer>
+<footer>{% if site.footer %}<p>{{ site.footer }}</p>{% endif %}<p><a href="{{ repo_url }}">Repository</a></p></footer>
 </body>
 </html>

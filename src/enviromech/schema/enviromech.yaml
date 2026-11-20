@@ -337,6 +337,43 @@ classes:
         required: true
       notes:
 
+  KeyEventRelationshipRecord:
+    description: >-
+      One Key Event Relationship (KER), in one file under data/key_event_relationships/.
+      The relationship itself is an EMOD KeRelationship, unchanged: it names its
+      upstream and downstream Events by AOP-Wiki id, and each Event has its own
+      record under data/key_events/. An AOP names the relationship by id in
+      aop.ke_relationships, with its directness there, because directness is
+      a property of the relationship within one AOP.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: >-
+          The KER's AOP-Wiki identifier as a CURIE, for example
+          aop.relationships:3637. The prefix is the one Bioregistry registers
+          for AOP-Wiki Key Event Relationships.
+        pattern: "^aop\\.relationships:\\d+$"
+        required: true
+      status:
+        description: Review state of this record.
+        range: CurationStatusEnum
+        required: true
+      ke_relationship:
+        description: The relationship, as an EMOD KeRelationship.
+        range: KeRelationship
+        inlined: true
+        required: true
+      aop_wiki_snapshot:
+        description: >-
+          The date of the AOP-Wiki XML export the relationship was read from,
+          as YYYY-MM-DD.
+        range: date
+        required: true
+      source_uri:
+        description: The relationship's page on AOP-Wiki.
+        range: uri
+
   AopRecord:
     description: >-
       One Adverse Outcome Pathway, in one file under data/aops/. The AOP itself

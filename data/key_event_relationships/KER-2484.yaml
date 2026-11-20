@@ -1,0 +1,10 @@
+# AOP-Wiki KER 2484, from KE 758 to KE 319. The upstream and downstream Events
+# were read from the 2026-11-01 AOP-Wiki XML export.
+id: aop.relationships:2484
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/relationships/2484
+ke_relationship:
+  id: 2484
+  upstream_event_id: 758
+  downstream_event_id: 319

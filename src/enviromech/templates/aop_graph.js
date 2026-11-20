@@ -1,9 +1,9 @@
 // Draws an AOP's graph from the JSON aop_graph.py embeds, in two views:
 //   Pathway: Key Events, then the dismech nodes they aggregate, then the dismech
 //            models linked to those nodes.
-//   Methods: Key Events; EnviroMech assays with no dismech counterpart; methods
-//            that are both an EnviroMech assay and a dismech model; dismech models
-//            with no EnviroMech counterpart; then the dismech nodes.
+//   Methods: EnviroMech assays with no dismech counterpart; Key Events; methods
+//            that are both an EnviroMech assay and a dismech model; the dismech
+//            nodes; then dismech models with no EnviroMech counterpart.
 // No dependencies. Text from the records is set with textContent, never as HTML.
 (function () {
   "use strict";
@@ -15,7 +15,7 @@
   var SVG = "http://www.w3.org/2000/svg";
   var GAP_Y = 14, PAD = 12, LINE = 17, CHAR = 7.2, HEADER = 34;
   var view = "pathway", pinned = null;
-  var EMPTY = "Select a box to see what links it.";
+  var EMPTY = "Select a box to see what links it. Right-click a Key Event or assay box for its own page.";
 
   // Every item, by id. A shared method is one box standing for an assay and a model.
   var byId = {};
@@ -66,14 +66,14 @@
       });
     });
     cols = [
-      { head: "Key Events", w: 180, ids: data.key_events.map(function (d) { return d.id; }) },
       { head: "EnviroMech assays only", w: 180, ids: methods.assays_only },
+      { head: "Key Events", w: 180, ids: data.key_events.map(function (d) { return d.id; }) },
       { head: "In both", w: 190, ids: methods.shared.map(function (p) { return sharedOf[p.assay]; }) },
-      { head: "dismech models only", w: 180, ids: methods.models_only },
       { head: "dismech nodes", w: 190, ids: data.nodes.map(function (d) { return d.id; }) },
+      { head: "dismech models only", w: 180, ids: methods.models_only },
     ];
-    // Nodes are placed before the dismech-only models, so those models sit by their nodes.
-    return { cols: cols, order: [0, 1, 2, 4, 3], gaps: [50, 50, 70, 120], links: links };
+    // Placement starts from the Key Events, then each column is set beside the ones it links to.
+    return { cols: cols, order: [1, 0, 2, 3, 4], gaps: [50, 50, 70, 120], links: links };
   }
 
   function el(name, attrs, parent) {
@@ -104,7 +104,7 @@
     }
     if (d.kind === "node") return [d.level, d.has_models ? "" : "no linked model"].filter(Boolean).join(" · ");
     if (d.kind === "assay") return d.guidelines.join(", ") || "no test guideline";
-    if (d.kind === "shared") return [d.assay.guidelines.join(", "), "also a dismech model"].filter(Boolean).join(" · ");
+    if (d.kind === "shared") return d.assay.guidelines.join(", ") || "no test guideline";
     // A model: its section, and in the pathway view its relationships to its nodes
     // (the methods view labels them on the lines instead).
     var rels = view !== "pathway" ? [] : V.links.filter(function (l) { return l.kind === "node-model" && l.b === d.id; })
@@ -247,7 +247,16 @@
       g.addEventListener("mouseleave", function () { if (!pinned) highlight(null); });
       g.addEventListener("focus", function () { if (!pinned) highlight(id); });
       g.addEventListener("click", function () { select(id); });
+      // The alternate click: a right-click menu with the box's own page. A box with no
+      // page of its own keeps the browser's menu.
+      g.addEventListener("contextmenu", function (e) {
+        var page = pageOf(id);
+        if (!page) return;
+        e.preventDefault();
+        openMenu(page, e.clientX, e.clientY);
+      });
       g.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" && e.shiftKey && pageOf(id)) { e.preventDefault(); location.href = pageOf(id).href; return; }
         if (e.key === "Enter" || e.key === " ") { e.preventDefault(); select(id); }
         if (e.key === "Escape") select(null);
       });
@@ -255,6 +264,37 @@
     if (pinned && !pos[pinned]) pinned = null;
     highlight(pinned);
   }
+
+  // The page a box leads to: a Key Event's record or an assay's. Other boxes have none here.
+  function pageOf(id) {
+    var d = byId[id];
+    if (d.kind === "ke" && d.has_record && d.href) return { href: d.href, text: "Open Key Event page" };
+    var assay = d.kind === "shared" ? d.assay : d.kind === "assay" ? d : null;
+    if (assay && assay.href) return { href: assay.href, text: "Open assay page" };
+    return null;
+  }
+
+  var menu = null;
+  function closeMenu() { if (menu) { menu.remove(); menu = null; } }
+  function openMenu(page, x, y) {
+    closeMenu();
+    menu = document.createElement("div");
+    menu.className = "g-menu"; menu.setAttribute("role", "menu");
+    menu.style.position = "fixed"; menu.style.zIndex = "10";  // placed even before style.css loads
+    var a = document.createElement("a");
+    a.href = page.href; a.textContent = page.text; a.setAttribute("role", "menuitem");
+    menu.appendChild(a);
+    document.body.appendChild(menu);
+    menu.style.left = Math.min(x, window.innerWidth - menu.offsetWidth - 8) + "px";
+    menu.style.top = Math.min(y, window.innerHeight - menu.offsetHeight - 8) + "px";
+    a.focus();
+  }
+  document.addEventListener("click", function (e) { if (menu && !menu.contains(e.target)) closeMenu(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeMenu(); });
+  // Capture phase: runs before a box opens its own menu, so only the last one stays.
+  document.addEventListener("contextmenu", function (e) { if (menu && !menu.contains(e.target)) closeMenu(); }, true);
+  window.addEventListener("scroll", closeMenu, true);
+  window.addEventListener("resize", closeMenu);
 
   function highlight(id) {
     var on = id ? chain(current, id) : null;

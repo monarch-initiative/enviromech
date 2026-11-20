@@ -72,6 +72,10 @@ validate-assays:
     uv run linkml-validate -s {{schema}} -C AssayRecord data/assays/*.yaml
     uv run linkml-validate -s {{schema}} -C TestGuidelineRecord data/test_guidelines/*.yaml
 
+# Closed-schema validation of every Key Event Relationship record.
+validate-key-event-relationships:
+    uv run linkml-validate -s {{schema}} -C KeyEventRelationshipRecord data/key_event_relationships/*.yaml
+
 # Closed-schema validation of every AOP record.
 validate-aops:
     uv run linkml-validate -s {{schema}} -C AopRecord data/aops/*.yaml

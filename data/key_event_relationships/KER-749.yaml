@@ -1,0 +1,10 @@
+# AOP-Wiki KER 749, from KE 757 to KE 758. The upstream and downstream Events
+# were read from the 2026-11-01 AOP-Wiki XML export.
+id: aop.relationships:749
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/relationships/749
+ke_relationship:
+  id: 749
+  upstream_event_id: 757
+  downstream_event_id: 758

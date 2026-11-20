@@ -127,6 +127,7 @@ def add_assays(graph: dict, key_events: dict[int, tuple[str, dict]], assays: dic
                 seen[assay_id] = {
                     "id": assay_id,
                     "number": number,
+                    "href": f"{assay_record['_stem']}.html" if assay_record.get("_stem") else "",
                     "label": _text(assay.get("title")) or f"Assay {number}",
                     "description": _text(assay.get("description")),
                     "guidelines": [guidelines.get(g, str(g)) for g in assay.get("test_guidelines") or []],
@@ -161,7 +162,9 @@ def graphs(aop_records: dict[str, dict], key_event_records: dict[str, dict],
     by_event_id = {
         (data.get("event") or {}).get("id"): (stem, data) for stem, data in key_event_records.items()
     }
-    assays = {(data.get("assay") or {}).get("id"): data for data in (assay_records or {}).values()}
+    # Each assay record carries its file stem, so its box can link to its page.
+    assays = {(data.get("assay") or {}).get("id"): {**data, "_stem": stem}
+              for stem, data in (assay_records or {}).items()}
     guidelines = {
         (data.get("test_guideline") or {}).get("id"): (data.get("test_guideline") or {}).get("short_title")
         for data in (guideline_records or {}).values()

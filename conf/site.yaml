@@ -12,12 +12,26 @@ title: "EnviroMech records"
 # amber, orange, deep-orange, brown, grey, blue-grey.
 palette: indigo
 
+# The record browser's colors, each #rrggbb, from the AOP-Wiki logo. None of them
+# changes the docs site. Leave one out to derive it from the others.
+# banner: the header band (the logo's charcoal), and the links, which are the
+# banner color made readable on the page.
+banner: "#3b3f3f"
+# highlight: the left edge of cards and of the box at the top of a record page,
+# the selected tab and page number, and the dismech boxes in the graph (the
+# logo's green).
+highlight: "#b5d5a7"
+# tint: the wash behind counts and chips (a paler green).
+tint: "#e3f0dc"
+# hover: the background of a hovered link (a pale green).
+hover: "#e3f0dc"
+
 # Highlight color, for hover and focus. A Material accent name: the palette
 # names above except brown, grey and blue-grey.
 accent: indigo
 
 # auto follows each visitor's system setting; light or dark fixes it.
-theme: auto
+theme: light
 
 # Columns of the browser's front page, which lists every record: fields of the
 # record, in order. A field holding an ontology term shows its label.
@@ -32,7 +46,8 @@ index_columns:
 # field of the record, reaching into a nested one with dots (event.short_name),
 # or one of the values render.py derives: aop_wiki_id, key_events,
 # ke_relationships, dismech_nodes, dismech_models, level, level_screening and,
-# for a Key Event, aops (the AOPs it appears in, with its role in each).
+# for a Key Event, aops (the AOPs it appears in, with its role in each) and,
+# for a KER, relationship_id and aops, and for a Method, test_guidelines.
 kind_columns:
   AOP:
     - name
@@ -50,6 +65,16 @@ kind_columns:
     - level_screening
     - dismech_nodes
     - status
+  KER:
+    - name
+    - relationship_id
+    - aops
+    - status
+  Method:
+    - name
+    - test_guidelines
+    - key_events
+    - mapping_reference
   Observation:
     - name
     - causal_agent
@@ -60,8 +85,7 @@ kind_columns:
 # Record sections left off the browser's record pages. They stay in the data.
 hidden_sections:
   - curation_history
+  - mapping_extraction
 
-# Footer text on every browser page.
-footer: >-
-  AI-curated. Validation checks that citations exist, quotes are exact and
-  ontology terms are real. It does not check that the science is right.
+# Footer text on every browser page; empty for none.
+footer: ""

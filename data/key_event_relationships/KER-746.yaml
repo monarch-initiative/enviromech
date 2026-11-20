@@ -1,0 +1,10 @@
+# AOP-Wiki KER 746, from KE 280 to KE 756. The upstream and downstream Events
+# were read from the 2026-11-01 AOP-Wiki XML export.
+id: aop.relationships:746
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/relationships/746
+ke_relationship:
+  id: 746
+  upstream_event_id: 280
+  downstream_event_id: 756

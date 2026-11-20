@@ -1,0 +1,10 @@
+# AOP-Wiki KER 2270, from KE 961 to KE 281. The upstream and downstream Events
+# were read from the 2026-11-01 AOP-Wiki XML export.
+id: aop.relationships:2270
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/relationships/2270
+ke_relationship:
+  id: 2270
+  upstream_event_id: 961
+  downstream_event_id: 281

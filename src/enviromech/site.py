@@ -11,6 +11,7 @@ pages) just enough to reach WCAG AA contrast, so any palette stays readable.
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -44,7 +45,7 @@ ACCENT = {
 THEMES = ("auto", "light", "dark")
 # The record browser surfaces links sit on that are closest to the link color:
 # a hovered table row (style.css --plain-bg). Contrast is checked against these.
-LIGHT_BG, DARK_BG = "#ececf0", "#2a2a30"
+LIGHT_BG, DARK_BG = "#efefea", "#2a2a30"
 MIN_CONTRAST = 4.5  # WCAG AA for body text
 MIN_HEADER_CONTRAST = 3.0  # WCAG AA for large text, such as a header title
 # The record browser is optional; without it, only the docs site's colors apply.
@@ -54,6 +55,10 @@ DEFAULTS = {
     "title": MECH_NAME,
     "palette": "indigo",
     "accent": "indigo",
+    "banner": None,
+    "highlight": None,
+    "tint": None,
+    "hover": None,
     "theme": "auto",
     "index_columns": ["name", "id", "status"],
     "kind_columns": {},
@@ -110,6 +115,10 @@ def problems(settings: dict) -> list[str]:
         out.append(f"palette {settings['palette']!r} is not one of: {', '.join(PRIMARY)}")
     if settings["accent"] not in ACCENT:
         out.append(f"accent {settings['accent']!r} is not one of: {', '.join(ACCENT)}")
+    for key in ("banner", "highlight", "tint", "hover"):
+        value = settings.get(key)
+        if value is not None and not re.fullmatch(r"#[0-9a-fA-F]{6}", str(value)):
+            out.append(f"{key} {value!r} is not a color like #3b3f3f")
     if settings["theme"] not in THEMES:
         out.append(f"theme {settings['theme']!r} is not one of: {', '.join(THEMES)}")
     for key in ("index_columns", "hidden_sections"):
@@ -129,12 +138,32 @@ def colors(settings: dict) -> dict[str, str]:
     primary, _ = PRIMARY[settings["palette"]]
     # Header text: whichever of white or near-black reads better on the
     # palette color. Material's own pairing is sometimes under 3:1.
-    on_primary = max(("#ffffff", "#1f1f1f"), key=lambda t: contrast(t, primary))
-    accent = ACCENT[settings["accent"]]
+    banner = settings.get("banner")
+    if banner:
+        # One brand color: the banner, the links (darkened or lightened to be
+        # readable) and the hover and focus color, a lighter variation of it.
+        primary = banner
+        accent = readable(
+            _hex(tuple(c + (1 - c) * 0.25 for c in _rgb(settings.get("highlight") or banner))), LIGHT_BG)
+    else:
+        accent = ACCENT[settings["accent"]]
+    if settings.get("hover"):
+        # A hovered link is dark text on the hover color, not a color of its own.
+        accent = "#1f1f1f"
+    banner = primary
+    on_primary = max(("#ffffff", "#1f1f1f"), key=lambda t: contrast(t, banner))
+    # A second brand color, for card edges and what is selected; the banner's
+    # own color when none is set. Its tint is a wash of it for pills.
+    highlight = settings.get("highlight") or banner
     return {
-        "primary": primary,
+        "primary": banner,
         "on_primary": on_primary,
         "accent": accent,
+        "highlight": highlight,
+        "highlight_dark": readable(highlight, DARK_BG),
+        "on_highlight": max(("#ffffff", "#1f1f1f"), key=lambda t: contrast(t, highlight)),
+        "tint": settings.get("tint") or _hex(tuple(c + (1 - c) * 0.86 for c in _rgb(highlight))),
+        "hover_bg": settings.get("hover") or "transparent",
         "link_light": readable(primary, LIGHT_BG),
         "link_dark": readable(primary, DARK_BG),
     }

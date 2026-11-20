@@ -1,0 +1,10 @@
+# AOP-Wiki KER 312, from KE 281 to KE 280. The upstream and downstream Events
+# were read from the 2026-11-01 AOP-Wiki XML export.
+id: aop.relationships:312
+status: DRAFT
+aop_wiki_snapshot: "2026-11-01"
+source_uri: https://aopwiki.org/relationships/312
+ke_relationship:
+  id: 312
+  upstream_event_id: 281
+  downstream_event_id: 280

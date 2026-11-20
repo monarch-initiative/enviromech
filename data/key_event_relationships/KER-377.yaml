@@ -1,0 +1,10 @@
+# AOP-Wiki KER 377, from KE 396 to KE 398. The upstream and downstream Events
+# were read from the 2026-10-03 AOP-Wiki XML export.
+id: aop.relationships:377
+status: DRAFT
+aop_wiki_snapshot: "2026-10-03"
+source_uri: https://aopwiki.org/relationships/377
+ke_relationship:
+  id: 377
+  upstream_event_id: 396
+  downstream_event_id: 398

@@ -1,0 +1,19 @@
+history_version: 1
+target:
+  kind: mapping
+  slug: aop-40-ui-updates-review-fixes
+  path: data/assays
+session:
+  id: 2026-11-18T033044Z-claude-code-c0e679
+  timestamp: '2026-11-18T03:30:44Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  summary: Fix review findings on the browser UI and AOP 40 data
+  details: Fetched and cached PMID:27965148, PMID:32335162 and DOI:10.3390/toxics14040295 (assays 18-20);
+    titles match the methods. KE-826's KeratinoSens, LuSens, Epi2SensA and alpha-Sens models were copied
+    by hand from dismech 16d89f0 and are not yet checked with just check-source-nodes (needs a dismech
+    checkout).
