@@ -165,3 +165,17 @@ footer { color: var(--muted); font-size: .85rem; margin: 2.5rem auto 2rem; }
 .is-dim { opacity: .18; transition: opacity .15s; }
 .pathway-details { margin-top: .8rem; }
 .pathway-details p { margin: .3rem 0; }
+
+/* The paired-observation graph on an Evidence record's page. */
+.evidence-graph .epair { display: flex; flex-wrap: wrap; align-items: stretch; gap: .6rem; margin: .5rem 0; }
+.epair-obs { flex: 1 1 14rem; min-width: 0; display: flex; flex-direction: column; gap: .2rem;
+  background: var(--card); border: 1px solid var(--line); border-top: 4px solid var(--purple);
+  border-radius: 8px; padding: .6rem .8rem; text-decoration: none; color: var(--fg); }
+a.epair-obs:hover, a.epair-obs:focus { background: var(--hover); }
+.epair-role { font-size: .72rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.epair-name { font-weight: 600; }
+.epair-edge { display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .25rem; flex: 0 1 12rem; min-width: 0; text-align: center; }
+.epair-arrow { color: var(--muted); font-size: 1.2rem; line-height: 1; }
+.epair-ker { font-size: .9rem; }
+@media (max-width: 36rem) { .epair-edge { flex-basis: 100%; } .epair-edge .epair-arrow { transform: rotate(90deg); } }

@@ -692,6 +692,62 @@ def event_link(event_id, by_event_id: dict) -> Markup:
     return link(f"{target['stem']}.html", target["data"]["name"])
 
 
+def cross_link_evidence(records: list[dict]) -> None:
+    """Link each Evidence record to its two observations and its KER, and back.
+
+    An Evidence record names an upstream observation, a downstream observation
+    and the Key Event Relationship they support, each by record id. Those become
+    links; the KER's page gains the Evidence supporting it, and each
+    observation's page the Evidence that pairs it. None of those back-links is
+    in a file; they are derived here. Each Evidence record also gets the small
+    paired-observation graph its page draws.
+    """
+    obs_by_id = {r["data"].get("id"): r for r in records
+                 if r["data"]["kind"] == "Observation" and r["data"].get("id")}
+    ker_by_id = {r["data"].get("id"): r for r in records
+                 if r["data"]["kind"] == "KER" and r["data"].get("id")}
+    supporting: dict[str, list[Markup]] = {}
+    pairing: dict[str, list[Markup]] = {}
+    for r in records:
+        data = r["data"]
+        if data["kind"] != "Evidence":
+            continue
+        up = obs_by_id.get(data.get("upstream_observation"))
+        down = obs_by_id.get(data.get("downstream_observation"))
+        ker = ker_by_id.get(data.get("relationship"))
+
+        def side(obs, fallback):
+            if obs is None:
+                return {"label": str(fallback or ""), "href": None}
+            return {"label": str(obs["data"]["name"]), "href": f"{obs['stem']}.html"}
+
+        r["evidence_graph"] = {
+            "upstream": side(up, data.get("upstream_observation")),
+            "downstream": side(down, data.get("downstream_observation")),
+            "ker": ({"label": str(ker["data"]["name"]), "href": f"{ker['stem']}.html"}
+                    if ker else {"label": str(data.get("relationship") or ""), "href": None}),
+        }
+        shown = dict(data)
+        if up:
+            shown["upstream_observation"] = link(f"{up['stem']}.html", str(up["data"]["name"]))
+        if down:
+            shown["downstream_observation"] = link(f"{down['stem']}.html", str(down["data"]["name"]))
+        if ker:
+            shown["relationship"] = link(f"{ker['stem']}.html", str(ker["data"]["name"]))
+        r["data"] = shown
+        back = link(f"{r['stem']}.html", str(data["name"]))
+        if ker:
+            supporting.setdefault(ker["stem"], []).append(back)
+        for obs in (up, down):
+            if obs is not None:
+                pairing.setdefault(obs["stem"], []).append(back)
+    for r in records:
+        if r["stem"] in supporting:
+            r["data"] = {**r["data"], "evidence": supporting[r["stem"]]}
+        if r["stem"] in pairing:
+            r["data"] = {**r["data"], "evidence_pairings": pairing[r["stem"]]}
+
+
 def name_assays(records: list[dict]) -> None:
     """Show each Key Event's assays and test guidelines by name, not by id.
 
@@ -847,6 +903,7 @@ def build() -> dict[Path, str]:
     list_cells(records)
     cross_link(records)
     cross_link_aops(records)
+    cross_link_evidence(records)
     name_assays(records)
     records.sort(key=lambda r: str(r["data"].get("name", r["stem"])).lower())
     all_views = views(records, settings)
