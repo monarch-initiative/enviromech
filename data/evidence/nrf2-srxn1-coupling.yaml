@@ -1,0 +1,39 @@
+# EMOD Evidence: pairs an upstream-Event observation (NRF2) and a downstream-
+# Event observation (SRXN1), measured together, onto the KER. This is the
+# structure EMOD's Evidence class already defines; EnviroMech surfaces it here
+# as an EvidenceRecord for the first time.
+id: enviromech:ev-nrf2-srxn1-coupling
+status: DRAFT
+upstream_observation: enviromech:obs-0005
+downstream_observation: enviromech:obs-0006
+relationship: enviromech:ker-nrf2-srxn1
+experimental_design: >-
+  Time-course NRF2 and SRXN1 protein in HepG2 after single or repeated exposure
+  to four soft electrophiles across a wide concentration range; semi-mechanistic
+  ODE fitted by nonlinear mixed effects.
+response_relationship:
+- response_variable: SRXN1 protein
+  model_type: NLME
+  scenario:
+    causal_agent: "soft electrophiles"
+    regimen: REPEATED
+    system: HepG2
+  notes: Repeated-exposure dynamics modelled separately from single exposure.
+citations:
+- reference: PMID:40972999
+  reference_title: "Deciphering the quantitative relationship between NRF2 and SRXN1 through semi-mechanistic computational modeling."
+  supports: SUPPORT
+  evidence_source: IN_VITRO
+  snippet: "we explored the quantitative relationship between NRF2 and sulfiredoxin 1 (SRXN1), a bona fide key NRF2 target gene"
+  explanation: >-
+    Jointly characterises upstream (NRF2) and downstream (SRXN1) states and their
+    quantitative coupling, supporting the KER.
+creation_date: "2026-11-20"
+curation_history:
+- timestamp: "2026-11-20T04:10:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-4-8
+  action: CREATE
+  description: >-
+    Created the Evidence record pairing the NRF2 and SRXN1 observations onto the NRF2->SRXN1 KER, with a verified quote from PMID 40972999.

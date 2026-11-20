@@ -1,0 +1,26 @@
+history_version: 1
+target:
+  kind: schema
+  slug: enviromech
+  path: src/enviromech/schema/enviromech.yaml
+session:
+  id: 2026-11-20T130202Z-claude-code-2c7f54
+  timestamp: '2026-11-20T13:02:02Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+links:
+  prs:
+  - https://github.com/monarch-initiative/enviromech/pull/59
+events:
+- type: CREATE
+  outcome: changed
+  summary: Local-minting exception and the NRF2->SRXN1 quantitative KER
+  details: 'Added RecordProvenanceEnum (AOP_WIKI|LOCAL) and enviromech: id patterns so KE/KER/AOP records
+    can be minted outside the production AOP-Wiki; surfaced EMOD Evidence as EvidenceRecord; added ResponseRelationship/ModelParameter/ResponseScenario
+    and quantitative Observation slots. Curated the NRF2->SRXN1 oxidative-stress coupling (PMID 40972999)
+    as a worked quantitative KER: two local KEs, one quantitative KER, two observations, one Evidence
+    pairing. Parameter values left as placeholders to transcribe; NRF2 KE minted LOCAL pending AOP-Wiki
+    reconciliation (aopwiki.org unreachable in the build env).'
