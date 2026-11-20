@@ -35,6 +35,7 @@ CURIEs are links.
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import re
 import sys
@@ -596,14 +597,113 @@ def hill_arms_svg(rr: dict) -> Markup | None:
     )
 
 
+def _load_run(rr: dict):
+    """(inputs, simulation) dicts for a response relationship's committed model
+    run, or None when it declares none or the files are missing/unreadable."""
+    path = rr.get("simulation_run")
+    if not path:
+        return None
+    base = REPO_ROOT / str(path)
+    try:
+        inp = json.loads((base / "inputs.json").read_text())
+        sim = json.loads((base / "simulation.json").read_text())
+    except (OSError, ValueError):
+        return None
+    if not isinstance(inp, dict) or not isinstance(sim, dict):
+        return None
+    return inp, sim
+
+
+def obs_sim_svg(rr: dict):
+    """Observed-vs-simulated SRXN1(t) for the highest concentration of a response
+    relationship's committed model run: measured SRXN1 (points ± SD) against the
+    integrated model (line, with the min/max NRF2-input envelope). Returns
+    (svg, concentration, pooled_r2) or None. Observed points are transcribed; the
+    line is the derived simulation, labelled as such by the caption."""
+    run = _load_run(rr)
+    if run is None:
+        return None
+    inp, sim = run
+    try:
+        concs = [float(c) for c in inp["concentrations_uM"]]
+        key = inp["concentrations_uM"][concs.index(max(concs))]
+        obs = inp["series"][str(key)]
+        sm = sim["series"][str(key)]
+        t_obs = [float(t) for t in inp["times"]]
+        o_mean = [float(v) for v in obs["srxn1_mean"]]
+        o_sd = [float(v) for v in obs["srxn1_sd"]]
+        grid = [float(t) for t in sim["times"]]
+        s_mean = [float(v) for v in sm["srxn1_sim_mean"]]
+        s_min = [float(v) for v in sm["srxn1_sim_min"]]
+        s_max = [float(v) for v in sm["srxn1_sim_max"]]
+    except (KeyError, ValueError, TypeError, IndexError):
+        return None
+    r2 = sim.get("fit", {}).get("pooled_r2")
+    tmax = max(t_obs[-1], grid[-1]) or 1.0
+    ymax = max(max(m + s for m, s in zip(o_mean, o_sd, strict=True)), max(s_max)) * 1.08 or 1.0
+
+    def xof(t):
+        return _PX0 + (t / tmax) * (_PX1 - _PX0)
+
+    def yof(y):
+        return _PY0 - (y / ymax) * (_PY0 - _PY1)
+
+    band = ([(xof(t), yof(v)) for t, v in zip(grid, s_min, strict=True)]
+            + [(xof(t), yof(v)) for t, v in zip(reversed(grid), reversed(s_max), strict=True)])
+    band_d = _poly(band) + " Z"
+    line_d = _poly([(xof(t), yof(v)) for t, v in zip(grid, s_mean, strict=True)])
+    obs_marks = []
+    for t, m, sd in zip(t_obs, o_mean, o_sd, strict=True):
+        x = xof(t)
+        obs_marks.append(
+            f'<line class="resp-err" x1="{x:.1f}" y1="{yof(max(0, m - sd)):.1f}"'
+            f' x2="{x:.1f}" y2="{yof(m + sd):.1f}"/>'
+            f'<circle class="resp-obs" cx="{x:.1f}" cy="{yof(m):.1f}" r="1.5"/>')
+    xticks = "".join(
+        f'<text class="resp-tick" x="{xof(g):.1f}" y="{_PY0+12}"'
+        f' text-anchor="middle">{g:g}</text>' for g in (0, 12, 24, 36, 48)
+        if g <= tmax)
+    yticks = "".join(
+        f'<text class="resp-tick" x="{_PX0-5}" y="{yof(g)+3:.1f}"'
+        f' text-anchor="end">{g:g}</text>' for g in (0, round(ymax / 2), round(ymax)))
+    svg = Markup(
+        '<svg class="response-svg" viewBox="0 0 320 170" role="img"'
+        ' aria-label="Observed vs simulated SRXN1 over time">'
+        f'{xticks}{yticks}'
+        f'<path class="resp-band" d="{band_d}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX1}" y2="{_PY0}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX0}" y2="{_PY1}"/>'
+        f'{"".join(obs_marks)}'
+        f'<path class="resp-curve" d="{line_d}"/>'
+        f'<circle class="resp-obs" cx="{_PX0+8}" cy="26" r="1.5"/>'
+        f'<text class="resp-legend" x="{_PX0+14}" y="29">observed ± SD</text>'
+        f'<line class="resp-curve" x1="{_PX0+2}" y1="38" x2="{_PX0+14}" y2="38"/>'
+        f'<text class="resp-legend" x="{_PX0+18}" y="41">simulated</text>'
+        f'<text class="resp-axis-title" x="{(_PX0+_PX1)/2:.0f}" y="168"'
+        ' text-anchor="middle">time (h)</text>'
+        f'<text class="resp-axis-title" x="11" y="{(_PY0+_PY1)/2:.0f}"'
+        f' text-anchor="middle" transform="rotate(-90 11 {(_PY0+_PY1)/2:.0f})">'
+        f'SRXN1 ({escape(str(inp.get("value_unit", "au")))})</text>'
+        '</svg>')
+    return svg, key, r2
+
+
 def model_figures(rr: dict) -> list[Markup]:
-    """Faithful figures for a response relationship, each computed from the
-    transcribed parameters alone. For a semi-mechanistic ODE model that is the
-    dynamic modified-NRF2 fraction f(t) and the two Hill production arms; the
-    SRXN1(t) trajectory itself is deliberately not drawn, because Eq I needs the
-    measured NRF2 input N(t), which is an experimental trajectory rather than a
-    transcribed parameter. Empty when nothing faithful can be drawn."""
+    """Faithful figures for a response relationship. When the record declares a
+    committed model run, SRXN1(t) is simulated from the measured NRF2 input and
+    drawn against the observed data; the dynamic modified-NRF2 fraction f(t) and
+    the two Hill production arms decompose the mechanism. Without a run, SRXN1(t)
+    is not drawn (Eq I needs the measured NRF2 input, not a transcribed
+    parameter) and only f(t)/arms are shown. Empty when nothing can be drawn."""
     figs: list[Markup] = []
+    run = obs_sim_svg(rr)
+    if run is not None:
+        svg, conc, r2 = run
+        r2txt = f" · pooled R² = {r2:g}" if r2 is not None else ""
+        figs.append(Markup(
+            '<figure class="resp-fig"><figcaption class="resp-fig-title">'
+            'Observed vs simulated SRXN1(t) — {} µM, measured NRF2 input{}'
+            '</figcaption>{}</figure>').format(conc, r2txt, svg))
     frac = ode_fraction_svg(rr)
     if frac is not None:
         figs.append(Markup(
@@ -616,7 +716,14 @@ def model_figures(rr: dict) -> list[Markup]:
             '<figure class="resp-fig"><figcaption class="resp-fig-title">'
             'Production arms — fractional Hill occupancy by NRF2 level'
             '</figcaption>{}</figure>').format(arms))
-    if figs:
+    if figs and run is not None:
+        figs.append(Markup(
+            '<p class="resp-fig-note muted">SRXN1(t) is integrated from Eq I with'
+            ' the measured NRF2 input and the deposit parameters (a derived'
+            ' simulation, regenerated from the committed model run); f(t) and the'
+            ' Hill arms decompose the same model from the transcribed'
+            ' parameters.</p>'))
+    elif figs:
         figs.append(Markup(
             '<p class="resp-fig-note muted">Simulated from the transcribed'
             ' parameters. SRXN1(t) itself is not drawn: Eq I requires the'
