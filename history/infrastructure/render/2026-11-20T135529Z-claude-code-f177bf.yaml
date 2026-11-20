@@ -1,0 +1,26 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: render
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-20T135529Z-claude-code-f177bf
+  timestamp: '2026-11-20T13:55:29Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+events:
+- type: CREATE
+  outcome: changed
+  summary: 'Record browser: draw the response relationship as a dose-response curve'
+  details: 'Visualization plan Phase 3, on #62. A KER/Evidence response_relationship now renders as a
+    card: a scenario header (agent x regimen x system), an inline-SVG Hill dose-response curve when its
+    EC50 and Emax are transcribed, and otherwise an honest ''Response curve pending'' panel naming the
+    untranscribed parameters (never a fabricated curve, matching the committed NRF2->SRXN1 record whose
+    parameters are null placeholders). Parameters render with pending values shown as such; source_model_uri
+    and notes follow. response_curve_svg draws only from numeric EC50/Emax (+ optional Hill); self-contained
+    SVG, no JS, styled from the site tokens. test_response_curve.py covers the drawn and pending branches
+    and the committed record. The AOP-graph KER-edge badge is deferred: KER relationships are not drawn
+    as edges on the AOP graph yet. render, ruff, pytest (260) pass.'
