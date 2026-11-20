@@ -13,6 +13,7 @@
 <p class="meta">
 {%- if record.data.id %}<a class="id" href="{{ record.data.id | curie_url }}">{{ record.data.id }}</a>{% endif %}
 {%- if record.data.status %} {{ record.data.status | badge("status") }}{% endif %}
+{%- if record.data.provenance %} {{ record.data.provenance | badge("provenance") }}{% endif %}
 {%- if record.data.record_term %} <span class="grounded">{{ record.data.record_term | term }}</span>{% endif %}
 </p>
 </header>

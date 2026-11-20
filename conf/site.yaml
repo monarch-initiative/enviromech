@@ -51,6 +51,7 @@ index_columns:
 kind_columns:
   AOP:
     - name
+    - provenance
     - aop_wiki_id
     - key_events
     - ke_relationships
@@ -59,6 +60,7 @@ kind_columns:
     - status
   Key Event:
     - name
+    - provenance
     - aop_wiki_id
     - level
     - aops
@@ -67,8 +69,14 @@ kind_columns:
     - status
   KER:
     - name
+    - provenance
+    - quantitative
     - relationship_id
     - aops
+    - status
+  Evidence:
+    - name
+    - observations
     - status
   Method:
     - name

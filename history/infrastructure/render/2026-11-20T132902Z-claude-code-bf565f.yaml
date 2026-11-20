@@ -1,0 +1,23 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: render
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-20T132902Z-claude-code-bf565f
+  timestamp: '2026-11-20T13:29:02Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+events:
+- type: CREATE
+  outcome: changed
+  summary: 'Record browser: register an Evidence kind and show provenance'
+  details: 'Visualization plan Phase 1. Added EVIDENCE_DIR and an Evidence kind to the record browser
+    so the EvidenceRecords from #59 are listed and get record pages (auto-laid-out from the data shape).
+    Surfaced provenance as a badge on record pages and a column on the AOP/Key Event/KER list views (LOCAL
+    stands out; AOP-Wiki mirrors read blank), and a quantitative flag on the KER list for KERs that carry
+    a response_relationship. Updated conf/site.yaml kind_columns, the record.html/list.html templates,
+    and the test census (HELD) for the new kind. render, ruff and pytest (255) all pass.'

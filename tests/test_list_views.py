@@ -6,7 +6,7 @@ from functools import cache
 import pytest
 
 from enviromech import render, site
-from enviromech.paths import AOPS_DIR, ASSAYS_DIR, KERS_DIR, KEY_EVENTS_DIR, PAGES_DIR
+from enviromech.paths import AOPS_DIR, ASSAYS_DIR, EVIDENCE_DIR, KERS_DIR, KEY_EVENTS_DIR, PAGES_DIR
 from enviromech.validate import iter_records
 
 SETTINGS = site.load()
@@ -21,6 +21,7 @@ HELD = {
     "AOP": len(iter_records(AOPS_DIR)),
     "Key Event": len(iter_records(KEY_EVENTS_DIR)),
     "KER": len(iter_records(KERS_DIR)),
+    "Evidence": len(iter_records(EVIDENCE_DIR)),
     "Method": len(iter_records(ASSAYS_DIR)),
     "Observation": len(iter_records()),
 }

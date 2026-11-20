@@ -35,6 +35,7 @@
 <tr>{% for col in view.columns %}<td data-label="{{ col | column_label }}">
 {%- if loop.first %}<a href="records/{{ r.stem }}.html">{{ column_value(r, col) or r.stem }}</a>
 {%- elif col == "status" and r.data.get(col) %}{{ r.data.get(col) | badge("status") }}
+{%- elif col == "provenance" and column_value(r, col) %}{{ column_value(r, col) | badge("provenance") }}
 {%- else %}{{ column_value(r, col) }}{% endif %}</td>{% endfor %}</tr>
 {%- endfor %}
 </tbody>

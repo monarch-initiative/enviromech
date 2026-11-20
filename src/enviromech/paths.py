@@ -26,6 +26,8 @@ KEY_EVENTS_DIR = REPO_ROOT / "data/key_events"
 AOPS_DIR = REPO_ROOT / "data/aops"
 # Key Event Relationships: the endpoints an AOP names only by id.
 KERS_DIR = REPO_ROOT / "data/key_event_relationships"
+# Evidence records: an upstream and a downstream observation paired onto a KER.
+EVIDENCE_DIR = REPO_ROOT / "data/evidence"
 ASSAYS_DIR = REPO_ROOT / "data/assays"
 TEST_GUIDELINES_DIR = REPO_ROOT / "data/test_guidelines"
 HISTORY_DIR = REPO_ROOT / "history"
