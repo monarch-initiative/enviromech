@@ -11,21 +11,60 @@ response_relationship:
 - response_variable: SRXN1 protein
   model_type: ODE_SEMIMECHANISTIC
   scenario:
-    causal_agent: "soft electrophiles (sulforaphane, andrographolide, ethacrynic acid, CDDO-me)"
+    causal_agent: sulforaphane
     regimen: SINGLE
     system: HepG2
+  source_model_uri: https://doi.org/10.5281/zenodo.17181465
   parameters:
-  - name: EC50
-    unit: uM
-    source_locator: "transcribe from the fitted model (PMID 40972999)"
-  - name: Emax
-    unit: fold-over-control
-    source_locator: "transcribe"
+  - name: kp
+    value: 0.0023
+    unit: 1/h
+    source_locator: "Table S3 (dynamic cofactor X model); mean, 95% CI (0.0022, 0.0025). Basal SRXN1 synthesis rate."
+  - name: kd
+    value: 0.016
+    unit: 1/h
+    source_locator: "Table S3; mean, 95% CI (0.015, 0.017). Basal SRXN1 degradation rate."
+  - name: Vmax
+    value: 130492
+    unit: au/h
+    source_locator: "Table S3 (Vmax1); mean, 95% CI (130292, 130620). Maximal SRXN1 synthesis rate."
+  - name: Km_modified
+    value: 0.014
+    unit: au
+    source_locator: "Table S3; mean, 95% CI (0.013, 0.015). NRF2 level at half-maximal synthesis, modified NRF2."
+  - name: Km_unmodified
+    value: 107110
+    unit: au
+    source_locator: "Table S3; mean, 95% CI (106953, 107273). NRF2 level at half-maximal synthesis, unmodified NRF2."
+  - name: n_modified
+    value: 9.90
+    source_locator: "Table S3; mean, 95% CI (9.720, 9.995). Hill coefficient, modified NRF2 (ultrasensitive)."
+  - name: n_unmodified
+    value: 1.003
+    source_locator: "Table S3; mean, 95% CI (1.001, 1.004). Hill coefficient, unmodified NRF2 (near-linear)."
+  - name: f_i
+    value: 0.001
+    source_locator: "Table S3; fixed. Initial fraction of modified NRF2."
+  - name: r1
+    value: 8.90
+    unit: 1/h
+    source_locator: "Table S3, sulforaphane; mean, 95% CI (7.2, 11.4). Rate modified NRF2 increases, first exposure (population r1_all 2.1, CI 0.13-5.5)."
+  - name: d1
+    value: 0.2
+    unit: 1/h
+    source_locator: "Table S3, sulforaphane; mean, 95% CI (0.012, 0.59). Rate modified NRF2 decreases, first exposure (population d1_all 0.21, CI 0.009-0.7)."
   notes: >-
-    Semi-mechanistic ODE fitted by nonlinear mixed effects. Parameter values are
-    placeholders to be transcribed; the coupling is cofactor/PTM-gated and
-    compound-, time- and exposure-scenario-specific, so a single global
-    parameter set would overstate it (hence one scenario per condition).
+    Posterior means (95% CI in each source_locator) from the final semi-mechanistic
+    model with a dynamic fraction of modified NRF2 (Table S3; code at
+    doi:10.5281/zenodo.17181465), fitted by Bayesian nonlinear mixed effects in MCSim.
+    The generic parameters are shared across the four compounds; r1 and d1 are
+    sulforaphane-specific for continuous (first) exposure. The NRF2->SRXN1 coupling is
+    dynamic and hysteretic: the modified-NRF2 arm is ultrasensitive (n_modified ~ 9.9)
+    and the unmodified arm near-linear (n_unmodified ~ 1.0). The paper shows a static
+    Hill dose-response (their model 1) is insufficient, so this is a time-resolved
+    relationship, not a concentration-response curve. Intensities are in arbitrary
+    units (au), rates per hour. Repeated-exposure parameters r2/d2 are omitted as this
+    scenario is single exposure.
 ke_relationship:
   id: 990100001
   upstream_event_id: 990000001

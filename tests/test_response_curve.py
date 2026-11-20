@@ -23,8 +23,12 @@ def test_no_curve_without_transcribed_values():
     assert render.response_curve_svg(rr(ec50=5.0, emax=None)) is None
 
 
-def test_the_committed_record_shows_a_pending_panel_not_a_fake_curve():
+def test_the_committed_record_shows_its_parameters_without_a_fake_curve():
     pages = render.build()
     ker = pages[PAGES_DIR / "records" / "KER-nrf2-srxn1.html"]
-    assert "Response curve pending" in ker
-    assert "resp-curve" not in ker  # no fabricated curve for null parameters
+    # The NRF2->SRXN1 model is an ODE, not a dose-response, and its parameters are
+    # transcribed from Table S3: show the parameter table, never a fabricated curve,
+    # and do not claim a curve is pending once the parameters are in.
+    assert "resp-curve" not in ker
+    assert "Response curve pending" not in ker
+    assert "130492" in ker  # a transcribed value (Vmax) renders

@@ -467,12 +467,14 @@ def response_relationships(items: list) -> Markup:
         if curve is not None:
             parts.append(curve)
         else:
+            # A curve needs EC50/Emax. With other parameters transcribed (an ODE
+            # model, not a dose-response) show the table alone; only flag genuinely
+            # untranscribed parameters as pending.
             pending = [str(p.get("name")) for p in (rr.get("parameters") or [])
                        if isinstance(p, dict) and p.get("name") and _curve_number(p.get("value")) is None]
-            msg = "Response curve pending"
             if pending:
-                msg += " — " + ", ".join(pending) + " not yet transcribed"
-            parts.append(Markup('<p class="response-pending">{}</p>').format(msg))
+                msg = "Response curve pending — " + ", ".join(pending) + " not yet transcribed"
+                parts.append(Markup('<p class="response-pending">{}</p>').format(msg))
         rows = []
         for p in rr.get("parameters") or []:
             if not isinstance(p, dict):
