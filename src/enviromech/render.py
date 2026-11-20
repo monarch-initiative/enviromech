@@ -48,6 +48,7 @@ from .aop_graph import graphs
 from .paths import (
     AOPS_DIR,
     ASSAYS_DIR,
+    EVIDENCE_DIR,
     KERS_DIR,
     KEY_EVENTS_DIR,
     MECH_NAME,
@@ -83,7 +84,7 @@ MAX_CELL_TEXT = 90
 # test guidelines and event components have no pages of their own, so they have
 # no view either; a Key Event's page names its assays, and an event component is
 # reached from the Key Event that uses it.
-KINDS = ("AOP", "Key Event", "KER", "Method", "Observation")
+KINDS = ("AOP", "Key Event", "KER", "Evidence", "Method", "Observation")
 
 
 def curie_url(curie: str) -> str:
@@ -489,6 +490,8 @@ def list_cells(records: list[dict]) -> None:
         if data["kind"] == "KER":
             cells["relationship_id"] = str(r["ker"]["id"])
             cells["aops"] = ", ".join(ker_in_aops.get(r["ker"]["id"], []))
+            cells["provenance"] = str(data.get("provenance") or "")
+            cells["quantitative"] = "yes" if data.get("response_relationship") else ""
         elif data["kind"] == "Method":
             assay = data.get("assay") or {}
             cells["test_guidelines"] = ", ".join(data.get("guideline_names") or [])
@@ -497,6 +500,7 @@ def list_cells(records: list[dict]) -> None:
             aop = data.get("aop") or {}
             graph = r.get("graph") or {}
             cells["aop_wiki_id"] = str(aop.get("id", ""))
+            cells["provenance"] = str(data.get("provenance") or "")
             cells["key_events"] = str(len(aop.get("events") or []))
             cells["ke_relationships"] = str(len(aop.get("ke_relationships") or []))
             # The graph counts the nodes and models the AOP's Key Events
@@ -507,6 +511,7 @@ def list_cells(records: list[dict]) -> None:
             event = data.get("event") or {}
             sources = (data.get("aggregation") or {}).get("source_nodes") or []
             cells["aop_wiki_id"] = str(event.get("id", ""))
+            cells["provenance"] = str(data.get("provenance") or "")
             cells["level"] = cell((event.get("biological_organization_id") or {}).get("term"))
             cells["aops"] = ", ".join(in_aops.get(r["stem"], []))
             cells["level_screening"] = cell((data.get("level_screening") or {}).get("outcome"))
@@ -516,6 +521,10 @@ def list_cells(records: list[dict]) -> None:
                 for model in source.get("models") or []
                 if model.get("model_ref")  # an unnamed model is not another model
             }))
+        elif data["kind"] == "Evidence":
+            up = str(data.get("upstream_observation") or "")
+            down = str(data.get("downstream_observation") or "")
+            cells["observations"] = (f"{up} \u2192 {down}" if up and down else up or down)
         elif data["kind"] == "Observation":
             cells["key_events"] = str(len((data.get("observation") or {}).get("events") or []))
         r["cells"] = cells
@@ -810,6 +819,18 @@ def build() -> dict[Path, str]:
         records.append({"stem": path.stem, "data": {"kind": "AOP", "name": title, **data}})
     # KERs and Methods (assays) are records of their own kinds, with their own views.
     records.extend(ker_and_method_records(records))
+    # Evidence records pair an upstream and a downstream observation onto a KER,
+    # titled by the KER they support so the row reads as evidence for a chain.
+    ker_name = {r["data"].get("id"): r["data"]["name"]
+                for r in records if r["data"]["kind"] == "KER" and r["data"].get("id")}
+    for path in iter_records(EVIDENCE_DIR):
+        data = load(path) or {}
+        if not isinstance(data, dict):
+            continue
+        rel = data.get("relationship")
+        chain = ker_name.get(rel)
+        name = f"Evidence for {chain}" if chain else (f"Evidence ({rel})" if rel else path.stem)
+        records.append({"stem": path.stem, "data": {"kind": "Evidence", "name": name, **data}})
     # The pathway graph is built from the records as loaded, before cross-linking
     # turns AOP-Wiki ids into links.
     aop_graphs = graphs(
