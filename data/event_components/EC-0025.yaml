@@ -1,0 +1,8 @@
+# Event component of the local SRXN1-induction Key Event (enviromech:ke-srxn1-induction).
+id: enviromech:ec-0025
+event_component:
+  id: 25
+  biological_object_id:
+    term: "SRXN1 (sulfiredoxin 1)"
+  biological_action_id:
+    term: increased

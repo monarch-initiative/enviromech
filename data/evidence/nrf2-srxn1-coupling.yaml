@@ -4,8 +4,8 @@
 # as an EvidenceRecord for the first time.
 id: enviromech:ev-nrf2-srxn1-coupling
 status: DRAFT
-upstream_observation: enviromech:obs-nrf2-activation-hepg2
-downstream_observation: enviromech:obs-srxn1-induction-hepg2
+upstream_observation: enviromech:obs-0005
+downstream_observation: enviromech:obs-0006
 relationship: enviromech:ker-nrf2-srxn1
 experimental_design: >-
   Time-course NRF2 and SRXN1 protein in HepG2 after single or repeated exposure

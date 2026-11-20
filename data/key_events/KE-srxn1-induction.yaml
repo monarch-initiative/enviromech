@@ -10,7 +10,7 @@ event:
   biological_organization_id:
     term: Molecular
   event_components:
-  - id: 990000021
+  - id: 25
     biological_object_id:
       term: "SRXN1 (sulfiredoxin 1)"
     biological_action_id:

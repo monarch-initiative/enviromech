@@ -1,4 +1,4 @@
-id: enviromech:obs-srxn1-induction-hepg2
+id: enviromech:obs-0006
 name: SRXN1 induction by soft electrophiles in HepG2
 description: Soft electrophiles induce SRXN1 protein in HepG2, time- and dose-dependently.
 status: DRAFT
@@ -7,12 +7,12 @@ causal_agent:
   agent_type: ENVIRONMENTAL_CHEMICAL
 asserted_relation: induces
 observation:
-  id: 990200002
+  id: 6
   biological_action_id:
     term: increased
   biological_object_str: "SRXN1 protein"
   assay_id:
-    id: 990300002
+    id: 22
     title: "SRXN1-GFP reporter, HepG2, time-lapse imaging"
   events:
   - 990000002

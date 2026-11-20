@@ -9,6 +9,10 @@ KEY_EVENT_IDS = {(load(p).get("event") or {}).get("id") for p in iter_records(KE
 
 def test_a_ker_file_id_matches_its_relationship_id():
     for path, data in KERS.items():
+        # LOCAL KERs minted in EnviroMech use an enviromech:ker-<slug> id and no
+        # AOP-Wiki aop.relationships number; this convention is for mirrors only.
+        if str(data["id"]).startswith("enviromech:"):
+            continue
         number = data["ke_relationship"]["id"]
         assert data["id"] == f"aop.relationships:{number}", path
         assert path.stem == f"KER-{number}", path

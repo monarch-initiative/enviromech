@@ -1,4 +1,4 @@
-id: enviromech:obs-nrf2-activation-hepg2
+id: enviromech:obs-0005
 name: NRF2 activation by soft electrophiles in HepG2
 description: Soft electrophiles activate NRF2 in HepG2 cells, time- and dose-dependently.
 status: DRAFT
@@ -7,12 +7,12 @@ causal_agent:
   agent_type: ENVIRONMENTAL_CHEMICAL
 asserted_relation: activates
 observation:
-  id: 990200001
+  id: 5
   biological_action_id:
     term: increased
   biological_object_str: "NFE2L2 (NRF2) protein"
   assay_id:
-    id: 990300001
+    id: 21
     title: "NRF2-GFP reporter, HepG2, time-lapse imaging"
   events:
   - 990000001

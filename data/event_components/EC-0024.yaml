@@ -1,0 +1,8 @@
+# Event component of the local NRF2-activation Key Event (enviromech:ke-nrf2-activation).
+id: enviromech:ec-0024
+event_component:
+  id: 24
+  biological_object_id:
+    term: "NFE2L2 (NRF2)"
+  biological_action_id:
+    term: increased
