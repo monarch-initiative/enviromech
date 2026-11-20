@@ -288,6 +288,11 @@ site-check:
 render:
     uv run python -m {{slug}}.render
 
+# Regenerate the NRF2->SRXN1 simulation artifact (derived; never hand-edit
+# simulation.json). Deterministic stdlib port of Sharma et al.'s model.
+simulate-nrf2-srxn1:
+    uv run python scripts/simulate_nrf2_srxn1.py
+
 # ---------------------------------------------------------------- code
 
 # Run the test suite

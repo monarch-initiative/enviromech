@@ -35,6 +35,7 @@ CURIEs are links.
 from __future__ import annotations
 
 import argparse
+import json
 import math
 import re
 import sys
@@ -441,6 +442,296 @@ def response_curve_svg(rr: dict) -> Markup | None:
     )
 
 
+def _sexp(x: float) -> float:
+    """exp with the tails clamped, so a long horizon cannot overflow."""
+    if x > 700.0:
+        return math.inf
+    if x < -700.0:
+        return 0.0
+    return math.exp(x)
+
+
+def _poly(pts: list[tuple[float, float]]) -> str:
+    return "M " + " L ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
+
+
+# Plot area shared by the model figures, in the 320x170 viewBox.
+_PX0, _PX1, _PY0, _PY1 = 48, 302, 150, 24
+
+
+def ode_fraction_svg(rr: dict) -> Markup | None:
+    """Time course of the dynamic modified-NRF2 fraction f(t) for an
+    ODE_SEMIMECHANISTIC response relationship (Sharma et al., Eq V):
+    f(t) = 1 / ((1/f_i - 1)*exp(-t*r1) + exp(t*d1)), single exposure.
+    Every point is computed from transcribed parameters (f_i, r1, d1); no
+    experimental input is needed, so this is faithful rather than illustrative.
+    Returns None when those parameters are absent."""
+    params = {str(p.get("name", "")).strip().lower(): p
+              for p in (rr.get("parameters") or []) if isinstance(p, dict)}
+
+    def pval(name):
+        p = params.get(name)
+        return _curve_number(p.get("value")) if isinstance(p, dict) else None
+
+    f_i, r1, d1 = pval("f_i"), pval("r1"), pval("d1")
+    if f_i is None or r1 is None or d1 is None or not (0.0 < f_i < 1.0):
+        return None
+    a = 1.0 / f_i - 1.0
+
+    def frac(t):
+        denom = a * _sexp(-t * r1) + _sexp(t * d1)
+        return 0.0 if denom in (math.inf, 0.0) else 1.0 / denom
+
+    # Sample a fine grid, find the peak, then a horizon where the pulse has
+    # decayed to 2% of peak (so the figure shows rise and fall), clamped.
+    fine = [(i * 0.1, frac(i * 0.1)) for i in range(0, 2001)]
+    peak_t, peak_f = max(fine, key=lambda tv: tv[1])
+    horizon = fine[-1][0]
+    for t, fv in fine:
+        if t > peak_t and fv < 0.02 * peak_f:
+            horizon = t
+            break
+    horizon = min(96.0, max(24.0, horizon))
+
+    def xof(t):
+        return _PX0 + (t / horizon) * (_PX1 - _PX0)
+
+    def yof(fr):
+        return _PY0 - fr * (_PY0 - _PY1)
+
+    steps = 160
+    pts = [(xof(horizon * i / steps), yof(frac(horizon * i / steps)))
+           for i in range(steps + 1)]
+    px, py = xof(peak_t), yof(peak_f)
+    ticks = "".join(
+        f'<line class="resp-grid" x1="{xof(horizon*g):.1f}" y1="{_PY0}"'
+        f' x2="{xof(horizon*g):.1f}" y2="{_PY1}"/>'
+        f'<text class="resp-tick" x="{xof(horizon*g):.1f}" y="{_PY0+12}"'
+        f' text-anchor="middle">{horizon*g:.0f}</text>'
+        for g in (0.25, 0.5, 0.75, 1.0))
+    yticks = "".join(
+        f'<text class="resp-tick" x="{_PX0-5}" y="{yof(g)+3:.1f}"'
+        f' text-anchor="end">{g:g}</text>' for g in (0.0, 0.5, 1.0))
+    return Markup(
+        '<svg class="response-svg" viewBox="0 0 320 170" role="img"'
+        ' aria-label="Modified NRF2 fraction over time">'
+        f'{ticks}{yticks}'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX1}" y2="{_PY0}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX0}" y2="{_PY1}"/>'
+        f'<path class="resp-curve" d="{_poly(pts)}"/>'
+        f'<line class="resp-mark" x1="{px:.1f}" y1="{_PY0}" x2="{px:.1f}" y2="{py:.1f}"/>'
+        f'<circle class="resp-dot" cx="{px:.1f}" cy="{py:.1f}" r="2.4"/>'
+        f'<text class="resp-label" x="{px+4:.1f}" y="{py-4:.1f}">'
+        f'peak f={peak_f:.2f} at {peak_t:g} h</text>'
+        f'<text class="resp-axis-title" x="{(_PX0+_PX1)/2:.0f}" y="168"'
+        ' text-anchor="middle">time (h)</text>'
+        f'<text class="resp-axis-title" x="11" y="{(_PY0+_PY1)/2:.0f}"'
+        f' text-anchor="middle" transform="rotate(-90 11 {(_PY0+_PY1)/2:.0f})">'
+        'modified NRF2 fraction f</text>'
+        '</svg>'
+    )
+
+
+def hill_arms_svg(rr: dict) -> Markup | None:
+    """The two NRF2->SRXN1 production arms as fractional Hill occupancy vs NRF2
+    level in units of each arm's own Km (Sharma et al., Eq IV): modified
+    (n_modified, ultrasensitive) against unmodified (n_unmodified, near-linear).
+    Normalising by Km lets the two arms — whose Km differ by orders of magnitude —
+    share one axis so the difference in Hill steepness is what shows. Computed
+    from the Hill coefficients alone. Returns None when they are absent."""
+    params = {str(p.get("name", "")).strip().lower(): p
+              for p in (rr.get("parameters") or []) if isinstance(p, dict)}
+
+    def pval(name):
+        p = params.get(name)
+        return _curve_number(p.get("value")) if isinstance(p, dict) else None
+
+    n_mod, n_unmod = pval("n_modified"), pval("n_unmodified")
+    if n_mod is None or n_unmod is None or n_mod <= 0 or n_unmod <= 0:
+        return None
+    xmax = 3.0
+
+    def xof(x):
+        return _PX0 + (x / xmax) * (_PX1 - _PX0)
+
+    def yof(y):
+        return _PY0 - y * (_PY0 - _PY1)
+
+    def occ(x, n):
+        xn = x ** n
+        return xn / (1.0 + xn)
+
+    steps = 120
+    arms = []
+    for cls, n in (("resp-curve", n_mod), ("resp-curve-2", n_unmod)):
+        pts = [(xof(xmax * i / steps), yof(occ(xmax * i / steps, n)))
+               for i in range(steps + 1)]
+        arms.append(f'<path class="{cls}" d="{_poly(pts)}"/>')
+    km_x = xof(1.0)
+    ticks = "".join(
+        f'<text class="resp-tick" x="{xof(g):.1f}" y="{_PY0+12}"'
+        f' text-anchor="middle">{g:g}</text>' for g in (0, 1, 2, 3))
+    yticks = "".join(
+        f'<text class="resp-tick" x="{_PX0-5}" y="{yof(g)+3:.1f}"'
+        f' text-anchor="end">{g:g}</text>' for g in (0.0, 0.5, 1.0))
+    return Markup(
+        '<svg class="response-svg" viewBox="0 0 320 170" role="img"'
+        ' aria-label="Hill production arms">'
+        f'{ticks}{yticks}'
+        f'<line class="resp-grid" x1="{km_x:.1f}" y1="{_PY0}" x2="{km_x:.1f}"'
+        f' y2="{_PY1}" stroke-dasharray="2 2"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX1}" y2="{_PY0}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX0}" y2="{_PY1}"/>'
+        f'{"".join(arms)}'
+        f'<rect class="resp-swatch" x="{_PX0+6}" y="28" width="9" height="9"/>'
+        f'<text class="resp-legend" x="{_PX0+18}" y="36">modified · n={n_mod:g}</text>'
+        f'<rect class="resp-swatch resp-swatch-2" x="{_PX0+6}" y="42"'
+        ' width="9" height="9"/>'
+        f'<text class="resp-legend" x="{_PX0+18}" y="50">unmodified · n={n_unmod:g}</text>'
+        f'<text class="resp-axis-title" x="{(_PX0+_PX1)/2:.0f}" y="168"'
+        ' text-anchor="middle">NRF2 level (× Km)</text>'
+        f'<text class="resp-axis-title" x="11" y="{(_PY0+_PY1)/2:.0f}"'
+        f' text-anchor="middle" transform="rotate(-90 11 {(_PY0+_PY1)/2:.0f})">'
+        'fractional occupancy</text>'
+        '</svg>'
+    )
+
+
+def _load_run(rr: dict):
+    """(inputs, simulation) dicts for a response relationship's committed model
+    run, or None when it declares none or the files are missing/unreadable."""
+    path = rr.get("simulation_run")
+    if not path:
+        return None
+    base = REPO_ROOT / str(path)
+    try:
+        inp = json.loads((base / "inputs.json").read_text())
+        sim = json.loads((base / "simulation.json").read_text())
+    except (OSError, ValueError):
+        return None
+    if not isinstance(inp, dict) or not isinstance(sim, dict):
+        return None
+    return inp, sim
+
+
+def obs_sim_svg(rr: dict):
+    """Observed-vs-simulated SRXN1(t) for the highest concentration of a response
+    relationship's committed model run: measured SRXN1 (points ± SD) against the
+    integrated model (line, with the min/max NRF2-input envelope). Returns
+    (svg, concentration, pooled_r2) or None. Observed points are transcribed; the
+    line is the derived simulation, labelled as such by the caption."""
+    run = _load_run(rr)
+    if run is None:
+        return None
+    inp, sim = run
+    try:
+        concs = [float(c) for c in inp["concentrations_uM"]]
+        key = inp["concentrations_uM"][concs.index(max(concs))]
+        obs = inp["series"][str(key)]
+        sm = sim["series"][str(key)]
+        t_obs = [float(t) for t in inp["times"]]
+        o_mean = [float(v) for v in obs["srxn1_mean"]]
+        o_sd = [float(v) for v in obs["srxn1_sd"]]
+        grid = [float(t) for t in sim["times"]]
+        s_mean = [float(v) for v in sm["srxn1_sim_mean"]]
+        s_min = [float(v) for v in sm["srxn1_sim_min"]]
+        s_max = [float(v) for v in sm["srxn1_sim_max"]]
+    except (KeyError, ValueError, TypeError, IndexError):
+        return None
+    r2 = sim.get("fit", {}).get("pooled_r2")
+    tmax = max(t_obs[-1], grid[-1]) or 1.0
+    ymax = max(max(m + s for m, s in zip(o_mean, o_sd, strict=True)), max(s_max)) * 1.08 or 1.0
+
+    def xof(t):
+        return _PX0 + (t / tmax) * (_PX1 - _PX0)
+
+    def yof(y):
+        return _PY0 - (y / ymax) * (_PY0 - _PY1)
+
+    band = ([(xof(t), yof(v)) for t, v in zip(grid, s_min, strict=True)]
+            + [(xof(t), yof(v)) for t, v in zip(reversed(grid), reversed(s_max), strict=True)])
+    band_d = _poly(band) + " Z"
+    line_d = _poly([(xof(t), yof(v)) for t, v in zip(grid, s_mean, strict=True)])
+    obs_marks = []
+    for t, m, sd in zip(t_obs, o_mean, o_sd, strict=True):
+        x = xof(t)
+        obs_marks.append(
+            f'<line class="resp-err" x1="{x:.1f}" y1="{yof(max(0, m - sd)):.1f}"'
+            f' x2="{x:.1f}" y2="{yof(m + sd):.1f}"/>'
+            f'<circle class="resp-obs" cx="{x:.1f}" cy="{yof(m):.1f}" r="1.5"/>')
+    xticks = "".join(
+        f'<text class="resp-tick" x="{xof(g):.1f}" y="{_PY0+12}"'
+        f' text-anchor="middle">{g:g}</text>' for g in (0, 12, 24, 36, 48)
+        if g <= tmax)
+    yticks = "".join(
+        f'<text class="resp-tick" x="{_PX0-5}" y="{yof(g)+3:.1f}"'
+        f' text-anchor="end">{g:g}</text>' for g in (0, round(ymax / 2), round(ymax)))
+    svg = Markup(
+        '<svg class="response-svg" viewBox="0 0 320 170" role="img"'
+        ' aria-label="Observed vs simulated SRXN1 over time">'
+        f'{xticks}{yticks}'
+        f'<path class="resp-band" d="{band_d}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX1}" y2="{_PY0}"/>'
+        f'<line class="resp-axis" x1="{_PX0}" y1="{_PY0}" x2="{_PX0}" y2="{_PY1}"/>'
+        f'{"".join(obs_marks)}'
+        f'<path class="resp-curve" d="{line_d}"/>'
+        f'<circle class="resp-obs" cx="{_PX0+8}" cy="26" r="1.5"/>'
+        f'<text class="resp-legend" x="{_PX0+14}" y="29">observed ± SD</text>'
+        f'<line class="resp-curve" x1="{_PX0+2}" y1="38" x2="{_PX0+14}" y2="38"/>'
+        f'<text class="resp-legend" x="{_PX0+18}" y="41">simulated</text>'
+        f'<text class="resp-axis-title" x="{(_PX0+_PX1)/2:.0f}" y="168"'
+        ' text-anchor="middle">time (h)</text>'
+        f'<text class="resp-axis-title" x="11" y="{(_PY0+_PY1)/2:.0f}"'
+        f' text-anchor="middle" transform="rotate(-90 11 {(_PY0+_PY1)/2:.0f})">'
+        f'SRXN1 ({escape(str(inp.get("value_unit", "au")))})</text>'
+        '</svg>')
+    return svg, key, r2
+
+
+def model_figures(rr: dict) -> list[Markup]:
+    """Faithful figures for a response relationship. When the record declares a
+    committed model run, SRXN1(t) is simulated from the measured NRF2 input and
+    drawn against the observed data; the dynamic modified-NRF2 fraction f(t) and
+    the two Hill production arms decompose the mechanism. Without a run, SRXN1(t)
+    is not drawn (Eq I needs the measured NRF2 input, not a transcribed
+    parameter) and only f(t)/arms are shown. Empty when nothing can be drawn."""
+    figs: list[Markup] = []
+    run = obs_sim_svg(rr)
+    if run is not None:
+        svg, conc, r2 = run
+        r2txt = f" · pooled R² = {r2:g}" if r2 is not None else ""
+        figs.append(Markup(
+            '<figure class="resp-fig"><figcaption class="resp-fig-title">'
+            'Observed vs simulated SRXN1(t) — {} µM, measured NRF2 input{}'
+            '</figcaption>{}</figure>').format(conc, r2txt, svg))
+    frac = ode_fraction_svg(rr)
+    if frac is not None:
+        figs.append(Markup(
+            '<figure class="resp-fig"><figcaption class="resp-fig-title">'
+            'Dynamic modified-NRF2 fraction f(t) — simulated from f_i, r1, d1'
+            ' (Eq V)</figcaption>{}</figure>').format(frac))
+    arms = hill_arms_svg(rr)
+    if arms is not None:
+        figs.append(Markup(
+            '<figure class="resp-fig"><figcaption class="resp-fig-title">'
+            'Production arms — fractional Hill occupancy by NRF2 level'
+            '</figcaption>{}</figure>').format(arms))
+    if figs and run is not None:
+        figs.append(Markup(
+            '<p class="resp-fig-note muted">SRXN1(t) is integrated from Eq I with'
+            ' the measured NRF2 input and the deposit parameters (a derived'
+            ' simulation, regenerated from the committed model run); f(t) and the'
+            ' Hill arms decompose the same model from the transcribed'
+            ' parameters.</p>'))
+    elif figs:
+        figs.append(Markup(
+            '<p class="resp-fig-note muted">Simulated from the transcribed'
+            ' parameters. SRXN1(t) itself is not drawn: Eq I requires the'
+            ' measured NRF2 input N(t), an experimental trajectory that is not a'
+            ' transcribed parameter.</p>'))
+    return figs
+
+
 def response_relationships(items: list) -> Markup:
     """The quantitative response relationships on a KER or Evidence record, each a
     card with its dose-response curve where the parameters are transcribed, or a
@@ -463,18 +754,24 @@ def response_relationships(items: list) -> Markup:
                     for k in ("causal_agent", "regimen", "system") if scenario.get(k)]
             if bits:
                 parts.append(Markup('<p class="response-scenario muted">{}</p>').format(" · ".join(bits)))
-        curve = response_curve_svg(rr)
-        if curve is not None:
-            parts.append(curve)
+        figs = model_figures(rr)
+        if figs:
+            # A faithful figure (or figures) computed from the transcribed
+            # parameters — e.g. the ODE model's f(t) and Hill arms.
+            parts.extend(figs)
         else:
-            # A curve needs EC50/Emax. With other parameters transcribed (an ODE
-            # model, not a dose-response) show the table alone; only flag genuinely
-            # untranscribed parameters as pending.
-            pending = [str(p.get("name")) for p in (rr.get("parameters") or [])
-                       if isinstance(p, dict) and p.get("name") and _curve_number(p.get("value")) is None]
-            if pending:
-                msg = "Response curve pending — " + ", ".join(pending) + " not yet transcribed"
-                parts.append(Markup('<p class="response-pending">{}</p>').format(msg))
+            curve = response_curve_svg(rr)
+            if curve is not None:
+                parts.append(curve)
+            else:
+                # Neither a faithful model figure nor a dose-response curve can be
+                # drawn; flag genuinely untranscribed parameters as pending.
+                pending = [str(p.get("name")) for p in (rr.get("parameters") or [])
+                           if isinstance(p, dict) and p.get("name")
+                           and _curve_number(p.get("value")) is None]
+                if pending:
+                    msg = "Response curve pending — " + ", ".join(pending) + " not yet transcribed"
+                    parts.append(Markup('<p class="response-pending">{}</p>').format(msg))
         rows = []
         for p in rr.get("parameters") or []:
             if not isinstance(p, dict):

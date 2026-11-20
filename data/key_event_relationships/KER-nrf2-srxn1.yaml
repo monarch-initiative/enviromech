@@ -15,6 +15,7 @@ response_relationship:
     regimen: SINGLE
     system: HepG2
   source_model_uri: https://doi.org/10.5281/zenodo.17181465
+  simulation_run: data/model_runs/nrf2_srxn1_sulforaphane_continuous
   parameters:
   - name: kp
     value: 0.0023
@@ -65,6 +66,15 @@ response_relationship:
     relationship, not a concentration-response curve. Intensities are in arbitrary
     units (au), rates per hour. Repeated-exposure parameters r2/d2 are omitted as this
     scenario is single exposure.
+    The values above are transcribed verbatim from Table S3. The deposit's own
+    Parameters_set.csv differs in several, mostly as point estimates sitting inside
+    these CIs (e.g. r1 7.98 vs 8.90, d1 0.15 vs 0.2). One differs far more: Table S3
+    gives kp = 0.0023 but the deposit code uses buildSrxn1Base = 0.02262, and Tables
+    S1 and S2 (the other two model versions) both give kp around 0.021 - so the Table
+    S3 value is almost certainly a missing-digit typo. The committed simulation_run
+    uses the deposit Parameters_set.csv, which reproduces the paper's figures (pooled
+    observed-vs-simulated R-squared 0.98); this response_relationship keeps the Table
+    S3 values as published. See the simulation_run provenance and tracking issue #66.
 ke_relationship:
   id: 990100001
   upstream_event_id: 990000001
