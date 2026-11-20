@@ -1,0 +1,29 @@
+history_version: 1
+target:
+  kind: record
+  slug: KER-nrf2-srxn1
+  path: data/observations/KER-nrf2-srxn1.yaml
+session:
+  id: 2026-11-20T143040Z-claude-code-cb3cf5
+  timestamp: '2026-11-20T14:30:40Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - response_relationship
+  summary: Transcribe the NRF2->SRXN1 model parameters from Sharma et al. Table S3
+  details: 'Replaced the EC50/Emax placeholders on the NRF2->SRXN1 KER''s response_relationship with the
+    real fitted parameters of the paper''s final semi-mechanistic dynamic-cofactor model (Table S3; code
+    at doi:10.5281/zenodo.17181465), transcribed from the article PDF and supplementary PDF the maintainer
+    supplied. Posterior means with 95% CIs recorded per parameter: kp 0.0023, kd 0.016, Vmax 130492, Km_modified
+    0.014, Km_unmodified 107110, n_modified 9.90, n_unmodified 1.003, f_i 0.001 (fixed); sulforaphane-specific
+    first-exposure r1 8.90, d1 0.2. Scenario narrowed to sulforaphane continuous (single). This is an
+    ODE model, not a dose-response, so no Hill curve is drawn; render.py was adjusted so a record with
+    transcribed non-dose-response parameters shows its parameter table without a misleading ''curve pending''
+    message (the pending panel now appears only for genuinely null parameters). closed-schema validation,
+    render, ruff and pytest (260) pass.'
