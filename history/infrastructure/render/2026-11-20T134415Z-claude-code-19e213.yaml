@@ -1,0 +1,24 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: render
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-20T134415Z-claude-code-19e213
+  timestamp: '2026-11-20T13:44:15Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+events:
+- type: CREATE
+  outcome: changed
+  summary: 'Record browser: link Evidence to its observations and KER, and draw the pairing'
+  details: 'Visualization plan Phase 2, on top of #61. Added cross_link_evidence(): an Evidence record''s
+    upstream/downstream observation and relationship become links to those record pages; the KER''s page
+    gains the Evidence supporting it and each observation''s page the Evidence that pairs it, all derived
+    (mirrors cross_link for Observation/KE). Each Evidence page draws a static paired-observation diagram
+    (evidence_graph.html + .epair CSS) reading upstream-obs -> KER -> downstream-obs, no JS, matching
+    the site''s box styling. New test_evidence.py checks the links and the pairing both ways. render,
+    ruff and pytest all pass.'

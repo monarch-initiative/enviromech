@@ -1,0 +1,20 @@
+{#- The paired-observation graph on an Evidence record's page: the upstream
+    observation and the downstream observation, measured together, with the Key
+    Event Relationship they support as the link between them. Static, built from
+    record.evidence_graph by render.cross_link_evidence; no JavaScript. -#}
+{%- set g = record.evidence_graph %}
+<section class="evidence-graph" aria-label="Evidence pairing">
+<h2>Evidence pairing</h2>
+<p class="help">An upstream and a downstream observation, measured together, are the evidence for the relationship between their Key Events. Each box links to its record.</p>
+<div class="epair">
+{%- if g.upstream.href %}<a class="epair-obs" href="{{ g.upstream.href }}">{% else %}<div class="epair-obs">{% endif %}
+<span class="epair-role">upstream observation</span><span class="epair-name">{{ g.upstream.label }}</span>
+{%- if g.upstream.href %}</a>{% else %}</div>{% endif %}
+<div class="epair-edge"><span class="epair-arrow" aria-hidden="true">&#8594;</span>
+{%- if g.ker.href %}<a class="epair-ker" href="{{ g.ker.href }}">{{ g.ker.label }}</a>{% else %}<span class="epair-ker">{{ g.ker.label }}</span>{% endif %}
+<span class="epair-arrow" aria-hidden="true">&#8594;</span></div>
+{%- if g.downstream.href %}<a class="epair-obs" href="{{ g.downstream.href }}">{% else %}<div class="epair-obs">{% endif %}
+<span class="epair-role">downstream observation</span><span class="epair-name">{{ g.downstream.label }}</span>
+{%- if g.downstream.href %}</a>{% else %}</div>{% endif %}
+</div>
+</section>
