@@ -29,3 +29,11 @@ citations:
     Jointly characterises upstream (NRF2) and downstream (SRXN1) states and their
     quantitative coupling, supporting the KER.
 creation_date: "2026-11-20"
+curation_history:
+- timestamp: "2026-11-20T04:10:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-4-8
+  action: CREATE
+  description: >-
+    Created the Evidence record pairing the NRF2 and SRXN1 observations onto the NRF2->SRXN1 KER, with a verified quote from PMID 40972999.

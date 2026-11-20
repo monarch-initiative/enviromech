@@ -29,3 +29,11 @@ evidence:
     Reports SRXN1 protein expression measured in HepG2 after exposure to
     NRF2-activating soft electrophiles.
 creation_date: "2026-11-20"
+curation_history:
+- timestamp: "2026-11-20T04:10:00Z"
+  curator: claude-code
+  llm_assisted: true
+  model: claude-opus-4-8
+  action: CREATE
+  description: >-
+    Created the SRXN1-induction observation in HepG2, bound to the local SRXN1-induction Key Event, with a verified quote from PMID 40972999.
