@@ -35,6 +35,7 @@ CURIEs are links.
 from __future__ import annotations
 
 import argparse
+import math
 import re
 import sys
 from functools import cache
@@ -370,6 +371,130 @@ def history(v: list) -> Markup:
 HEADER_KEYS = ("id", "name", "description", "description_evidence", "status", "record_term", "synonyms")
 
 
+def _curve_number(x):
+    """A finite real parameter value, or None (True/False and non-numbers are None)."""
+    if isinstance(x, bool) or not isinstance(x, (int, float)):
+        return None
+    return float(x)
+
+
+def response_curve_svg(rr: dict) -> Markup | None:
+    """A dose-response (Hill) curve for one response relationship, drawn only when
+    its EC50 and Emax are transcribed. Returns None otherwise, so the card shows a
+    pending panel rather than a fabricated curve."""
+    params = {str(p.get("name", "")).strip().lower(): p
+              for p in (rr.get("parameters") or []) if isinstance(p, dict)}
+
+    def pval(*names):
+        for n in names:
+            p = params.get(n)
+            if p is not None and _curve_number(p.get("value")) is not None:
+                return _curve_number(p["value"])
+        return None
+
+    def punit(*names):
+        for n in names:
+            p = params.get(n)
+            if p is not None and p.get("unit"):
+                return str(p["unit"])
+        return ""
+
+    ec50 = pval("ec50", "ac50", "bmd")
+    emax = pval("emax")
+    if ec50 is None or emax is None or ec50 <= 0 or emax <= 0:
+        return None
+    hill = pval("hill", "hill coefficient", "n", "h") or 1.0
+    x_unit, y_unit = punit("ec50", "ac50", "bmd"), punit("emax")
+    x0, x1, y0, y1 = 48, 302, 150, 24
+    lo, hi = math.log10(ec50) - 2.0, math.log10(ec50) + 2.0
+
+    def xof(c):
+        return x0 + (math.log10(c) - lo) / (hi - lo) * (x1 - x0)
+
+    def yof(r):
+        return y0 - (r / emax) * (y0 - y1)
+
+    steps = 48
+    pts = []
+    for i in range(steps + 1):
+        c = 10 ** (lo + (hi - lo) * i / steps)
+        r = emax * c ** hill / (ec50 ** hill + c ** hill)
+        pts.append(f"{xof(c):.1f},{yof(r):.1f}")
+    path = "M " + " L ".join(pts)
+    ec50x, halfy = xof(ec50), yof(emax / 2)
+    mid_x, mid_y = (x0 + x1) / 2, (y0 + y1) / 2
+    xu, yu = escape(x_unit), escape(y_unit)
+    return Markup(
+        '<svg class="response-svg" viewBox="0 0 320 170" role="img" aria-label="Dose-response curve">'
+        f'<line class="resp-axis" x1="{x0}" y1="{y0}" x2="{x1}" y2="{y0}"/>'
+        f'<line class="resp-axis" x1="{x0}" y1="{y0}" x2="{x0}" y2="{y1}"/>'
+        f'<line class="resp-mark" x1="{ec50x:.1f}" y1="{y0}" x2="{ec50x:.1f}" y2="{halfy:.1f}"/>'
+        f'<line class="resp-mark" x1="{x0}" y1="{halfy:.1f}" x2="{ec50x:.1f}" y2="{halfy:.1f}"/>'
+        f'<path class="resp-curve" d="{path}"/>'
+        f'<text class="resp-label" x="{ec50x:.1f}" y="{y0 + 12}"'
+        f' text-anchor="middle">EC50 {ec50:g} {xu}</text>'
+        f'<text class="resp-axis-title" x="{mid_x:.0f}" y="168"'
+        f' text-anchor="middle">conc. ({xu}), log</text>'
+        f'<text class="resp-axis-title" x="11" y="{mid_y:.0f}" text-anchor="middle"'
+        f' transform="rotate(-90 11 {mid_y:.0f})">response ({yu})</text>'
+        '</svg>'
+    )
+
+
+def response_relationships(items: list) -> Markup:
+    """The quantitative response relationships on a KER or Evidence record, each a
+    card with its dose-response curve where the parameters are transcribed, or a
+    pending panel where they are not."""
+    cards = []
+    for rr in items:
+        if not isinstance(rr, dict):
+            cards.append(plain_card(rr))
+            continue
+        parts = []
+        head = " · ".join(p for p in [
+            str(rr["response_variable"]) if rr.get("response_variable") else "",
+            enum_text(rr["model_type"]) if rr.get("model_type") else "",
+        ] if p)
+        if head:
+            parts.append(Markup('<h3 class="card-title">{}</h3>').format(head))
+        scenario = rr.get("scenario") or {}
+        if isinstance(scenario, dict):
+            bits = [enum_text(scenario[k]) if k == "regimen" else str(scenario[k])
+                    for k in ("causal_agent", "regimen", "system") if scenario.get(k)]
+            if bits:
+                parts.append(Markup('<p class="response-scenario muted">{}</p>').format(" · ".join(bits)))
+        curve = response_curve_svg(rr)
+        if curve is not None:
+            parts.append(curve)
+        else:
+            pending = [str(p.get("name")) for p in (rr.get("parameters") or [])
+                       if isinstance(p, dict) and p.get("name") and _curve_number(p.get("value")) is None]
+            msg = "Response curve pending"
+            if pending:
+                msg += " — " + ", ".join(pending) + " not yet transcribed"
+            parts.append(Markup('<p class="response-pending">{}</p>').format(msg))
+        rows = []
+        for p in rr.get("parameters") or []:
+            if not isinstance(p, dict):
+                continue
+            val = _curve_number(p.get("value"))
+            if val is None:
+                cell = Markup('<span class="muted" title="{}">pending</span>').format(
+                    str(p.get("source_locator") or "to transcribe"))
+            else:
+                cell = escape(f"{val:g} {p.get('unit') or ''}".strip())
+            rows.append(Markup("<tr><th>{}</th><td>{}</td></tr>").format(str(p.get("name") or ""), cell))
+        if rows:
+            parts.append(Markup('<table class="kv">{}</table>').format(Markup("").join(rows)))
+        if rr.get("source_model_uri"):
+            src = value(rr["source_model_uri"], "source_model_uri")
+            parts.append(Markup('<p class="response-source">{}</p>').format(src))
+        if rr.get("notes"):
+            parts.append(Markup('<p class="card-desc">{}</p>').format(scalar(rr["notes"])))
+        cards.append(Markup('<div class="card response-card">{}</div>').format(Markup("").join(parts)))
+    return Markup('<div class="cards">{}</div>').format(Markup("").join(cards))
+
+
 def record_body(data: dict, hidden: list[str]) -> dict:
     """The parts of a record page: overview rows, then sections."""
     overview, sections = [], []
@@ -383,6 +508,8 @@ def record_body(data: dict, hidden: list[str]) -> dict:
             html = discussions(v)
         elif k == "curation_history":
             html = history(v)
+        elif k == "response_relationship":
+            html = response_relationships(v)
         elif isinstance(v, list):
             html = items(k, v)
         elif isinstance(v, dict):

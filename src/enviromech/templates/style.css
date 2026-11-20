@@ -179,3 +179,14 @@ a.epair-obs:hover, a.epair-obs:focus { background: var(--hover); }
 .epair-arrow { color: var(--muted); font-size: 1.2rem; line-height: 1; }
 .epair-ker { font-size: .9rem; }
 @media (max-width: 36rem) { .epair-edge { flex-basis: 100%; } .epair-edge .epair-arrow { transform: rotate(90deg); } }
+
+/* The quantitative response-relationship card on a KER or Evidence page. */
+.response-card .response-scenario { margin: 0 0 .4rem; font-size: .9rem; }
+.response-svg { display: block; width: 100%; max-width: 22rem; height: auto; margin: .3rem 0 .5rem; }
+.response-svg .resp-axis { stroke: var(--line); stroke-width: 1; }
+.response-svg .resp-curve { fill: none; stroke: var(--purple); stroke-width: 2; }
+.response-svg .resp-mark { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 2; }
+.response-svg .resp-label, .response-svg .resp-axis-title { fill: var(--muted); font-size: 9px; }
+.response-pending { margin: .3rem 0 .5rem; padding: .5rem .7rem; border: 1px dashed var(--line);
+  border-radius: 8px; color: var(--muted); font-size: .9rem; background: var(--plain-bg); }
+.response-source { margin: .3rem 0 0; font-size: .9rem; }
