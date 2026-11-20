@@ -1,0 +1,40 @@
+# LOCAL Key Event Relationship minted in EnviroMech: NRF2 activation -> SRXN1
+# induction, modelled as a QUANTITATIVE KER. Events named by CURIE in
+# upstream_event/downstream_event (EnviroMech's reference); the nested EMOD
+# KeRelationship keeps reserved local integer ids for EMOD fidelity.
+id: enviromech:ker-nrf2-srxn1
+provenance: LOCAL
+status: DRAFT
+upstream_event: enviromech:ke-nrf2-activation
+downstream_event: enviromech:ke-srxn1-induction
+response_relationship:
+- response_variable: SRXN1 protein
+  model_type: ODE_SEMIMECHANISTIC
+  scenario:
+    causal_agent: "soft electrophiles (sulforaphane, andrographolide, ethacrynic acid, CDDO-me)"
+    regimen: SINGLE
+    system: HepG2
+  parameters:
+  - name: EC50
+    unit: uM
+    source_locator: "transcribe from the fitted model (PMID 40972999)"
+  - name: Emax
+    unit: fold-over-control
+    source_locator: "transcribe"
+  notes: >-
+    Semi-mechanistic ODE fitted by nonlinear mixed effects. Parameter values are
+    placeholders to be transcribed; the coupling is cofactor/PTM-gated and
+    compound-, time- and exposure-scenario-specific, so a single global
+    parameter set would overstate it (hence one scenario per condition).
+ke_relationship:
+  id: 990100001
+  upstream_event_id: 990000001
+  downstream_event_id: 990000002
+  how_it_works: >-
+    Activated NRF2 binds antioxidant response elements and induces SRXN1; the
+    quantitative strength of coupling depends on an NRF2 cofactor/PTM and on the
+    stressor and exposure scenario.
+  quantitative_understanding: >-
+    See response_relationship. A semi-mechanistic NLME model captures the joint
+    NRF2/SRXN1 dynamics; the relationship is not a fixed stoichiometry.
+  has_tabulated_evidence: true

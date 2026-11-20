@@ -1,0 +1,25 @@
+# LOCAL Key Event minted in EnviroMech. SRXN1 induction is promoted from "a
+# reporter of NRF2 activity" to its own downstream Key Event so the NRF2->SRXN1
+# relationship can carry paired-observation Evidence as a quantitative KER.
+id: enviromech:ke-srxn1-induction
+provenance: LOCAL
+status: DRAFT
+event:
+  id: 990000002
+  title: "Induction, Sulfiredoxin 1 (SRXN1)"
+  biological_organization_id:
+    term: Molecular
+  event_components:
+  - id: 990000021
+    biological_object_id:
+      term: "SRXN1 (sulfiredoxin 1)"
+    biological_action_id:
+      term: increased
+  definition: >-
+    Transcriptional induction of SRXN1 (sulfiredoxin 1), a bona fide NRF2 target
+    gene, via NRF2 binding at antioxidant response elements. Commonly used as the
+    quantitative reporter of NRF2 transcriptional activity.
+  measured_or_detected: >-
+    SRXN1 protein by GFP-reporter time-lapse imaging in HepG2.
+level_screening:
+  outcome: NOT_SCREENED

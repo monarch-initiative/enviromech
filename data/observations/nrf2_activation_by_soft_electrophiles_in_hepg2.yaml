@@ -1,0 +1,31 @@
+id: enviromech:obs-nrf2-activation-hepg2
+name: NRF2 activation by soft electrophiles in HepG2
+description: Soft electrophiles activate NRF2 in HepG2 cells, time- and dose-dependently.
+status: DRAFT
+causal_agent:
+  name: sulforaphane
+  agent_type: ENVIRONMENTAL_CHEMICAL
+asserted_relation: activates
+observation:
+  id: 990200001
+  biological_action_id:
+    term: increased
+  biological_object_str: "NFE2L2 (NRF2) protein"
+  assay_id:
+    id: 990300001
+    title: "NRF2-GFP reporter, HepG2, time-lapse imaging"
+  events:
+  - 990000001
+exposure_concentration: "wide concentration range (see source)"
+exposure_time: "time course"
+exposure_regimen: SINGLE
+evidence:
+- reference: PMID:40972999
+  reference_title: "Deciphering the quantitative relationship between NRF2 and SRXN1 through semi-mechanistic computational modeling."
+  supports: SUPPORT
+  evidence_source: IN_VITRO
+  snippet: "We developed a semi-mechanistic mathematical model based on time course experimental data of NRF2 and SRXN1 protein expression in HepG2 cells following single or repeated exposure to NRF2 activating soft electrophiles (sulforaphane, andrographolide, ethacrynic acid or CDDO-me) at a wide concentration range."
+  explanation: >-
+    Reports NRF2 protein expression measured in HepG2 after exposure to
+    NRF2-activating soft electrophiles.
+creation_date: "2026-11-20"

@@ -1,0 +1,30 @@
+# LOCAL Key Event minted in EnviroMech (not in the production AOP-Wiki).
+# NRF2 activation is very likely an existing AOP-Wiki KE; this LOCAL record
+# should be reconciled against it, and promoted, once an AOP-Wiki lookup is
+# possible (provenance AOP_WIKI + aop.events: id). event.id uses a reserved
+# local integer range (>=990000000) so the nested EMOD Event keeps an identifier.
+id: enviromech:ke-nrf2-activation
+provenance: LOCAL
+status: DRAFT
+event:
+  id: 990000001
+  title: "Activation, NRF2"
+  biological_organization_id:
+    term: Molecular
+  event_components:
+  - id: 990000011
+    biological_object_id:
+      term: "NFE2L2 (NRF2)"
+    biological_action_id:
+      term: increased
+  definition: >-
+    Stabilisation and activation of the transcription factor NRF2 (NFE2L2),
+    which binds antioxidant response elements (ARE) to drive cytoprotective gene
+    transcription. Induced by soft electrophiles that modify KEAP1 cysteines.
+  measured_or_detected: >-
+    NRF2 protein by GFP-reporter time-lapse imaging in HepG2.
+level_screening:
+  outcome: NOT_SCREENED
+notes: >-
+  Minted locally so the NRF2 -> SRXN1 relationship can be modelled as a
+  quantitative KER before the upstream KE is reconciled with AOP-Wiki.

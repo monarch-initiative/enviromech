@@ -117,6 +117,24 @@ classes:
           same thing as a string.
         range: Term
         inlined: true
+      exposure_concentration:
+        description: >-
+          The concentration (range) of the causal agent, as the source reports
+          it, e.g. "wide concentration range". Free text until a structured
+          quantity type lands.
+      exposure_time:
+        description: Exposure duration or sampling time, as reported.
+      exposure_regimen:
+        description: Single vs repeated vs continuous exposure.
+        range: ExposureRegimenEnum
+      measured_value:
+        description: >-
+          A measured magnitude for this observation, transcribed from the
+          source, beside the qualitative direction in
+          observation.biological_action_id.
+        range: float
+      measured_unit:
+        description: Unit for measured_value, e.g. "fold-over-control".
     slot_usage:
       id:
         description: >-
@@ -154,8 +172,14 @@ classes:
           The Key Event's AOP-Wiki identifier as a CURIE, for example
           aop.events:1542. The prefix is the one Bioregistry registers for
           AOP-Wiki Key Events.
-        pattern: "^aop\\.events:\\d+$"
+        pattern: "^(aop\\.events:\\d+|enviromech:ke-[a-z0-9-]+)$"
         required: true
+      provenance:
+        description: >-
+          AOP_WIKI (mirrored from the production AOP-Wiki) or LOCAL (minted in
+          EnviroMech). Absent is treated as AOP_WIKI. A LOCAL Key Event has an
+          enviromech:ke-<slug> id and no aop_wiki_snapshot/source_uri.
+        range: RecordProvenanceEnum
       status:
         description: Review state of this record.
         range: CurationStatusEnum
@@ -171,7 +195,7 @@ classes:
           The date of the AOP-Wiki XML export the Event was read from, as
           YYYY-MM-DD.
         range: date
-        required: true
+        required: false
       source_uri:
         description: The Event's page on AOP-Wiki.
         range: uri
@@ -353,26 +377,54 @@ classes:
           The KER's AOP-Wiki identifier as a CURIE, for example
           aop.relationships:3637. The prefix is the one Bioregistry registers
           for AOP-Wiki Key Event Relationships.
-        pattern: "^aop\\.relationships:\\d+$"
+        pattern: "^(aop\\.relationships:\\d+|enviromech:ker-[a-z0-9-]+)$"
         required: true
       status:
         description: Review state of this record.
         range: CurationStatusEnum
         required: true
       ke_relationship:
-        description: The relationship, as an EMOD KeRelationship.
+        description: >-
+          The relationship, as an EMOD KeRelationship. Optional for a LOCAL
+          record, which names its events with upstream_event/downstream_event
+          below; when present it may use reserved local integer ids.
         range: KeRelationship
         inlined: true
-        required: true
       aop_wiki_snapshot:
         description: >-
           The date of the AOP-Wiki XML export the relationship was read from,
           as YYYY-MM-DD.
         range: date
-        required: true
+        required: false
       source_uri:
         description: The relationship's page on AOP-Wiki.
         range: uri
+      provenance:
+        description: >-
+          AOP_WIKI (mirrored) or LOCAL (minted in EnviroMech). Absent is treated
+          as AOP_WIKI. A LOCAL relationship has an enviromech:ker-<slug> id, no
+          aop_wiki_snapshot, and names its events with upstream_event/
+          downstream_event rather than only via the nested integer-keyed
+          EMOD KeRelationship.
+        range: RecordProvenanceEnum
+      upstream_event:
+        description: >-
+          The upstream Key Event, by record id (an aop.events: or enviromech:ke-
+          CURIE). EnviroMech's CURIE reference, used in place of the EMOD integer
+          upstream_event_id for LOCAL relationships.
+        range: uriorcurie
+      downstream_event:
+        description: The downstream Key Event, by record id.
+        range: uriorcurie
+      response_relationship:
+        description: >-
+          Structured quantitative description(s) of how the downstream Event
+          responds to the upstream Event: the qAOP layer, replacing free-text
+          quantitative_understanding where a fitted model exists.
+        range: ResponseRelationship
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
 
   AopRecord:
     description: >-
@@ -401,8 +453,13 @@ classes:
         description: >-
           The AOP's AOP-Wiki identifier as a CURIE, for example aop:587. The
           prefix is the one Bioregistry registers for AOP-Wiki AOPs.
-        pattern: "^aop:\\d+$"
+        pattern: "^(aop:\\d+|enviromech:aop-[a-z0-9-]+)$"
         required: true
+      provenance:
+        description: >-
+          AOP_WIKI (mirrored) or LOCAL (minted in EnviroMech). Absent is treated
+          as AOP_WIKI.
+        range: RecordProvenanceEnum
       status:
         description: Review state of this record.
         range: CurationStatusEnum
@@ -419,7 +476,7 @@ classes:
           The date of the AOP-Wiki XML export the AOP was read from, as
           YYYY-MM-DD.
         range: date
-        required: true
+        required: false
       source_uri:
         description: The AOP's page on AOP-Wiki.
         range: uri
@@ -836,6 +893,104 @@ classes:
 
 # ============================================================ slots
 
+  ResponseRelationship:
+    description: >-
+      A quantitative, scenario-scoped description of how a downstream Event
+      responds to an upstream Event (the qAOP layer). Numbers are transcribed
+      from a cited source, never originated.
+    attributes:
+      response_variable:
+        description: What is modelled, e.g. "SRXN1 protein".
+      model_type:
+        range: ResponseModelTypeEnum
+      parameters:
+        range: ModelParameter
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      scenario:
+        range: ResponseScenario
+        inlined: true
+      source_model_uri:
+        description: A runnable/deposited model, e.g. a BioModels id or repo path.
+        range: uriorcurie
+      notes:
+
+  ModelParameter:
+    description: One fitted parameter of a ResponseRelationship; value transcribed, not originated.
+    attributes:
+      name:
+        description: e.g. EC50, Emax, k_on, BMD.
+        required: true
+      value:
+        range: float
+      unit:
+      source_locator:
+        description: The table or figure the value was read from.
+
+  ResponseScenario:
+    description: >-
+      The condition a ResponseRelationship is scoped to. A coupling that is not a
+      fixed stoichiometry needs one scenario per (agent x regimen x system).
+    attributes:
+      causal_agent:
+        description: The stressor/agent, e.g. sulforaphane.
+      regimen:
+        range: ExposureRegimenEnum
+      system:
+        description: The test system, e.g. HepG2.
+
+  EvidenceRecord:
+    tree_root: true
+    description: >-
+      One piece of Evidence for a Key Event Relationship: an observation of the
+      upstream Event and an observation of the downstream Event, measured
+      together, supporting the KER. Wraps the EMOD Evidence class. Note the
+      mapping: EnviroMech's EvidenceItem (a citation with a verified quote) is
+      EMOD's Citation; this record is EMOD's Evidence.
+    attributes:
+      id:
+        identifier: true
+        range: uriorcurie
+        description: A CURIE minted in the enviromech namespace, e.g. enviromech:ev-nrf2-srxn1.
+        pattern: "^enviromech:[^\\s]+$"
+        required: true
+      status:
+        range: CurationStatusEnum
+        required: true
+      upstream_observation:
+        description: The upstream-Event observation, by ObservationRecord id.
+        range: uriorcurie
+        required: true
+      downstream_observation:
+        description: The downstream-Event observation, by ObservationRecord id.
+        range: uriorcurie
+        required: true
+      relationship:
+        description: The KeyEventRelationshipRecord this evidence supports, by id.
+        range: uriorcurie
+        required: true
+      experimental_design:
+        description: How the two observations were jointly produced.
+      response_relationship:
+        description: The quantitative coupling this evidence establishes, if a fitted model exists.
+        range: ResponseRelationship
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      citations:
+        description: Sources, each with an exact verified quote (an EvidenceItem == EMOD Citation).
+        range: EvidenceItem
+        multivalued: true
+        required: true
+      notes:
+      creation_date:
+      curation_history:
+        range: CurationEvent
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+
 slots:
   id:
     identifier: true
@@ -979,9 +1134,31 @@ slots:
     required: true
     description: What kind of change this was.
 
+
 # ============================================================ enums
 
 enums:
+  RecordProvenanceEnum:
+    description: Whether a record is mirrored from AOP-Wiki or minted locally.
+    permissible_values:
+      AOP_WIKI:
+        description: Mirrored from the production AOP-Wiki; carries an aop.* id and a snapshot.
+      LOCAL:
+        description: "Minted in EnviroMech; carries an enviromech: id and no AOP-Wiki provenance."
+  ExposureRegimenEnum:
+    description: Exposure schedule for an observation or response scenario.
+    permissible_values:
+      SINGLE:
+      REPEATED:
+      CONTINUOUS:
+  ResponseModelTypeEnum:
+    description: The mathematical form of a quantitative response relationship.
+    permissible_values:
+      HILL:
+      LINEAR:
+      ODE_SEMIMECHANISTIC:
+      NLME:
+      OTHER:
   CurationStatusEnum:
     description: Review state of a record.
     permissible_values:
