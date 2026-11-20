@@ -1,0 +1,38 @@
+history_version: 1
+target:
+  kind: infrastructure
+  slug: render
+  path: src/enviromech/render.py
+session:
+  id: 2026-11-20T151610Z-claude-code-6e2eb5
+  timestamp: '2026-11-20T15:16:10Z'
+  actors:
+  - type: ai_agent
+    name: claude-code
+    model: claude-opus-4-8
+    agent_tool: claude-code
+events:
+- type: EDIT
+  outcome: changed
+  sections:
+  - response_relationships
+  - style.css
+  summary: 'Record browser: faithful time-course and Hill-arm figures for an ODE response relationship'
+  details: 'Visualization follow-up to #64 (the transcribed NRF2->SRXN1 Table S3 parameters). An ODE_SEMIMECHANISTIC
+    response_relationship now renders two inline-SVG figures computed from the transcribed parameters
+    alone, instead of the parameter table with no graph: (1) the dynamic modified-NRF2 fraction f(t) over
+    time from f_i, r1, d1 (Sharma et al. Eq V, single-exposure branch) -- a genuine time course, rising
+    to peak f~0.77 at ~1.2 h then decaying; and (2) the two production arms as fractional Hill occupancy
+    vs NRF2 level in units of each arm''s Km, showing the ultrasensitive modified arm (n_modified~9.9)
+    against the near-linear unmodified arm (n_unmodified~1.0), which share one normalized axis because
+    their Km differ by orders of magnitude (Eq IV). SRXN1(t) itself is deliberately NOT simulated and
+    a note says why: Eq I needs the measured NRF2 input N(t), an experimental spline-interpolated trajectory
+    that is not a transcribed parameter, so simulating SRXN1 would mean originating its driver. model_figures(rr)
+    gathers whatever faithful figures the transcribed parameters determine and falls back to the existing
+    dose-response curve / pending logic when none apply; ode_fraction_svg and hill_arms_svg each degrade
+    to None when their parameters are absent (tested). Self-contained SVG, no JS, theme-aware via site
+    tokens; new resp-fig/resp-curve-2/resp-legend CSS. Horizon for f(t) is derived from the fitted decay
+    (2% of peak, clamped), not hardcoded. tests/test_model_figures.py added (pulse shape, steeper modified
+    arm, generality beyond NRF2, the SRXN1-not-simulated guarantee, graceful degradation); test_response_curve.py
+    committed-record test updated for the new figures. ruff, linkml-lint (schema untouched), KER schema
+    validation, render, and pytest (267 passed) all pass.'

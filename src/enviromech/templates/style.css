@@ -190,3 +190,14 @@ a.epair-obs:hover, a.epair-obs:focus { background: var(--hover); }
 .response-pending { margin: .3rem 0 .5rem; padding: .5rem .7rem; border: 1px dashed var(--line);
   border-radius: 8px; color: var(--muted); font-size: .9rem; background: var(--plain-bg); }
 .response-source { margin: .3rem 0 0; font-size: .9rem; }
+/* Faithful model figures: f(t) and the Hill production arms. */
+.resp-fig { margin: .4rem 0 .6rem; }
+.resp-fig-title { font-size: .82rem; font-weight: 600; color: var(--fg); margin: 0 0 .1rem; }
+.resp-fig-note { margin: .1rem 0 .3rem; font-size: .82rem; }
+.response-svg .resp-grid { stroke: var(--line); stroke-width: 1; opacity: .5; }
+.response-svg .resp-tick { fill: var(--muted); font-size: 8px; }
+.response-svg .resp-curve-2 { fill: none; stroke: var(--accent); stroke-width: 2; stroke-dasharray: 4 2; }
+.response-svg .resp-dot { fill: var(--purple); }
+.response-svg .resp-legend { fill: var(--muted); font-size: 8.5px; }
+.response-svg .resp-swatch { fill: var(--purple); }
+.response-svg .resp-swatch-2 { fill: var(--accent); }
